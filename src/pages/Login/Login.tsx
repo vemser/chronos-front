@@ -9,7 +9,7 @@ import { shadows } from '@mui/system';
 export const Login = () => {
   return (
     <Box display={'flex'} className={styles.container}>
-        <Box component="div" sx={{ width: '50%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent:'center'}} className={styles.image}>
+        <Box component="div" sx={{ width: '50%', display: 'flex', alignItems: 'center', justifyContent:'center'}} className={styles.image}>
             <img src={loginLogo} alt="" style={{width: '80%'}}/>
         </Box>
     
@@ -37,15 +37,14 @@ export const Login = () => {
                     alignItems={'center'} 
                     justifyContent={'center'}
                     >
-                    <label htmlFor=""></label>
-                    <TextField className={styles.loginText} id='outlined-basic' label='Usuário' variant='outlined' sx={{width: 400, color:'palette.primary.dark' }}/>
-                    <TextField className={styles.loginText} id='outlined-basic' label='Senha' variant='outlined' sx = {{width: 400, color:'#1e62fe'}}/>
+                    <TextField className={styles.loginText} id='outlined-basic' label='Usuário' variant='outlined' style={{ color:'palette.primary.dark' }}/>
+                    <TextField className={styles.loginText} id='outlined-basic' label='Senha' variant='outlined' style={{ color:'#1e62fe' }}/>
                 </Box>
 
                 <Button className={styles.loginText}
                     type="submit"
                     variant="contained"
-                    sx={{ mt: 3, mb: 2, width: '400px', backgroundColor:'#1e62fe'}}
+                    sx={{ mt: 3, mb: 2, backgroundColor:'#1e62fe'}}
                     >
                     Enviar
                 </Button>
