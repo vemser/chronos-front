@@ -6,7 +6,6 @@ export const PaginaInicial: React.FC = () => {
   return (
     <>
       <Header />
-      <EditarPerfil />
     </>
   )
 }
