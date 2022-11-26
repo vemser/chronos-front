@@ -107,7 +107,7 @@ export const Login = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {values.showPassword ? <Visibility />  : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }

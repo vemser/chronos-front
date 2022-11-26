@@ -9,6 +9,9 @@ export const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/pagina-inicial" element={<PaginaInicial />} />
+
+        <Route />
+
       </Routes>
     </BrowserRouter>
   )
