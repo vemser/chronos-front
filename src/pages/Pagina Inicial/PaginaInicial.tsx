@@ -1,10 +1,12 @@
 import React from 'react'
-import { Header } from '../../components/Header'
+import { EditarPerfil } from '../../components/EditarPerfil/EditarPerfil'
+import { Header } from '../../components/Header/Header'
 
-export const PaginaInicial = () => {
+export const PaginaInicial: React.FC = () => {
   return (
     <>
       <Header />
+      <EditarPerfil />
     </>
   )
 }
