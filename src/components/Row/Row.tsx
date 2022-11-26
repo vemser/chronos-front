@@ -63,7 +63,6 @@ export const Row: React.FC = () => {
               <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
             </TableCell>
           </TableRow>
-
           <TableRow>
             <TableCell>Henrique Soares</TableCell>
             <TableCell>henrique@hotmail.com </TableCell>
@@ -73,6 +72,7 @@ export const Row: React.FC = () => {
               <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
             </TableCell>
           </TableRow>
+
           {/* ))} */}
         </TableBody>
       </Table>
