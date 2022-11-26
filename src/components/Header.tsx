@@ -49,15 +49,14 @@ export const Header = () => {
             gap: '20px',
             alignItems: 'center',
             height: '80px',
-            justifyContent: 'space-between',
-            backgroundColor: 'red'
+            justifyContent: 'space-between'
           }}
         >
           <Box
             display={'flex'}
             justifyContent={'center'}
             sx={{
-              display: { xs: 'none', md: 'flex', sm: 'flex' }
+              display: { xs: 'none', sm: 'flex' }
             }}
           >
             <Link to="/">
@@ -68,10 +67,8 @@ export const Header = () => {
 
           <Box
             sx={{
-              flexGrow: 1,
-              display: { xs: 'flex', md: 'none' },
-              mr: 2,
-              backgroundColor: 'blue'
+              display: { xs: 'flex', sm: 'none' },
+              alignItems: 'center'
             }}
           >
             <IconButton
@@ -99,7 +96,7 @@ export const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' }
+                display: { xs: 'block', sm: 'none' }
               }}
             >
               {pages.map(page => (
@@ -121,11 +118,18 @@ export const Header = () => {
               <img src={ImgLogo} width="100px" alt="Logo DBC" />
             </Link>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
             <Link to="/">AAAAAA</Link>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: 'flex',
+              gap: '10px',
+              alignItems: 'center'
+            }}
+          >
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -153,6 +157,7 @@ export const Header = () => {
                 </MenuItem>
               ))}
             </Menu>
+            <Link to="/">Sair</Link>
           </Box>
         </Toolbar>
       </Container>
