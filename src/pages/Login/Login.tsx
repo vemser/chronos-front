@@ -84,7 +84,7 @@ export const Login = () => {
             <TextField
               className={styles.loginText}
               id="outlined-basic"
-              label="Usuário"
+              label="Email"
               variant="outlined"
               style={{ color: 'palette.primary.dark' }}
             />

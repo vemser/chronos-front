@@ -1,4 +1,4 @@
-import { TextField } from 'material-ui'
+import { TextField } from '@mui/material'
 import React from 'react'
 
 export const EditarPerfil = () => {
