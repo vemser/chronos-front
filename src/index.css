@@ -8,4 +8,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  color: #111827;
+}
+
+button, input, textarea {
+  font-family: 'Inter', sans-serif;
+}
+a{
+  text-decoration: none;
 }
