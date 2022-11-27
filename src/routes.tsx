@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import { AdminHome } from './pages/AdminHome/AdminHome'
+import { AdminHome } from './pages/Admin/AdminHome/AdminHome'
 import { Login } from './pages/Login/Login'
 import { PaginaInicial } from './pages/Pagina Inicial/PaginaInicial'
 
