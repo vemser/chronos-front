@@ -1,0 +1,49 @@
+.ContainerNova {
+  margin-top: 20px;
+}
+
+.ButtonContainer {
+  transition: 0.2s;
+
+  margin-right: 7px;
+}
+.ButtonContainer:hover {
+  scale: 1.05;
+
+  cursor: pointer;
+}
+
+.ContainerButton {
+  width: 25%;
+}
+.ContainerGestaoEdicoes {
+  width: 80%;
+}
+
+.ButtonSearch {
+  margin-right: 15%;
+}
+
+.ContainerGeral {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.ContainerTitle {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.ContainerHead {
+  display: flex;
+  justify-content: space-between;
+  width: 72%;
+
+  margin: auto;
+}
