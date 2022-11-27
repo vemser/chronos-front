@@ -5,7 +5,9 @@ import { AdminCadastrar } from './pages/Admin/AdminCadastrar/AdminCadastrar'
 import { AdminEditarColab } from './pages/Admin/AdminEditarColab/AdminEditarColab'
 import { AdminHome } from './pages/Admin/AdminHome/AdminHome'
 import { AdminListar } from './pages/Admin/AdminListar/AdminListar'
+import { GestaoCadastrarDiaNaoUtil } from './pages/Gestao/GestaoCadastrarDiaNaoUtil/GestaoCadastrarDiaNaoUtil'
 import { GestaoCadastrarEdicao } from './pages/Gestao/GestaoCadastrarEdicao/GestaoCadastrarEdicao'
+import { GestaoDiaNaoUtil } from './pages/Gestao/GestaoDiaNaoUtil/GestaoDiaNaoUtil'
 import { GestaoEdicoes } from './pages/Gestao/GestaoEdicoes/GestaoEdicoes'
 import { GestaoHome } from './pages/Gestao/GestaoHome/GestaoHome'
 import { GestaoNovaEtapa } from './pages/Gestao/GestaoNovaEtapa/GestaoNovaEtapa'
@@ -14,12 +16,6 @@ import { GestaoVerificarEdicao } from './pages/Gestao/GestaoVerificarEdicao/Gest
 import { Login } from './pages/Login/Login'
 import { NotFind } from './pages/NotFind/NotFind'
 import { PaginaInicial } from './pages/Pagina Inicial/PaginaInicial'
-
-const ROLES = {
-  'Admin': 'Admin',
-  'Home': 'ROLE_HOME',
-  'Gestao': 'Gestao'
-}
 
 export const AppRoutes = () => {
   return (
@@ -42,7 +38,10 @@ export const AppRoutes = () => {
 
         <Route path='/gestao'>
           <Route index element={<GestaoHome />} />
-          <Route path='/gestao/cadastrar-nao-util' element={<GestaoCadastrarEdicao />} />
+
+          <Route path='/gestao/dias-nao-uteis' element={<GestaoDiaNaoUtil />} />
+          <Route path='/gestao/cadastrar-dias-nao-uteis' element={<GestaoCadastrarDiaNaoUtil />} />
+
           <Route path='/gestao/edicoes' element={<GestaoEdicoes />} />
           <Route path='/gestao/cadastrar-edicao' element={<GestaoCadastrarEdicao />} />
           <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>

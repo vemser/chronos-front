@@ -1,0 +1,9 @@
+.botao{
+    color: var(--color-blue);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+}
+.botao:hover{
+    border: none;
+}
