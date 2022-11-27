@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem'
 
 import { Link } from 'react-router-dom'
 import ImgLogo from '../../assets/logo-dbc-branco.png'
+import { HeaderButton } from '../HeaderButton/HeaderButton'
 
 const pages = ['Products', 'Pricing', 'Blog']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
@@ -41,12 +42,12 @@ export const Header = () => {
   }
   return (
     <AppBar position="static" sx={{ backgroundColor: '#1e62fe' }}>
-      <Container maxWidth="xl">
+      <Container maxWidth={false} sx={{ maxWidth: '80%' }}>
         <Toolbar
           disableGutters
           sx={{
             display: 'flex',
-            gap: '20px',
+            gap: '60px',
             alignItems: 'center',
             height: '80px',
             justifyContent: 'space-between'
@@ -56,7 +57,7 @@ export const Header = () => {
             display={'flex'}
             justifyContent={'center'}
             sx={{
-              display: { xs: 'none', sm: 'flex' }
+              display: { xs: 'none', md: 'flex' }
             }}
           >
             <Link to="/">
@@ -67,7 +68,7 @@ export const Header = () => {
 
           <Box
             sx={{
-              display: { xs: 'flex', sm: 'none' },
+              display: { xs: 'flex', md: 'none' },
               alignItems: 'center'
             }}
           >
@@ -77,10 +78,9 @@ export const Header = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
             >
-              <MenuIcon />
-            </IconButton>
+            <MenuIcon sx={{ fill: '#fff'}}/>
+            </IconButton >
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -96,21 +96,47 @@ export const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', sm: 'none' }
-              }}
+                display: { xs: 'block', md: 'none' }, color:"#fff"
+              }} 
             >
-              {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              <Box display={'flex'} flexDirection={'column'}>
+             
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Link to={'/'} style={{
+                    fontWeight: '500',
+                    fontSize: '1rem'
+                  }}>
+                    EDIÇÃO
+                  </Link>
                 </MenuItem>
-              ))}
+
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Link to={'/'} style={{
+                    fontWeight: '500',
+                    fontSize: '1rem'
+                  }}>
+                    ETAPA
+                  </Link>
+                </MenuItem>
+
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Link to={'/'} style={{
+                    fontWeight: '500',
+                    fontSize: '1rem'
+                  }}>
+                    PROCESSO
+                  </Link>
+                </MenuItem>
+
+              </Box>
+
             </Menu>
           </Box>
 
           <Box
             justifyContent={'center'}
             sx={{
-              display: { xs: 'flex', sm: 'none' }
+              display: { xs: 'flex', md: 'none' }
             }}
           >
             <Link to="/">
@@ -118,8 +144,14 @@ export const Header = () => {
               <img src={ImgLogo} width="100px" alt="Logo DBC" />
             </Link>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
-            <Link to="/">AAAAAA</Link>
+
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap:'40px'}}>
+            <HeaderButton texto={'Edição'} url={'/'}/>
+          
+            <HeaderButton texto={'Etapa'} url={'/aaa'}/>
+              
+            <HeaderButton texto={'Processo'} url={'/aaa'}/>
           </Box>
 
           <Box
@@ -130,7 +162,10 @@ export const Header = () => {
               alignItems: 'center'
             }}
           >
-            <Tooltip title="Open settings">
+
+            <h2 style={{color: '#fff'}}>USUARIO</h2>
+
+            <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -151,13 +186,25 @@ export const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              <MenuItem onClick={handleCloseUserMenu}>
+                  <Link to={'/'} style={{
+                    fontWeight: '500',
+                    fontSize: '1rem'
+                  }}>
+                    Editar Perfil
+                  </Link>
                 </MenuItem>
-              ))}
+
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Link to={'/'} style={{
+                    fontWeight: '500',
+                    fontSize: '1rem'
+                  }}>
+                    Sair
+                  </Link>
+                </MenuItem>
             </Menu>
-            <Link to="/">Sair</Link>
+            <Link style={{color: '#fff'}} to="/">Sair</Link>
           </Box>
         </Toolbar>
       </Container>
