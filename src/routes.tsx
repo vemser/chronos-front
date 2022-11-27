@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { AdminHome } from './pages/Admin/AdminHome/AdminHome'
 import { Login } from './pages/Login/Login'
 import { PaginaInicial } from './pages/Pagina Inicial/PaginaInicial'
 
@@ -15,9 +16,19 @@ export const AppRoutes = () => {
     <BrowserRouter>
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Login />} />
+
+        <Route path='/' element={<Login />} />
+        
+        <Route path='/admin'>
+          <Route index element={<AdminHome />} />
+        </Route>
+
+        <Route path='/gestao'>
+          <Route index element={<AdminHome />} />
+        </Route>
 
         <Route path="/pagina-inicial" element={<PaginaInicial />} />
+
 
       </Routes>
     </AuthProvider>

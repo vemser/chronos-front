@@ -133,6 +133,5 @@ export const Login = () => {
           </Box>
         </Box>
       </Box>
-    
   )
 }
