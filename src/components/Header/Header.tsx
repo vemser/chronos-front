@@ -163,7 +163,7 @@ export const Header = () => {
             }}
           >
 
-            <h2 style={{color: '#fff'}}>USUARIO</h2>
+            <h3 style={{color: '#fff'}}>USUARIO</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

@@ -43,7 +43,7 @@ export const EditarPerfil = () => {
           >
             <Box>
               {' '}
-              <h2>Editar Perfil</h2>{' '}
+              <h2 style={{color:'#fff'}}>Editar Perfil</h2>{' '}
             </Box>
           </Grid>
           <Box

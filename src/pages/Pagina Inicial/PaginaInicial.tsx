@@ -13,6 +13,8 @@ export const PaginaInicial: React.FC = () => {
           <Row />
         </Box>
       </Box>
+      
+      <EditarPerfil />
     </>
   )
 }

@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }: IChildren ) => {
     const userSignup = async (newUser: IUser) => {
         try {
             let user = {email: newUser.email, senha: newUser.senha}
-            await api.post('/auth/create', user);
+            let data = await api.post('/auth/login', user)
             
             navigate(`/`)
         } catch (error) {
