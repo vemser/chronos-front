@@ -9,12 +9,12 @@ export const PaginaInicial: React.FC = () => {
   return (
     <>
       <Header />
-      <CadastrarColaborador />
-      {/* <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+      {/* <CadastrarColaborador /> */}
+      <Box width={'100%'} display={'flex'} justifyContent={'center'}>
         <Box width={'80%'}>
           <Row />
         </Box>
-      </Box> */}
+      </Box>
     </>
   )
 }
