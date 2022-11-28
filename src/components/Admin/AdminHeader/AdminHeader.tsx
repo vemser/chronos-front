@@ -85,6 +85,12 @@ export const AdminHeader = () => {
                     CADASTRAR COLABORADOR
                   </MenuItem>
                 </Link>
+
+                <Link to={'/admin/listar'}>
+                  <MenuItem>
+                    LISTAR COLABORADORES
+                  </MenuItem>
+                </Link>
               </Box>
 
             </Menu>
@@ -100,6 +106,8 @@ export const AdminHeader = () => {
           <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
             <ul>
               <HeaderButton texto={'CADASTRAR COLABORADOR'} url={'/admin/cadastrar'}/>
+
+              <HeaderButton texto={'LISTAR COLABORADORES'} url={'/admin/listar'}/>
             </ul>
           </Box>
 
@@ -131,7 +139,7 @@ export const AdminHeader = () => {
             >
                 <MenuItem>
                   <Box className={styles.menuBurgerOptions}>
-                    <Link to={'/gestao/perfil'}>
+                    <Link to={'/admin/perfil'}>
                       <MenuItem>
                         EDITAR PERFIL
                       </MenuItem>

@@ -11,21 +11,24 @@ import {
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './GestaoEdicoes.module.css'
-import { Header } from '../../../components/Header/Header'
 import FileCopyIcon from '@mui/icons-material/FileCopy'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox'
 import SearchIcon from '@mui/icons-material/Search'
+import { Link } from 'react-router-dom'
+import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 
 export const GestaoEdicoes: React.FC = () => {
   return (
     <>
-      <Header />
+      <GestaoHeader />
 
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>
           <Box className={styles.ContainerNova}>
-            <Button variant="contained"> + NOVA</Button>{' '}
+            <Link to={'/gestao/cadastrar-edicao'}>
+              <Button variant="contained"> + NOVA</Button>
+            </Link>
           </Box>
           <div className={styles.ContainerTitle}>
             <h2>Edições do Vem Ser</h2>

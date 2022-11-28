@@ -10,9 +10,14 @@ import {
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
+import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
+import { Header } from '../../../components/Header/Header'
 
 export const AdminListar: React.FC = () => {
   return (
+    <>
+    <Header />
+   
     <TableContainer
       sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
     >
@@ -68,5 +73,6 @@ export const AdminListar: React.FC = () => {
         </TableBody>
       </Table>
     </TableContainer>
+  </>
   )
 }

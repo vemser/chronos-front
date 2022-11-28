@@ -5,6 +5,7 @@ import { AdminCadastrar } from './pages/Admin/AdminCadastrar/AdminCadastrar'
 import { AdminEditarColab } from './pages/Admin/AdminEditarColab/AdminEditarColab'
 import { AdminHome } from './pages/Admin/AdminHome/AdminHome'
 import { AdminListar } from './pages/Admin/AdminListar/AdminListar'
+import { AdminPerfil } from './pages/Admin/AdminPerfil/AdminPerfil'
 import { GestaoCadastrarDiaNaoUtil } from './pages/Gestao/GestaoCadastrarDiaNaoUtil/GestaoCadastrarDiaNaoUtil'
 import { GestaoCadastrarEdicao } from './pages/Gestao/GestaoCadastrarEdicao/GestaoCadastrarEdicao'
 import { GestaoDiaNaoUtil } from './pages/Gestao/GestaoDiaNaoUtil/GestaoDiaNaoUtil'
@@ -29,6 +30,8 @@ export const AppRoutes = () => {
 
           <Route path="/admin">
             <Route index element={<AdminHome />} />
+            <Route path ='/admin/perfil' element={<AdminPerfil />} />
+
             <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
             <Route path="/admin/listar" element={<AdminListar />} />
             <Route
