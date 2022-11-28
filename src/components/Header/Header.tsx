@@ -100,6 +100,9 @@ export const Header = () => {
               }} 
             >
               <Box display={'flex'} flexDirection={'column'}>
+
+                <ul>
+
              
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Link to={'/'} style={{
@@ -128,6 +131,7 @@ export const Header = () => {
                   </Link>
                 </MenuItem>
 
+              </ul>
               </Box>
 
             </Menu>
@@ -186,7 +190,7 @@ export const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={handleCloseUserMenu}>
                   <Link to={'/'} style={{
                     fontWeight: '500',
                     fontSize: '1rem'

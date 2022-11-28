@@ -26,20 +26,23 @@ export const AuthProvider = ({ children }: IChildren ) => {
 
     const handleLogin = async (user: IUser) => {
         try {
-           // const { data } = await api.post('/auth', user);
-            // api.defaults.headers.common['Authorization'] = data;
-            console.log(user);
+
+            const { data } = await api.post('/login', user);
+
+            api.defaults.headers.common['Authorization'] = data;
             
-            // localStorage.setItem('token', data)
+            localStorage.setItem('token', data)
             localStorage.setItem('user', user.email)
 
-            //setRole(data.role)
+            setRole(data.role)
 
-            //navigate(`/home/${role}`)
+            navigate(`/home/admin}`)
         } catch (error) {
             console.error(error);
         }
     } 
+
+
 
     const handleLogout = async () => {
         localStorage.removeItem('token')

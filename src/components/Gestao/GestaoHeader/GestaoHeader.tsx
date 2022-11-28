@@ -40,7 +40,7 @@ export const GestaoHeader = () => {
     setAnchorElUser(null)
   }
   return (
-    <AppBar position="static" className={styles.header} >
+    <AppBar position="static" className={styles.header} sx={{ backgroundColor: '#ffffff'}}>
       <Container maxWidth={false} className={styles.headerContainer}>
         <Toolbar disableGutters className={styles.toolbar}>
 
@@ -79,15 +79,17 @@ export const GestaoHeader = () => {
               }} 
             >
               <Box className={styles.menuBurgerOptions}>
+                <Link to={'/gestao/edicoes'}>
+                  <MenuItem>
+                    EDIÇÕES
+                  </MenuItem>
+                </Link>
 
-                <MenuItem>
-                  <Link to={'/'}>EDIÇÕES</Link>
-                </MenuItem>
-
-                <MenuItem>
-                  <Link to={'/'}>DIAS NÃO ÚTEIS</Link>
-                </MenuItem>
-
+                <Link to={'/gestao/dias-nao-uteis'}>
+                  <MenuItem>
+                    DIAS NÃO ÚTEIS
+                  </MenuItem>
+                </Link>
               </Box>
 
             </Menu>
@@ -101,10 +103,10 @@ export const GestaoHeader = () => {
 
           
           <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
-            <List>
-                <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'}/>
-                <HeaderButton texto={'DIAS NÃO ÚTEIS'} url={'/gestao/dias-nao-uteis'}/>
-            </List>
+            <ul>
+              <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'}/>
+              <HeaderButton texto={'DIAS NÃO ÚTEIS'} url={'/gestao/dias-nao-uteis'}/>
+            </ul>
           </Box>
 
           <Box className={styles.usuario}>
@@ -133,21 +135,22 @@ export const GestaoHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem onClick={handleCloseUserMenu}>
-                    <Box className={styles.menuBurgerOptions}>
+                <MenuItem>
+                  <Box className={styles.menuBurgerOptions}>
+                    <Link to={'/gestao/perfil'}>
+                      <MenuItem>
+                        EDITAR PERFIL
+                      </MenuItem>
+                    </Link>
 
-                        <MenuItem>
-                            <Link to={'/'}>EDITAR PERFIL</Link>
-                        </MenuItem>
-
-                        <MenuItem>
-                            <Link to={'/'}>DIAS NÃO ÚTEIS</Link>
-                        </MenuItem>
-
-                    </Box>
+                    <Link to={'/'}>
+                      <MenuItem>
+                        SAIR
+                      </MenuItem>
+                    </Link>
+                  </Box>
                 </MenuItem>
             </Menu>
-            <Link style={{color: '#fff'}} to="/">Sair</Link>
           </Box>
         </Toolbar>
       </Container>

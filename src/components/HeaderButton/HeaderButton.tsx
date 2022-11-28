@@ -11,7 +11,7 @@ interface IHeaderButton {
 export const HeaderButton = (props: IHeaderButton ) => {
   return (
     <Link to={`${props.url}`}>
-        <Button variant="outlined" className={styles.botao}>
+        <Button sx={{ fontSize: '0.875rem', fontWeight: '600', color: '#1e62fe'}}>
           {props.texto}
         </Button>
     </Link>

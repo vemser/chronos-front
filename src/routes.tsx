@@ -12,6 +12,7 @@ import { GestaoEdicoes } from './pages/Gestao/GestaoEdicoes/GestaoEdicoes'
 import { GestaoHome } from './pages/Gestao/GestaoHome/GestaoHome'
 import { GestaoNovaEtapa } from './pages/Gestao/GestaoNovaEtapa/GestaoNovaEtapa'
 import { GestaoNovoProcesso } from './pages/Gestao/GestaoNovoProcesso/GestaoNovoProcesso'
+import { GestaoPerfil } from './pages/Gestao/GestaoPerfil/GestaoPerfil'
 import { GestaoVerificarEdicao } from './pages/Gestao/GestaoVerificarEdicao/GestaoVerificarEdicao'
 import { Login } from './pages/Login/Login'
 import { NotFind } from './pages/NotFind/NotFind'
@@ -38,6 +39,8 @@ export const AppRoutes = () => {
 
         <Route path='/gestao'>
           <Route index element={<GestaoHome />} />
+
+          <Route path='/gestao/perfil' element={<GestaoPerfil />} />
 
           <Route path='/gestao/dias-nao-uteis' element={<GestaoDiaNaoUtil />} />
           <Route path='/gestao/cadastrar-dias-nao-uteis' element={<GestaoCadastrarDiaNaoUtil />} />
