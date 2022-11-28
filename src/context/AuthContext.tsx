@@ -12,18 +12,6 @@ export const AuthProvider = ({ children }: IChildren ) => {
     const [ role, setRole ] = useState(null);
     
 
-    
-    const userSignup = async (newUser: IUser) => {
-        try {
-            let user = {email: newUser.email, senha: newUser.senha}
-            let data = await api.post('/auth/login', user)
-            
-            navigate(`/`)
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     const handleLogin = async (user: IUser) => {
         try {
 
@@ -36,7 +24,19 @@ export const AuthProvider = ({ children }: IChildren ) => {
 
             setRole(data.role)
 
-            navigate(`/home/admin}`)
+            if(data?.role === 'ROLE_ADMIN'){
+                navigate(`/home/admin}`)
+
+            } else if(data?.role === 'ROLE_GESTAO_DE_PESSOAS'){
+                navigate(`/home/gestao}`)
+
+            } else if(data?.role === 'ROLE_INSTRUTOR'){
+                navigate(`/home/instrutor}`)
+                
+            } else {
+                navigate(`/`)
+            }
+        
         } catch (error) {
             console.error(error);
         }
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: IChildren ) => {
 
 
     return(
-        <AuthContext.Provider value={{userSignup, handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{ handleLogin, handleLogout}}>
             { children }
         </AuthContext.Provider>
     )
