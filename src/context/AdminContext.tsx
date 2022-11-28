@@ -3,7 +3,8 @@ import {
   IChildren,
   IAdminContext,
   IColaborador,
-  toastConfig
+  toastConfig,
+  IColaborador2
 } from '../utils/interfaces'
 import { api } from '../utils/api'
 import { useNavigate, Navigate } from 'react-router-dom'
@@ -16,8 +17,18 @@ export const AdminProvider = ({ children }: IChildren) => {
   const navigate = useNavigate()
 
   const criarDadosColaborador = async (colaborador: IColaborador) => {
+    let dadosColaborador: IColaborador2 = {
+      nome: colaborador.nome,
+      email: colaborador.email,
+      cargos: []
+    }
+    colaborador.Administrador && dadosColaborador.cargos.push('ROLE_ADMIN')
+    colaborador.GestaoDePessoas &&
+      dadosColaborador.cargos.push('ROLE_GESTAO_DE_PESSOAS')
+    colaborador.Instrutor && dadosColaborador.cargos.push('ROLE_INSTRUTOR')
+
     try {
-      await api.post('/usuario', colaborador)
+      await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin/listar')
     } catch (error) {
@@ -59,5 +70,9 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
-  return <AdminContext.Provider value={{}}>{children}</AdminContext.Provider>
+  return (
+    <AdminContext.Provider value={{ criarDadosColaborador }}>
+      {children}
+    </AdminContext.Provider>
+  )
 }

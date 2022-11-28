@@ -24,6 +24,8 @@ interface State {
   showPassword: boolean
 }
 
+// const { handleLogin } = useContext(AuthContext)
+
 export const Login = () => {
   const [values, setValues] = React.useState<State>({
     password: '',
@@ -109,7 +111,12 @@ export const Login = () => {
                   error={!!errors.email}
                 />
                 {errors.email && (
-                  <span id="login-error-email">{errors.email.message}</span>
+                  <span
+                    className={styles.ContainerError}
+                    id="login-error-email"
+                  >
+                    {errors.email.message}
+                  </span>
                 )}
               </Box>
 
@@ -144,7 +151,12 @@ export const Login = () => {
                   label="Senha"
                 />
                 {errors.senha && (
-                  <span id="login-error-senha">{errors.senha.message}</span>
+                  <span
+                    className={styles.ContainerError}
+                    id="login-error-senha"
+                  >
+                    {errors.senha.message}
+                  </span>
                 )}
               </FormControl>
             </Box>

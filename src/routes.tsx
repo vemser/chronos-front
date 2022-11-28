@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { AdminProvider } from './context/AdminContext'
 import { AuthProvider } from './context/AuthContext'
 import { AdminCadastrar } from './pages/Admin/AdminCadastrar/AdminCadastrar'
 import { AdminEditarColab } from './pages/Admin/AdminEditarColab/AdminEditarColab'
@@ -23,41 +24,60 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Login />} />
+        <AdminProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
 
-          <Route path="*" element={<NotFind />} />
+            <Route path="*" element={<NotFind />} />
 
-          <Route path="/admin">
-            <Route index element={<AdminHome />} />
-            <Route path ='/admin/perfil' element={<AdminPerfil />} />
+            <Route path="/admin">
+              <Route index element={<AdminHome />} />
+              <Route path="/admin/perfil" element={<AdminPerfil />} />
 
-            <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
-            <Route path="/admin/listar" element={<AdminListar />} />
-            <Route
-              path="/admin/editar-colaborador/:colaborador"
-              element={<AdminEditarColab />}
-            />
-          </Route>
+              <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
+              <Route path="/admin/listar" element={<AdminListar />} />
+              <Route
+                path="/admin/editar-colaborador/:colaborador"
+                element={<AdminEditarColab />}
+              />
+            </Route>
 
+            <Route path="/gestao">
+              <Route index element={<GestaoHome />} />
 
-        <Route path='/gestao'>
-          <Route index element={<GestaoHome />} />
+              <Route path="/gestao/perfil" element={<GestaoPerfil />} />
 
-          <Route path='/gestao/perfil' element={<GestaoPerfil />} />
+              <Route
+                path="/gestao/dias-nao-uteis"
+                element={<GestaoDiaNaoUtil />}
+              />
+              <Route
+                path="/gestao/cadastrar-dias-nao-uteis"
+                element={<GestaoCadastrarDiaNaoUtil />}
+              />
 
-          <Route path='/gestao/dias-nao-uteis' element={<GestaoDiaNaoUtil />} />
-          <Route path='/gestao/cadastrar-dias-nao-uteis' element={<GestaoCadastrarDiaNaoUtil />} />
+              <Route path="/gestao/edicoes" element={<GestaoEdicoes />} />
+              <Route
+                path="/gestao/cadastrar-edicao"
+                element={<GestaoCadastrarEdicao />}
+              />
+              <Route
+                path="/gestao/verificar-edicao/:edicao"
+                element={<GestaoVerificarEdicao />}
+              />
+              <Route
+                path="/gestao/verificar-edicao/:edicao/nova-etapa"
+                element={<GestaoNovaEtapa />}
+              />
+              <Route
+                path="/gestao/verificar-edicao/:edicao/novo-processo"
+                element={<GestaoNovoProcesso />}
+              />
+            </Route>
 
-          <Route path='/gestao/edicoes' element={<GestaoEdicoes />} />
-          <Route path='/gestao/cadastrar-edicao' element={<GestaoCadastrarEdicao />} />
-          <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
-          <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
-          <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
-        </Route>
-
-          <Route path="/pagina-inicial" element={<PaginaInicial />} />
-        </Routes>
+            <Route path="/pagina-inicial" element={<PaginaInicial />} />
+          </Routes>
+        </AdminProvider>
       </AuthProvider>
     </BrowserRouter>
   )
