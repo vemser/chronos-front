@@ -13,7 +13,7 @@ export interface IAuthContext {
     handleLogout: () => Promise<void>,
 }
 
-export interface IUserContext {
+export interface IAdminContext {
     
 }
 

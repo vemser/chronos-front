@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from 'AdminCadastrar.module.css'
+import styles from './AdminCadastrar.module.css'
 
 import TextField from '@mui/material/TextField'
 
@@ -14,6 +14,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
 import FormHelperText from '@mui/material/FormHelperText'
+import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 
 export const AdminCadastrar = () => {
   const [state, setState] = React.useState({
@@ -39,6 +40,7 @@ export const AdminCadastrar = () => {
   }
   return (
     <>
+    <AdminHeader />
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <Grid
           container

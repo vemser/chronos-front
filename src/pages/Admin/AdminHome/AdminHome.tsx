@@ -3,11 +3,12 @@ import styles from './AdminHome.module.css'
 import { Header } from '../../../components/Header/Header'
 import { Row } from '../../../components/Row/Row'
 import { Box } from '@mui/system'
+import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 
 export const AdminHome: React.FC = () => {
   return (
     <>
-      <Header />
+      <AdminHeader />
       <Box width={'100%'} display={'flex'} justifyContent={'center'}>
         <Box width={'80%'}>
           <Row />

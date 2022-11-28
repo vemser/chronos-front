@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 
@@ -14,13 +13,13 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
 import { Link } from 'react-router-dom'
-import ImgLogo from '../../assets/logo-dbc-branco.png'
+import imgLogo from '../../../assets/login-logo.png'
 import { HeaderButton } from '../../HeaderButton/HeaderButton'
-
-const pages = ['Products', 'Pricing', 'Blog']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+import styles from './AdminHeader.module.css'
+import { List } from '@mui/material'
 
 export const AdminHeader = () => {
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -41,37 +40,17 @@ export const AdminHeader = () => {
     setAnchorElUser(null)
   }
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#1e62fe' }}>
-      <Container maxWidth={false} sx={{ maxWidth: '80%' }}>
-        <Toolbar
-          disableGutters
-          sx={{
-            display: 'flex',
-            gap: '60px',
-            alignItems: 'center',
-            height: '80px',
-            justifyContent: 'space-between'
-          }}
-        >
-          <Box
-            display={'flex'}
-            justifyContent={'center'}
-            sx={{
-              display: { xs: 'none', md: 'flex' }
-            }}
-          >
-            <Link to="/">
-              {' '}
-              <img src={ImgLogo} width="100px" alt="" />
+    <AppBar position="static" className={styles.header} sx={{ backgroundColor: '#ffffff'}}>
+      <Container maxWidth={false} className={styles.headerContainer}>
+        <Toolbar disableGutters className={styles.toolbar}>
+
+          <Box className={styles.logoImg} sx={{display: { xs: 'none', md: 'flex' }}}>
+            <Link to="/admin">
+              <img src={imgLogo} alt="Logo DBC" title='Logo' />
             </Link>
           </Box>
 
-          <Box
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              alignItems: 'center'
-            }}
-          >
+          <Box className={styles.menuBurgerContainer} sx={{ display: { xs: 'flex', md: 'none' } }} >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -79,7 +58,7 @@ export const AdminHeader = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
             >
-            <MenuIcon sx={{ fill: '#fff'}}/>
+            <MenuIcon className={styles.burgerIcon}/>
             </IconButton >
             <Menu
               id="menu-appbar"
@@ -96,80 +75,44 @@ export const AdminHeader = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' }, color:"#fff"
+                display: { xs: 'block', md: 'none' }
               }} 
             >
-              <Box display={'flex'} flexDirection={'column'}>
-             
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    EDIÇÃO
-                  </Link>
-                </MenuItem>
+              <Box className={styles.menuBurgerOptions}>
 
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    ETAPA
-                  </Link>
-                </MenuItem>
-
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    PROCESSO
-                  </Link>
-                </MenuItem>
-
+                <Link to={'/admin/cadastrar'}>
+                  <MenuItem>
+                    CADASTRAR COLABORADOR
+                  </MenuItem>
+                </Link>
               </Box>
 
             </Menu>
           </Box>
 
-          <Box
-            justifyContent={'center'}
-            sx={{
-              display: { xs: 'flex', md: 'none' }
-            }}
-          >
+          <Box className={styles.logoImg} sx={{ display: { xs: 'flex', md: 'none'}}} >
             <Link to="/">
-              {' '}
-              <img src={ImgLogo} width="100px" alt="Logo DBC" />
+              <img src={imgLogo}  alt="Logo DBC" />
             </Link>
           </Box>
 
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap:'40px'}}>
-            <HeaderButton texto={'Edição'} url={'/'}/>
           
-            <HeaderButton texto={'Etapa'} url={'/aaa'}/>
-              
-            <HeaderButton texto={'Processo'} url={'/aaa'}/>
+          <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
+            <ul>
+              <HeaderButton texto={'CADASTRAR COLABORADOR'} url={'/admin/cadastrar'}/>
+            </ul>
           </Box>
 
-          <Box
-            sx={{
-              flexGrow: 0,
-              display: 'flex',
-              gap: '10px',
-              alignItems: 'center'
-            }}
-          >
+          <Box className={styles.usuario}>
 
-            <h3 style={{color: '#fff'}}>USUARIO</h3>
+            <h3>USUARIO</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -186,25 +129,22 @@ export const AdminHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    Editar Perfil
-                  </Link>
-                </MenuItem>
+                <MenuItem>
+                  <Box className={styles.menuBurgerOptions}>
+                    <Link to={'/gestao/perfil'}>
+                      <MenuItem>
+                        EDITAR PERFIL
+                      </MenuItem>
+                    </Link>
 
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    Sair
-                  </Link>
+                    <Link to={'/'}>
+                      <MenuItem>
+                        SAIR
+                      </MenuItem>
+                    </Link>
+                  </Box>
                 </MenuItem>
             </Menu>
-            <Link style={{color: '#fff'}} to="/">Sair</Link>
           </Box>
         </Toolbar>
       </Container>
