@@ -21,20 +21,21 @@ import { PaginaInicial } from './pages/Pagina Inicial/PaginaInicial'
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
-    <AuthProvider>
-      <Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
 
-        <Route path='/' element={<Login />} />
-        
-        <Route path='*' element ={<NotFind />} />
+          <Route path="*" element={<NotFind />} />
 
-
-        <Route path='/admin'>
-          <Route index element={<AdminHome />} />
-          <Route path='/admin/cadastrar' element={<AdminCadastrar />} />
-          <Route path='/admin/listar' element={<AdminListar />} />
-          <Route path='/admin/editar-colaborador/:colaborador'  element={<AdminEditarColab />} />
-        </Route>
+          <Route path="/admin">
+            <Route index element={<AdminHome />} />
+            <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
+            <Route path="/admin/listar" element={<AdminListar />} />
+            <Route
+              path="/admin/editar-colaborador/:colaborador"
+              element={<AdminEditarColab />}
+            />
+          </Route>
 
 
         <Route path='/gestao'>
@@ -52,11 +53,9 @@ export const AppRoutes = () => {
           <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
         </Route>
 
-        <Route path="/pagina-inicial" element={<PaginaInicial />} />
-
-
-      </Routes>
-    </AuthProvider>
+          <Route path="/pagina-inicial" element={<PaginaInicial />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

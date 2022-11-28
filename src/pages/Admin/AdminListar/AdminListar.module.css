@@ -1,0 +1,8 @@
+.ButtonContainer {
+  color: #111827;
+  transition: 0.2s;
+}
+.ButtonContainer:hover {
+  color: #1e62fe;
+  scale: 1.05;
+}
