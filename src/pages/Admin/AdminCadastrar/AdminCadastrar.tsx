@@ -40,7 +40,7 @@ export const AdminCadastrar = () => {
   }
   return (
     <>
-    <AdminHeader />
+      <AdminHeader />
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <Grid
           container

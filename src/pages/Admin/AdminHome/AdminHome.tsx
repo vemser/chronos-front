@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AdminHome.module.css'
-import { Header } from '../../../components/Header/Header'
+
 import { Row } from '../../../components/Row/Row'
 import { Box } from '@mui/system'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'

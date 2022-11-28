@@ -28,6 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.5",
+    "react-nprogress": "^0.1.6",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
@@ -59,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/nprogress": "^0.2.0"
   }
 }
