@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 import {
   IChildren,
   IAdminContext,
@@ -15,6 +15,12 @@ export const AdminContext = createContext({} as IAdminContext)
 
 export const AdminProvider = ({ children }: IChildren) => {
   const navigate = useNavigate()
+
+  const [token, setToken] = useState<string>(
+    localStorage.getItem('token') || ''
+  )
+
+  const [dadosColaborador, setDadosColaborador] = useState<any>()
 
   const criarDadosColaborador = async (colaborador: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
@@ -39,8 +45,9 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const buscarDadosColaborador = async () => {
     try {
-      // api.defaults.headers.common['Authorization'] = token
-      api.get('/usuario')
+      api.defaults.headers.common['Authorization'] = token
+      const { data } = await api.get('/usuario')
+      setDadosColaborador(data)
     } catch (error) {
       console.log(error)
     }
@@ -71,7 +78,13 @@ export const AdminProvider = ({ children }: IChildren) => {
   }
 
   return (
-    <AdminContext.Provider value={{ criarDadosColaborador }}>
+    <AdminContext.Provider
+      value={{
+        criarDadosColaborador,
+        buscarDadosColaborador,
+        dadosColaborador
+      }}
+    >
       {children}
     </AdminContext.Provider>
   )

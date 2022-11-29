@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useEffect } from 'react'
 import { useContext } from 'react'
 import {
   TableCell,
@@ -14,12 +15,16 @@ import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 import { AdminContext } from '../../../context/AdminContext'
-import { IAdminContext, IColaborador } from '../../../utils/interfaces'
+import { IAdminContext, IColaborador2 } from '../../../utils/interfaces'
 
 export const AdminListar: React.FC = () => {
-  // const navigate = useNavigate()
-  // const { dadosColaborador, buscarDadosColaborador } =
-  //   useContext<IAdminContext>(AdminContext)
+  const navigate = useNavigate()
+  const { dadosColaborador, buscarDadosColaborador } =
+    useContext<any>(AdminContext)
+
+  useEffect(() => {
+    buscarDadosColaborador()
+  }, [buscarDadosColaborador])
 
   return (
     <>
@@ -39,24 +44,24 @@ export const AdminListar: React.FC = () => {
           </TableHead>
 
           <TableBody>
-            {/* {rows.map(row => ( */}
-            <TableRow>
-              <TableCell>Henrique Soares</TableCell>
-              <TableCell>henrique@hotmail.com </TableCell>
-              <TableCell>Gestor de Pessoas</TableCell>
-              <TableCell>
-                <ModeEditSharpIcon
-                  sx={{ mr: 1, cursor: 'pointer' }}
-                  className={styles.ButtonContainer}
-                />
-                <DeleteSharpIcon
-                  sx={{ cursor: 'pointer' }}
-                  className={styles.ButtonContainer}
-                />
-              </TableCell>
-            </TableRow>
-
-            {/* ))} */}
+            {dadosColaborador?.map((user: any) => {
+              return <h1>{user.nome}</h1>
+              // <TableRow>
+              //   <TableCell>{user.nome}</TableCell>
+              //   <TableCell>{user.email}</TableCell>
+              //   <TableCell>{user.cargos}</TableCell>
+              //   <TableCell>
+              //     <ModeEditSharpIcon
+              //       sx={{ mr: 1, cursor: 'pointer' }}
+              //       className={styles.ButtonContainer}
+              //     />
+              //     <DeleteSharpIcon
+              //       sx={{ cursor: 'pointer' }}
+              //       className={styles.ButtonContainer}
+              //     />
+              //   </TableCell>
+              // </TableRow>
+            })}
           </TableBody>
         </Table>
       </TableContainer>
