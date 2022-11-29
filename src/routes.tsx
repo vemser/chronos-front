@@ -55,7 +55,8 @@ export const AppRoutes = () => {
             
           </Route>
         </Routes>
-      </AuthProvider>
+        </AdminProvider>
+        </AuthProvider>
     </BrowserRouter>
   )
 }
