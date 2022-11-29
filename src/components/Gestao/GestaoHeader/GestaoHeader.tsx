@@ -19,6 +19,13 @@ import styles from './GestaoHeader.module.css'
 import { List } from '@mui/material'
 
 export const GestaoHeader = () => {
+  
+  const userEmail = localStorage.getItem('user');
+
+
+// ==== MATERIAL UI FUNCTIONS ====
+
+
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -87,7 +94,7 @@ export const GestaoHeader = () => {
 
                 <Link to={'/gestao/dias-nao-uteis'}>
                   <MenuItem>
-                    DIAS NÃO ÚTEIS
+                    PERÍODO NÃO ÚTIL
                   </MenuItem>
                 </Link>
               </Box>
@@ -105,17 +112,17 @@ export const GestaoHeader = () => {
           <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
             <ul>
               <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'}/>
-              <HeaderButton texto={'DIAS NÃO ÚTEIS'} url={'/gestao/dias-nao-uteis'}/>
+              <HeaderButton texto={'PERÍODO NÃO ÚTIL'} url={'/gestao/dias-nao-uteis'}/>
             </ul>
           </Box>
 
           <Box className={styles.usuario}>
 
-            <h3>USUARIO</h3>
+            <h3>{userEmail}</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={`${userEmail}`} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
 

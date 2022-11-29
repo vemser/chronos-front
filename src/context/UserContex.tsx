@@ -23,7 +23,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         try {
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/listar-edicao?pagina=${parseInt(page) - 1}&tamanho=40`);
+            const { data } = await api.get(`/edicao/listar-edicoes?pagina=0&tamanho=20`);
 
             setTotalPages(data.totalPages)
             setEdicoes(data.elementos)
@@ -52,8 +52,17 @@ export const UserProvider = ({ children }: IChildren) => {
 
         try {
             api.defaults.headers.common['Authorization'] = token;
+
+            const [DIday, DImonth, DIyear] = edicao.dataInicial.split('/');
+            edicao.dataInicial = [DIyear, DImonth, DIday].join('-');
+
+            const [DFday, DFmonth, DFyear] = edicao.dataFinal.split('/');
+            edicao.dataFinal = [DFyear, DFmonth, DFday].join('-');
+
             await api.post('/edicao', edicao);
 
+            console.log('deu certo');
+            
             navigate('/gestao/edicoes')
             
         } catch (error) {
