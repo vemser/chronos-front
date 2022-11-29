@@ -20,6 +20,11 @@ import { List } from '@mui/material'
 
 export const AdminHeader = () => {
 
+  const userEmail = localStorage.getItem('user');
+
+
+// ==== MATERIAL UI FUNCTIONS ====
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -86,11 +91,6 @@ export const AdminHeader = () => {
                   </MenuItem>
                 </Link>
 
-                <Link to={'/admin/listar'}>
-                  <MenuItem>
-                    LISTAR COLABORADORES
-                  </MenuItem>
-                </Link>
               </Box>
 
             </Menu>
@@ -104,20 +104,16 @@ export const AdminHeader = () => {
 
           
           <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
-            <ul>
-              <HeaderButton texto={'CADASTRAR COLABORADOR'} url={'/admin/cadastrar'}/>
-
-              <HeaderButton texto={'LISTAR COLABORADORES'} url={'/admin/listar'}/>
-            </ul>
+            <HeaderButton texto={'CADASTRAR COLABORADOR'} url={'/admin/cadastrar'}/>
           </Box>
 
           <Box className={styles.usuario}>
 
-            <h3>USUARIO</h3>
+            <h3>{userEmail}</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={`${userEmail}`} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
 

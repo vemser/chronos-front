@@ -112,7 +112,6 @@ export const Login = () => {
                   id="input-login-email"
                   label="Email"
                   variant="outlined"
-                  value={'admin@gmail.com'}
                   style={{ color: 'palette.primary.dark' }}
                   error={!!errors.email}
                 />
@@ -135,7 +134,6 @@ export const Login = () => {
                   className={styles.loginText}
                   id="input-login-senha"
                   type={values.showPassword ? 'text' : 'password'}
-                  value={'12345678'}
                   onChange={handleChange('password')}
                   error={!!errors.senha}
                   endAdornment={
