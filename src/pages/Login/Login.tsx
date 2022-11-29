@@ -112,6 +112,7 @@ export const Login = () => {
                   id="input-login-email"
                   label="Email"
                   variant="outlined"
+                  value={'admin@gmail.com'}
                   style={{ color: 'palette.primary.dark' }}
                   error={!!errors.email}
                 />
