@@ -61,13 +61,11 @@ export const AuthProvider = ({ children }: IChildren ) => {
         }
     } 
 
-
-
-    const handleLogout = async () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        api.defaults.headers.common['Authorization'] = undefined;
-    }
+  const handleLogout = async () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    api.defaults.headers.common['Authorization'] = undefined
+  }
 
 
     return(
@@ -76,4 +74,3 @@ export const AuthProvider = ({ children }: IChildren ) => {
         </AuthContext.Provider>
     )
 }
-

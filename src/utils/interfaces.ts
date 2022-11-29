@@ -5,10 +5,9 @@ export interface IChildren {
 }
 
 export interface IUser {
-    email: string,
-    senha: string
+  email: string
+  senha: string
 }
-
 
 // INTERFACES AUTH
 
@@ -18,13 +17,26 @@ export interface IAuthContext {
     handleLogout: () => Promise<void>,
 }
 
-
 // INTERFACES ADMIN
 
-export interface IColaborador {}
+export interface IColaborador2 {
+  nome: string
+  email: string
+  cargos: string[]
+}
 
-export interface IAdminContext {}
+export interface IColaborador {
+  nome: string
+  email: string
+  Administrador: string
+  GestaoDePessoas: string
+  Instrutor: string
+  imagem: string
+}
 
+export interface IAdminContext {
+  criarDadosColaborador: (colaborador: IColaborador) => Promise<void>
+}
 
 // INTERFACES USER
 
@@ -59,7 +71,6 @@ export interface IEtapa {
     nome: string,
     idEtapa: number,
 }
-
 
 export interface IProcesso {
   nome: string,

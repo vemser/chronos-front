@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { AdminProvider } from './context/AdminContext'
 import { AuthProvider } from './context/AuthContext'
 import { AdminCadastrar } from './pages/Admin/AdminCadastrar/AdminCadastrar'
 import { AdminEditarColab } from './pages/Admin/AdminEditarColab/AdminEditarColab'
@@ -24,10 +25,11 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Login />} />
+        <AdminProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
 
-          <Route path="*" element={<NotFind />} />
+            <Route path="*" element={<NotFind />} />
 
           <Route path='/admin' element={<PrivateRoute roleRequired='ROLE_ADMIN'/>}>
             <Route index element={<AdminHome />} />
