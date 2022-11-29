@@ -5,8 +5,7 @@ import { EditarPerfil } from '../../../components/EditarPerfil/EditarPerfil'
 export const AdminPerfil = () => {
   return (
     <>
-      <AdminPerfil />
-      <EditarPerfil />
+      <h1>sdasdads</h1>
     </>
   )
 }
