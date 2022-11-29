@@ -16,7 +16,12 @@ interface State {
 }
 
 export const Login = () => {
-  const [values, setValues] = React.useState<State>({
+
+
+
+
+
+    const [values, setValues] = React.useState<State>({
     password: '',
     showPassword: false
   })
@@ -39,13 +44,12 @@ export const Login = () => {
     event.preventDefault()
   }
 
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, roles } = useContext(AuthContext);
   const token = localStorage.getItem('token');
 
   const { register, handleSubmit, formState: { errors }} = useForm<IUser>({
     resolver: yupResolver(userFormSchema)
   })
-
 
   return (
     
@@ -91,6 +95,7 @@ export const Login = () => {
                 id="outlined-basic"
                 label="Email"
                 variant="outlined"
+                value='admin@gmail.com'
                 style={{ color: 'palette.primary.dark' }}
               />
 
@@ -102,7 +107,7 @@ export const Login = () => {
                   className={styles.loginText}
                   id="outlined-adornment-password"
                   type={values.showPassword ? 'text' : 'password'}
-                  value={values.password}
+                  value={'12345678'}
                   onChange={handleChange('password')}
                   endAdornment={
                     <InputAdornment position="end">
@@ -129,6 +134,8 @@ export const Login = () => {
             >
               Enviar
             </Button>
+
+            <button onClick={() => console.log(roles)}>aaaa</button>
             </form>
           </Box>
         </Box>

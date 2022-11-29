@@ -13,6 +13,7 @@ export interface IUser {
 // INTERFACES AUTH
 
 export interface IAuthContext {
+    roles: string[] | undefined,
     handleLogin: (user: IUser) => Promise<void>,
     handleLogout: () => Promise<void>,
 }
@@ -28,46 +29,46 @@ export interface IAdminContext {}
 // INTERFACES USER
 
 export interface IUserContext {
-    edicoes: IEdicoes[],
-    etapas: IEtapas[],
+    edicoes: IEdicao[],
+    etapas: IEtapa[],
     totalPages: number,
     getEdicoesList: (page: string) => Promise<void>,
     deleteEdicao: (idEdicao: number) => Promise<void>,
     createEdicao: (edicao: IEdicao) => Promise<void>,
     editEdicao: (edicao: IEdicao) => Promise<void>,
     getEtapas: (idEdicao: number) => Promise<void>,
-    deleteEtapa: (idEtapa: number) => Promise<void>,
-    createEtapa: (etapa: IEtapa) => Promise<void>,
-    editEtapa: (etapa: IEtapa) => Promise<void>,
-    getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
-    deleteProcesso: (idProcesso: number) => Promise<void>,
-    createProcesso: (processo: IProcesso) => Promise<void>,
-    editProcesso: (processo: IProcesso) => Promise<void>
+    deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>,
+    createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>,
+    editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>,
+    // getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
+    // deleteProcesso: (idProcesso: number) => Promise<void>,
+    // createProcesso: (processo: IProcesso) => Promise<void>,
+    // editProcesso: (processo: IProcesso) => Promise<void>
 
 }
 
 
-export interface IEdicoes{
-
-}
 export interface IEdicao{
-    id: number;
-}
-
-
-export interface IEtapas{
-
-}
-export interface IEtapa {
-    id: number,
+    nome: string,
+    dataInicial: string,
+    dataFinal: string,
     idEdicao: number
+}
+
+export interface IEtapa {
+    nome: string,
+    idEtapa: number,
 }
 
 
 export interface IProcesso {
-    idEdicao: number,
-    idEtapa: number
-    idProcesso: number
+  nome: string,
+  idEtapa: number,
+  areaEnvolvida: string[],
+  responsavel: string[]
+  duracaoProcesso: number,
+  diasUteis: number,
+  ordem: number
 }
 
 // CONFIG TOASTIFY
@@ -81,4 +82,11 @@ export const toastConfig: object = {
   draggable: true,
   progress: undefined,
   theme: 'light'
+}
+
+
+// PRIVATE ROUTES
+
+export interface IPrivateRoute{
+    roleRequired: any
 }

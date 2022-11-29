@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { api } from '../utils/api';
-import { IChildren, IEdicao, IEdicoes, IEtapa, IEtapas, IProcesso, IUserContext } from '../utils/interfaces'
+import { IChildren, IEdicao, IEtapa, IProcesso, IUserContext } from '../utils/interfaces'
 
 
 export const UserContext = createContext({} as IUserContext);   
@@ -13,8 +13,8 @@ export const UserProvider = ({ children }: IChildren) => {
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
-    const [ edicoes, setEdicoes ] = useState<IEdicoes[]>([]);
-    const [ etapas, setEtapas ] = useState<IEtapas[]>([])
+    const [ edicoes, setEdicoes ] = useState<IEdicao[]>([]);
+    const [ etapas, setEtapas ] = useState<IEtapa[]>([])
 
 
     const [totalPages, setTotalPages] = useState(0);
@@ -23,10 +23,10 @@ export const UserProvider = ({ children }: IChildren) => {
 
         try {
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/listar-edicao?pagina=${parseInt(page) - 1}&tamanho=40}`);
+            const { data } = await api.get(`/edicao/listar-edicao?pagina=${parseInt(page) - 1}&tamanho=40`);
 
             setTotalPages(data.totalPages)
-            setEdicoes(data.content)
+            setEdicoes(data.elementos)
 
         } catch (error) {
             console.error(error);
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: IChildren) => {
         }
     }
 
-    const deleteEdicao = async (idEdicao: any) => {
+    const deleteEdicao = async (idEdicao: number) => {
 
         try {
             api.defaults.headers.common['Authorization'] = token;
@@ -66,7 +66,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const editEdicao = async (edicao: IEdicao) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
-            await api.put(`/edicao/${edicao.id}`, edicao)
+            await api.put(`/edicao/${edicao.idEdicao}`, edicao)
 
             navigate('/gestao/edicoes')
             
@@ -83,10 +83,9 @@ export const UserProvider = ({ children }: IChildren) => {
     const getEtapas = async (idEdicao: number) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/etapa/listar-etapas/${idEdicao}`)
-
+            const { data } = await api.get(`/etapa/listar-etapas`)
   
-            setEtapas(data.content)
+            setEtapas(data.elementos)
 
             navigate(`/gestao/verificar-edicao/${idEdicao}`)
             
@@ -96,12 +95,12 @@ export const UserProvider = ({ children }: IChildren) => {
         }
     }
 
-    const deleteEtapa = async (idEtapa: number) => {
+    const deleteEtapa = async (idEtapa: number, idEdicao: number) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/etapa/${idEtapa}`)
 
-            navigate(`/gestao/verificar-edicao/${idEtapa}`)
+            navigate(`/gestao/verificar-edicao/${idEdicao}`)
             
         } catch (error) {
             console.error(error);
@@ -109,12 +108,12 @@ export const UserProvider = ({ children }: IChildren) => {
         }
     }
 
-    const createEtapa = async (etapa: IEtapa) => {
+    const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
-            await api.post(`/etapa/${etapa.id}`, etapa);
+            await api.post(`/etapa/`, etapa);
 
-            navigate(`/gestao/verificar-edicao/${etapa.idEdicao}`)
+            navigate(`/gestao/verificar-edicao/${idEdicao}`)
             
             
         } catch (error) {
@@ -123,12 +122,12 @@ export const UserProvider = ({ children }: IChildren) => {
         }
     }
 
-    const editEtapa = async (etapa: IEtapa) => {
+    const editEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
-            await api.put(`/etapa/${etapa.id}`, etapa)
+            await api.put(`/etapa/${etapa.idEtapa}`, etapa)
 
-            navigate(`/gestao/verificar-edicao/${etapa.idEdicao}`)
+            navigate(`/gestao/verificar-edicao/${idEdicao}`)
             
         } catch (error) {
             console.error(error);
@@ -139,56 +138,56 @@ export const UserProvider = ({ children }: IChildren) => {
     // PROCESSO
 
 
-    const getProcessos = async (idEdicao: number, idEtapa: number) => {
-        try {
-            api.defaults.headers.common['Authorization'] = token;
-            await api.get(`/processo/${idEdicao}/${idEtapa}`)
+    // const getProcessos = async (idEdicao: number, idEtapa: number) => {
+    //     try {
+    //         api.defaults.headers.common['Authorization'] = token;
+    //         await api.get(`/processo`)
 
             
-        } catch (error) {
-            console.error(error);
+    //     } catch (error) {
+    //         console.error(error);
 
-        }
-    }
+    //     }
+    // }
 
 
 
-    const deleteProcesso = async (idProcesso: number) => {
-        try {
-            api.defaults.headers.common['Authorization'] = token;
-            await api.delete(`/processo/${idProcesso}`)
+    // const deleteProcesso = async (idProcesso: number) => {
+    //     try {
+    //         api.defaults.headers.common['Authorization'] = token;
+    //         await api.delete(`/processo/${idProcesso}`)
             
-        } catch (error) {
-            console.error(error);
+    //     } catch (error) {
+    //         console.error(error);
 
-        }
-    }
+    //     }
+    // }
 
-    const createProcesso = async (processo: IProcesso) => {
-        try {
-            api.defaults.headers.common['Authorization'] = token;
-            await api.post(`/processo/${processo.idEdicao}/${processo.idEtapa}`, processo);
+    // const createProcesso = async (processo: IProcesso) => {
+    //     try {
+    //         api.defaults.headers.common['Authorization'] = token;
+    //         await api.post(`/processo/${processo.idEdicao}/${processo.idEtapa}`, processo);
 
-            navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
+    //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
             
-        } catch (error) {
-            console.error(error);
+    //     } catch (error) {
+    //         console.error(error);
 
-        }
-    }
+    //     }
+    // }
 
-    const editProcesso = async (processo: IProcesso) => {
-        try {
-            api.defaults.headers.common['Authorization'] = token;
-            await api.put(`/processo/${processo.idProcesso}`, processo)
+    // const editProcesso = async (processo: IProcesso) => {
+    //     try {
+    //         api.defaults.headers.common['Authorization'] = token;
+    //         await api.put(`/processo/${processo.idProcesso}`, processo)
 
-            navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
+    //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
             
-        } catch (error) {
-            console.error(error);
+    //     } catch (error) {
+    //         console.error(error);
             
-        }
-    }
+    //     }
+    // }
 
 
 
@@ -196,7 +195,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
 
   return (
-    <UserContext.Provider value={{ edicoes, etapas, totalPages, getEdicoesList, deleteEdicao, createEdicao, editEdicao, getEtapas, deleteEtapa, createEtapa, editEtapa, getProcessos, deleteProcesso, createProcesso, editProcesso }}>
+    <UserContext.Provider value={{ edicoes, etapas, totalPages, getEdicoesList, deleteEdicao, createEdicao, editEdicao, getEtapas, deleteEtapa, createEtapa, editEtapa }}>
         { children }
     </UserContext.Provider>
   )

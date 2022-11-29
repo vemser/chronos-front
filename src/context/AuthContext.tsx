@@ -1,5 +1,6 @@
+import { JoinFullTwoTone } from '@mui/icons-material';
 import { applyInitialState } from '@mui/x-data-grid/hooks/features/columns/gridColumnsUtils';
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { api } from '../utils/api';
 import { IAuthContext, IChildren, IUser } from '../utils/interfaces'
@@ -9,33 +10,51 @@ export const AuthContext = createContext({} as IAuthContext);
 export const AuthProvider = ({ children }: IChildren ) => {
 
     const navigate = useNavigate();
-    const [ role, setRole ] = useState(null);
-    
+    const [ roles, setRoles ] = useState<string[] | undefined>([]);
+    const[ token, setToken ] = useState<string | any >('')
+   
+    const parseJwt = async (token: any) => {
+        try {
+            let decodedJWT = JSON.parse(atob(token.split('.')[1]))
+            let roleArray = decodedJWT.CARGOS
 
+            return roleArray        
+            
+        } catch (e) {
+          return null;
+        }
+    };
+
+    
     const handleLogin = async (user: IUser) => {
         try {
 
+            console.log('iniciou');
+            
             const { data } = await api.post('/login', user);
 
             api.defaults.headers.common['Authorization'] = data;
-            
+
             localStorage.setItem('token', data)
             localStorage.setItem('user', user.email)
 
-            setRole(data.role)
+            let rolesArray = await parseJwt(localStorage.getItem('token'))
 
-            if(data?.role === 'ROLE_ADMIN'){
-                navigate(`/home/admin}`)
+            setRoles(rolesArray)
 
-            } else if(data?.role === 'ROLE_GESTAO_DE_PESSOAS'){
-                navigate(`/home/gestao}`)
-
-            } else if(data?.role === 'ROLE_INSTRUTOR'){
-                navigate(`/home/instrutor}`)
+            if(rolesArray && rolesArray[0] === 'ROLE_ADMIN'){
+                navigate(`/admin`)
+    
+            } else if (rolesArray && rolesArray[0] === 'ROLE_GESTAO_DE_PESSOAS'){
+                navigate(`/gestao`)
+    
+            } else if (rolesArray && rolesArray[0] === 'ROLE_INSTRUTOR'){
+                navigate(`/instrutor`)
                 
             } else {
                 navigate(`/`)
             }
+            
         
         } catch (error) {
             console.error(error);
@@ -52,7 +71,7 @@ export const AuthProvider = ({ children }: IChildren ) => {
 
 
     return(
-        <AuthContext.Provider value={{ handleLogin, handleLogout}}>
+        <AuthContext.Provider value={{ roles, handleLogin, handleLogout}}>
             { children }
         </AuthContext.Provider>
     )

@@ -59,5 +59,7 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
-  return <AdminContext.Provider value={{}}>{children}</AdminContext.Provider>
+  return <AdminContext.Provider value={{
+    
+  }}>{children}</AdminContext.Provider>
 }

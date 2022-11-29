@@ -18,6 +18,7 @@ import { GestaoVerificarEdicao } from './pages/Gestao/GestaoVerificarEdicao/Gest
 import { Login } from './pages/Login/Login'
 import { NotFind } from './pages/NotFind/NotFind'
 import { PaginaInicial } from './pages/Pagina Inicial/PaginaInicial'
+import { PrivateRoute } from './pages/PrivateRoute/PrivateRoute'
 
 export const AppRoutes = () => {
   return (
@@ -28,35 +29,29 @@ export const AppRoutes = () => {
 
           <Route path="*" element={<NotFind />} />
 
-          <Route path="/admin">
+          <Route path='/admin' element={<PrivateRoute roleRequired='ROLE_ADMIN'/>}>
             <Route index element={<AdminHome />} />
             <Route path ='/admin/perfil' element={<AdminPerfil />} />
-
-            <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
             <Route path="/admin/listar" element={<AdminListar />} />
-            <Route
-              path="/admin/editar-colaborador/:colaborador"
-              element={<AdminEditarColab />}
-            />
+            <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
+            <Route path="/admin/editar-colaborador/:colaborador" element={<AdminEditarColab />} />
           </Route>
 
+          <Route path='/gestao' element={<PrivateRoute roleRequired='ROLE_GESTAO_DE_PESSOAS'/>}>
+            <Route index element={<GestaoHome />} />
+            <Route path='/gestao/perfil' element={<GestaoPerfil />} />
+            <Route path='/gestao/dias-nao-uteis' element={<GestaoDiaNaoUtil />} />
+            <Route path='/gestao/cadastrar-dias-nao-uteis' element={<GestaoCadastrarDiaNaoUtil />} />
+            <Route path='/gestao/edicoes' element={<GestaoEdicoes />} />
+            <Route path='/gestao/cadastrar-edicao' element={<GestaoCadastrarEdicao />} />
+            <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
+            <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
+            <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
+          </Route>
 
-        <Route path='/gestao'>
-          <Route index element={<GestaoHome />} />
-
-          <Route path='/gestao/perfil' element={<GestaoPerfil />} />
-
-          <Route path='/gestao/dias-nao-uteis' element={<GestaoDiaNaoUtil />} />
-          <Route path='/gestao/cadastrar-dias-nao-uteis' element={<GestaoCadastrarDiaNaoUtil />} />
-
-          <Route path='/gestao/edicoes' element={<GestaoEdicoes />} />
-          <Route path='/gestao/cadastrar-edicao' element={<GestaoCadastrarEdicao />} />
-          <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
-          <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
-          <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
-        </Route>
-
-          <Route path="/pagina-inicial" element={<PaginaInicial />} />
+          <Route path='/instrutor' element={<PrivateRoute roleRequired='ROLE_INSTRUTOR'/>}>
+            
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
