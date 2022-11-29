@@ -13,9 +13,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
-import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
+
 import { AdminContext } from '../../../context/AdminContext'
 import { IColaborador, IAdminContext } from '../../../utils/interfaces'
+import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
+import CheckBoxIcon from '@mui/icons-material/CheckBox'
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox'
 
 export const AdminListar: React.FC = () => {
   const navigate = useNavigate()
@@ -27,13 +30,11 @@ export const AdminListar: React.FC = () => {
   const { deletarColaborador } = useContext(AdminContext)
 
   useEffect(() => {
-    buscarDadosColaborador()
+    buscarDadosColaborador('1')
   }, [])
 
   return (
     <>
-      <AdminHeader />
-
       <TableContainer
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >
@@ -54,7 +55,7 @@ export const AdminListar: React.FC = () => {
                   <TableCell>{user.nome}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    {user.cargos[0].descricao} <br />
+                    {user?.cargos[0].descricao} <br />
                     {user?.cargos[1]?.descricao}
                   </TableCell>
                   <TableCell>
@@ -67,10 +68,15 @@ export const AdminListar: React.FC = () => {
                       className={styles.ButtonContainer}
                       onClick={() => deletarColaborador(user.idUsuario)}
                     />
+                    <IndeterminateCheckBoxIcon
+                      className={styles.ButtonContainer}
+                    />
+                    <CheckBoxIcon className={styles.ButtonContainer} />
                   </TableCell>
                 </TableRow>
               )
             })}
+            <PaginacaoColaborador />
           </TableBody>
         </Table>
       </TableContainer>

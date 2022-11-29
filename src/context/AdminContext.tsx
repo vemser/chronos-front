@@ -14,6 +14,7 @@ import nProgress from 'nprogress'
 export const AdminContext = createContext({} as IAdminContext)
 
 export const AdminProvider = ({ children }: IChildren) => {
+  const [totalPages, setTotalPages] = useState(0)
   const navigate = useNavigate()
   const [dadosColaborador, setDadosColaborador] = useState<
     IColaborador[] | undefined
@@ -43,10 +44,11 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
-  const buscarDadosColaborador = async () => {
+  const buscarDadosColaborador = async (page: string) => {
     try {
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get('/usuario?pagina=0&tamanho=20')
+      const { data } = await api.get(`/usuario?pagina=${page}&tamanho=5`)
+      setTotalPages(data.totalPages)
       setDadosColaborador(data.elementos)
     } catch (error) {
       console.log(error)
@@ -84,7 +86,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         criarDadosColaborador,
         buscarDadosColaborador,
         dadosColaborador,
-        deletarColaborador
+        deletarColaborador,
+        totalPages
       }}
     >
       {children}
