@@ -36,6 +36,7 @@ export const AdminCadastrar = () => {
       <AdminHeader />
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
+          className={styles.FormAdmin}
           onSubmit={handleSubmit((data: IColaborador) =>
             criarDadosColaborador(data)
           )}

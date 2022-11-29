@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useContext } from 'react'
 import {
   TableCell,
   TableContainer,
@@ -7,12 +8,19 @@ import {
   TableBody,
   TableRow
 } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom'
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
+import { AdminContext } from '../../../context/AdminContext'
+import { IAdminContext, IColaborador } from '../../../utils/interfaces'
 
 export const AdminListar: React.FC = () => {
+  // const navigate = useNavigate()
+  // const { dadosColaborador, buscarDadosColaborador } =
+  //   useContext<IAdminContext>(AdminContext)
+
   return (
     <>
       <AdminHeader />
@@ -45,26 +53,6 @@ export const AdminListar: React.FC = () => {
                   sx={{ cursor: 'pointer' }}
                   className={styles.ButtonContainer}
                 />
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell>Henrique Soares</TableCell>
-              <TableCell>henrique@hotmail.com </TableCell>
-              <TableCell>Gestor de Pessoas</TableCell>
-              <TableCell>
-                <ModeEditSharpIcon sx={{ mr: 1, cursor: 'pointer' }} />
-                <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
-              </TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell>Henrique Soares</TableCell>
-              <TableCell>henrique@hotmail.com </TableCell>
-              <TableCell>Gestor de Pessoas</TableCell>
-              <TableCell>
-                <ModeEditSharpIcon sx={{ mr: 1, cursor: 'pointer' }} />
-                <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
               </TableCell>
             </TableRow>
 
