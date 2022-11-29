@@ -27,10 +27,12 @@ export interface IColaborador2 {
 export interface IColaborador {
   nome: string
   email: string
+  idCargo: number
   Administrador: string
   GestaoDePessoas: string
   Instrutor: string
   imagem: string
+  idUsuario: number
 }
 
 export interface IAdminContext {
