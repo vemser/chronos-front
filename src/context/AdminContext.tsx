@@ -15,12 +15,12 @@ export const AdminContext = createContext({} as IAdminContext)
 
 export const AdminProvider = ({ children }: IChildren) => {
   const navigate = useNavigate()
-
+  const [dadosColaborador, setDadosColaborador] = useState<
+    IColaborador[] | undefined
+  >(undefined)
   const [token, setToken] = useState<string>(
     localStorage.getItem('token') || ''
   )
-
-  const [dadosColaborador, setDadosColaborador] = useState<any>()
 
   const criarDadosColaborador = async (colaborador: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
@@ -46,8 +46,8 @@ export const AdminProvider = ({ children }: IChildren) => {
   const buscarDadosColaborador = async () => {
     try {
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get('/usuario')
-      setDadosColaborador(data)
+      const { data } = await api.get('/usuario?pagina=0&tamanho=20')
+      setDadosColaborador(data.elementos)
     } catch (error) {
       console.log(error)
     }
@@ -55,10 +55,11 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const deletarColaborador = async (idUsuario: number) => {
     try {
-      // api.defaults.headers.common['Authorization'] = token
+      api.defaults.headers.common['Authorization'] = token
       await api.delete(`/usuario/${idUsuario}`)
       toast.success('Usuário deletado com sucesso!', toastConfig)
     } catch (error) {
+      toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
     }
   }
@@ -82,7 +83,8 @@ export const AdminProvider = ({ children }: IChildren) => {
       value={{
         criarDadosColaborador,
         buscarDadosColaborador,
-        dadosColaborador
+        dadosColaborador,
+        deletarColaborador
       }}
     >
       {children}

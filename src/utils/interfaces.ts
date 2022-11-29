@@ -28,6 +28,7 @@ export interface IColaborador2 {
 export interface IColaborador {
   nome: string
   email: string
+  cargos: any
   idCargo: number
   Administrador: string
   GestaoDePessoas: string
@@ -39,9 +40,9 @@ export interface IColaborador {
 export interface IAdminContext {
   criarDadosColaborador: (colaborador: IColaborador) => Promise<void>
   buscarDadosColaborador: () => Promise<void>
-  dadosColaborador: IColaborador | undefined
+  dadosColaborador: IColaborador[] | undefined
+  deletarColaborador: (idUsuario: number) => Promise<void>
 }
-
 // INTERFACES USER
 
 export interface IUserContext {

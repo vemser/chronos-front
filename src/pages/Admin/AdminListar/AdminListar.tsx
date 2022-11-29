@@ -15,16 +15,20 @@ import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 import { AdminContext } from '../../../context/AdminContext'
-import { IAdminContext, IColaborador2 } from '../../../utils/interfaces'
+import { IColaborador, IAdminContext } from '../../../utils/interfaces'
 
 export const AdminListar: React.FC = () => {
   const navigate = useNavigate()
   const { dadosColaborador, buscarDadosColaborador } =
-    useContext<any>(AdminContext)
+    useContext<IAdminContext>(AdminContext)
+
+  console.log(dadosColaborador)
+
+  const { deletarColaborador } = useContext(AdminContext)
 
   useEffect(() => {
     buscarDadosColaborador()
-  }, [buscarDadosColaborador])
+  }, [])
 
   return (
     <>
@@ -44,23 +48,28 @@ export const AdminListar: React.FC = () => {
           </TableHead>
 
           <TableBody>
-            {dadosColaborador?.map((user: any) => {
-              return <h1>{user.nome}</h1>
-              // <TableRow>
-              //   <TableCell>{user.nome}</TableCell>
-              //   <TableCell>{user.email}</TableCell>
-              //   <TableCell>{user.cargos}</TableCell>
-              //   <TableCell>
-              //     <ModeEditSharpIcon
-              //       sx={{ mr: 1, cursor: 'pointer' }}
-              //       className={styles.ButtonContainer}
-              //     />
-              //     <DeleteSharpIcon
-              //       sx={{ cursor: 'pointer' }}
-              //       className={styles.ButtonContainer}
-              //     />
-              //   </TableCell>
-              // </TableRow>
+            {dadosColaborador?.map((user: IColaborador) => {
+              return (
+                <TableRow key={user.email}>
+                  <TableCell>{user.nome}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    {user.cargos[0].descricao} <br />
+                    {user?.cargos[1]?.descricao}
+                  </TableCell>
+                  <TableCell>
+                    <ModeEditSharpIcon
+                      sx={{ mr: 1, cursor: 'pointer' }}
+                      className={styles.ButtonContainer}
+                    />
+                    <DeleteSharpIcon
+                      sx={{ cursor: 'pointer' }}
+                      className={styles.ButtonContainer}
+                      onClick={() => deletarColaborador(user.idUsuario)}
+                    />
+                  </TableCell>
+                </TableRow>
+              )
             })}
           </TableBody>
         </Table>
