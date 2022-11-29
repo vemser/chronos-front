@@ -19,6 +19,7 @@ import { IColaborador, IAdminContext } from '../../../utils/interfaces'
 import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox'
+import { userFormSchema } from '../../../utils/schemas'
 
 export const AdminListar: React.FC = () => {
   const navigate = useNavigate()
@@ -62,6 +63,11 @@ export const AdminListar: React.FC = () => {
                     <ModeEditSharpIcon
                       sx={{ mr: 1, cursor: 'pointer' }}
                       className={styles.ButtonContainer}
+                      onClick={() => {
+                        navigate('/admin/editar-colaborador/:colaborador', {
+                          state: user
+                        })
+                      }}
                     />
                     <DeleteSharpIcon
                       sx={{ cursor: 'pointer' }}

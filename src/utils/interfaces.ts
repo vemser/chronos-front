@@ -44,6 +44,7 @@ export interface IAdminContext {
   dadosColaborador: IColaborador[] | undefined
   deletarColaborador: (idUsuario: number) => Promise<void>
   totalPages: number
+  editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
 }
 // INTERFACES USER
 

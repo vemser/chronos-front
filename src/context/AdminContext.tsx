@@ -66,12 +66,24 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
-  const editarColaborador = async (idUsuario: IColaborador) => {
+  // Atualizar cadastro e cargo do usuário
+  const editarColaborador = async (data: IColaborador, idUsuario: number) => {
+    let dadosColaborador: IColaborador2 = {
+      nome: data.nome,
+      email: data.email,
+      cargos: []
+    }
+    data.Administrador && dadosColaborador.cargos.push('ROLE_ADMIN')
+    data.GestaoDePessoas &&
+      dadosColaborador.cargos.push('ROLE_GESTAO_DE_PESSOAS')
+    data.Instrutor && dadosColaborador.cargos.push('ROLE_INSTRUTOR')
+    console.log(dadosColaborador)
     try {
       nProgress.start()
-
-      await api.put(`update-cadastro/${idUsuario}`)
+      api.defaults.headers.common['Authorization'] = token
+      await api.put(`usuario/update-cadastro/${idUsuario}`, dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
+      navigate('/admin')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
@@ -87,7 +99,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         buscarDadosColaborador,
         dadosColaborador,
         deletarColaborador,
-        totalPages
+        totalPages,
+        editarColaborador
       }}
     >
       {children}
