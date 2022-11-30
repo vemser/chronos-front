@@ -54,31 +54,30 @@ export interface IAdminContext {
 // INTERFACES USER
 
 export interface IUserContext {
-    edicoes: IEdicao[],
-    etapas: IEtapa[],
-    totalPages: number,
-    getEdicoesList: (page: string) => Promise<void>,
-    deleteEdicao: (idEdicao: number) => Promise<void>,
-    createEdicao: (edicao: IEdicao) => Promise<void>,
-    editEdicao: (edicao: IEdicao) => Promise<void>,
-    getEtapas: (idEdicao: number) => Promise<void>,
-    deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>,
-    createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>,
-    editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>,
-    // getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
-    // deleteProcesso: (idProcesso: number) => Promise<void>,
-    // createProcesso: (processo: IProcesso) => Promise<void>,
-    // editProcesso: (processo: IProcesso) => Promise<void>
-    ativoInativo: (idEdicao: number) => Promise<void>
+  edicoes: IEdicao[]
+  etapas: IEtapa[]
+  totalPages: number
+  getEdicoesList: (page: string) => Promise<void>
+  deleteEdicao: (idEdicao: number) => Promise<void>
+  createEdicao: (edicao: IEdicao) => Promise<void>
+  editEdicao: (edicao: IEdicao) => Promise<void>
+  getEtapas: (idEdicao: number) => Promise<void>
+  deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>
+  createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
+  editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
+  // getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
+  // deleteProcesso: (idProcesso: number) => Promise<void>,
+  // createProcesso: (processo: IProcesso) => Promise<void>,
+  // editProcesso: (processo: IProcesso) => Promise<void>
+  ativoInativo: (idEdicao: number) => Promise<void>
 }
 
-
-export interface IEdicao{
-    nome: string,
-    dataInicial: string,
-    dataFinal: string,
-    status: string,
-    idEdicao: number
+export interface IEdicao {
+  nome: string
+  dataInicial: string
+  dataFinal: string
+  status: string
+  idEdicao: number
 }
 
 export interface IEtapa {
@@ -98,16 +97,13 @@ export interface IProcesso {
 
 // INTERFACES DIA NAO UTIL
 
-export interface IDiaNaoUtilContext {
+export interface IDiaNaoUtilContext {}
 
-
-}
-
-export interface IDiaNaoUtil{
-  totalElementos: number,
-  quantidadePaginas: number,
-  pagina: number,
-  tamanho: number,
+export interface IDiaNaoUtil {
+  totalElementos: number
+  quantidadePaginas: number
+  pagina: number
+  tamanho: number
   elementos: []
 }
 
@@ -129,4 +125,3 @@ export const toastConfig: object = {
 export interface IPrivateRoute {
   roleRequired: any
 }
-
