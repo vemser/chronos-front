@@ -47,7 +47,10 @@ export const AdminProvider = ({ children }: IChildren) => {
   const buscarDadosColaborador = async (page: string) => {
     try {
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(`/usuario?pagina=${page}&tamanho=10`)
+      const { data } = await api.get(
+        `/usuario?pagina=${Number(page) - 1}&tamanho=10`
+      )
+
       console.log(data.elementos)
       setTotalPages(data.totalPages)
       setDadosColaborador(data.elementos)
@@ -61,6 +64,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = token
       await api.delete(`/usuario/${idUsuario}`)
       toast.success('Usuário deletado com sucesso!', toastConfig)
+      buscarDadosColaborador('1')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
