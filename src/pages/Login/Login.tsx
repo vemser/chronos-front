@@ -27,12 +27,7 @@ interface State {
 // const { handleLogin } = useContext(AuthContext)
 
 export const Login = () => {
-
-
-
-
-
-    const [values, setValues] = React.useState<State>({
+  const [values, setValues] = React.useState<State>({
     password: '',
     showPassword: false
   })

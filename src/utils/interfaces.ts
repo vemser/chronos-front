@@ -12,9 +12,9 @@ export interface IUser {
 // INTERFACES AUTH
 
 export interface IAuthContext {
-    roles: string[] | undefined,
-    handleLogin: (user: IUser) => Promise<void>,
-    handleLogout: () => Promise<void>,
+  roles: string[] | undefined
+  handleLogin: (user: IUser) => Promise<void>
+  handleLogout: () => Promise<void>
 }
 
 // INTERFACES ADMIN
@@ -28,18 +28,29 @@ export interface IColaborador2 {
 export interface IColaborador {
   nome: string
   email: string
+  cargos: any
+
   idCargo: number
   Administrador: string
   GestaoDePessoas: string
   Instrutor: string
   imagem: string
   idUsuario: number
+  senhaAtual: string
+  novaSenha: string
+  confirmacaoNovaSenha: string
 }
 
 export interface IAdminContext {
   criarDadosColaborador: (colaborador: IColaborador) => Promise<void>
+  buscarDadosColaborador: (page: string) => Promise<void>
+  dadosColaborador: IColaborador[] | undefined
+  deletarColaborador: (idUsuario: number) => Promise<void>
+  totalPages: number
+  editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
+  alterarStatusColab: (idUsuario: number) => Promise<void>
+  atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
 }
-
 // INTERFACES USER
 
 export interface IUserContext {
@@ -71,17 +82,17 @@ export interface IEdicao{
 }
 
 export interface IEtapa {
-    nome: string,
-    idEtapa: number,
+  nome: string
+  idEtapa: number
 }
 
 export interface IProcesso {
-  nome: string,
-  idEtapa: number,
-  areaEnvolvida: string[],
+  nome: string
+  idEtapa: number
+  areaEnvolvida: string[]
   responsavel: string[]
-  duracaoProcesso: number,
-  diasUteis: number,
+  duracaoProcesso: number
+  diasUteis: number
   ordem: number
 }
 
@@ -113,10 +124,9 @@ export const toastConfig: object = {
   theme: 'light'
 }
 
-
 // PRIVATE ROUTES
 
-export interface IPrivateRoute{
-    roleRequired: any
+export interface IPrivateRoute {
+  roleRequired: any
 }
 

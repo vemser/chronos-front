@@ -21,10 +21,14 @@ import { Login } from './pages/Login/Login'
 import { NotFind } from './pages/NotFind/NotFind'
 import { PaginaInicial } from './pages/Pagina Inicial/PaginaInicial'
 import { PrivateRoute } from './pages/PrivateRoute/PrivateRoute'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import 'nprogress/nprogress.css'
 
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <AuthProvider>
         <AdminProvider>
           <UserProvider>
