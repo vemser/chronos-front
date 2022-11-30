@@ -103,3 +103,4 @@ export const toastConfig: object = {
 export interface IPrivateRoute{
     roleRequired: any
 }
+
