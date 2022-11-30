@@ -18,14 +18,15 @@ import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 import Input from '@mui/material/Input'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { CadastroDePessoasSchema } from '../../../utils/schemas'
 
 export const AdminCadastrar = () => {
   const {
     register,
-    handleSubmit
-    // formState: { errors }
-  } = useForm<IColaborador>({})
-  // resolver: yupResolver(CadastroDePessoasSchema)
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IColaborador>({ resolver: yupResolver(CadastroDePessoasSchema) })
 
   const cargos = []
 
@@ -144,7 +145,16 @@ export const AdminCadastrar = () => {
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
                     {...register('nome')}
+                    error={!!errors.nome}
                   />
+                  {errors.nome && (
+                    <span
+                      className={styles.ContainerError}
+                      id="colab-error-email"
+                    >
+                      {errors.nome.message}
+                    </span>
+                  )}
                   <TextField
                     id="email"
                     label="Email"
@@ -152,7 +162,16 @@ export const AdminCadastrar = () => {
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
                     {...register('email')}
+                    error={!!errors.email}
                   />
+                  {errors.email && (
+                    <span
+                      className={styles.ContainerError}
+                      id="colab-error-email"
+                    >
+                      {errors.email.message}
+                    </span>
+                  )}
                   <FormControl
                     required
                     // error={error}

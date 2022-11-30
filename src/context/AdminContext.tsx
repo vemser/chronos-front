@@ -35,6 +35,7 @@ export const AdminProvider = ({ children }: IChildren) => {
     colaborador.Instrutor && dadosColaborador.cargos.push('ROLE_INSTRUTOR')
 
     try {
+      dadosColaborador.nome = colaborador.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
       await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin')
