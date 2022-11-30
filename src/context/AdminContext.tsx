@@ -103,6 +103,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
       await api.put(`usuario/enable-disable/${idUsuario}`)
+      buscarDadosColaborador('1')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
