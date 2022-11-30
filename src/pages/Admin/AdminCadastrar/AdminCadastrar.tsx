@@ -98,7 +98,7 @@ export const AdminCadastrar = () => {
                   <Box display="flex" justifyContent="center">
                     <label htmlFor="upload-photo">
                       <input
-                        style={{ display: 'none', backgroundColor: '#ccc' }}
+                        style={{ display: 'none' }}
                         id="upload-photo"
                         name="upload-photo"
                         type="file"
