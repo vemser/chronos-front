@@ -9,7 +9,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 export const PaginacaoColaborador = () => {
   const { totalPages, buscarDadosColaborador } = useContext(AdminContext)
   const [searchParam] = useSearchParams()
-  const pageNumber = searchParam.get('page') || '0'
+  const pageNumber = searchParam.get('page') || '1'
 
   const pages = useMemo(() => {
     const pageList: number[] = []

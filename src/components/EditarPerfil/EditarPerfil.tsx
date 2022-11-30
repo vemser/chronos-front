@@ -21,6 +21,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 import Input from '@mui/material/Input'
 import FilledInput from '@mui/material/FilledInput'
+import { useLocation } from 'react-router-dom'
 
 interface State {
   password: string
@@ -28,11 +29,17 @@ interface State {
 }
 
 export const EditarPerfil = () => {
+  const { state } = useLocation()
+  console.log(state)
   const {
     register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<IColaborador>({})
+    handleSubmit
+    // formState: { errors }
+  } = useForm<IColaborador>({
+    defaultValues: {
+      // nome: state.nome
+    }
+  })
 
   const [values, setValues] = React.useState<State>({
     password: '',
@@ -57,13 +64,16 @@ export const EditarPerfil = () => {
     event.preventDefault()
   }
 
+  // const { register, handleSubmit } = useForm<IColaborador>({
+  //   defaultValues: {
+  //     nome: state.nome,
+  //     email: state.email
+  //   }
+  // })
+
   const { atualizarSenhaUsuario } = useContext(AdminContext)
 
   const { inserirFotoUsuario } = useContext(AdminContext)
-
-  // const atualizarPerfil = () => {
-  //   atualizarSenhaUsuario(data)
-  // }
 
   return (
     <>

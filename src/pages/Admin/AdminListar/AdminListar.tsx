@@ -9,7 +9,7 @@ import {
   TableBody,
   TableRow
 } from '@mui/material'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
@@ -20,7 +20,6 @@ import {
   IAdminContext,
   IChildren
 } from '../../../utils/interfaces'
-import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
 
 import { userFormSchema } from '../../../utils/schemas'
 import Switch from '@mui/material/Switch'
