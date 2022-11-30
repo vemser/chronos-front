@@ -26,7 +26,7 @@ export const UserProvider = ({ children }: IChildren) => {
         try {
             nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao?pagina=0&tamanho=20`);
+            const { data } = await api.get(`/edicao?pagina=${Number(page) - 1}&tamanho=20`);
 
             setTotalPages(data.totalPages)
             setEdicoes(data.elementos)
@@ -98,11 +98,22 @@ export const UserProvider = ({ children }: IChildren) => {
 
     // ATIVO INATIVO EDICAO
 
-    const ativoInativo = async (idEdicao: number) => {
+    const ativoInativo = async (data: IEdicao) => {
 
          try {
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token
-            await api.put(`edicao/enable-disable/${idEdicao}`)
+            await api.put(`edicao/enable-disable/${data.idEdicao}`)
+
+            if(data.status === 'ATIVO') {
+                data.status = 'Inativo'
+            } else {
+                data.status ='Ativo'
+            }
+            
+            toast.success(`'Status da edição ${data.nome} alterado! para ${data.status}'`)
+
+            getEdicoesList('1')
 
         } catch (error) {
             console.log(error)

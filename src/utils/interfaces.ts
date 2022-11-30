@@ -70,7 +70,7 @@ export interface IUserContext {
   // deleteProcesso: (idProcesso: number) => Promise<void>,
   // createProcesso: (processo: IProcesso) => Promise<void>,
   // editProcesso: (processo: IProcesso) => Promise<void>
-  ativoInativo: (idEdicao: number) => Promise<void>
+  ativoInativo: (data: IEdicao) => Promise<void>
 }
 
 export interface IEdicao {

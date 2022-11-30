@@ -84,7 +84,7 @@ export const GestaoEdicoes: React.FC = () => {
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <Switch onClick={() => ativoInativo(edicao.idEdicao)} defaultChecked={status} />
+                      <Switch onClick={() => ativoInativo(edicao)} checked={status} defaultChecked={status} />
                     </TableCell>
 
                     <TableCell align="right" width={'40px'}>

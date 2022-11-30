@@ -1,4 +1,3 @@
-import { log } from "console";
 import nProgress from "nprogress";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +16,8 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
         try {
             nProgress.start();
             const { data } = await api.get('/dia-nao-util?pagina=0&tamanho=20')
+
+            console.log(data.elementos)
             
             setDiasNaoUteis(data.elementos)
 
@@ -33,6 +34,8 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     const postDiaNaoUtil = async (data: IDiaNaoUtil) => {
         try {
             nProgress.start()
+            console.log(data);
+            
             await api.post('/dia-nao-util', data)
             toast.success('Dia Não Útil cadastrado com sucesso!', toastConfig)
 
@@ -53,6 +56,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             nProgress.start()
             await api.delete(`/dia-nao-util/${idDiaNaoUtil}`)
             toast.success('Dia Não Útil removido com sucesso!', toastConfig)
+            getDiaNaoUtil()
 
         } catch (error) {
             console.error(error);

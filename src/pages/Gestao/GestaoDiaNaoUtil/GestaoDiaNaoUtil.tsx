@@ -11,7 +11,6 @@ import {
   Switch,
 } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link, useNavigate } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
@@ -21,7 +20,7 @@ import styles from './GestaoDiaNaoUtil.module.css'
 
 export const GestaoDiaNaoUtil = () => {
 
-  const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil } = useContext(DiaNaoUtilContext)
+  const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil } = useContext(DiaNaoUtilContext)
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
@@ -52,7 +51,7 @@ export const GestaoDiaNaoUtil = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="justify">Código</TableCell>
+                  <TableCell align="justify" sx={{ }}>Código</TableCell>
                   <TableCell align="justify">Descrição</TableCell>
                   <TableCell align="justify">Período Inicial</TableCell>
                   <TableCell align="justify">Período Final</TableCell>
