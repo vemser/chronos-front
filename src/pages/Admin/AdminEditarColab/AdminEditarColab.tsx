@@ -23,6 +23,7 @@ import { useLocation } from 'react-router-dom'
 export const AdminEditarColab = () => {
   const { state } = useLocation()
   const { editarColaborador } = useContext(AdminContext)
+  console.log(state)
 
   // const {
   //   register,
@@ -37,8 +38,6 @@ export const AdminEditarColab = () => {
       email: state.email
     }
   })
-
-  const cargos = []
 
   return (
     <>

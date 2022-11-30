@@ -12,13 +12,14 @@ import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import imgLogo from '../../../assets/login-logo.png'
 import { HeaderButton } from '../../HeaderButton/HeaderButton'
 import styles from './AdminHeader.module.css'
 import { List } from '@mui/material'
 
 export const AdminHeader = () => {
+  const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -147,15 +148,14 @@ export const AdminHeader = () => {
             >
               <MenuItem>
                 <Box className={styles.menuBurgerOptions}>
-                  <Link
-                    to={'/admin/perfil'}
-                    //  onClick={() => {
-                    //     navigate('/admin/perfil', {
-                    //       state: user
-                    //     })
+                  <MenuItem
+                    onClick={() => {
+                      navigate('/admin/perfil')
+                      // , {state }
+                    }}
                   >
-                    <MenuItem>EDITAR PERFIL</MenuItem>
-                  </Link>
+                    EDITAR PERFIL
+                  </MenuItem>
 
                   <Link to={'/'}>
                     <MenuItem>SAIR</MenuItem>
