@@ -52,14 +52,6 @@ export const AuthProvider = ({ children }: IChildren) => {
     }
   }
 
-  const loggedUser = async () => {
-    try {
-      await api.get('/usuario/logged-user')
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const handleLogout = async () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
@@ -67,9 +59,7 @@ export const AuthProvider = ({ children }: IChildren) => {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ roles, handleLogin, handleLogout, loggedUser }}
-    >
+    <AuthContext.Provider value={{ roles, handleLogin, handleLogout }}>
       {children}
     </AuthContext.Provider>
   )

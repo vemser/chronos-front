@@ -15,7 +15,6 @@ export interface IAuthContext {
   roles: string[] | undefined
   handleLogin: (user: IUser) => Promise<void>
   handleLogout: () => Promise<void>
-  loggedUser: () => Promise<void>
 }
 
 // INTERFACES ADMIN
