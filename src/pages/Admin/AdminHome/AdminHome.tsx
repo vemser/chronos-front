@@ -4,14 +4,20 @@ import styles from './AdminHome.module.css'
 import { Row } from '../../../components/Row/Row'
 import { Box } from '@mui/system'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
+import { AdminListar } from '../AdminListar/AdminListar'
+import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
 
 export const AdminHome: React.FC = () => {
   return (
     <>
       <AdminHeader />
+
       <Box width={'100%'} display={'flex'} justifyContent={'center'}>
         <Box width={'80%'}>
-          <Row />
+          <AdminListar />
+          <div>
+            <PaginacaoColaborador />
+          </div>
         </Box>
       </Box>
     </>

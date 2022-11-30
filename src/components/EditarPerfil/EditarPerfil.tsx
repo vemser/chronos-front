@@ -1,17 +1,63 @@
-import { TextField } from '@mui/material'
-import React from 'react'
+import {
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+  IconButton
+} from '@mui/material'
+import React, { useContext } from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp'
 import Button from '@mui/material/Button'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import styles from './EditarPerfil.module.css'
+import { AdminContext } from '../../context/AdminContext'
+import { useForm } from 'react-hook-form'
+import { IColaborador } from '../../utils/interfaces'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+
+import Input from '@mui/material/Input'
+import FilledInput from '@mui/material/FilledInput'
+
+interface State {
+  password: string
+  showPassword: boolean
+}
 
 export const EditarPerfil = () => {
-  const [value, setValue] = React.useState('')
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IColaborador>({})
+
+  const [values, setValues] = React.useState<State>({
+    password: '',
+    showPassword: false
+  })
+
+  const handleChange =
+    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value })
+    }
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword
+    })
   }
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault()
+  }
+
+  const { atualizarSenhaUsuario } = useContext(AdminContext)
 
   return (
     <>
@@ -43,86 +89,144 @@ export const EditarPerfil = () => {
           >
             <Box>
               {' '}
-              <h2 style={{color:'#fff'}}>Editar Perfil</h2>{' '}
+              <h2 style={{ color: '#fff' }}>Editar Perfil</h2>{' '}
             </Box>
           </Grid>
-          <Box
-            minHeight={'500px'}
-            width={'100%'}
-            display={'flex'}
-            justifyContent={'center'}
-            className={styles.ContainerPerfil}
+          <form
+            onSubmit={handleSubmit((data: IColaborador) =>
+              atualizarSenhaUsuario(data)
+            )}
+            className={styles.FormEditar}
           >
             <Box
-              width={'50%'}
+              minHeight={'500px'}
+              width={'100%'}
               display={'flex'}
-              alignItems={'center'}
               justifyContent={'center'}
+              className={styles.ContainerPerfil}
             >
               <Box
-                width={'300px'}
-                height={'300px'}
-                borderRadius={'8px'}
-                boxShadow={2}
+                width={'50%'}
+                display={'flex'}
+                alignItems={'center'}
+                justifyContent={'center'}
               >
-                {' '}
-                <svg data-testid="AccountCircleSharpIcon">
-                  <AccountCircleSharpIcon color={'disabled'} />
-                </svg>
-                <Box display="flex" justifyContent="center">
-                  <Button
-                    variant="contained"
-                    endIcon={
-                      <AddAPhotoIcon
+                <Box
+                  width={'300px'}
+                  height={'300px'}
+                  borderRadius={'8px'}
+                  boxShadow={2}
+                >
+                  {' '}
+                  <svg data-testid="AccountCircleSharpIcon">
+                    <AccountCircleSharpIcon color={'disabled'} />
+                  </svg>
+                  <Box display="flex" justifyContent="center">
+                    <label htmlFor="upload-photo">
+                      <input
+                        style={{ display: 'none' }}
+                        id="upload-photo"
+                        name="upload-photo"
+                        type="file"
+                      />
+                      <Button
+                        component="span"
+                        variant="contained"
+                        endIcon={
+                          <AddAPhotoIcon
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              mb: '4px'
+                            }}
+                          />
+                        }
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
-                          mb: '4px'
+                          width: '200px',
+                          mt: 2
                         }}
+                      >
+                        Trocar Foto
+                        <input type="file" hidden name="[name]" />
+                      </Button>
+                    </label>
+                  </Box>
+                </Box>
+              </Box>
+
+              <Box
+                width={'50%'}
+                display="flex"
+                justifyContent="center"
+                alignItems={'center'}
+              >
+                <Box display="flex" flexDirection="column" gap="20px">
+                  <TextField
+                    id="nome"
+                    label="Nome"
+                    {...register('nome')}
+                    variant="standard"
+                    sx={{ width: '450px' }}
+                    className={styles.FormPerfil}
+                  />
+                  {/* <FormControl sx={{ m: 1, width: '30ch' }} variant="standard">
+                    <InputLabel htmlFor="standard-adornment-password">
+                      Senha Atual
+                    </InputLabel>
+                    <Input
+                      type={values.showPassword ? 'text' : 'password'}
+                      id="senhaAtual"
+                      {...register('senhaAtual')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl> */}
+                  <TextField
+                    label="Senha atual"
+                    id="senhaAtual"
+                    {...register('senhaAtual')}
+                    variant="standard"
+                  />
+                  <TextField
+                    label="Nova Senha"
+                    id="novaSenha"
+                    {...register('novaSenha')}
+                    variant="standard"
+                  />
+                  <TextField
+                    id="confirmacaoNovaSenha"
+                    label="Confirmar Nova Senha"
+                    variant="standard"
+                    {...register('confirmacaoNovaSenha')}
+                  />
+                  <div className={styles.ContainerEnviar}>
+                    <label htmlFor="submit">
+                      <input
+                        type="submit"
+                        className={styles.BotaoEnviar}
+                        value="Enviar"
                       />
-                    }
-                    sx={{ display: 'flex', alignItems: 'center' }}
-                  >
-                    Trocar Foto
-                  </Button>
+                    </label>
+                  </div>
                 </Box>
               </Box>
             </Box>
-
-            <Box
-              width={'50%'}
-              display="flex"
-              justifyContent="center"
-              alignItems={'center'}
-            >
-              <Box display="flex" flexDirection="column" gap="20px">
-                <TextField
-                  id="standard-multiline-flexible"
-                  label="Nome"
-                  value={value}
-                  onChange={handleChange}
-                  variant="standard"
-                  sx={{ width: '450px' }}
-                  className={styles.FormPerfil}
-                />
-                <TextField
-                  id="standard-multiline-flexible"
-                  label="Senha Atual"
-                  variant="standard"
-                />
-                <TextField
-                  id="standard-multiline-flexible"
-                  label="Nova Senha"
-                  variant="standard"
-                />
-                <TextField
-                  id="standard-multiline-flexible"
-                  label="Confirmar Nova Senha"
-                  variant="standard"
-                />
-              </Box>
-            </Box>
-          </Box>
+          </form>
         </Grid>
       </Grid>
     </>
