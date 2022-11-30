@@ -1,5 +1,7 @@
+import nProgress from 'nprogress';
 import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { api } from '../utils/api';
 import { IChildren, IEdicao, IEtapa, IProcesso, IUserContext } from '../utils/interfaces'
 
@@ -40,13 +42,21 @@ export const UserProvider = ({ children }: IChildren) => {
     const deleteEdicao = async (idEdicao: number) => {
 
         try {
+            nProgress.start()
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/edicao/${idEdicao}`);
+            toast.success('Edicao Removida com sucesso!')
+
+
             getEdicoesList('1')
 
         } catch (error) {
             console.error(error);
+            toast.error('Houve um erro ao remover Edicao!')
             
+        } finally {
+            nProgress.done()
+
         }
     }
 
@@ -207,28 +217,6 @@ export const UserProvider = ({ children }: IChildren) => {
             
     //     }
     // }
-
-
-
-    const getDiaNaoUtil = async (page: string) => {
-
-        try {
-            api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao?pagina=0&tamanho=20`);
-
-            console.log(data.elementos);
-            
-
-            setTotalPages(data.totalPages)
-            setEdicoes(data.elementos)
-
-        } catch (error) {
-            console.error(error);
-
-        }
-    }
-
-
 
   return (
     <UserContext.Provider value={{ edicoes, etapas, totalPages, getEdicoesList, deleteEdicao, createEdicao, editEdicao, getEtapas, deleteEtapa, createEtapa, editEtapa, ativoInativo }}>

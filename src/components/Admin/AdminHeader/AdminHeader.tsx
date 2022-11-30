@@ -24,6 +24,8 @@ export const AdminHeader = () => {
     null
   )
 
+  const userEmail = localStorage.getItem('user')
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }

@@ -1,31 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import styles from './GestaoCadastrarEdicao.module.css'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { Box, TextField, Button, Stack } from '@mui/material'
-import dayjs, { Dayjs } from 'dayjs'
+import { Box, TextField, Button } from '@mui/material'
 import 'dayjs/locale/pt-br'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { IEdicao } from '../../../utils/interfaces'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { cadastrarEdicaoFormSchema } from '../../../utils/schemas'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { UserContext } from '../../../context/UserContex'
-
-
-const isWeekend = (date: Dayjs) => {
-  const day = date.day()
-
-  return day === 0 || day === 6
-}
 
 export const GestaoCadastrarEdicao = () => {
 
   const { createEdicao } = useContext(UserContext);
-
-  const [inicial, setInicial] = React.useState<Dayjs | null>()
-  const [final, setFinal] = React.useState<Dayjs | null>()
 
   const { register, handleSubmit,  formState: { errors }} = useForm<IEdicao>(({
     resolver: yupResolver(cadastrarEdicaoFormSchema)

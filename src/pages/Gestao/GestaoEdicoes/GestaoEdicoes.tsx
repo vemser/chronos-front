@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from 'react'
+import React, { useContext, useLayoutEffect } from 'react'
 import {
   TableCell,
   TableContainer,
@@ -20,7 +20,7 @@ import { UserContext } from '../../../context/UserContex'
 
 export const GestaoEdicoes: React.FC = () => {
 
-  const { edicoes, getEdicoesList, ativoInativo } = useContext(UserContext);
+  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao } = useContext(UserContext);
 
 
   useLayoutEffect(() => {
@@ -91,7 +91,7 @@ export const GestaoEdicoes: React.FC = () => {
                     </TableCell>
                     
                     <TableCell align="right" width={'40px'}>
-                      <HighlightOffIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon onClick={() => {deleteEdicao(edicao.idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                   </TableRow>

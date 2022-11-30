@@ -99,16 +99,19 @@ export interface IProcesso {
 // INTERFACES DIA NAO UTIL
 
 export interface IDiaNaoUtilContext {
-
+  diasNaoUteis: IDiaNaoUtil[],
+  getDiaNaoUtil: () => Promise<void>,
+  postDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>, 
+  deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>, 
+  putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
 
 }
 
 export interface IDiaNaoUtil{
-  totalElementos: number,
-  quantidadePaginas: number,
-  pagina: number,
-  tamanho: number,
-  elementos: []
+  descricao: string,
+  dataInicial: string,
+  dataFinal: string,
+  idDiaNaoUtil: number
 }
 
 // CONFIG TOASTIFY
