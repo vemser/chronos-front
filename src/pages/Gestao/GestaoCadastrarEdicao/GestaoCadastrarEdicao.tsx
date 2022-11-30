@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './GestaoCadastrarEdicao.module.css'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -7,7 +7,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import 'dayjs/locale/pt-br'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { IEdicao } from '../../../utils/interfaces'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { cadastrarEdicaoFormSchema } from '../../../utils/schemas'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -31,6 +31,8 @@ export const GestaoCadastrarEdicao = () => {
     resolver: yupResolver(cadastrarEdicaoFormSchema)
   }))
 
+
+
   return (
     <>
     <GestaoHeader />
@@ -53,28 +55,8 @@ export const GestaoCadastrarEdicao = () => {
             <div className={styles.ContainerMenorCalendario}>
               <Box>
                 <p>Início</p>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'pt-br'}>
-                  <DatePicker
-                    label="Basic example"
-                    value={inicial}
-                    onChange={(newValue) => {
-                      setInicial(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} id={'dataInicial'} {...register('dataInicial')} />}
-                  />
-                </LocalizationProvider>
-
-
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'pt-br'}>
-                  <DatePicker
-                    label="Basic example"
-                    value={final}
-                    onChange={(newValue) => {
-                      setFinal(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params}  id={'dataFinal'} {...register('dataFinal')}/>}
-                  />
-                </LocalizationProvider>
+                <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')}/>
+                <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataFinal')}/>
               </Box>
             </div>
             

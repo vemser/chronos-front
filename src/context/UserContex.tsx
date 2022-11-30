@@ -23,7 +23,10 @@ export const UserProvider = ({ children }: IChildren) => {
 
         try {
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/listar-edicoes?pagina=0&tamanho=20`);
+            const { data } = await api.get(`/edicao?pagina=0&tamanho=20`);
+
+            console.log(data.elementos);
+            
 
             setTotalPages(data.totalPages)
             setEdicoes(data.elementos)
@@ -53,15 +56,7 @@ export const UserProvider = ({ children }: IChildren) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
 
-            const [DIday, DImonth, DIyear] = edicao.dataInicial.split('/');
-            edicao.dataInicial = [DIyear, DImonth, DIday].join('-');
-
-            const [DFday, DFmonth, DFyear] = edicao.dataFinal.split('/');
-            edicao.dataFinal = [DFyear, DFmonth, DFday].join('-');
-
             await api.post('/edicao', edicao);
-
-            console.log('deu certo');
             
             navigate('/gestao/edicoes')
             
@@ -83,6 +78,21 @@ export const UserProvider = ({ children }: IChildren) => {
             console.error(error);
             
         }
+    }
+
+    // ATIVO INATIVO EDICAO
+
+    const ativoInativo = async (idEdicao: number) => {
+
+         try {
+            api.defaults.headers.common['Authorization'] = token
+            await api.put(`edicao/enable-disable/${idEdicao}`)
+
+            console.log('mudou')
+        } catch (error) {
+            console.log(error)
+
+        } 
     }
 
 
@@ -200,11 +210,28 @@ export const UserProvider = ({ children }: IChildren) => {
 
 
 
+    const getDiaNaoUtil = async (page: string) => {
+
+        try {
+            api.defaults.headers.common['Authorization'] = token;
+            const { data } = await api.get(`/edicao?pagina=0&tamanho=20`);
+
+            console.log(data.elementos);
+            
+
+            setTotalPages(data.totalPages)
+            setEdicoes(data.elementos)
+
+        } catch (error) {
+            console.error(error);
+
+        }
+    }
 
 
 
   return (
-    <UserContext.Provider value={{ edicoes, etapas, totalPages, getEdicoesList, deleteEdicao, createEdicao, editEdicao, getEtapas, deleteEtapa, createEtapa, editEtapa }}>
+    <UserContext.Provider value={{ edicoes, etapas, totalPages, getEdicoesList, deleteEdicao, createEdicao, editEdicao, getEtapas, deleteEtapa, createEtapa, editEtapa, ativoInativo }}>
         { children }
     </UserContext.Provider>
   )

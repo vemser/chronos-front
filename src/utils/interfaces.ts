@@ -58,7 +58,7 @@ export interface IUserContext {
     // deleteProcesso: (idProcesso: number) => Promise<void>,
     // createProcesso: (processo: IProcesso) => Promise<void>,
     // editProcesso: (processo: IProcesso) => Promise<void>
-
+    ativoInativo: (idEdicao: number) => Promise<void>
 }
 
 
@@ -66,6 +66,7 @@ export interface IEdicao{
     nome: string,
     dataInicial: string,
     dataFinal: string,
+    status: string,
     idEdicao: number
 }
 
@@ -82,6 +83,21 @@ export interface IProcesso {
   duracaoProcesso: number,
   diasUteis: number,
   ordem: number
+}
+
+// INTERFACES DIA NAO UTIL
+
+export interface IDiaNaoUtilContext {
+
+
+}
+
+export interface IDiaNaoUtil{
+  totalElementos: number,
+  quantidadePaginas: number,
+  pagina: number,
+  tamanho: number,
+  elementos: []
 }
 
 // CONFIG TOASTIFY
@@ -103,3 +119,4 @@ export const toastConfig: object = {
 export interface IPrivateRoute{
     roleRequired: any
 }
+
