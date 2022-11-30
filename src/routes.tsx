@@ -27,6 +27,7 @@ import 'nprogress/nprogress.css'
 import { DiaNaoUtilProvider } from './context/DiaNaoUtilContext'
 import { GestaoEditarDiaNaoUtil } from './pages/Gestao/GestaoEditarDiaNaoUtil/GestaoEditarDiaNaoUtil'
 import { GestaoEditarEdicao } from './pages/Gestao/GestaoEditarEdicao/GestaoEditarEdicao'
+import { Calendario } from './pages/Calendario/Calendario'
 
 export const AppRoutes = () => {
   return (
@@ -40,6 +41,9 @@ export const AppRoutes = () => {
                 <Route path="/" element={<Login />} />
 
                 <Route path="*" element={<NotFind />} />
+
+                
+                <Route path="calendario" element={<Calendario />} />
 
                 <Route path='/admin' element={<PrivateRoute roleRequired='ROLE_ADMIN'/>}>
                   <Route index element={<AdminHome />} />

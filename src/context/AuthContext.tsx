@@ -23,6 +23,17 @@ export const AuthProvider = ({ children }: IChildren) => {
     }
   }
 
+  const loggedUser = async () => {
+    try {
+      const { data } = await api.get('/usuario/logged-user')
+
+      console.log(data.cargos);
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleLogin = async (user: IUser) => {
     try {
       console.log('iniciou')
@@ -38,6 +49,10 @@ export const AuthProvider = ({ children }: IChildren) => {
 
       setRoles(rolesArray)
 
+      loggedUser()
+
+
+
       if (rolesArray && rolesArray[0] === 'ROLE_ADMIN') {
         navigate(`/admin`)
       } else if (rolesArray && rolesArray[0] === 'ROLE_GESTAO_DE_PESSOAS') {
@@ -51,6 +66,8 @@ export const AuthProvider = ({ children }: IChildren) => {
       console.error(error)
     }
   }
+
+ 
 
   const handleLogout = async () => {
     localStorage.removeItem('token')
