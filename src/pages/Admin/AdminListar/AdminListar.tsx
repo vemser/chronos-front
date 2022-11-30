@@ -17,9 +17,9 @@ import styles from './AdminListar.module.css'
 import { AdminContext } from '../../../context/AdminContext'
 import { IColaborador, IAdminContext } from '../../../utils/interfaces'
 import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
-import CheckBoxIcon from '@mui/icons-material/CheckBox'
-import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox'
+
 import { userFormSchema } from '../../../utils/schemas'
+import Switch from '@mui/material/Switch'
 
 export const AdminListar: React.FC = () => {
   const navigate = useNavigate()
@@ -33,6 +33,8 @@ export const AdminListar: React.FC = () => {
   useEffect(() => {
     buscarDadosColaborador('1')
   }, [])
+
+  const { alterarStatusColab } = useContext(AdminContext)
 
   return (
     <>
@@ -57,7 +59,7 @@ export const AdminListar: React.FC = () => {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
                     {user?.cargos[0].descricao} <br />
-                    {user?.cargos[1]?.descricao}
+                    {user?.cargos[1]?.descricao} <br />
                   </TableCell>
                   <TableCell>
                     <ModeEditSharpIcon
@@ -69,15 +71,15 @@ export const AdminListar: React.FC = () => {
                         })
                       }}
                     />
+
                     <DeleteSharpIcon
                       sx={{ cursor: 'pointer' }}
                       className={styles.ButtonContainer}
                       onClick={() => deletarColaborador(user.idUsuario)}
                     />
-                    <IndeterminateCheckBoxIcon
-                      className={styles.ButtonContainer}
+                    <Switch
+                      onClick={() => alterarStatusColab(user.idUsuario)}
                     />
-                    <CheckBoxIcon className={styles.ButtonContainer} />
                   </TableCell>
                 </TableRow>
               )

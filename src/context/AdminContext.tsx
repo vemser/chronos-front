@@ -37,7 +37,7 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
-      navigate('/admin/listar')
+      navigate('/admin')
     } catch (error) {
       console.log(error)
       toast.error('Algo deu errado, tente novamente', toastConfig)
@@ -47,7 +47,8 @@ export const AdminProvider = ({ children }: IChildren) => {
   const buscarDadosColaborador = async (page: string) => {
     try {
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(`/usuario?pagina=${page}&tamanho=5`)
+      const { data } = await api.get(`/usuario?pagina=${page}&tamanho=05`)
+      console.log(data.elementos)
       setTotalPages(data.totalPages)
       setDadosColaborador(data.elementos)
     } catch (error) {
@@ -92,6 +93,36 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
+  // Alterar status do usuário
+  const alterarStatusColab = async (idUsuario: number) => {
+    try {
+      nProgress.start()
+      api.defaults.headers.common['Authorization'] = token
+      await api.put(`usuario/enable-disable/${idUsuario}`)
+    } catch (error) {
+      toast.error('Houve algum error, tente novamente!', toastConfig)
+      console.log(error)
+    } finally {
+      nProgress.done()
+    }
+  }
+
+  // Atualizar perfil do usuário
+
+  const atualizarSenhaUsuario = async (data: IColaborador) => {
+    try {
+      nProgress.start()
+      api.defaults.headers.common['Authorization'] = token
+      toast.success('Usuário editado com sucesso!', toastConfig)
+      await api.put(`usuario/update-perfil`, data)
+    } catch (error) {
+      toast.error('Houve algum error, tente novamente!', toastConfig)
+      console.log(error)
+    } finally {
+      nProgress.done()
+    }
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -100,7 +131,9 @@ export const AdminProvider = ({ children }: IChildren) => {
         dadosColaborador,
         deletarColaborador,
         totalPages,
-        editarColaborador
+        editarColaborador,
+        alterarStatusColab,
+        atualizarSenhaUsuario
       }}
     >
       {children}

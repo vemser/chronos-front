@@ -19,7 +19,6 @@ import styles from './AdminHeader.module.css'
 import { List } from '@mui/material'
 
 export const AdminHeader = () => {
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -40,17 +39,26 @@ export const AdminHeader = () => {
     setAnchorElUser(null)
   }
   return (
-    <AppBar position="static" className={styles.header} sx={{ backgroundColor: '#ffffff'}}>
+    <AppBar
+      position="static"
+      className={styles.header}
+      sx={{ backgroundColor: '#ffffff' }}
+    >
       <Container maxWidth={false} className={styles.headerContainer}>
         <Toolbar disableGutters className={styles.toolbar}>
-
-          <Box className={styles.logoImg} sx={{display: { xs: 'none', md: 'flex' }}}>
+          <Box
+            className={styles.logoImg}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             <Link to="/admin">
-              <img src={imgLogo} alt="Logo DBC" title='Logo' />
+              <img src={imgLogo} alt="Logo DBC" title="Logo" />
             </Link>
           </Box>
 
-          <Box className={styles.menuBurgerContainer} sx={{ display: { xs: 'flex', md: 'none' } }} >
+          <Box
+            className={styles.menuBurgerContainer}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -58,8 +66,8 @@ export const AdminHeader = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
             >
-            <MenuIcon className={styles.burgerIcon}/>
-            </IconButton >
+              <MenuIcon className={styles.burgerIcon} />
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -76,43 +84,47 @@ export const AdminHeader = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' }
-              }} 
+              }}
             >
               <Box className={styles.menuBurgerOptions}>
-
                 <Link to={'/admin/cadastrar'}>
-                  <MenuItem>
-                    CADASTRAR COLABORADOR
-                  </MenuItem>
+                  <MenuItem>CADASTRAR COLABORADOR</MenuItem>
                 </Link>
 
                 <Link to={'/admin/listar'}>
-                  <MenuItem>
-                    LISTAR COLABORADORES
-                  </MenuItem>
+                  <MenuItem>LISTAR COLABORADORES</MenuItem>
                 </Link>
               </Box>
-
             </Menu>
           </Box>
 
-          <Box className={styles.logoImg} sx={{ display: { xs: 'flex', md: 'none'}}} >
+          <Box
+            className={styles.logoImg}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
+          >
             <Link to="/">
-              <img src={imgLogo}  alt="Logo DBC" />
+              <img src={imgLogo} alt="Logo DBC" />
             </Link>
           </Box>
 
-          
-          <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
+          <Box
+            className={styles.navbar}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             <ul>
-              <HeaderButton texto={'CADASTRAR COLABORADOR'} url={'/admin/cadastrar'}/>
+              <HeaderButton
+                texto={'CADASTRAR COLABORADOR'}
+                url={'/admin/cadastrar'}
+              />
 
-              <HeaderButton texto={'LISTAR COLABORADORES'} url={'/admin/listar'}/>
+              <HeaderButton
+                texto={'LISTAR COLABORADORES'}
+                url={'/admin/listar'}
+              />
             </ul>
           </Box>
 
           <Box className={styles.usuario}>
-
             <h3>USUARIO</h3>
 
             <Tooltip title="Exibir detalhes">
@@ -137,21 +149,23 @@ export const AdminHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem>
-                  <Box className={styles.menuBurgerOptions}>
-                    <Link to={'/admin/perfil'}>
-                      <MenuItem>
-                        EDITAR PERFIL
-                      </MenuItem>
-                    </Link>
+              <MenuItem>
+                <Box className={styles.menuBurgerOptions}>
+                  <Link
+                    to={'/admin/perfil'}
+                    //  onClick={() => {
+                    //     navigate('/admin/perfil', {
+                    //       state: user
+                    //     })
+                  >
+                    <MenuItem>EDITAR PERFIL</MenuItem>
+                  </Link>
 
-                    <Link to={'/'}>
-                      <MenuItem>
-                        SAIR
-                      </MenuItem>
-                    </Link>
-                  </Box>
-                </MenuItem>
+                  <Link to={'/'}>
+                    <MenuItem>SAIR</MenuItem>
+                  </Link>
+                </Box>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

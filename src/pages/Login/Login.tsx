@@ -27,12 +27,7 @@ interface State {
 // const { handleLogin } = useContext(AuthContext)
 
 export const Login = () => {
-
-
-
-
-
-    const [values, setValues] = React.useState<State>({
+  const [values, setValues] = React.useState<State>({
     password: '',
     showPassword: false
   })
@@ -135,7 +130,7 @@ export const Login = () => {
                   className={styles.loginText}
                   id="input-login-senha"
                   type={values.showPassword ? 'text' : 'password'}
-                  value={'12345678'}
+                  value={'654321654'}
                   onChange={handleChange('password')}
                   error={!!errors.senha}
                   endAdornment={
