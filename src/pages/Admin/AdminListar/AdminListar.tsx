@@ -15,7 +15,11 @@ import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
 
 import { AdminContext } from '../../../context/AdminContext'
-import { IColaborador, IAdminContext } from '../../../utils/interfaces'
+import {
+  IColaborador,
+  IAdminContext,
+  IChildren
+} from '../../../utils/interfaces'
 import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
 
 import { userFormSchema } from '../../../utils/schemas'
@@ -58,8 +62,9 @@ export const AdminListar: React.FC = () => {
                   <TableCell>{user.nome}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    {user?.cargos[0].descricao} <br />
-                    {user?.cargos[1]?.descricao} <br />
+                    {user?.cargos?.map((cargo: IColaborador) => {
+                      return <p>{cargo.descricao}</p>
+                    })}
                   </TableCell>
                   <TableCell>
                     <ModeEditSharpIcon
