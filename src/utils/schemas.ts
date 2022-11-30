@@ -21,3 +21,9 @@ export const cadastrarDiaNaoUtilFormSchema = yup.object().shape({
 
     dataFinal: yup.string().required('Por favor informe a data final')
 })
+
+export const cadastrarEtapaFormSchema = yup.object().shape({
+    nome: yup.string().required('Por favor, digite o nome da etapa'),
+    
+    ordemExecucao: yup.number().required('Por favor informe a ordem de execução')
+})

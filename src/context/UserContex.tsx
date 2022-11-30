@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../utils/api';
-import { IChildren, IEdicao, IEtapa, IProcesso, IUserContext } from '../utils/interfaces'
+import { IChildren, IEdicao, IEtapa, IProcesso, IUserContext, toastConfig } from '../utils/interfaces'
 
 
 export const UserContext = createContext({} as IUserContext);   
@@ -24,11 +24,9 @@ export const UserProvider = ({ children }: IChildren) => {
     const getEdicoesList = async (page: string) => {
 
         try {
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao?pagina=0&tamanho=20`);
-
-            console.log(data.elementos);
-            
 
             setTotalPages(data.totalPages)
             setEdicoes(data.elementos)
@@ -36,6 +34,8 @@ export const UserProvider = ({ children }: IChildren) => {
         } catch (error) {
             console.error(error);
 
+        } finally {
+            nProgress.done();
         }
     }
 
@@ -79,14 +79,20 @@ export const UserProvider = ({ children }: IChildren) => {
 
     const editEdicao = async (edicao: IEdicao) => {
         try {
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
             await api.put(`/edicao/${edicao.idEdicao}`, edicao)
+            toast.success('Edicao editada com sucesso!', toastConfig)
 
             navigate('/gestao/edicoes')
             
         } catch (error) {
             console.error(error);
+            toast.error('Houve um erro ao editar a edição.', toastConfig)
             
+        } finally {
+            nProgress.done();
+
         }
     }
 
@@ -98,7 +104,6 @@ export const UserProvider = ({ children }: IChildren) => {
             api.defaults.headers.common['Authorization'] = token
             await api.put(`edicao/enable-disable/${idEdicao}`)
 
-            console.log('mudou')
         } catch (error) {
             console.log(error)
 
@@ -140,9 +145,9 @@ export const UserProvider = ({ children }: IChildren) => {
     const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
-            await api.post(`/etapa/`, etapa);
+            await api.post(`/etapa/${idEdicao}`, etapa);
 
-            navigate(`/gestao/verificar-edicao/${idEdicao}`)
+            navigate(`/gestao/edicoes`)
             
             
         } catch (error) {

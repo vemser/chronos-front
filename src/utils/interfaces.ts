@@ -82,7 +82,8 @@ export interface IEdicao {
 }
 
 export interface IEtapa {
-  nome: string
+  nome: string,
+  ordemExecucao: number
   idEtapa: number
 }
 

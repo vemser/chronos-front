@@ -1,3 +1,4 @@
+import { log } from "console";
 import nProgress from "nprogress";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,17 +15,18 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
     const getDiaNaoUtil = async () => {
         try {
-
-
-           const { data } = await api.get('/dia-nao-util?pagina=0&tamanho=20')
-           
-        
-            console.log(data.elementos);
-
+            nProgress.start();
+            const { data } = await api.get('/dia-nao-util?pagina=0&tamanho=20')
+            
             setDiasNaoUteis(data.elementos)
 
         } catch (error) {
-
+            console.error(error);
+            toast.error('Algo de errado aconteceu, por favor tente novamente.')
+            
+        } finally {
+            nProgress.done();
+            
         }
     }
 

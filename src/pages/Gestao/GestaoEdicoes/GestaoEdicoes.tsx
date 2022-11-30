@@ -13,15 +13,16 @@ import {
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
 import styles from './GestaoEdicoes.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { UserContext } from '../../../context/UserContex'
 
 export const GestaoEdicoes: React.FC = () => {
 
   const { edicoes, getEdicoesList, ativoInativo, deleteEdicao } = useContext(UserContext);
-
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     getEdicoesList('1')
@@ -48,10 +49,11 @@ export const GestaoEdicoes: React.FC = () => {
           
 
           <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 650,  }} aria-label="simple table">
               <TableHead>
-                <TableRow>
+                <TableRow >
                   <TableCell align="justify">Edições</TableCell>
+                  <TableCell align="center">Detalhes</TableCell>
                   <TableCell align="right">Ativo</TableCell>
                   <TableCell align="right">Editar</TableCell>
                   <TableCell align="right">Clonar</TableCell>
@@ -71,18 +73,22 @@ export const GestaoEdicoes: React.FC = () => {
                   return(
                   <TableRow
                     key={edicao.idEdicao}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
                   >
                     <TableCell component="th" scope="row" align="justify">
                       {edicao.nome}
                     </TableCell>
+
+                    <TableCell component="th" scope="row" align="center" width={'120px'}>
+                      <SearchIcon onClick={() => {navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                    </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <Switch onClick={() => ativoInativo(edicao.idEdicao)} defaultChecked={status}/>
+                      <Switch onClick={() => ativoInativo(edicao.idEdicao)} defaultChecked={status} />
                     </TableCell>
 
                     <TableCell align="right" width={'40px'}>
-                      <EditIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon onClick={() => {navigate(`/gestao/editar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
 

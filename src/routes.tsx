@@ -26,6 +26,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'nprogress/nprogress.css'
 import { DiaNaoUtilProvider } from './context/DiaNaoUtilContext'
 import { GestaoEditarDiaNaoUtil } from './pages/Gestao/GestaoEditarDiaNaoUtil/GestaoEditarDiaNaoUtil'
+import { GestaoEditarEdicao } from './pages/Gestao/GestaoEditarEdicao/GestaoEditarEdicao'
 
 export const AppRoutes = () => {
   return (
@@ -43,7 +44,6 @@ export const AppRoutes = () => {
                 <Route path='/admin' element={<PrivateRoute roleRequired='ROLE_ADMIN'/>}>
                   <Route index element={<AdminHome />} />
                   <Route path ='/admin/perfil' element={<AdminPerfil />} />
-                  <Route path="/admin/listar" element={<AdminListar />} />
                   <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
                   <Route path="/admin/editar-colaborador/:colaborador" element={<AdminEditarColab />} />
                 </Route>
@@ -58,6 +58,7 @@ export const AppRoutes = () => {
 
                   <Route path='/gestao/edicoes' element={<GestaoEdicoes />} />
                   <Route path='/gestao/cadastrar-edicao' element={<GestaoCadastrarEdicao />} />
+                  <Route path='/gestao/editar-edicao/:edicao' element={<GestaoEditarEdicao />} />
 
                   <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
                   <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
