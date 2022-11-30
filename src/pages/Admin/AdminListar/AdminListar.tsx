@@ -84,7 +84,6 @@ export const AdminListar: React.FC = () => {
                 </TableRow>
               )
             })}
-            <PaginacaoColaborador />
           </TableBody>
         </Table>
       </TableContainer>

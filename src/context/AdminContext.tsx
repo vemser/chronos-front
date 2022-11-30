@@ -47,7 +47,7 @@ export const AdminProvider = ({ children }: IChildren) => {
   const buscarDadosColaborador = async (page: string) => {
     try {
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(`/usuario?pagina=${page}&tamanho=05`)
+      const { data } = await api.get(`/usuario?pagina=${page}&tamanho=10`)
       console.log(data.elementos)
       setTotalPages(data.totalPages)
       setDadosColaborador(data.elementos)
@@ -123,6 +123,23 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
+  // Inserir foto ao usuário
+
+  const inserirFotoUsuario = async (idUsuario: number) => {
+    console.log(idUsuario)
+    try {
+      nProgress.start()
+      api.defaults.headers.common['Authorization'] = token
+      toast.success('Usuário editado com sucesso!', toastConfig)
+      await api.put(`/usuario/upload-image`, idUsuario)
+    } catch (error) {
+      toast.error('Houve algum error, tente novamente!', toastConfig)
+      console.log(error)
+    } finally {
+      nProgress.done()
+    }
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -133,7 +150,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         totalPages,
         editarColaborador,
         alterarStatusColab,
-        atualizarSenhaUsuario
+        atualizarSenhaUsuario,
+        inserirFotoUsuario
       }}
     >
       {children}

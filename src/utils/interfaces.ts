@@ -50,35 +50,35 @@ export interface IAdminContext {
   editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
   alterarStatusColab: (idUsuario: number) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
+  inserirFotoUsuario: (idUsuario: number) => Promise<void>
 }
 // INTERFACES USER
 
 export interface IUserContext {
-    edicoes: IEdicao[],
-    etapas: IEtapa[],
-    totalPages: number,
-    getEdicoesList: (page: string) => Promise<void>,
-    deleteEdicao: (idEdicao: number) => Promise<void>,
-    createEdicao: (edicao: IEdicao) => Promise<void>,
-    editEdicao: (edicao: IEdicao) => Promise<void>,
-    getEtapas: (idEdicao: number) => Promise<void>,
-    deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>,
-    createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>,
-    editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>,
-    // getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
-    // deleteProcesso: (idProcesso: number) => Promise<void>,
-    // createProcesso: (processo: IProcesso) => Promise<void>,
-    // editProcesso: (processo: IProcesso) => Promise<void>
-    ativoInativo: (idEdicao: number) => Promise<void>
+  edicoes: IEdicao[]
+  etapas: IEtapa[]
+  totalPages: number
+  getEdicoesList: (page: string) => Promise<void>
+  deleteEdicao: (idEdicao: number) => Promise<void>
+  createEdicao: (edicao: IEdicao) => Promise<void>
+  editEdicao: (edicao: IEdicao) => Promise<void>
+  getEtapas: (idEdicao: number) => Promise<void>
+  deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>
+  createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
+  editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
+  // getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
+  // deleteProcesso: (idProcesso: number) => Promise<void>,
+  // createProcesso: (processo: IProcesso) => Promise<void>,
+  // editProcesso: (processo: IProcesso) => Promise<void>
+  ativoInativo: (idEdicao: number) => Promise<void>
 }
 
-
-export interface IEdicao{
-    nome: string,
-    dataInicial: string,
-    dataFinal: string,
-    status: string,
-    idEdicao: number
+export interface IEdicao {
+  nome: string
+  dataInicial: string
+  dataFinal: string
+  status: string
+  idEdicao: number
 }
 
 export interface IEtapa {
@@ -132,4 +132,3 @@ export const toastConfig: object = {
 export interface IPrivateRoute {
   roleRequired: any
 }
-
