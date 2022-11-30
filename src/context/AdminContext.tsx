@@ -88,6 +88,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
       await api.put(`usuario/update-cadastro/${idUsuario}`, dadosColaborador)
+      inserirFotoUsuario(idUsuario)
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin')
     } catch (error) {

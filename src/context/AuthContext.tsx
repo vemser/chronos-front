@@ -1,65 +1,64 @@
-import { JoinFullTwoTone } from '@mui/icons-material';
-import { applyInitialState } from '@mui/x-data-grid/hooks/features/columns/gridColumnsUtils';
+import { JoinFullTwoTone } from '@mui/icons-material'
+import { applyInitialState } from '@mui/x-data-grid/hooks/features/columns/gridColumnsUtils'
 import React, { createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { api } from '../utils/api';
+import { useNavigate } from 'react-router-dom'
+import { api } from '../utils/api'
 import { IAuthContext, IChildren, IUser } from '../utils/interfaces'
 
-export const AuthContext = createContext({} as IAuthContext);
+export const AuthContext = createContext({} as IAuthContext)
 
-export const AuthProvider = ({ children }: IChildren ) => {
+export const AuthProvider = ({ children }: IChildren) => {
+  const navigate = useNavigate()
+  const [roles, setRoles] = useState<string[] | undefined>([])
+  const [token, setToken] = useState<string | any>('')
 
-    const navigate = useNavigate();
-    const [ roles, setRoles ] = useState<string[] | undefined>([]);
-    const[ token, setToken ] = useState<string | any >('')
-   
-    const parseJwt = async (token: any) => {
-        try {
-            let decodedJWT = JSON.parse(atob(token.split('.')[1]))
-            let roleArray = decodedJWT.CARGOS
+  const parseJwt = async (token: any) => {
+    try {
+      let decodedJWT = JSON.parse(atob(token.split('.')[1]))
+      let roleArray = decodedJWT.CARGOS
 
-            return roleArray        
-            
-        } catch (e) {
-          return null;
-        }
-    };
+      return roleArray
+    } catch (e) {
+      return null
+    }
+  }
 
-    
-    const handleLogin = async (user: IUser) => {
-        try {
+  const handleLogin = async (user: IUser) => {
+    try {
+      console.log('iniciou')
 
-            console.log('iniciou');
-            
-            const { data } = await api.post('/login', user);
+      const { data } = await api.post('/login', user)
 
-            api.defaults.headers.common['Authorization'] = data;
+      api.defaults.headers.common['Authorization'] = data
 
-            localStorage.setItem('token', data)
-            localStorage.setItem('user', user.email)
+      localStorage.setItem('token', data)
+      localStorage.setItem('user', user.email)
 
-            let rolesArray = await parseJwt(localStorage.getItem('token'))
+      let rolesArray = await parseJwt(localStorage.getItem('token'))
 
-            setRoles(rolesArray)
+      setRoles(rolesArray)
 
-            if(rolesArray && rolesArray[0] === 'ROLE_ADMIN'){
-                navigate(`/admin`)
-    
-            } else if (rolesArray && rolesArray[0] === 'ROLE_GESTAO_DE_PESSOAS'){
-                navigate(`/gestao`)
-    
-            } else if (rolesArray && rolesArray[0] === 'ROLE_INSTRUTOR'){
-                navigate(`/instrutor`)
-                
-            } else {
-                navigate(`/`)
-            }
-            
-        
-        } catch (error) {
-            console.error(error);
-        }
-    } 
+      if (rolesArray && rolesArray[0] === 'ROLE_ADMIN') {
+        navigate(`/admin`)
+      } else if (rolesArray && rolesArray[0] === 'ROLE_GESTAO_DE_PESSOAS') {
+        navigate(`/gestao`)
+      } else if (rolesArray && rolesArray[0] === 'ROLE_INSTRUTOR') {
+        navigate(`/instrutor`)
+      } else {
+        navigate(`/`)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const loggedUser = async () => {
+    try {
+      await api.get('/usuario/logged-user')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleLogout = async () => {
     localStorage.removeItem('token')
@@ -67,10 +66,11 @@ export const AuthProvider = ({ children }: IChildren ) => {
     api.defaults.headers.common['Authorization'] = undefined
   }
 
-
-    return(
-        <AuthContext.Provider value={{ roles, handleLogin, handleLogout}}>
-            { children }
-        </AuthContext.Provider>
-    )
+  return (
+    <AuthContext.Provider
+      value={{ roles, handleLogin, handleLogout, loggedUser }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }

@@ -15,6 +15,7 @@ export interface IAuthContext {
   roles: string[] | undefined
   handleLogin: (user: IUser) => Promise<void>
   handleLogout: () => Promise<void>
+  loggedUser: () => Promise<void>
 }
 
 // INTERFACES ADMIN
@@ -82,7 +83,7 @@ export interface IEdicao {
 }
 
 export interface IEtapa {
-  nome: string,
+  nome: string
   ordemExecucao: number
   idEtapa: number
 }
@@ -100,18 +101,17 @@ export interface IProcesso {
 // INTERFACES DIA NAO UTIL
 
 export interface IDiaNaoUtilContext {
-  diasNaoUteis: IDiaNaoUtil[],
-  getDiaNaoUtil: () => Promise<void>,
-  postDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>, 
-  deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>, 
+  diasNaoUteis: IDiaNaoUtil[]
+  getDiaNaoUtil: () => Promise<void>
+  postDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
+  deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>
   putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
-
 }
 
-export interface IDiaNaoUtil{
-  descricao: string,
-  dataInicial: string,
-  dataFinal: string,
+export interface IDiaNaoUtil {
+  descricao: string
+  dataInicial: string
+  dataFinal: string
   idDiaNaoUtil: number
 }
 

@@ -39,6 +39,8 @@ export const AdminEditarColab = () => {
     }
   })
 
+  const { inserirFotoUsuario } = useContext(AdminContext)
+
   return (
     <>
       <AdminHeader />
@@ -104,10 +106,11 @@ export const AdminEditarColab = () => {
                     <AccountCircleSharpIcon color={'disabled'} />
                   </svg>
                   <Box display="flex" justifyContent="center">
-                    <label htmlFor="upload-photo">
+                    <label htmlFor="imagem">
                       <input
                         style={{ display: 'none', backgroundColor: '#ccc' }}
-                        id="upload-photo"
+                        {...register('imagem')}
+                        id="imagem"
                         name="upload-photo"
                         type="file"
                       />

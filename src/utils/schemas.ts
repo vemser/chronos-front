@@ -48,6 +48,6 @@ export const CadastroDePessoasSchema = yup.object().shape({
 
   email: yup
     .string()
-    .required('Por favor, digite seu Email!')
+    .required('Por favor, digite seu email!')
     .email('Por favor, digite um email válido')
 })
