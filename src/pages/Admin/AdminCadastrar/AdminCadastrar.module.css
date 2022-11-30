@@ -37,6 +37,10 @@
   scale: 1.01;
 }
 
+.ContainerError {
+  color: rgb(171, 33, 33);
+}
+
 .TrocarFoto {
   background-color: #1976d2;
   padding: 5px;
