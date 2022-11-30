@@ -29,13 +29,13 @@ export interface IColaborador {
   nome: string
   email: string
   cargos: any
-
   idCargo: number
   Administrador: string
   GestaoDePessoas: string
   Instrutor: string
   imagem: string
   idUsuario: number
+  descricao: any
   senhaAtual: string
   novaSenha: string
   confirmacaoNovaSenha: string
