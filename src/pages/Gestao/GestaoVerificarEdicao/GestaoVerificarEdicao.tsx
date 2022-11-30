@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import styles from './GestaoVerificarEdicao.module.css'
@@ -15,11 +15,13 @@ import {
 } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
+import { UserContext } from '../../../context/UserContex'
 
 export const GestaoVerificarEdicao = () => {
 
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { deleteEtapa } = useContext(UserContext)
 
   return (
     <>
@@ -44,7 +46,7 @@ export const GestaoVerificarEdicao = () => {
               
               <Box sx={{display: 'flex', alignItems:'center', gap: '12px' }}>
                 <EditIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
-                <HighlightOffIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                <HighlightOffIcon onClick={() => {deleteEtapa(etapa.idEtapa, state.idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
               </Box> 
             </Box>
             

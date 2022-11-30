@@ -1,11 +1,9 @@
 import React from 'react'
 import styles from './AdminHome.module.css'
-
-import { Row } from '../../../components/Row/Row'
 import { Box } from '@mui/system'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 import { AdminListar } from '../AdminListar/AdminListar'
-import { PaginacaoColaborador } from '../../../context/PaginacaoColaborador'
+import { PaginacaoColaborador } from '../../../components/Paginacao/PaginacaoColaborador/PaginacaoColaborador'
 
 export const AdminHome: React.FC = () => {
   return (

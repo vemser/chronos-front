@@ -48,11 +48,11 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       api.defaults.headers.common['Authorization'] = token
       const { data } = await api.get(
-        `/usuario?pagina=${Number(page) - 1}&tamanho=10`
+        `/usuario?pagina=${Number(page) - 1}&tamanho=5`
       )
 
       console.log(data.elementos)
-      setTotalPages(data.totalPages)
+      setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
     } catch (error) {
       console.log(error)

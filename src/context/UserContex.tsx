@@ -46,8 +46,6 @@ export const UserProvider = ({ children }: IChildren) => {
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/edicao/${idEdicao}`);
             toast.success('Edicao Removida com sucesso!')
-
-
             getEdicoesList('1')
 
         } catch (error) {
@@ -145,7 +143,7 @@ export const UserProvider = ({ children }: IChildren) => {
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/etapa/${idEtapa}`)
 
-            navigate(`/gestao/verificar-edicao/${idEdicao}`)
+            getEtapas(idEdicao)
             
         } catch (error) {
             console.error(error);
@@ -158,7 +156,7 @@ export const UserProvider = ({ children }: IChildren) => {
             api.defaults.headers.common['Authorization'] = token;
             await api.post(`/etapa/${idEdicao}`, etapa);
 
-            navigate(`/gestao/edicoes`)
+            navigate(`/gestao/verificar-edicao/${idEdicao}`)
             
             
         } catch (error) {
