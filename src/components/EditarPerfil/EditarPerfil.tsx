@@ -59,6 +59,12 @@ export const EditarPerfil = () => {
 
   const { atualizarSenhaUsuario } = useContext(AdminContext)
 
+  const { inserirFotoUsuario } = useContext(AdminContext)
+
+  // const atualizarPerfil = () => {
+  //   atualizarSenhaUsuario(data)
+  // }
+
   return (
     <>
       <Grid container width={'100%'} display="flex" justifyContent="center">
@@ -122,12 +128,12 @@ export const EditarPerfil = () => {
                     <AccountCircleSharpIcon color={'disabled'} />
                   </svg>
                   <Box display="flex" justifyContent="center">
-                    <label htmlFor="upload-photo">
+                    <label htmlFor="imagem">
                       <input
                         style={{ display: 'none' }}
-                        id="upload-photo"
-                        name="upload-photo"
+                        id="imagem"
                         type="file"
+                        {...register('imagem')}
                       />
                       <Button
                         component="span"

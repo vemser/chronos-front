@@ -92,10 +92,6 @@ export const AdminHeader = () => {
                 <Link to={'/admin/cadastrar'}>
                   <MenuItem>CADASTRAR COLABORADOR</MenuItem>
                 </Link>
-
-                <Link to={'/admin/listar'}>
-                  <MenuItem>LISTAR COLABORADORES</MenuItem>
-                </Link>
               </Box>
             </Menu>
           </Box>
@@ -117,11 +113,6 @@ export const AdminHeader = () => {
               <HeaderButton
                 texto={'CADASTRAR COLABORADOR'}
                 url={'/admin/cadastrar'}
-              />
-
-              <HeaderButton
-                texto={'LISTAR COLABORADORES'}
-                url={'/admin/listar'}
               />
             </ul>
           </Box>
