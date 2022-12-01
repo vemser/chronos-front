@@ -10,6 +10,7 @@ import { api } from '../utils/api'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
+import { AuthContext } from './AuthContext'
 
 export const AdminContext = createContext({} as IAdminContext)
 
@@ -22,6 +23,7 @@ export const AdminProvider = ({ children }: IChildren) => {
   const [token, setToken] = useState<string>(
     localStorage.getItem('token') || ''
   )
+  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
   const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
@@ -135,7 +137,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       }
 
       toast.success(
-        `'Status da edição ${data.nome} alterado! para ${data.status}'`
+        `Status da edição ${data.nome} alterado para ${data.status}!`
       )
       buscarDadosColaborador('1')
     } catch (error) {
@@ -154,7 +156,6 @@ export const AdminProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = token
       toast.success('Usuário editado com sucesso!', toastConfig)
       await api.put(`usuario/update-perfil`, data)
-      inserirFotoUsuario()
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
@@ -164,13 +165,15 @@ export const AdminProvider = ({ children }: IChildren) => {
   }
 
   // Inserir foto ao usuário
+  const imagemBase = dadosUsuarioLogado.imagem
 
   const inserirFotoUsuario = async () => {
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
-      toast.success('Usuário editado com sucesso!', toastConfig)
+
       await api.put(`/usuario/upload-image`)
+      toast.success('Usuário editado com sucesso!', toastConfig)
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)

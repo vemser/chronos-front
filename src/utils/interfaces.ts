@@ -52,7 +52,7 @@ export interface IAdminContext {
   editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
   alterarStatusColab: (idUsuario: IColaborador) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
-  inserirFotoUsuario: (idUsuario: number) => Promise<void>
+  inserirFotoUsuario: () => Promise<void>
 }
 // INTERFACES USER
 

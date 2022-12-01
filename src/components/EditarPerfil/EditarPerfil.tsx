@@ -79,9 +79,12 @@ export const EditarPerfil = () => {
     event.preventDefault()
   }
 
-  const { atualizarSenhaUsuario } = useContext(AdminContext)
+  const { atualizarSenhaUsuario, inserirFotoUsuario } = useContext(AdminContext)
 
-  const { inserirFotoUsuario } = useContext(AdminContext)
+  const atualizarDadosPerfil = (data: IColaborador) => {
+    atualizarSenhaUsuario(data)
+    inserirFotoUsuario()
+  }
 
   return (
     <>
@@ -117,9 +120,7 @@ export const EditarPerfil = () => {
             </Box>
           </Grid>
           <form
-            onSubmit={handleSubmit((data: IColaborador) =>
-              atualizarSenhaUsuario(data)
-            )}
+            onSubmit={handleSubmit((data: IColaborador) => console.log(data))}
             className={styles.FormEditar}
           >
             <Box

@@ -78,7 +78,7 @@ export const AdminEditarColab = () => {
             >
               <Box>
                 {' '}
-                <h2>Cadastrar Colaborador</h2>{' '}
+                <h2>Editar Colaborador</h2>{' '}
               </Box>
             </Grid>
             <Box

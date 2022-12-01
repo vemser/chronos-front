@@ -54,9 +54,10 @@
 }
 
 .HoverButton {
-  color: #bdbdbd;
-  font-weight: 600;
+  color: #bdbdbd !important;
+  font-weight: 600 !important;
+  color: red;
 }
 .HoverButton:hover {
-  color: blue;
+  color: blue !important;
 }
