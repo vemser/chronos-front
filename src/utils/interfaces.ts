@@ -112,6 +112,7 @@ export interface IDiaNaoUtil {
   dataInicial: string
   dataFinal: string
   idDiaNaoUtil: number
+  repeticaoAnual: boolean | string
 }
 
 // CONFIG TOASTIFY

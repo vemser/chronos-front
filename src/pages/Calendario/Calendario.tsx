@@ -9,15 +9,13 @@ export const Calendario = () => {
     
     const [ mesAtual , setMesAtual ] = useState(getMonth())
 
-    console.table(getMonth())
-
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection:'column'}}>
-        
+
         <CalendarioHeader />
 
-        <Box sx={{ display: 'flex'}}>
+        <Box sx={{ display: 'flex', gap:'40px', flexDirection: 'column', mt:'40px'}}>
             <Sidebar />
             <Meses month={mesAtual}/>
         </Box>
