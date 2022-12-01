@@ -153,10 +153,13 @@ export const UserProvider = ({ children }: IChildren) => {
 
     const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
+
+            etapa.ordemExecucao = Number(etapa.ordemExecucao)
+            
             api.defaults.headers.common['Authorization'] = token;
             await api.post(`/etapa/${idEdicao}`, etapa);
 
-            navigate(`/gestao/verificar-edicao/${idEdicao}`)
+            navigate(`/gestao/edicoes`)
             
             
         } catch (error) {
@@ -170,7 +173,7 @@ export const UserProvider = ({ children }: IChildren) => {
             api.defaults.headers.common['Authorization'] = token;
             await api.put(`/etapa/${etapa.idEtapa}`, etapa)
 
-            navigate(`/gestao/verificar-edicao/${idEdicao}`)
+            navigate(`/gestao/edicoes`)
             
         } catch (error) {
             console.error(error);

@@ -4,9 +4,9 @@
     justify-content: space-between;
     align-items: flex-end;
   }
-  
+
   .ContainerNova a button{
-    width: 180px;
+    width: 280px;
   }
   
   .ButtonContainer {
@@ -32,10 +32,11 @@
   }
   
   .ContainerGeral {
-    width: 100%;
+    max-width: 1600px;
     height: 100vh;
     display: flex;
     justify-content: center;
+    margin: 0 auto;
   }
   
   .ContainerTitle {

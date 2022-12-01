@@ -35,6 +35,12 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
         try {
             nProgress.start()
             console.log(data);
+
+            if(data.repeticaoAnual === true) {
+                data.repeticaoAnual = 'ATIVO'
+            } else {
+                data.repeticaoAnual = 'INATIVO'
+            }
             
             await api.post('/dia-nao-util', data)
             toast.success('Dia Não Útil cadastrado com sucesso!', toastConfig)

@@ -8,7 +8,7 @@ import {
   Box,
   Button,
   TableHead,
-  Switch,
+  Checkbox,
 } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
@@ -41,21 +41,21 @@ export const GestaoDiaNaoUtil = () => {
             </div>
 
             <Link to={'/gestao/cadastrar-dias-nao-uteis'}>
-              <Button variant="contained"> ADICIONAR PERÍODO NÃO ÚTIL</Button>
+              <Button className={styles.addBtn} variant="contained"> ADICIONAR PERÍODO NÃO ÚTIL</Button>
             </Link>
           </Box>
 
           
 
-          <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableContainer sx={{ boxShadow: 1, width: 'auto', borderRadius: '5px', maxWidth: 1366, margin: '50px auto' }}>
+            <Table sx={{ minWidth: 650, maxWidth: 1366}} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="justify" sx={{ }}>Código</TableCell>
+                  <TableCell align="justify" width={'20px'}>Código</TableCell>
                   <TableCell align="justify">Descrição</TableCell>
                   <TableCell align="justify">Período Inicial</TableCell>
                   <TableCell align="justify">Período Final</TableCell>
-                  <TableCell align="right">Repetir</TableCell>
+                  <TableCell align="justify">Repetir</TableCell>
                   <TableCell align="right">Editar</TableCell>
                   <TableCell align="right">Excluir</TableCell>
                 </TableRow>
@@ -64,42 +64,45 @@ export const GestaoDiaNaoUtil = () => {
               <TableBody>
                 {diasNaoUteis?.map((dia) => {
 
-                  // if(dia.status === 'ATIVO') {
-                  //     var status = true
-                  // } else {
-                  //   var status = false
-                  // }
+                  if(dia.repeticaoAnual === 'ATIVO') {
+                      var status = true
+                  } else {
+                    var status = false
+                  }
+
+
+
 
                   return(
                   <TableRow
                     key={dia.idDiaNaoUtil}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row" align="justify">
+                    <TableCell component="th" scope="row" align="justify" width={'300px'}>
                       {dia.idDiaNaoUtil}
                     </TableCell>
 
-                    <TableCell component="th" scope="row" align="justify">
+                    <TableCell component="th" scope="row" align="justify" width={'300px'}>
                       {dia.descricao}
                     </TableCell>
 
-                    <TableCell align="justify" >
-                      {dia.dataInicial}
+                    <TableCell align="justify" width={'300px'}>
+                      {}
                     </TableCell>
 
-                    <TableCell align="justify">
+                    <TableCell align="justify" width={'300px'}>
                       {dia.dataFinal}
                     </TableCell>
 
-                    <TableCell align="right" width={'40px'}>
-                      <Switch />
+                    <TableCell align="justify" width={'600px'}>
+                      <Checkbox checked={status} />
                     </TableCell>
 
-                    <TableCell align="right" width={'40px'}>
+                    <TableCell align="right" >
                       <EditIcon onClick={() => {navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
-                    <TableCell align="right" width={'40px'}>
+                    <TableCell align="right" >
                       <HighlightOffIcon onClick={() => deleteDiaNaoUtil(dia.idDiaNaoUtil)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
