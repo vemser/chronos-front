@@ -15,11 +15,8 @@ import {
 export const UserContext = createContext({} as IUserContext)
 
 export const UserProvider = ({ children }: IChildren) => {
-  const token = localStorage.getItem('token')
-  const navigate = useNavigate()
-
-  const [edicoes, setEdicoes] = useState<IEdicao[]>([])
-  const [etapas, setEtapas] = useState<IEtapa[]>([])
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
     const [ edicoes, setEdicoes ] = useState<IEdicao[]>([]);
     const [ etapas, setEtapas ] = useState<IEtapa[]>([]);
@@ -230,7 +227,7 @@ export const UserProvider = ({ children }: IChildren) => {
             nProgress.done();
         }
     }
-  }
+  
 
 
 
