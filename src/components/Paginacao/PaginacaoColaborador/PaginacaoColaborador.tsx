@@ -28,67 +28,72 @@ export const PaginacaoColaborador = () => {
 
   return (
     <>
-        {pageNumber === '1' ? (
-          <Box className={style.pagination}>
+      {pageNumber === '1' ? (
+        <Box className={style.pagination}>
+          <ChevronLeftIcon className={style.icon} />
+
+          <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
+            {pageNumber}
+          </Link>
+
+          <MoreHorizIcon className={style.icon} />
+
+          <Link className={style.icon} to={`/admin?page=${pages.length}`}>
+            {pages.length}
+          </Link>
+
+          <Link
+            className={style.chevron}
+            to={`/admin?page=${Number(pageNumber) + 1}`}
+          >
+            <ChevronRightIcon className="chevron" />
+          </Link>
+        </Box>
+      ) : Number(pageNumber) === pages.length ? (
+        <Box className={style.pagination}>
+          <Link to={`/admin?page=${Number(pageNumber) - 1}`}>
             <ChevronLeftIcon className={style.icon} />
+          </Link>
 
-            <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
-              {pageNumber}
-            </Link>
+          <Link className={style.icon} to={`/admin?page=${1}`}>
+            {1}
+          </Link>
 
-            <MoreHorizIcon className={style.icon} />
+          <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/admin?page=${pages.length}`}>{pages.length}</Link>
+          <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
+            {pageNumber}
+          </Link>
 
-            <Link className={style.chevron} to={`/admin?page=${Number(pageNumber) + 1}`}>
-              <ChevronRightIcon className="chevron" />
-            </Link>
-          </Box>
+          <ChevronRightIcon className={style.icon} />
+        </Box>
+      ) : (
+        <Box className={style.pagination}>
+          <Link to={`/admin?page=${Number(pageNumber) - 1}`}>
+            <ChevronLeftIcon className={style.icon} />
+          </Link>
 
-        ) : (Number(pageNumber) === pages.length) ? (
-          <Box className={style.pagination}> 
+          <Link className={style.icon} to={`/admin?page=${1}`}>
+            {1}
+          </Link>
 
-            <Link to={`/admin?page=${Number(pageNumber) - 1}`}>
-              <ChevronLeftIcon className={style.icon} />
-            </Link>
+          <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/admin?page=${1}`}>
-              {1}
-            </Link>
+          <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
+            {pageNumber}
+          </Link>
 
-            <MoreHorizIcon className={style.icon} />
+          <MoreHorizIcon className={style.icon} />
 
-            <Link style={{ color: '#1e62fe' }}  to={`/admin?page=${pageNumber}`}>
-              {pageNumber}
-            </Link>
-            
-            <ChevronRightIcon className={style.icon}/>
-          </Box>
-        ) : (
-          <Box className={style.pagination}> 
-            <Link to={`/admin?page=${Number(pageNumber) - 1}`}>
-              <ChevronLeftIcon className={style.icon}/>
-            </Link>
+          <Link className={style.icon} to={`/admin?page=${pages.length}`}>
+            {pages.length}
+          </Link>
 
-            <Link className={style.icon} to={`/admin?page=${1}`}>
-              {1}
-            </Link>
-
-            <MoreHorizIcon className={style.icon} />
-
-            <Link style={{ color: '#1e62fe' }}  to={`/admin?page=${pageNumber}`}>
-              {pageNumber}
-            </Link>
-
-            <MoreHorizIcon className={style.icon} />
-
-            <Link className={style.icon} to={`/admin?page=${pages.length}`}>{pages.length}</Link>
-
-            <Link to={`/admin?page=${Number(pageNumber) + 1}`}>
-              <ChevronRightIcon className={style.icon}/>
-            </Link>
-          </Box>
-        )}
+          <Link to={`/admin?page=${Number(pageNumber) + 1}`}>
+            <ChevronRightIcon className={style.icon} />
+          </Link>
+        </Box>
+      )}
     </>
   )
 }

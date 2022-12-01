@@ -23,8 +23,12 @@ import {
 
 import { userFormSchema } from '../../../utils/schemas'
 import Switch from '@mui/material/Switch'
+import { AuthContext } from '../../../context/AuthContext'
+import { SignalWifiStatusbar4Bar } from '@mui/icons-material'
 
 export const AdminListar: React.FC = () => {
+  const { dadosUsuarioLogado } = useContext<any>(AuthContext)
+
   const navigate = useNavigate()
   const { dadosColaborador, buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
@@ -56,8 +60,14 @@ export const AdminListar: React.FC = () => {
 
           <TableBody>
             {dadosColaborador?.map((user: IColaborador) => {
+              console.log(user)
+              if (user.status === 'ATIVO') {
+                var status = true
+              } else {
+                var status = false
+              }
               return (
-                <TableRow key={user.email}>
+                <TableRow key={user.idUsuario}>
                   <TableCell>{user.nome}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
@@ -82,7 +92,9 @@ export const AdminListar: React.FC = () => {
                       onClick={() => deletarColaborador(user.idUsuario)}
                     />
                     <Switch
-                      onClick={() => alterarStatusColab(user.idUsuario)}
+                      checked={status}
+                      defaultChecked={status}
+                      onClick={() => alterarStatusColab(user)}
                     />
                   </TableCell>
                 </TableRow>

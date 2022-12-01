@@ -6,7 +6,7 @@ import {
   TextField,
   IconButton
 } from '@mui/material'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp'
@@ -22,6 +22,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Input from '@mui/material/Input'
 import FilledInput from '@mui/material/FilledInput'
 import { useLocation } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
+import { ClassNames } from '@emotion/react'
 
 interface State {
   password: string
@@ -29,15 +31,28 @@ interface State {
 }
 
 export const EditarPerfil = () => {
+  // const [selectedImage, setSelectedImage] = useState()
+  // const imageChange = (e: any): void => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     setSelectedImage(e.target.files[0])
+  //   }
+  // }
+  const [selectedImage, setSelectedImage] = useState<any>(null)
+
+  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
+  console.log(dadosUsuarioLogado)
+
+  const imagemBase = dadosUsuarioLogado.imagem
   const { state } = useLocation()
-  console.log(state)
+
   const {
     register,
     handleSubmit
     // formState: { errors }
   } = useForm<IColaborador>({
     defaultValues: {
-      // nome: state.nome
+      nome: dadosUsuarioLogado.nome
+      // imagem: dadosUsuarioLogado.imagem
     }
   })
 
@@ -63,13 +78,6 @@ export const EditarPerfil = () => {
   ) => {
     event.preventDefault()
   }
-
-  // const { register, handleSubmit } = useForm<IColaborador>({
-  //   defaultValues: {
-  //     nome: state.nome,
-  //     email: state.email
-  //   }
-  // })
 
   const { atualizarSenhaUsuario } = useContext(AdminContext)
 
@@ -128,15 +136,68 @@ export const EditarPerfil = () => {
                 justifyContent={'center'}
               >
                 <Box
-                  width={'300px'}
                   height={'300px'}
+                  className={styles.ContainerMedio}
                   borderRadius={'8px'}
                   boxShadow={2}
                 >
                   {' '}
-                  <svg data-testid="AccountCircleSharpIcon">
-                    <AccountCircleSharpIcon color={'disabled'} />
-                  </svg>
+                  <div className={styles.ContainerImagem}>
+                    {/* <input
+                      type="image"
+                      width={'250px'}
+                      src={URL.createObjectURL(selectedImage)}
+                      alt="Imagem"
+                    /> */}
+
+                    {imagemBase === null && selectedImage === null ? (
+                      <svg data-testid="AccountCircleSharpIcon" width={'250px'}>
+                        <AccountCircleSharpIcon color={'disabled'} />
+                      </svg>
+                    ) : imagemBase === null && selectedImage !== null ? (
+                      <img
+                        alt="not fount"
+                        width={'250px'}
+                        className={styles.BorderRadius}
+                        src={URL.createObjectURL(selectedImage)}
+                      />
+                    ) : imagemBase !== null && selectedImage !== null ? (
+                      <img
+                        alt="not fount"
+                        width={'250px'}
+                        className={styles.BorderRadius}
+                        src={URL.createObjectURL(selectedImage)}
+                      />
+                    ) : (
+                      <img
+                        alt="not fount"
+                        width={'250px'}
+                        className={styles.BorderRadius}
+                        src={`data:image/png;base64, ${imagemBase}`}
+                      />
+                    )}
+                  </div>
+                  {/* <img
+                      alt="not fount"
+                      width={'250px'}
+                      src={`data:image/png;base64, ${imagemBase}`}
+                    /> */}
+                  {/* {selectedImage && (
+                      <div>
+                        <img
+                          alt="not fount"
+                          width={'250px'}
+                          src={URL.createObjectURL(selectedImage)}
+                        />
+                        <br />
+                        <button onClick={() => setSelectedImage(null)}>
+                          Remove
+                        </button>
+                      
+                    )} */}
+                  {/* <svg data-testid="AccountCircleSharpIcon"> */}
+                  {/* <AccountCircleSharpIcon color={'disabled'} /> */}
+                  {/* </svg> */}
                   <Box display="flex" justifyContent="center">
                     <label htmlFor="imagem">
                       <input
@@ -144,6 +205,10 @@ export const EditarPerfil = () => {
                         id="imagem"
                         type="file"
                         {...register('imagem')}
+                        onChange={(event: any) => {
+                          console.log(event.target.files[0])
+                          setSelectedImage(event.target.files[0])
+                        }}
                       />
                       <Button
                         component="span"
@@ -184,7 +249,6 @@ export const EditarPerfil = () => {
                     label="Nome"
                     {...register('nome')}
                     variant="standard"
-                    sx={{ width: '450px' }}
                     className={styles.FormPerfil}
                   />
                   {/* <FormControl sx={{ m: 1, width: '30ch' }} variant="standard">

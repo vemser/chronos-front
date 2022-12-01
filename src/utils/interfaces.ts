@@ -15,6 +15,7 @@ export interface IAuthContext {
   roles: string[] | undefined
   handleLogin: (user: IUser) => Promise<void>
   handleLogout: () => Promise<void>
+  dadosUsuarioLogado: any
 }
 
 // INTERFACES ADMIN
@@ -22,7 +23,7 @@ export interface IAuthContext {
 export interface IColaborador2 {
   nome: string
   email: string
-  cargos: string[]
+  cargos: Object[]
 }
 
 export interface IColaborador {
@@ -34,11 +35,12 @@ export interface IColaborador {
   GestaoDePessoas: string
   Instrutor: string
   imagem: string
-  idUsuario: number
+  idUsuario: number | any
   descricao: any
   senhaAtual: string
   novaSenha: string
   confirmacaoNovaSenha: string
+  status: string
 }
 
 export interface IAdminContext {
@@ -48,7 +50,7 @@ export interface IAdminContext {
   deletarColaborador: (idUsuario: number) => Promise<void>
   totalPages: number
   editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
-  alterarStatusColab: (idUsuario: number) => Promise<void>
+  alterarStatusColab: (idUsuario: IColaborador) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
   inserirFotoUsuario: (idUsuario: number) => Promise<void>
 }

@@ -162,7 +162,7 @@ export const AdminEditarColab = () => {
                     variant="standard"
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
-                    {...register('email')}
+                    value={state.email}
                   />
                   <FormControl
                     required
