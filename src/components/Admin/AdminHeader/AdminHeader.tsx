@@ -17,13 +17,20 @@ import imgLogo from '../../../assets/login-logo.png'
 import { HeaderButton } from '../../HeaderButton/HeaderButton'
 import styles from './AdminHeader.module.css'
 import { List } from '@mui/material'
+import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
+  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
+
+  // let percorrerDados = dadosUsuarioLogado.map((dados: any) => {
+  //   dados.nome
+  //   console.log(dados.nome)
+  // })
 
   const userEmail = localStorage.getItem('user')
 
@@ -119,13 +126,13 @@ export const AdminHeader = () => {
           </Box>
 
           <Box className={styles.usuario}>
-            <h3>{userEmail}</h3>
+            <h3>{dadosUsuarioLogado.nome}</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
-                  alt={`${userEmail}`}
-                  src="/static/images/avatar/2.jpg"
+                  alt={`${dadosUsuarioLogado.imagem}`}
+                  src={dadosUsuarioLogado.imagem}
                 />
               </IconButton>
             </Tooltip>
@@ -149,6 +156,7 @@ export const AdminHeader = () => {
               <MenuItem>
                 <Box className={styles.menuBurgerOptions}>
                   <MenuItem
+                    className={styles.HoverButton}
                     onClick={() => {
                       navigate('/admin/perfil')
                       // , {state }
@@ -158,7 +166,7 @@ export const AdminHeader = () => {
                   </MenuItem>
 
                   <Link to={'/'}>
-                    <MenuItem>SAIR</MenuItem>
+                    <MenuItem className={styles.HoverButton}>SAIR</MenuItem>
                   </Link>
                 </Box>
               </MenuItem>

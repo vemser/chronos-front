@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
 import styles from './AdminListar.module.css'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 
 import { AdminContext } from '../../../context/AdminContext'
 import {
@@ -23,8 +24,12 @@ import {
 
 import { userFormSchema } from '../../../utils/schemas'
 import Switch from '@mui/material/Switch'
+import { AuthContext } from '../../../context/AuthContext'
+import { SignalWifiStatusbar4Bar } from '@mui/icons-material'
 
 export const AdminListar: React.FC = () => {
+  const { dadosUsuarioLogado } = useContext<any>(AuthContext)
+
   const navigate = useNavigate()
   const { dadosColaborador, buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
@@ -50,22 +55,50 @@ export const AdminListar: React.FC = () => {
               <TableCell sx={{ color: '#fff' }}>Colaborador(a)</TableCell>
               <TableCell sx={{ color: '#fff' }}>E-mail</TableCell>
               <TableCell sx={{ color: '#fff' }}>Cargo</TableCell>
-              <TableCell sx={{ color: '#fff' }}>Ações</TableCell>
+
+              <TableCell sx={{ color: '#fff' }} align="right">
+                Ativo
+              </TableCell>
+              <TableCell sx={{ color: '#fff' }} align="right">
+                Editar
+              </TableCell>
+
+              <TableCell sx={{ color: '#fff' }} align="right">
+                Excluir
+              </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {dadosColaborador?.map((user: IColaborador) => {
+              console.log(user)
+              if (user.status === 'ATIVO') {
+                var status = true
+              } else {
+                var status = false
+              }
               return (
-                <TableRow key={user.email}>
-                  <TableCell>{user.nome}</TableCell>
-                  <TableCell>{user.email}</TableCell>
+                <TableRow key={user.idUsuario}>
+                  <TableCell component="th" scope="row" align="justify">
+                    {user.nome}
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="justify">
+                    {user.email}
+                  </TableCell>
                   <TableCell>
                     {user?.cargos?.map((cargo: IColaborador) => {
                       return <p>{cargo.descricao}</p>
                     })}
                   </TableCell>
-                  <TableCell>
+
+                  <TableCell align="right" width={'40px'}>
+                    <Switch
+                      checked={status}
+                      defaultChecked={status}
+                      onClick={() => alterarStatusColab(user)}
+                    />
+                  </TableCell>
+                  <TableCell align="right" width={'40px'}>
                     <ModeEditSharpIcon
                       sx={{ mr: 1, cursor: 'pointer' }}
                       className={styles.ButtonContainer}
@@ -75,14 +108,12 @@ export const AdminListar: React.FC = () => {
                         })
                       }}
                     />
-
-                    <DeleteSharpIcon
+                  </TableCell>
+                  <TableCell align="right" width={'40px'} sx={{ pr: 3 }}>
+                    <HighlightOffIcon
                       sx={{ cursor: 'pointer' }}
                       className={styles.ButtonContainer}
                       onClick={() => deletarColaborador(user.idUsuario)}
-                    />
-                    <Switch
-                      onClick={() => alterarStatusColab(user.idUsuario)}
                     />
                   </TableCell>
                 </TableRow>

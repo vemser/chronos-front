@@ -10,6 +10,7 @@ import { api } from '../utils/api'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
+import { AuthContext } from './AuthContext'
 
 export const AdminContext = createContext({} as IAdminContext)
 
@@ -22,20 +23,32 @@ export const AdminProvider = ({ children }: IChildren) => {
   const [token, setToken] = useState<string>(
     localStorage.getItem('token') || ''
   )
+  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
-  const criarDadosColaborador = async (colaborador: IColaborador) => {
+  const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
-      nome: colaborador.nome,
-      email: colaborador.email,
+      nome: data.nome,
+      email: data.email,
       cargos: []
     }
-    colaborador.Administrador && dadosColaborador.cargos.push('ROLE_ADMIN')
-    colaborador.GestaoDePessoas &&
-      dadosColaborador.cargos.push('ROLE_GESTAO_DE_PESSOAS')
-    colaborador.Instrutor && dadosColaborador.cargos.push('ROLE_INSTRUTOR')
+    data.Administrador &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_ADMIN',
+        descricao: 'Administrador'
+      })
+    data.GestaoDePessoas &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_GESTAO_DE_PESSOAS',
+        descricao: 'GestaoDePessoas'
+      })
+    data.Instrutor &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_INSTRUTOR',
+        descricao: 'Instrutor'
+      })
 
     try {
-      dadosColaborador.nome = colaborador.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
+      dadosColaborador.nome = data.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
       await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin')
@@ -79,16 +92,28 @@ export const AdminProvider = ({ children }: IChildren) => {
       email: data.email,
       cargos: []
     }
-    data.Administrador && dadosColaborador.cargos.push('ROLE_ADMIN')
+    data.Administrador &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_ADMIN',
+        descricao: 'Administrador'
+      })
     data.GestaoDePessoas &&
-      dadosColaborador.cargos.push('ROLE_GESTAO_DE_PESSOAS')
-    data.Instrutor && dadosColaborador.cargos.push('ROLE_INSTRUTOR')
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_GESTAO_DE_PESSOAS',
+        descricao: 'GestaoDePessoas'
+      })
+    data.Instrutor &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_INSTRUTOR',
+        descricao: 'Instrutor'
+      })
     console.log(dadosColaborador)
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
+
       await api.put(`usuario/update-cadastro/${idUsuario}`, dadosColaborador)
-      inserirFotoUsuario(idUsuario)
+
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin')
     } catch (error) {
@@ -100,11 +125,20 @@ export const AdminProvider = ({ children }: IChildren) => {
   }
 
   // Alterar status do usuário
-  const alterarStatusColab = async (idUsuario: number) => {
+  const alterarStatusColab = async (data: IColaborador) => {
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
-      await api.put(`usuario/enable-disable/${idUsuario}`)
+      await api.put(`usuario/enable-disable/${data.idUsuario}`)
+      if (data.status === 'ATIVO') {
+        data.status = 'Inativo'
+      } else {
+        data.status = 'Ativo'
+      }
+
+      toast.success(
+        `Status da edição ${data.nome} alterado para ${data.status}!`
+      )
       buscarDadosColaborador('1')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
@@ -131,14 +165,15 @@ export const AdminProvider = ({ children }: IChildren) => {
   }
 
   // Inserir foto ao usuário
+  const imagemBase = dadosUsuarioLogado.imagem
 
-  const inserirFotoUsuario = async (idUsuario: number) => {
-    console.log(idUsuario)
+  const inserirFotoUsuario = async () => {
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
+
+      await api.put(`/usuario/upload-image`)
       toast.success('Usuário editado com sucesso!', toastConfig)
-      await api.put(`/usuario/upload-image`, idUsuario)
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)

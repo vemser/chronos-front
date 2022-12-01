@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }: IChildren) => {
   const navigate = useNavigate()
   const [roles, setRoles] = useState<string[] | undefined>([])
   const [token, setToken] = useState<string | any>('')
+  const [dadosUsuarioLogado, setDadosUsuarioLogado] = useState<any>({})
 
   const parseJwt = async (token: any) => {
     try {
@@ -26,9 +27,9 @@ export const AuthProvider = ({ children }: IChildren) => {
   const loggedUser = async () => {
     try {
       const { data } = await api.get('/usuario/logged-user')
+      setDadosUsuarioLogado(data)
 
-      console.log(data.cargos);
-      
+      console.log(data.nome)
     } catch (error) {
       console.log(error)
     }
@@ -51,8 +52,6 @@ export const AuthProvider = ({ children }: IChildren) => {
 
       loggedUser()
 
-
-
       if (rolesArray && rolesArray[0] === 'ROLE_ADMIN') {
         navigate(`/admin`)
       } else if (rolesArray && rolesArray[0] === 'ROLE_GESTAO_DE_PESSOAS') {
@@ -67,8 +66,6 @@ export const AuthProvider = ({ children }: IChildren) => {
     }
   }
 
- 
-
   const handleLogout = async () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
@@ -76,7 +73,9 @@ export const AuthProvider = ({ children }: IChildren) => {
   }
 
   return (
-    <AuthContext.Provider value={{ roles, handleLogin, handleLogout }}>
+    <AuthContext.Provider
+      value={{ roles, handleLogin, handleLogout, dadosUsuarioLogado }}
+    >
       {children}
     </AuthContext.Provider>
   )
