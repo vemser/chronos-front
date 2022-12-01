@@ -49,3 +49,13 @@ export const CadastroDePessoasSchema = yup.object().shape({
     .required('Por favor, digite seu email!')
     .email('Por favor, digite um email válido')
 })
+
+export const EtapaSchema = yup.object().shape({
+  nome: yup
+    .string()
+    .required('Por favor, digite o nome da etapa')
+    .min(3, 'O nome da etapa deve ter no mínimo 3 caracteres'),
+
+  ordemExecucao: yup.number().required('Por favor informe a ordem de execução')
+})
+

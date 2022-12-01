@@ -59,7 +59,7 @@ export interface IUserContext {
   etapas: IEtapa[]
   totalPages: number
   getEdicoesList: (page: string) => Promise<void>
-  deleteEdicao: (idEdicao: number) => Promise<void>
+  deleteEdicao: (idEdicao: number, nomeEdicao: string) => Promise<void>
   createEdicao: (edicao: IEdicao) => Promise<void>
   editEdicao: (edicao: IEdicao) => Promise<void>
   getEtapas: (idEdicao: number) => Promise<void>

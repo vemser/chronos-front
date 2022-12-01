@@ -23,11 +23,11 @@ export const GestaoCadastrarEdicao = () => {
     <>
     <GestaoHeader />
       <section className={styles.ContainerSection}>
-        <div className={styles.ContainerTitle}>
-          <h2>Cadastrar Edição</h2>
-        </div>
-
         <div className={styles.ContainerCalendario}>
+          <div className={styles.ContainerTitle}>
+            <h2>Cadastrar Edição</h2>
+          </div>
+
           <form onSubmit={handleSubmit((data: IEdicao) => createEdicao(data))}>
             <div className={styles.ContainerNomeEdicao}>
               <TextField
@@ -36,25 +36,60 @@ export const GestaoCadastrarEdicao = () => {
                 variant="standard"
                 className={styles.NomeEdicao}
                 {...register('nome')}
+                error={!!errors.nome}
               />
+                  {errors.nome && (<span
+              className={styles.ContainerError}
+              id="erro-nome"
+              >
+                {errors.nome.message}
+              </span>
+              )}
             </div>
-            <div className={styles.ContainerMenorCalendario}>
-              <Box>
-                <p>Início</p>
-                <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')}/>
-                <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataFinal')}/>
+           
+
+              <Box className={styles.ContainerMenorCalendario}>
+
+                <Box className={styles.dateContainer} >
+                  <p>Data Inicial</p>
+                  <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial}/>
+                  {errors.dataInicial && (<span
+                      className={styles.ContainerError}
+                      id="erro-data-inicial"
+                    >
+                      {errors.dataInicial.message}
+                      
+                    </span>
+                  )}
+                </Box>
+
+                <Box className={styles.dateContainer}>
+                  <p>Data Final</p>
+                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"  {...register('dataFinal')} error={!!errors.dataFinal}/>
+                  
+                  {errors.dataFinal && (<span
+                      className={styles.ContainerError}
+                      id="erro-data-inicial"
+                    >
+                      {errors.dataFinal.message}
+                      
+                    </span>
+                  )}
+                </Box>
               </Box>
-            </div>
-            
-            <Button
-              className={styles.loginText}
-              type="submit"
-              variant="contained"
-              id="button-login"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe' }}
-            >
-              Enviar
-            </Button>
+
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>
+              <Button
+                className={styles.submitButton}
+                type="submit"
+                variant="contained"
+                id="button-login" 
+                sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe' }}
+                >
+                  Enviar
+              </Button>
+            </Box>
+
           </form>
         </div>
       </section>

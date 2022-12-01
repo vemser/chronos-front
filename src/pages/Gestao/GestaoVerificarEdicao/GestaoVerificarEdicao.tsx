@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useContext, useLayoutEffect } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import styles from './GestaoVerificarEdicao.module.css'
 import {
@@ -19,9 +19,24 @@ import { UserContext } from '../../../context/UserContex'
 
 export const GestaoVerificarEdicao = () => {
 
-  const { state } = useLocation();
+  
+  const { edicao } = useParams();
+
+  const idEdicao = Number(edicao)
+
   const navigate = useNavigate();
-  const { deleteEtapa } = useContext(UserContext)
+  const { deleteEtapa, getEtapas, etapas, edicoes } = useContext(UserContext)
+
+  
+
+  const EdicaoAtual = edicoes?.find((data) => data.idEdicao == idEdicao)
+
+  
+
+  
+  useLayoutEffect(() => {
+    getEtapas(idEdicao)
+  }, []) 
 
   return (
     <>
@@ -31,22 +46,22 @@ export const GestaoVerificarEdicao = () => {
 
       <Box sx={{ display: 'flex', justifyContent:'space-between', padding: '20px', mb: '60px'}}>
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <h2>{state.nome}</h2>
+          <h2>{EdicaoAtual?.nome}</h2>
           <p>Gerar Calendario</p>
         </Box>
 
-        <Button variant="contained" onClick={() => navigate('/gestao/verificar-edicao/:edicao/nova-etapa', { state: state })}> + Adicionar nova etapa</Button>
+        <Button variant="contained" onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/nova-etapa`, {state: EdicaoAtual})}> + Adicionar nova etapa</Button>
       </Box>
       
-      {state.etapas?.map((etapa: any) => {
+      {etapas?.map((etapa: any) => {
         return(<Box key={etapa.idEtapa} sx={{padding: '20px'}}> 
           <Box sx={{display: 'flex', alignItems:'center', justifyContent: 'space-between' }}> 
             <Box sx={{display: 'flex', alignItems:'center', gap: '40px' }}> 
               <h3>{etapa.nome}</h3>
               
               <Box sx={{display: 'flex', alignItems:'center', gap: '12px' }}>
-                <EditIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
-                <HighlightOffIcon onClick={() => {deleteEtapa(etapa.idEtapa, state.idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                <EditIcon onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/editar-etapa/${etapa.idEtapa}`, {state: etapa})} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                <HighlightOffIcon onClick={() => {deleteEtapa(etapa.idEtapa, idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
               </Box> 
             </Box>
             

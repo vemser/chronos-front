@@ -1,35 +1,38 @@
 import React, { useContext } from 'react'
-import styles from './GestaoNovaEtapa.module.css'
+import styles from './GestaoEditarEtapa.module.css'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
 import { IEtapa } from '../../../utils/interfaces'
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { EtapaSchema } from '../../../utils/schemas'
 
-export const GestaoNovaEtapa = () => {
+export const GestaoEditarEtapa = () => {
+
 
   const { state } = useLocation();
-  const { createEtapa } = useContext(UserContext);
+  const { editEtapa } = useContext(UserContext);
 
   const { register, handleSubmit,  formState: { errors }} = useForm<IEtapa>(({
     resolver: yupResolver(EtapaSchema)
   }))
 
+  const { edicao } = useParams();
+  const idEdicao = Number(edicao)
 
   return (
     <>
       <GestaoHeader />
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerTitle}>
-          <h2>Cadastrar etapa</h2>
+          <h2>Editar etapa</h2>
         </div>
         <div className={styles.ContainerCadastrarEtapa}>
 
-          <form onSubmit={handleSubmit((data:IEtapa) =>  createEtapa(data, state.idEdicao))}>
+          <form onSubmit={handleSubmit((data:IEtapa) =>  editEtapa(data, idEdicao))}>
             <TextField
               id="nome"
               label="Nome"
@@ -37,6 +40,7 @@ export const GestaoNovaEtapa = () => {
               className={styles.Nome}
               {...register('nome')}
               error={!!errors.nome}
+              defaultValue={state?.nome}
             />
             {errors.nome && (
                   <span
@@ -53,6 +57,7 @@ export const GestaoNovaEtapa = () => {
               label="Ordem"
               variant="standard"
               className={styles.Nome}
+              defaultValue={state?.ordemExecucao}
               {...register('ordemExecucao')}
               error={!!errors.ordemExecucao}
             />
@@ -64,6 +69,15 @@ export const GestaoNovaEtapa = () => {
                     {errors.ordemExecucao.message}
                   </span>
             )}
+            <TextField
+              id="idEtapa"
+              label="Ordem"
+              variant="standard"
+              value={state.idEtapa}
+              className={styles.Nome}
+              {...register('idEtapa')}
+              sx={{ display: 'none'}}
+            />
 
             <Button type={'submit'} variant="contained" className={styles.Button}>
               Enviar

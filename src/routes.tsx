@@ -28,6 +28,7 @@ import { DiaNaoUtilProvider } from './context/DiaNaoUtilContext'
 import { GestaoEditarDiaNaoUtil } from './pages/Gestao/GestaoEditarDiaNaoUtil/GestaoEditarDiaNaoUtil'
 import { GestaoEditarEdicao } from './pages/Gestao/GestaoEditarEdicao/GestaoEditarEdicao'
 import { Calendario } from './pages/Calendario/Calendario'
+import { GestaoEditarEtapa } from './pages/Gestao/GestaoEditarEtapa/GestaoEditarEtapa'
 
 export const AppRoutes = () => {
   return (
@@ -66,6 +67,12 @@ export const AppRoutes = () => {
 
                   <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
                   <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
+                  <Route path='/gestao/verificar-edicao/:edicao/editar-etapa/:idEtapa' element={<GestaoEditarEtapa />} />
+
+
+
+
+
                   <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
                 </Route>
 

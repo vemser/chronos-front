@@ -41,6 +41,7 @@
 .ContainerNomeEdicao {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 .ContainerMenorCalendario{
@@ -48,6 +49,9 @@
   gap: 40px;
 }
 
+.ContainerError {
+  color: rgb(171, 33, 33);
+}
 
 .dateContainer{
   display: flex;

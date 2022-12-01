@@ -18,6 +18,7 @@ import styles from './GestaoEdicoes.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { UserContext } from '../../../context/UserContex'
+import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 
 export const GestaoEdicoes: React.FC = () => {
 
@@ -34,7 +35,6 @@ export const GestaoEdicoes: React.FC = () => {
 
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>
-
           
           <Box className={styles.ContainerNova}>
             <div className={styles.ContainerTitle}>
@@ -45,8 +45,6 @@ export const GestaoEdicoes: React.FC = () => {
               <Button variant="contained"> ADICIONAR EDIÇÃO</Button>
             </Link>
           </Box>
-
-          
 
           <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
             <Table sx={{ minWidth: 650,  }} aria-label="simple table">
@@ -84,7 +82,7 @@ export const GestaoEdicoes: React.FC = () => {
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <Switch onClick={() => ativoInativo(edicao)} checked={status} defaultChecked={status} />
+                      <Switch onClick={() => ativoInativo(edicao)} checked={status} />
                     </TableCell>
 
                     <TableCell align="right" width={'40px'}>
@@ -97,7 +95,7 @@ export const GestaoEdicoes: React.FC = () => {
                     </TableCell>
                     
                     <TableCell align="right" width={'40px'}>
-                      <HighlightOffIcon onClick={() => {deleteEdicao(edicao.idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon onClick={() => {deleteEdicao(edicao.idEdicao, edicao.nome)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                   </TableRow>
@@ -106,6 +104,9 @@ export const GestaoEdicoes: React.FC = () => {
               </TableBody>
             </Table>
           </TableContainer>
+        </div>
+        <div>
+          <PaginacaoEdicoes/>
         </div>
       </section>
     </>

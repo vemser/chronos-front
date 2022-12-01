@@ -16,7 +16,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const navigate = useNavigate();
 
     const [ edicoes, setEdicoes ] = useState<IEdicao[]>([]);
-    const [ etapas, setEtapas ] = useState<IEtapa[]>([])
+    const [ etapas, setEtapas ] = useState<IEtapa[]>([]);
 
 
     const [totalPages, setTotalPages] = useState(0);
@@ -26,175 +26,204 @@ export const UserProvider = ({ children }: IChildren) => {
         try {
             nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao?pagina=${Number(page) - 1}&tamanho=20`);
+            const { data } = await api.get(`/edicao/listar?pagina=${Number(page) - 1}&tamanho=20`);
 
-            setTotalPages(data.totalPages)
-            setEdicoes(data.elementos)
+            setTotalPages(data.totalPages);
+            setEdicoes(data.elementos);
 
         } catch (error) {
             console.error(error);
 
         } finally {
             nProgress.done();
-        }
-    }
+        };
+    };
 
-    const deleteEdicao = async (idEdicao: number) => {
-
+    const deleteEdicao = async (idEdicao: number, nomeEdicao: string) => {
         try {
-            nProgress.start()
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/edicao/${idEdicao}`);
-            toast.success('Edicao Removida com sucesso!')
-            getEdicoesList('1')
+            toast.success(`Edição ${nomeEdicao} foi removida com sucesso`);
+            getEdicoesList('1');
 
         } catch (error) {
             console.error(error);
-            toast.error('Houve um erro ao remover Edicao!')
+            toast.error(`Houve um erro ao remover Edicao ${nomeEdicao}!`);
             
         } finally {
-            nProgress.done()
+            nProgress.done();
 
-        }
-    }
+        };
+    };
 
 
     const createEdicao = async (edicao: IEdicao) => {
 
         try {
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
 
             await api.post('/edicao', edicao);
-            
-            navigate('/gestao/edicoes')
+            toast.success('Edição criada com sucesso!');
+
+            navigate('/gestao/edicoes');
             
         } catch (error) {
             console.error(error);
+            toast.error('Houve um erro ao criar uma nova edição, por favor, tente novamente');
 
-        }
-    }
+        } finally {
+            nProgress.done();
+        };
+    };
 
 
     const editEdicao = async (edicao: IEdicao) => {
         try {
-            nProgress.start();
+            nProgress.start()
             api.defaults.headers.common['Authorization'] = token;
-            await api.put(`/edicao/${edicao.idEdicao}`, edicao)
-            toast.success('Edicao editada com sucesso!', toastConfig)
+            await api.put(`/edicao/${edicao.idEdicao}`, edicao);
+            toast.success('Edicao editada com sucesso!', toastConfig);
 
-            navigate('/gestao/edicoes')
+            navigate('/gestao/edicoes');
             
         } catch (error) {
             console.error(error);
-            toast.error('Houve um erro ao editar a edição.', toastConfig)
+            toast.error('Houve um erro ao editar a edição.', toastConfig);
             
         } finally {
             nProgress.done();
 
-        }
-    }
+        };
+    };
 
     // ATIVO INATIVO EDICAO
 
     const ativoInativo = async (data: IEdicao) => {
-
          try {
             nProgress.start();
-            api.defaults.headers.common['Authorization'] = token
-            await api.put(`edicao/enable-disable/${data.idEdicao}`)
+            api.defaults.headers.common['Authorization'] = token;
+            await api.put(`edicao/enable-disable/${data.idEdicao}`);
 
             if(data.status === 'ATIVO') {
-                data.status = 'Inativo'
+                data.status = 'Inativo';
             } else {
-                data.status ='Ativo'
-            }
+                data.status ='Ativo';
+            };
             
-            toast.success(`'Status da edição ${data.nome} alterado! para ${data.status}'`)
+            toast.success(`Status da edição ${data.nome} alterado para ${data.status}`);
 
-            getEdicoesList('1')
+            getEdicoesList('1');
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error(`Houve um erro ao alterar o status da edição ${data.nome}, por favor, tente novamente`);
 
-        } 
-    }
+        } finally {
+            nProgress.done();
 
+        };
+    };
 
     // ETAPA
 
 
     const getEtapas = async (idEdicao: number) => {
         try {
-            api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/etapa/listar-etapas`)
-  
-            setEtapas(data.elementos)
+            nProgress.start();
 
-            navigate(`/gestao/verificar-edicao/${idEdicao}`)
-            
+            api.defaults.headers.common['Authorization'] = token;
+            const { data } = await api.get(`/etapa/${idEdicao}`);
+      
+            setEtapas(data);
+
         } catch (error) {
             console.error(error);
+            toast.error('Houve um erro ao enviar as etapas, por favor tente novamente.');
 
-        }
-    }
+        } finally {
+            nProgress.done();
+        };
+    };
 
     const deleteEtapa = async (idEtapa: number, idEdicao: number) => {
         try {
+            nProgress.start();
+            
             api.defaults.headers.common['Authorization'] = token;
-            await api.delete(`/etapa/${idEtapa}`)
+            await api.delete(`/etapa/${idEtapa}`);
+            toast.success(`Etapa foi excluída com sucesso`, toastConfig);
 
-            getEtapas(idEdicao)
+           getEtapas(idEdicao);
             
         } catch (error) {
             console.error(error);
+            toast.error(`Houve um erro ao remover a etapa, por favor tente novamente.`);
 
-        }
-    }
+        } finally {
+            nProgress.done();
+        };
+    };
 
     const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
+            nProgress.start();
 
-            etapa.ordemExecucao = Number(etapa.ordemExecucao)
-            
+            etapa.ordemExecucao = Number(etapa.ordemExecucao);
             api.defaults.headers.common['Authorization'] = token;
             await api.post(`/etapa/${idEdicao}`, etapa);
 
-            navigate(`/gestao/edicoes`)
-            
+            toast.success(`Nova etapa ${etapa.nome} cadastrada com sucesso!`);
+
+            navigate(`/gestao/verificar-edicao/${idEdicao}`);
             
         } catch (error) {
             console.error(error);
+            toast.error('Houve um erro ao cadastrar uma nova etapa, por favor tente novamente.');
+        } finally {
+            nProgress.done();
 
-        }
-    }
+        };
+    };
 
     const editEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
-            api.defaults.headers.common['Authorization'] = token;
-            await api.put(`/etapa/${etapa.idEtapa}`, etapa)
+            nProgress.start();
 
-            navigate(`/gestao/edicoes`)
-            
+            api.defaults.headers.common['Authorization'] = token;
+            await api.put(`/etapa/${etapa.idEtapa}`, etapa);
+
+            toast.success(`Etapa ${etapa.nome} editada com sucesso!`);
+            navigate(`/gestao/verificar-edicao/${idEdicao}`);
+
         } catch (error) {
             console.error(error);
-            
-        }
-    }
+            toast.error(`Houve um erro ao editar a etapa ${etapa.nome}`);
+
+        } finally {
+            nProgress.done();
+
+        };
+    };
 
     // PROCESSO
 
 
-    // const getProcessos = async (idEdicao: number, idEtapa: number) => {
-    //     try {
-    //         api.defaults.headers.common['Authorization'] = token;
-    //         await api.get(`/processo`)
-
+    const getProcessos = async (idEtapa: number) => {
+        try {
+            nProgress.start();
+            api.defaults.headers.common['Authorization'] = token;
+            await api.get(`/processo/${idEtapa}`)
             
-    //     } catch (error) {
-    //         console.error(error);
+        } catch (error) {
+            console.error(error);
+            toast.error('Houve um erro, por favor tente novamente.');
 
-    //     }
-    // }
+        } finally {
+            nProgress.done();
+        }
+    }
 
 
 
