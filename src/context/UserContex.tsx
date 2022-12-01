@@ -1,19 +1,25 @@
-import nProgress from 'nprogress';
+import nProgress from 'nprogress'
 import React, { createContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { api } from '../utils/api';
-import { IChildren, IEdicao, IEtapa, IProcesso, IUserContext, toastConfig } from '../utils/interfaces'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { api } from '../utils/api'
+import {
+  IChildren,
+  IEdicao,
+  IEtapa,
+  IProcesso,
+  IUserContext,
+  toastConfig
+} from '../utils/interfaces'
 
-
-export const UserContext = createContext({} as IUserContext);   
-
-
+export const UserContext = createContext({} as IUserContext)
 
 export const UserProvider = ({ children }: IChildren) => {
+  const token = localStorage.getItem('token')
+  const navigate = useNavigate()
 
-    const token = localStorage.getItem('token');
-    const navigate = useNavigate();
+  const [edicoes, setEdicoes] = useState<IEdicao[]>([])
+  const [etapas, setEtapas] = useState<IEtapa[]>([])
 
     const [ edicoes, setEdicoes ] = useState<IEdicao[]>([]);
     const [ etapas, setEtapas ] = useState<IEtapa[]>([]);
@@ -98,7 +104,7 @@ export const UserProvider = ({ children }: IChildren) => {
         };
     };
 
-    // ATIVO INATIVO EDICAO
+  // ATIVO INATIVO EDICAO
 
     const ativoInativo = async (data: IEdicao) => {
          try {
@@ -126,7 +132,7 @@ export const UserProvider = ({ children }: IChildren) => {
         };
     };
 
-    // ETAPA
+  // ETAPA
 
 
     const getEtapas = async (idEdicao: number) => {
@@ -224,6 +230,7 @@ export const UserProvider = ({ children }: IChildren) => {
             nProgress.done();
         }
     }
+  }
 
 
 
@@ -235,38 +242,53 @@ export const UserProvider = ({ children }: IChildren) => {
     //     } catch (error) {
     //         console.error(error);
 
-    //     }
-    // }
+  //     }
+  // }
 
-    // const createProcesso = async (processo: IProcesso) => {
-    //     try {
-    //         api.defaults.headers.common['Authorization'] = token;
-    //         await api.post(`/processo/${processo.idEdicao}/${processo.idEtapa}`, processo);
+  // const createProcesso = async (processo: IProcesso) => {
+  //     try {
+  //         api.defaults.headers.common['Authorization'] = token;
+  //         await api.post(`/processo/${processo.idEdicao}/${processo.idEtapa}`, processo);
 
-    //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
-            
-    //     } catch (error) {
-    //         console.error(error);
+  //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
 
-    //     }
-    // }
+  //     } catch (error) {
+  //         console.error(error);
 
-    // const editProcesso = async (processo: IProcesso) => {
-    //     try {
-    //         api.defaults.headers.common['Authorization'] = token;
-    //         await api.put(`/processo/${processo.idProcesso}`, processo)
+  //     }
+  // }
 
-    //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
-            
-    //     } catch (error) {
-    //         console.error(error);
-            
-    //     }
-    // }
+  // const editProcesso = async (processo: IProcesso) => {
+  //     try {
+  //         api.defaults.headers.common['Authorization'] = token;
+  //         await api.put(`/processo/${processo.idProcesso}`, processo)
+
+  //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
+
+  //     } catch (error) {
+  //         console.error(error);
+
+  //     }
+  // }
 
   return (
-    <UserContext.Provider value={{ edicoes, etapas, totalPages, getEdicoesList, deleteEdicao, createEdicao, editEdicao, getEtapas, deleteEtapa, createEtapa, editEtapa, ativoInativo }}>
-        { children }
+    <UserContext.Provider
+      value={{
+        edicoes,
+        etapas,
+        totalPages,
+        getEdicoesList,
+        deleteEdicao,
+        createEdicao,
+        editEdicao,
+        getEtapas,
+        deleteEtapa,
+        createEtapa,
+        editEtapa,
+        ativoInativo
+      }}
+    >
+      {children}
     </UserContext.Provider>
   )
 }

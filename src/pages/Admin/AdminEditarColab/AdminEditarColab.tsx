@@ -78,7 +78,7 @@ export const AdminEditarColab = () => {
             >
               <Box>
                 {' '}
-                <h2>Cadastrar Colaborador</h2>{' '}
+                <h2>Editar Colaborador</h2>{' '}
               </Box>
             </Grid>
             <Box
@@ -162,7 +162,7 @@ export const AdminEditarColab = () => {
                     variant="standard"
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
-                    {...register('email')}
+                    value={state.email}
                   />
                   <FormControl
                     required

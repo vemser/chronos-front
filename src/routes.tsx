@@ -43,27 +43,52 @@ export const AppRoutes = () => {
 
                 <Route path="*" element={<NotFind />} />
 
-                
                 <Route path="calendario" element={<Calendario />} />
 
-                <Route path='/admin' element={<PrivateRoute roleRequired='ROLE_ADMIN'/>}>
+                <Route
+                  path="/admin"
+                  element={<PrivateRoute roleRequired="ROLE_ADMIN" />}
+                >
                   <Route index element={<AdminHome />} />
-                  <Route path ='/admin/perfil' element={<AdminPerfil />} />
+                  <Route path="/admin/perfil" element={<AdminPerfil />} />
                   <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
-                  <Route path="/admin/editar-colaborador/:colaborador" element={<AdminEditarColab />} />
+                  <Route
+                    path="/admin/editar-colaborador/:colaborador"
+                    element={<AdminEditarColab />}
+                  />
                 </Route>
 
-                <Route path='/gestao' element={<PrivateRoute roleRequired='ROLE_GESTAO_DE_PESSOAS'/>}>
+                <Route
+                  path="/gestao"
+                  element={
+                    <PrivateRoute roleRequired="ROLE_GESTAO_DE_PESSOAS" />
+                  }
+                >
                   <Route index element={<GestaoHome />} />
-                  <Route path='/gestao/perfil' element={<GestaoPerfil />} />
+                  <Route path="/gestao/perfil" element={<GestaoPerfil />} />
 
-                  <Route path='/gestao/dias-nao-uteis' element={<GestaoDiaNaoUtil />} />
-                  <Route path='/gestao/cadastrar-dias-nao-uteis' element={<GestaoCadastrarDiaNaoUtil />} />
-                  <Route path='/gestao/editar-dias-nao-uteis/:periodo' element={<GestaoEditarDiaNaoUtil />} />
+                  <Route
+                    path="/gestao/dias-nao-uteis"
+                    element={<GestaoDiaNaoUtil />}
+                  />
+                  <Route
+                    path="/gestao/cadastrar-dias-nao-uteis"
+                    element={<GestaoCadastrarDiaNaoUtil />}
+                  />
+                  <Route
+                    path="/gestao/editar-dias-nao-uteis/:periodo"
+                    element={<GestaoEditarDiaNaoUtil />}
+                  />
 
-                  <Route path='/gestao/edicoes' element={<GestaoEdicoes />} />
-                  <Route path='/gestao/cadastrar-edicao' element={<GestaoCadastrarEdicao />} />
-                  <Route path='/gestao/editar-edicao/:edicao' element={<GestaoEditarEdicao />} />
+                  <Route path="/gestao/edicoes" element={<GestaoEdicoes />} />
+                  <Route
+                    path="/gestao/cadastrar-edicao"
+                    element={<GestaoCadastrarEdicao />}
+                  />
+                  <Route
+                    path="/gestao/editar-edicao/:edicao"
+                    element={<GestaoEditarEdicao />}
+                  />
 
                   <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
                   <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
@@ -76,9 +101,10 @@ export const AppRoutes = () => {
                   <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
                 </Route>
 
-                <Route path='/instrutor' element={<PrivateRoute roleRequired='ROLE_INSTRUTOR'/>}>
-                  
-                </Route>
+                <Route
+                  path="/instrutor"
+                  element={<PrivateRoute roleRequired="ROLE_INSTRUTOR" />}
+                ></Route>
               </Routes>
             </DiaNaoUtilProvider>
           </UserProvider>

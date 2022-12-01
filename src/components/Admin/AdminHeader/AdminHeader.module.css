@@ -53,6 +53,11 @@
   color: var(--color-blue);
 }
 
-a:hover {
-  color: blue;
+.HoverButton {
+  color: #bdbdbd !important;
+  font-weight: 600 !important;
+  color: red;
+}
+.HoverButton:hover {
+  color: blue !important;
 }
