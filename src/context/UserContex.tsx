@@ -133,21 +133,16 @@ export const UserProvider = ({ children }: IChildren) => {
     }
   }
 
-    const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
-        try {
+  const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
+    try {
+      etapa.ordemExecucao = Number(etapa.ordemExecucao)
 
-            etapa.ordemExecucao = Number(etapa.ordemExecucao)
-            
-            api.defaults.headers.common['Authorization'] = token;
-            await api.post(`/etapa/${idEdicao}`, etapa);
+      api.defaults.headers.common['Authorization'] = token
+      await api.post(`/etapa/${idEdicao}`, etapa)
 
-            navigate(`/gestao/edicoes`)
-            
-            
-        } catch (error) {
-            console.error(error);
-
-        }
+      navigate(`/gestao/edicoes`)
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -156,15 +151,13 @@ export const UserProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = token
       await api.put(`/etapa/${etapa.idEtapa}`, etapa)
 
-            navigate(`/gestao/edicoes`)
-            
-        } catch (error) {
-            console.error(error);
-            
-        }
+      navigate(`/gestao/edicoes`)
+    } catch (error) {
+      console.error(error)
     }
+  }
 
-    // PROCESSO
+  // PROCESSO
 
   // const getProcessos = async (idEdicao: number, idEtapa: number) => {
   //     try {
@@ -235,4 +228,3 @@ export const UserProvider = ({ children }: IChildren) => {
     </UserContext.Provider>
   )
 }
-
