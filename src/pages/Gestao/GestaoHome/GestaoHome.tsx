@@ -15,9 +15,6 @@ export const GestaoHome = () => {
     loggedUser()
   }, [])
 
-  useEffect(() => {
-    buscarDadosColaborador('1')
-  }, [])
   return (
     <>
       <GestaoHeader />
