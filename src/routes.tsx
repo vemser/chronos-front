@@ -33,7 +33,7 @@ import { GestaoEditarEtapa } from './pages/Gestao/GestaoEditarEtapa/GestaoEditar
 export const AppRoutes = () => {
   
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ToastContainer />
       <AuthProvider>
         <AdminProvider>
@@ -44,7 +44,7 @@ export const AppRoutes = () => {
 
                 <Route path="*" element={<NotFind />} />
 
-                <Route path="calendario" element={<Calendario />} />
+                <Route path="/calendario" element={<Calendario />} />
 
                 <Route
                   path="/admin"
