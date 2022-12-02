@@ -31,12 +31,6 @@ interface State {
 }
 
 export const EditarPerfil = () => {
-  // const [selectedImage, setSelectedImage] = useState()
-  // const imageChange = (e: any): void => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     setSelectedImage(e.target.files[0])
-  //   }
-  // }
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
   const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
@@ -82,8 +76,15 @@ export const EditarPerfil = () => {
   const { atualizarSenhaUsuario, inserirFotoUsuario } = useContext(AdminContext)
 
   const atualizarDadosPerfil = (data: IColaborador) => {
+    const formData = new FormData()
+    if (selectedImage) {
+      formData.append('question-image', selectedImage)
+      inserirFotoUsuario(formData)
+    }
+
     atualizarSenhaUsuario(data)
-    inserirFotoUsuario()
+
+    console.log(selectedImage)
   }
 
   return (
@@ -120,7 +121,9 @@ export const EditarPerfil = () => {
             </Box>
           </Grid>
           <form
-            onSubmit={handleSubmit((data: IColaborador) => console.log(data))}
+            onSubmit={handleSubmit((data: IColaborador) =>
+              atualizarDadosPerfil(data)
+            )}
             className={styles.FormEditar}
           >
             <Box
@@ -178,37 +181,16 @@ export const EditarPerfil = () => {
                       />
                     )}
                   </div>
-                  {/* <img
-                      alt="not fount"
-                      width={'250px'}
-                      src={`data:image/png;base64, ${imagemBase}`}
-                    /> */}
-                  {/* {selectedImage && (
-                      <div>
-                        <img
-                          alt="not fount"
-                          width={'250px'}
-                          src={URL.createObjectURL(selectedImage)}
-                        />
-                        <br />
-                        <button onClick={() => setSelectedImage(null)}>
-                          Remove
-                        </button>
-                      
-                    )} */}
-                  {/* <svg data-testid="AccountCircleSharpIcon"> */}
-                  {/* <AccountCircleSharpIcon color={'disabled'} /> */}
-                  {/* </svg> */}
                   <Box display="flex" justifyContent="center">
                     <label htmlFor="imagem">
                       <input
                         style={{ display: 'none' }}
                         id="imagem"
                         type="file"
-                        {...register('imagem')}
-                        onChange={(event: any) => {
-                          console.log(event.target.files[0])
-                          setSelectedImage(event.target.files[0])
+                        onChange={(e: any) => {
+                          if (e.target.files && e.target.files.length > 0) {
+                            setSelectedImage(e.target.files[0])
+                          }
                         }}
                       />
                       <Button

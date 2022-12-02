@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
-import DeleteSharpIcon from '@mui/icons-material/DeleteSharp'
+
 import styles from './AdminListar.module.css'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 
@@ -25,7 +25,6 @@ import {
 import { userFormSchema } from '../../../utils/schemas'
 import Switch from '@mui/material/Switch'
 import { AuthContext } from '../../../context/AuthContext'
-import { SignalWifiStatusbar4Bar } from '@mui/icons-material'
 
 export const AdminListar: React.FC = () => {
   const { dadosUsuarioLogado } = useContext<any>(AuthContext)
@@ -33,8 +32,6 @@ export const AdminListar: React.FC = () => {
   const navigate = useNavigate()
   const { dadosColaborador, buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
-
-  console.log(dadosColaborador)
 
   const { deletarColaborador } = useContext(AdminContext)
 

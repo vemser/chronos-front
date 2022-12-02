@@ -64,8 +64,6 @@ export const AdminProvider = ({ children }: IChildren) => {
       const { data } = await api.get(
         `/usuario?pagina=${Number(page) - 1}&tamanho=5`
       )
-
-      console.log(data.elementos)
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
     } catch (error) {
@@ -167,12 +165,14 @@ export const AdminProvider = ({ children }: IChildren) => {
   // Inserir foto ao usuário
   const imagemBase = dadosUsuarioLogado.imagem
 
-  const inserirFotoUsuario = async () => {
+  const inserirFotoUsuario = async (data: any) => {
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
 
-      await api.put(`/usuario/upload-image`)
+      api.defaults.headers.patch['Content-Type'] = 'multipart/form-data'
+      await api.put(`/usuario/upload-image`, data)
+
       toast.success('Usuário editado com sucesso!', toastConfig)
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)

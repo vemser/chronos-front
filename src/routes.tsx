@@ -31,7 +31,7 @@ import { Calendario } from './pages/Calendario/Calendario'
 
 export const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ToastContainer />
       <AuthProvider>
         <AdminProvider>
