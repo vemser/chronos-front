@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import imgLogo from '../../../assets/login-logo.png'
 import { HeaderButton } from '../../HeaderButton/HeaderButton'
 import styles from './GestaoHeader.module.css'
@@ -20,10 +20,15 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const GestaoHeader = () => {
+  useEffect(() => {
+    loggedUser()
+  }, [])
+  const navigate = useNavigate()
   const userEmail = localStorage.getItem('user')
   const { dadosUsuarioLogado, loggedUser, handleLogout } =
     React.useContext<any>(AuthContext)
   const imagemBase = dadosUsuarioLogado.imagem
+
   // ==== MATERIAL UI FUNCTIONS ====
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -129,11 +134,11 @@ export const GestaoHeader = () => {
           </Box>
 
           <Box className={styles.usuario}>
-            <h3>{userEmail}</h3>
+            <h3>{dadosUsuarioLogado.nome}</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {imagemBase === null ? (
+                {dadosUsuarioLogado.imagem === null ? (
                   <Avatar
                     alt={`${dadosUsuarioLogado.imagem}`}
                     src={dadosUsuarioLogado.imagem}
@@ -141,9 +146,9 @@ export const GestaoHeader = () => {
                 ) : (
                   <img
                     alt="not fount"
-                    width={'100px'}
+                    width={'250px'}
                     className={styles.BorderRadius}
-                    src={`data:image/png;base64, ${imagemBase}`}
+                    src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}
                   />
                 )}
               </IconButton>
@@ -167,9 +172,15 @@ export const GestaoHeader = () => {
             >
               <MenuItem>
                 <Box className={styles.menuBurgerOptions}>
-                  <Link to={'/gestao/perfil'}>
-                    <MenuItem>EDITAR PERFIL</MenuItem>
-                  </Link>
+                  <MenuItem
+                    className={styles.HoverButton}
+                    onClick={() => {
+                      navigate('/gestao/perfil')
+                      // , {state }
+                    }}
+                  >
+                    EDITAR PERFIL
+                  </MenuItem>
 
                   <Box onClick={handleLogout}>
                     <MenuItem>SAIR</MenuItem>
