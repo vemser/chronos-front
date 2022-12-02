@@ -171,7 +171,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = token
 
       api.defaults.headers.patch['Content-Type'] = 'multipart/form-data'
-      await api.put(`/usuario/upload-image`, data)
+      await api.put(`/foto/upload-image-perfil`, data)
 
       toast.success('Usuário editado com sucesso!', toastConfig)
     } catch (error) {
