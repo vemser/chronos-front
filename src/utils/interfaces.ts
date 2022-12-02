@@ -34,7 +34,7 @@ export interface IColaborador {
   Administrador: string
   GestaoDePessoas: string
   Instrutor: string
-  imagem: string
+  imagem: string | File
   idUsuario: number | any
   descricao: any
   senhaAtual: string
@@ -52,7 +52,7 @@ export interface IAdminContext {
   editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
   alterarStatusColab: (idUsuario: IColaborador) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
-  inserirFotoUsuario: () => Promise<void>
+  inserirFotoUsuario: (data: any) => Promise<void>
 }
 // INTERFACES USER
 

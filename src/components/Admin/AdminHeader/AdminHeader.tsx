@@ -21,16 +21,12 @@ import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
   const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
+  const imagemBase = dadosUsuarioLogado.imagem
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
-
-  // let percorrerDados = dadosUsuarioLogado.map((dados: any) => {
-  //   dados.nome
-  //   console.log(dados.nome)
-  // })
 
   const userEmail = localStorage.getItem('user')
 
@@ -130,10 +126,19 @@ export const AdminHeader = () => {
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt={`${dadosUsuarioLogado.imagem}`}
-                  src={dadosUsuarioLogado.imagem}
-                />
+                {imagemBase === null ? (
+                  <Avatar
+                    alt={`${dadosUsuarioLogado.imagem}`}
+                    src={dadosUsuarioLogado.imagem}
+                  />
+                ) : (
+                  <img
+                    alt="not fount"
+                    width={'100px'}
+                    className={styles.BorderRadius}
+                    src={`data:image/png;base64, ${imagemBase}`}
+                  />
+                )}
               </IconButton>
             </Tooltip>
 
