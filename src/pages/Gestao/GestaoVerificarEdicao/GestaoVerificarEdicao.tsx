@@ -65,7 +65,7 @@ export const GestaoVerificarEdicao = () => {
               </Box> 
             </Box>
             
-            <Button variant="contained"> + NOVO PROCESSO</Button>
+            <Button variant="contained" onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/novo-processo`, {state: etapa})}> + NOVO PROCESSO</Button>
           </Box>
             
           <Box>
@@ -105,7 +105,7 @@ export const GestaoVerificarEdicao = () => {
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <HighlightOffIcon onClick={() => deleteProcesso(processo.idProcesso)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon onClick={() => deleteProcesso(processo.idProcesso, idEdicao)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
                   </TableRow>
                   )

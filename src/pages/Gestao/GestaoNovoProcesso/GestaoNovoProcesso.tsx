@@ -15,6 +15,7 @@ import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 
 const animatedComponents = makeAnimated()
+
 export const GestaoNovoProcesso = () => {
   // const {
   //   register,
@@ -91,6 +92,7 @@ export const GestaoNovoProcesso = () => {
                   isLoading={false}
                   isRtl={false}
                   closeMenuOnSelect={false}
+                  placeholder={'Área Responsável'}
                 />
               </label>
               <label htmlFor="selectGroup">

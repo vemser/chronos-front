@@ -25,7 +25,6 @@ export const UserProvider = ({ children }: IChildren) => {
     const [totalPages, setTotalPages] = useState(0);
 
     const getEdicoesList = async (page: string) => {
-
         try {
             nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
@@ -41,6 +40,7 @@ export const UserProvider = ({ children }: IChildren) => {
             nProgress.done();
         };
     };
+
 
     const deleteEdicao = async (idEdicao: number, nomeEdicao: string) => {
         try {
@@ -62,7 +62,6 @@ export const UserProvider = ({ children }: IChildren) => {
 
 
     const createEdicao = async (edicao: IEdicao) => {
-
         try {
             nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
@@ -90,6 +89,25 @@ export const UserProvider = ({ children }: IChildren) => {
             toast.success('Edicao editada com sucesso!', toastConfig);
 
             navigate('/gestao/edicoes');
+            
+        } catch (error) {
+            console.error(error);
+            toast.error('Houve um erro ao editar a edição.', toastConfig);
+            
+        } finally {
+            nProgress.done();
+
+        };
+    };
+
+    const cloneEdicao = async (edicao: IEdicao) => {
+        try {
+            nProgress.start()
+            api.defaults.headers.common['Authorization'] = token;
+            await api.post(`/edicao/clone/${edicao.idEdicao}`);
+            toast.success(`Clone da edicao ${edicao.nome} criado com sucesso!`, toastConfig);
+
+            getEdicoesList('1')
             
         } catch (error) {
             console.error(error);
@@ -158,7 +176,7 @@ export const UserProvider = ({ children }: IChildren) => {
             await api.delete(`/etapa/${idEtapa}`);
             toast.success(`Etapa foi excluída com sucesso`, toastConfig);
 
-           getEtapas(idEdicao);
+            getEtapas(idEdicao);
             
         } catch (error) {
             console.error(error);
@@ -228,12 +246,14 @@ export const UserProvider = ({ children }: IChildren) => {
         }
     }
 
-    const deleteProcesso = async (idProcesso: number) => {
+    const deleteProcesso = async (idProcesso: number, idEdicao: number) => {
         try {
             nProgress.start()
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/processo/${idProcesso}`);
             toast.success(`Processo removido com sucesso!`);
+            
+            getEtapas(idEdicao)
             
         } catch (error) {
             console.error(error);
@@ -281,6 +301,7 @@ export const UserProvider = ({ children }: IChildren) => {
         deleteEdicao,
         createEdicao,
         editEdicao,
+        cloneEdicao,
         getEtapas,
         deleteEtapa,
         createEtapa,

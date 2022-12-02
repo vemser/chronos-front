@@ -61,19 +61,23 @@ export interface IUserContext {
   edicoes: IEdicao[]
   etapas: IEtapa[]
   totalPages: number
+
   getEdicoesList: (page: string) => Promise<void>
   deleteEdicao: (idEdicao: number, nomeEdicao: string) => Promise<void>
   createEdicao: (edicao: IEdicao) => Promise<void>
   editEdicao: (edicao: IEdicao) => Promise<void>
+  cloneEdicao: (edicao: IEdicao) => Promise<void>
+  ativoInativo: (data: IEdicao) => Promise<void>
+
   getEtapas: (idEdicao: number) => Promise<void>
   deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>
   createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
   editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
+
   getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
-  deleteProcesso: (idProcesso: number) => Promise<void>,
+  deleteProcesso: (idProcesso: number, idEdicao: number) => Promise<void>,
   // createProcesso: (processo: IProcesso) => Promise<void>,
   // editProcesso: (processo: IProcesso) => Promise<void>
-  ativoInativo: (data: IEdicao) => Promise<void>
 }
 
 export interface IEdicao {

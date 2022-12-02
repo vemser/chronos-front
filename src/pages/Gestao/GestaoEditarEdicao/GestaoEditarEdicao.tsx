@@ -53,7 +53,7 @@ export const GestaoEditarEdicao = () => {
             <Box className={styles.ContainerMenorCalendario}>
               <Box className={styles.dateContainer} >
                 <p>Data Inicial</p>
-                <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial}/>
+                <TextField id="dataInicial" className={styles.dataPicker} defaultValue={state.dataInicial} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial}/>
                 {errors.dataInicial && (<span
                   className={styles.ContainerError}
                     id="erro-data-inicial"
@@ -65,7 +65,7 @@ export const GestaoEditarEdicao = () => {
 
                 <Box className={styles.dateContainer}>
                   <p>Data Final</p>
-                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"  {...register('dataFinal')} error={!!errors.dataFinal}/>
+                  <TextField id="dataFinal" className={styles.dataPicker} defaultValue={state.dataFinal} type={'date'} variant="standard"  {...register('dataFinal')} error={!!errors.dataFinal}/>
                    
                   {errors.dataFinal && (<span
                       className={styles.ContainerError}

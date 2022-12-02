@@ -22,7 +22,7 @@ import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes
 
 export const GestaoEdicoes: React.FC = () => {
 
-  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao } = useContext(UserContext);
+  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao, cloneEdicao } = useContext(UserContext);
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
@@ -91,7 +91,7 @@ export const GestaoEdicoes: React.FC = () => {
 
 
                     <TableCell align="right" width={'40px'}>
-                      <ContentCopyIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <ContentCopyIcon onClick={() => cloneEdicao(edicao)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
                     
                     <TableCell align="right" width={'40px'}>
