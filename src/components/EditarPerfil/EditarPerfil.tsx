@@ -78,13 +78,11 @@ export const EditarPerfil = () => {
   const atualizarDadosPerfil = (data: IColaborador) => {
     const formData = new FormData()
     if (selectedImage) {
-      formData.append('question-image', selectedImage)
+      formData.append('imagem', selectedImage)
       inserirFotoUsuario(formData)
     }
 
     atualizarSenhaUsuario(data)
-
-    console.log(selectedImage)
   }
 
   return (
@@ -147,13 +145,6 @@ export const EditarPerfil = () => {
                 >
                   {' '}
                   <div className={styles.ContainerImagem}>
-                    {/* <input
-                      type="image"
-                      width={'250px'}
-                      src={URL.createObjectURL(selectedImage)}
-                      alt="Imagem"
-                    /> */}
-
                     {imagemBase === null && selectedImage === null ? (
                       <svg data-testid="AccountCircleSharpIcon" width={'250px'}>
                         <AccountCircleSharpIcon color={'disabled'} />

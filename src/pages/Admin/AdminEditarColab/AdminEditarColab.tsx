@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './AdminEditarColab.module.css'
 
 import TextField from '@mui/material/TextField'
@@ -19,11 +19,17 @@ import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 import Input from '@mui/material/Input'
 import { useLocation } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminEditarColab = () => {
   const { state } = useLocation()
-  const { editarColaborador } = useContext(AdminContext)
+  const { editarColaborador, incluirFotoColab } = useContext(AdminContext)
   console.log(state)
+  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
+
+  console.log(state.imagem)
+
+  const [selectedImage, setSelectedImage] = useState<any>(null)
 
   // const {
   //   register,
@@ -35,11 +41,21 @@ export const AdminEditarColab = () => {
   const { register, handleSubmit } = useForm<IColaborador>({
     defaultValues: {
       nome: state.nome,
-      email: state.email
+      email: state.email,
+      imagem: state.imagem
     }
   })
 
   const { inserirFotoUsuario } = useContext(AdminContext)
+
+  const atualizarDadosPerfil = (idUsuario: number, data: IColaborador) => {
+    // const formData = new FormData()
+    // if (selectedImage) {
+    //   formData.append('imagem', selectedImage)
+    incluirFotoColab(idUsuario, data)
+
+    editarColaborador(data, idUsuario)
+  }
 
   return (
     <>
@@ -48,7 +64,7 @@ export const AdminEditarColab = () => {
         <form
           className={styles.FormAdmin}
           onSubmit={handleSubmit((data: IColaborador) =>
-            editarColaborador(data, state.idUsuario)
+            atualizarDadosPerfil(state.idUsuario, data)
           )}
         >
           <Grid
@@ -102,17 +118,51 @@ export const AdminEditarColab = () => {
                   boxShadow={2}
                 >
                   {' '}
-                  <svg data-testid="AccountCircleSharpIcon">
-                    <AccountCircleSharpIcon color={'disabled'} />
-                  </svg>
+                  <div className={styles.ContainerImagem}>
+                    {/* {state.imagem === null && selectedImage === null ? (
+                      <svg data-testid="AccountCircleSharpIcon" width={'250px'}>
+                        <AccountCircleSharpIcon color={'disabled'} />
+                      </svg>
+                    ) : state.imagem === null && selectedImage !== null ? (
+                      <img
+                        alt="not fount"
+                        width={'250px'}
+                        className={styles.BorderRadius}
+                        src={URL.createObjectURL(selectedImage)}
+                      />
+                    ) : state.imagem !== null && selectedImage !== null ? (
+                      <img
+                        alt="not fount"
+                        width={'250px'}
+                        className={styles.BorderRadius}
+                        src={URL.createObjectURL(selectedImage)}
+                      />
+                    ) : (
+                      <img
+                        alt="not fount"
+                        width={'250px'}
+                        className={styles.BorderRadius}
+                        src={`data:image/png;base64, ${state.imagem}`}
+                      />
+                    )} */}
+                    <img
+                      alt="not fount"
+                      width={'250px'}
+                      className={styles.BorderRadius}
+                      src={`data:image/png;base64, ${state.imagem}`}
+                    />
+                  </div>
                   <Box display="flex" justifyContent="center">
                     <label htmlFor="imagem">
                       <input
-                        style={{ display: 'none', backgroundColor: '#ccc' }}
-                        {...register('imagem')}
+                        style={{ display: 'none' }}
                         id="imagem"
-                        name="upload-photo"
                         type="file"
+                        onChange={(e: any) => {
+                          if (e.target.files && e.target.files.length > 0) {
+                            setSelectedImage(e.target.files[0])
+                          }
+                        }}
                       />
                       <Button
                         component="span"

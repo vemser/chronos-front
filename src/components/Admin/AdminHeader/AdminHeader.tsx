@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -20,7 +20,7 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
-  const { dadosUsuarioLogado, handleLogout } =
+  const { dadosUsuarioLogado, handleLogout, loggedUser } =
     React.useContext<any>(AuthContext)
 
   const navigate = useNavigate()
@@ -28,11 +28,12 @@ export const AdminHeader = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
-  // React.useEffect(() => {
-  //   loggedUser()
-  // }, [])
+
+  useEffect(() => {
+    loggedUser()
+  }, [])
   const imagemBase = dadosUsuarioLogado.imagem
-  console.log(imagemBase)
+  console.log(dadosUsuarioLogado)
   const userEmail = localStorage.getItem('user')
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {

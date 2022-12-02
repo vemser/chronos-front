@@ -146,7 +146,7 @@ export const AdminProvider = ({ children }: IChildren) => {
     }
   }
 
-  // Atualizar perfil do usuário
+  // Atualizar perfil do PRÓPRIO usuário
 
   const atualizarSenhaUsuario = async (data: IColaborador) => {
     try {
@@ -165,14 +165,31 @@ export const AdminProvider = ({ children }: IChildren) => {
   // Inserir foto ao usuário
   const imagemBase = dadosUsuarioLogado.imagem
 
+  // Atualizar foto do PRÓPRIO usuário
   const inserirFotoUsuario = async (data: any) => {
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
 
-      api.defaults.headers.patch['Content-Type'] = 'multipart/form-data'
       await api.put(`/foto/upload-image-perfil`, data)
 
+      toast.success('Usuário editado com sucesso!', toastConfig)
+      console.log('funcionou!')
+    } catch (error) {
+      toast.error('Houve algum error, tente novamente!', toastConfig)
+      console.log(error)
+    } finally {
+      nProgress.done()
+    }
+  }
+
+  //(ADMIN) Colocar uma foto no colaborador específico
+
+  const incluirFotoColab = async (idUsuario: number, data: any) => {
+    try {
+      nProgress.start()
+      api.defaults.headers.common['Authorization'] = token
+      await api.put(`/foto/upload-image/${idUsuario}`, data)
       toast.success('Usuário editado com sucesso!', toastConfig)
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
@@ -193,7 +210,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         editarColaborador,
         alterarStatusColab,
         atualizarSenhaUsuario,
-        inserirFotoUsuario
+        inserirFotoUsuario,
+        incluirFotoColab
       }}
     >
       {children}
