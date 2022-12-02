@@ -119,7 +119,7 @@ export const AdminEditarColab = () => {
                 >
                   {' '}
                   <div className={styles.ContainerImagem}>
-                    {/* {state.imagem === null && selectedImage === null ? (
+                    {state.imagem === null && selectedImage === null ? (
                       <svg data-testid="AccountCircleSharpIcon" width={'250px'}>
                         <AccountCircleSharpIcon color={'disabled'} />
                       </svg>
@@ -144,13 +144,7 @@ export const AdminEditarColab = () => {
                         className={styles.BorderRadius}
                         src={`data:image/png;base64, ${state.imagem}`}
                       />
-                    )} */}
-                    <img
-                      alt="not fount"
-                      width={'250px'}
-                      className={styles.BorderRadius}
-                      src={`data:image/png;base64, ${state.imagem}`}
-                    />
+                    )}
                   </div>
                   <Box display="flex" justifyContent="center">
                     <label htmlFor="imagem">
@@ -164,28 +158,6 @@ export const AdminEditarColab = () => {
                           }
                         }}
                       />
-                      <Button
-                        component="span"
-                        variant="contained"
-                        endIcon={
-                          <AddAPhotoIcon
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              mb: '4px'
-                            }}
-                          />
-                        }
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '200px',
-                          mt: 2
-                        }}
-                      >
-                        Trocar Foto
-                        <input type="file" hidden name="[name]" />
-                      </Button>
                     </label>
                   </Box>
                 </Box>
