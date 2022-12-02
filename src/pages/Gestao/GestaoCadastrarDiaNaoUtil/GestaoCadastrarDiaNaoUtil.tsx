@@ -3,10 +3,8 @@ import styles from './GestaoCadastrarDiaNaoUtil.module.css'
 import TextField from '@mui/material/TextField'
 import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { Dayjs } from 'dayjs'
 import 'dayjs/locale/pt-br'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
-import { Link } from 'react-router-dom'
 import { IDiaNaoUtil } from '../../../utils/interfaces'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -15,9 +13,7 @@ import { cadastrarDiaNaoUtilFormSchema } from '../../../utils/schemas'
 
 export const GestaoCadastrarDiaNaoUtil = () => {
 
- const { postDiaNaoUtil } = useContext(DiaNaoUtilContext)
-
-
+  const { postDiaNaoUtil } = useContext(DiaNaoUtilContext)
   const { register, handleSubmit,  formState: { errors }} = useForm<IDiaNaoUtil>(({
     resolver: yupResolver(cadastrarDiaNaoUtilFormSchema)
   }))
@@ -26,7 +22,6 @@ export const GestaoCadastrarDiaNaoUtil = () => {
     <>
     <GestaoHeader />
       <section className={styles.ContainerSection}>
-
         <div className={styles.ContainerCalendario}>
           <div className={styles.ContainerTitle}>
             <h2>Cadastrar Período Não Útil</h2>
@@ -39,6 +34,7 @@ export const GestaoCadastrarDiaNaoUtil = () => {
               label="Descrição do Período Não Útil"
               variant="standard"
               className={styles.NomeEdicao}
+              error={!!errors.descricao}
               {...register('descricao')}
             />
             {errors.descricao && (<span
@@ -57,7 +53,7 @@ export const GestaoCadastrarDiaNaoUtil = () => {
 
                 <Box className={styles.dateContainer} >
                   <p>Data Inicial</p>
-                  <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')}/>
+                  <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial}/>
                   {errors.dataInicial && (<span
                       className={styles.ContainerError}
                       id="login-error-email"
@@ -69,19 +65,18 @@ export const GestaoCadastrarDiaNaoUtil = () => {
 
                 <Box className={styles.dateContainer}>
                   <p>Data Final</p>
-                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"  {...register('dataFinal')}/>
+                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataFinal')} error={!!errors.dataFinal}/>
 
                 </Box>
               </Box>
        
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>
+            <Box className={styles.submitContainer}>
               <Button
                 className={styles.submitButton}
                 type="submit"
                 variant="contained"
                 id="button-login" 
-                sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe' }}
                 >
                   Enviar
               </Button>

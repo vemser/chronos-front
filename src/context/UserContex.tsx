@@ -3,30 +3,26 @@ import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { api } from '../utils/api'
-import {
-  IChildren,
-  IEdicao,
-  IEtapa,
-  IProcesso,
-  IUserContext,
-  toastConfig
-} from '../utils/interfaces'
+import { IAreasEnvolvidas, IChildren, IEdicao, IEtapa, IProcesso, IResponsaveis, IUserContext, toastConfig } from '../utils/interfaces'
 
-export const UserContext = createContext({} as IUserContext)
+export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IChildren) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
+  // STATES
+
     const [ edicoes, setEdicoes ] = useState<IEdicao[]>([]);
     const [ etapas, setEtapas ] = useState<IEtapa[]>([]);
-
-
+    const [ areasEnvolvidas, setAreasEnvolvidas ] = useState<IAreasEnvolvidas[]>([]);
+    const [ responsaveis, setResponsaveis ] = useState<IResponsaveis[]>([]);
     const [totalPages, setTotalPages] = useState(0);
 
     const getEdicoesList = async (page: string) => {
         try {
             nProgress.start();
+
             api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/listar?pagina=${Number(page) - 1}&tamanho=20`);
 
@@ -38,6 +34,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+
         };
     };
 
@@ -83,7 +80,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
     const editEdicao = async (edicao: IEdicao) => {
         try {
-            nProgress.start()
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
             await api.put(`/edicao/${edicao.idEdicao}`, edicao);
             toast.success('Edicao editada com sucesso!', toastConfig);
@@ -100,14 +97,15 @@ export const UserProvider = ({ children }: IChildren) => {
         };
     };
 
+
     const cloneEdicao = async (edicao: IEdicao) => {
         try {
-            nProgress.start()
+            nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
             await api.post(`/edicao/clone/${edicao.idEdicao}`);
             toast.success(`Clone da edicao ${edicao.nome} criado com sucesso!`, toastConfig);
 
-            getEdicoesList('1')
+            getEdicoesList('1');
             
         } catch (error) {
             console.error(error);
@@ -149,7 +147,6 @@ export const UserProvider = ({ children }: IChildren) => {
 
   // ETAPA
 
-
     const getEtapas = async (idEdicao: number) => {
         try {
             nProgress.start();
@@ -167,6 +164,7 @@ export const UserProvider = ({ children }: IChildren) => {
             nProgress.done();
         };
     };
+
 
     const deleteEtapa = async (idEtapa: number, idEdicao: number) => {
         try {
@@ -187,6 +185,7 @@ export const UserProvider = ({ children }: IChildren) => {
         };
     };
 
+
     const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
             nProgress.start();
@@ -196,17 +195,18 @@ export const UserProvider = ({ children }: IChildren) => {
             await api.post(`/etapa/${idEdicao}`, etapa);
 
             toast.success(`Nova etapa ${etapa.nome} cadastrada com sucesso!`);
-
             navigate(`/gestao/verificar-edicao/${idEdicao}`);
             
         } catch (error) {
             console.error(error);
             toast.error('Houve um erro ao cadastrar uma nova etapa, por favor tente novamente.');
+
         } finally {
             nProgress.done();
 
         };
     };
+
 
     const editEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
@@ -230,12 +230,11 @@ export const UserProvider = ({ children }: IChildren) => {
 
     // PROCESSO
 
-
     const getProcessos = async (idEtapa: number) => {
         try {
             nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
-            await api.get(`/processo/${idEtapa}`)
+            await api.get(`/processo/${idEtapa}`);
             
         } catch (error) {
             console.error(error);
@@ -243,17 +242,20 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
-        }
-    }
+
+        };
+    };
+
 
     const deleteProcesso = async (idProcesso: number, idEdicao: number) => {
         try {
-            nProgress.start()
+            nProgress.start();
+
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/processo/${idProcesso}`);
             toast.success(`Processo removido com sucesso!`);
             
-            getEtapas(idEdicao)
+            getEtapas(idEdicao);
             
         } catch (error) {
             console.error(error);
@@ -262,53 +264,124 @@ export const UserProvider = ({ children }: IChildren) => {
         } finally {
             nProgress.done();
 
-        }
+        };
+    };
+
+
+  const createProcesso = async (processo: IProcesso, idEtapa: number, idEdicao: number) => {
+
+    try {
+        nProgress.start();
+
+        api.defaults.headers.common[`Authorization`] = token;
+        await api.post(`/processo/${idEtapa}`, processo);
+
+        navigate(`/gestao/verificar-edicao/${idEdicao}`);
+
+    } catch (error) {
+        console.error(error);
+        toast.error('Houve um erro ao cadastrar um novo processo, por favor tente novamente.');
+
+    } finally {
+        nProgress.done();
+
+    };
+  };
+    
+
+  const editProcesso = async (processo: IProcesso, idEtapa: number, idEdicao: number) => {
+    try {
+        nProgress.start();
+
+        api.defaults.headers.common['Authorization'] = token;
+        await api.put(`/processo/${processo.idProcesso}`, processo);
+
+        navigate(`/gestao/verificar-edicao/${idEdicao}`);
+
+    }  catch (error) {
+        console.log(error);
+        toast.error(`Houve um erro ao editar o processo ${processo.nome}`);
+        
+    } finally {
+        nProgress.done();
+
+    };
+  };
+
+
+  // AREA ENVOLVIDA
+
+  const getAreaEnvolvida = async () => {
+    try {
+        nProgress.start();
+
+        const { data } = await api.get('/area-envolvida');
+        setAreasEnvolvidas(data)
+
+        console.log('Area Envolvida');
+        console.log(data)
+
+    } catch (error) {
+        console.error(error);
+        toast.error('Houve um erro em receber as areas envolvidas cadastradas', toastConfig)
+        
+    } finally { 
+        nProgress.done()
     }
+  }
 
-  // const createProcesso = async (processo: IProcesso) => {
-  //     try {
-  //         api.defaults.headers.common['Authorization'] = token;
-  //         await api.post(`/processo/${processo.idEdicao}/${processo.idEtapa}`, processo);
+  // RESPONSAVEL
+  
+    const getResponsavel = async () => {
+      try {
+          nProgress.start();
+  
+          const { data } = await api.get('/responsavel');
+          setResponsaveis(data);
 
-  //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
+          console.log('Responsavel');
+          console.log(data)
+  
+      } catch (error) {
+          console.error(error);
+          toast.error('Houve um erro em receber as areas envolvidas cadastradas', toastConfig);
+          
+      } finally { 
+          nProgress.done();
+      };
+    };
 
-  //     } catch (error) {
-  //         console.error(error);
 
-  //     }
-  // }
-
-  // const editProcesso = async (processo: IProcesso) => {
-  //     try {
-  //         api.defaults.headers.common['Authorization'] = token;
-  //         await api.put(`/processo/${processo.idProcesso}`, processo)
-
-  //         navigate(`/gestao/verificar-edicao/${processo.idEdicao}`)
-
-  //     } catch (error) {
-  //         console.error(error);
-
-  //     }
-  // }
-
+  
   return (
     <UserContext.Provider
       value={{
         edicoes,
         etapas,
         totalPages,
+        areasEnvolvidas,
+        responsaveis,
+
         getEdicoesList,
         deleteEdicao,
         createEdicao,
         editEdicao,
         cloneEdicao,
+
         getEtapas,
         deleteEtapa,
         createEtapa,
         editEtapa,
+
         ativoInativo,
+
         getProcessos,
-        deleteProcesso
+        deleteProcesso,
+        createProcesso,
+        editProcesso,
+
+        getAreaEnvolvida,
+        getResponsavel
       }}
     >
       {children}

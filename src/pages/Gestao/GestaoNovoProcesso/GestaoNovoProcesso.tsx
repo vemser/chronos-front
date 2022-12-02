@@ -1,4 +1,4 @@
-import React, { useContext, KeyboardEventHandler, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoNovoProcesso.module.css'
 import Select from 'react-select'
 
@@ -7,8 +7,8 @@ import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
-import { IEtapa } from '../../../utils/interfaces'
-import { useForm } from 'react-hook-form'
+import { IEtapa, IProcesso } from '../../../utils/interfaces'
+import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { cadastrarEtapaFormSchema } from '../../../utils/schemas'
 import CreatableSelect from 'react-select/creatable'
@@ -25,33 +25,51 @@ export const GestaoNovoProcesso = () => {
   //   // resolver: yupResolver(cadastrarEtapaFormSchema)
   // })
 
-  const { state } = useLocation()
-  const { createEtapa } = useContext(UserContext)
+  //HOOKS
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<IEtapa>({
+  const { state } = useLocation()
+  const [selectedOptions, setSelectedOptions] = useState([])
+  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis } = useContext(UserContext)
+  const { register, handleSubmit, formState: { errors }, control} = useForm({
     resolver: yupResolver(cadastrarEtapaFormSchema)
   })
 
-  const options = [
-    { value: 'produto 01', label: 'Produto 01' },
-    { value: 'produto 02', label: 'Produto 02' },
-    { value: 'produto 03', label: 'Produto 03' },
-    { value: 'produto 04', label: 'Produto 04' },
-    { value: 'produto 05', label: 'Produto 05' },
-    { value: 'produto 06', label: 'Produto 06' },
-    { value: 'produto 07', label: 'Produto 07' },
-    { value: 'produto 08', label: 'Produto 08' }
-  ]
+  useEffect(() => {
+    getAreaEnvolvida()
+    getResponsavel()
 
-  const [selectedOptions, setSelectedOptions] = useState([])
+  }, [])
+
+  // SELECT 
+
+  const selectAreaEnvolvida:object[] = []
+  const selectResponsavel:object[] = []
+
+
+  areasEnvolvidas.map((area) => {
+    selectAreaEnvolvida.push({
+      value: area.nome,
+      label: area.nome
+    })
+  })
+
+  responsaveis.map((responsavel) => {
+    selectResponsavel.push({
+      value: responsavel.nome,
+      label: responsavel.nome
+    })
+  })
+
 
   const handleSelect = () => {
     console.log(selectedOptions)
   }
+
+
+  
+
+
+ 
   return (
     <>
       <GestaoHeader />
@@ -64,11 +82,10 @@ export const GestaoNovoProcesso = () => {
           <div>
             <form
               className={styles.ContainerForm}
-              onSubmit={handleSubmit((data: IEtapa) =>
-                createEtapa(data, state.idEdicao)
+              onSubmit={handleSubmit((data: any) =>
+                console.log(data, state.idEdicao)
               )}
             >
-              {/* Select */}
 
               <TextField
                 className={styles.FormRow}
@@ -79,11 +96,10 @@ export const GestaoNovoProcesso = () => {
               />
               <label htmlFor="selectGroup">
                 Área Envolvida
+
                 <CreatableSelect
-                  defaultValue={[options[0], options[2]]}
                   components={animatedComponents}
-                  isMulti
-                  options={options}
+                  options={selectAreaEnvolvida}
                   onChange={(item: any) => setSelectedOptions(item)}
                   className={styles.selectOption}
                   isClearable={true}
@@ -91,17 +107,18 @@ export const GestaoNovoProcesso = () => {
                   isDisabled={false}
                   isLoading={false}
                   isRtl={false}
+                  isMulti
                   closeMenuOnSelect={false}
-                  placeholder={'Área Responsável'}
+                  placeholder={'Área Envolvida'}
+                  id={'area-envolvida'}
                 />
               </label>
               <label htmlFor="selectGroup">
                 Responsável
                 <CreatableSelect
-                  defaultValue={[options[0], options[2]]}
                   components={animatedComponents}
+                  options={selectResponsavel}
                   isMulti
-                  options={options}
                   onChange={(item: any) => setSelectedOptions(item)}
                   className={styles.selectOption}
                   isClearable={true}
@@ -110,6 +127,7 @@ export const GestaoNovoProcesso = () => {
                   isLoading={false}
                   isRtl={false}
                   closeMenuOnSelect={false}
+                  id={'responsavel'}
                 />
               </label>
               <TextField
@@ -117,21 +135,21 @@ export const GestaoNovoProcesso = () => {
                 id="duracaoProcesso"
                 label="Duração do processo"
                 variant="standard"
-                // {...register('duracaoProcesso')}
+                {...register('duracaoProcesso')}
               />
               <TextField
                 className={styles.FormRow}
                 id="diasUteis"
                 label="Dias uteis"
                 variant="standard"
-                // {...register('diasUteis')}
+                {...register('diasUteis')}
               />
               <TextField
                 className={styles.FormRow}
                 id="ordem"
                 label="Ordem"
                 variant="standard"
-                // {...register('ordem')}
+                {...register('ordem')}
               />
               <div className={styles.ContainerBotao}>
                 <Button
