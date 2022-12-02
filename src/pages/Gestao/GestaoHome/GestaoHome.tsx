@@ -7,7 +7,6 @@ export const GestaoHome = () => {
   return (
     <>
       <GestaoHeader />
-      <GestaoNovoProcesso />
     </>
   )
 }
