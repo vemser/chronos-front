@@ -20,14 +20,19 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
-  const { dadosUsuarioLogado, loggedUser, handleLogout } = React.useContext<any>(AuthContext)
-  const imagemBase = dadosUsuarioLogado.imagem
+  const { dadosUsuarioLogado, handleLogout } =
+    React.useContext<any>(AuthContext)
+
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
-
+  // React.useEffect(() => {
+  //   loggedUser()
+  // }, [])
+  const imagemBase = dadosUsuarioLogado.imagem
+  console.log(imagemBase)
   const userEmail = localStorage.getItem('user')
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -123,9 +128,7 @@ export const AdminHeader = () => {
 
           <Box className={styles.usuario}>
             <h3>{dadosUsuarioLogado.nome}</h3>
-
-            <Tooltip title="Exibir detalhes">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {imagemBase === null ? (
                   <Avatar
                     alt={`${dadosUsuarioLogado.imagem}`}
@@ -133,12 +136,20 @@ export const AdminHeader = () => {
                   />
                 ) : (
                   <img
-                    alt="not fount"
+                    alt=""
                     width={'100px'}
                     className={styles.BorderRadius}
                     src={`data:image/png;base64, ${imagemBase}`}
                   />
                 )}
+              </IconButton> */}
+
+            <Tooltip title="Exibir detalhes">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar
+                  alt={`${dadosUsuarioLogado.imagem}`}
+                  src={dadosUsuarioLogado.imagem}
+                />
               </IconButton>
             </Tooltip>
 
