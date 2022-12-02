@@ -28,8 +28,7 @@ export const AuthProvider = ({ children }: IChildren) => {
     try {
       const { data } = await api.get('/usuario/logged-user')
       setDadosUsuarioLogado(data)
-
-      console.log(data.nome)
+      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -67,10 +66,9 @@ export const AuthProvider = ({ children }: IChildren) => {
   }
 
   const handleLogout = async () => {
-    
     navigate('/')
     setRoles(undefined)
-    
+
     api.defaults.headers.common['Authorization'] = undefined
     localStorage.removeItem('token')
     localStorage.removeItem('user')

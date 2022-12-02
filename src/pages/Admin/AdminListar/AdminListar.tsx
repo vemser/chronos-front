@@ -68,7 +68,6 @@ export const AdminListar: React.FC = () => {
 
           <TableBody>
             {dadosColaborador?.map((user: IColaborador) => {
-              console.log(user)
               if (user.status === 'ATIVO') {
                 var status = true
               } else {
