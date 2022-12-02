@@ -20,7 +20,8 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
-  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
+  const { dadosUsuarioLogado, loggedUser, handleLogout } =
+    React.useContext<any>(AuthContext)
   const imagemBase = dadosUsuarioLogado.imagem
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -170,9 +171,9 @@ export const AdminHeader = () => {
                     EDITAR PERFIL
                   </MenuItem>
 
-                  <Link to={'/'}>
-                    <MenuItem className={styles.HoverButton}>SAIR</MenuItem>
-                  </Link>
+                  <Box onClick={handleLogout}>
+                    <MenuItem>SAIR</MenuItem>
+                  </Box>
                 </Box>
               </MenuItem>
             </Menu>

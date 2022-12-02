@@ -20,13 +20,11 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const GestaoHeader = () => {
-  
-  const userEmail = localStorage.getItem('user');
-
-
-// ==== MATERIAL UI FUNCTIONS ====
-
-
+  const userEmail = localStorage.getItem('user')
+  const { dadosUsuarioLogado, loggedUser, handleLogout } =
+    React.useContext<any>(AuthContext)
+  const imagemBase = dadosUsuarioLogado.imagem
+  // ==== MATERIAL UI FUNCTIONS ====
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -48,19 +46,27 @@ export const GestaoHeader = () => {
     setAnchorElUser(null)
   }
 
-  const { handleLogout } = useContext(AuthContext) 
   return (
-    <AppBar position="static" className={styles.header} sx={{ backgroundColor: '#ffffff'}}>
+    <AppBar
+      position="static"
+      className={styles.header}
+      sx={{ backgroundColor: '#ffffff' }}
+    >
       <Container maxWidth={false} className={styles.headerContainer}>
         <Toolbar disableGutters className={styles.toolbar}>
-
-          <Box className={styles.logoImg} sx={{display: { xs: 'none', md: 'flex' }}}>
+          <Box
+            className={styles.logoImg}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             <Link to="/gestao">
-              <img src={imgLogo} alt="Logo DBC" title='Logo' />
+              <img src={imgLogo} alt="Logo DBC" title="Logo" />
             </Link>
           </Box>
 
-          <Box className={styles.menuBurgerContainer} sx={{ display: { xs: 'flex', md: 'none' } }} >
+          <Box
+            className={styles.menuBurgerContainer}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -68,8 +74,8 @@ export const GestaoHeader = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
             >
-            <MenuIcon className={styles.burgerIcon}/>
-            </IconButton >
+              <MenuIcon className={styles.burgerIcon} />
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -86,46 +92,60 @@ export const GestaoHeader = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' }
-              }} 
+              }}
             >
               <Box className={styles.menuBurgerOptions}>
                 <Link to={'/gestao/edicoes'}>
-                  <MenuItem>
-                    EDIÇÕES
-                  </MenuItem>
+                  <MenuItem>EDIÇÕES</MenuItem>
                 </Link>
 
                 <Link to={'/gestao/dias-nao-uteis'}>
-                  <MenuItem>
-                    PERÍODO NÃO ÚTIL
-                  </MenuItem>
+                  <MenuItem>PERÍODO NÃO ÚTIL</MenuItem>
                 </Link>
               </Box>
-
             </Menu>
           </Box>
 
-          <Box className={styles.logoImg} sx={{ display: { xs: 'flex', md: 'none'}}} >
+          <Box
+            className={styles.logoImg}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
+          >
             <Link to="/">
-              <img src={imgLogo}  alt="Logo DBC" />
+              <img src={imgLogo} alt="Logo DBC" />
             </Link>
           </Box>
 
-          
-          <Box className={styles.navbar} sx={{display: { xs: 'none', md: 'flex' }}}>
+          <Box
+            className={styles.navbar}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             <ul>
-              <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'}/>
-              <HeaderButton texto={'PERÍODO NÃO ÚTIL'} url={'/gestao/dias-nao-uteis'}/>
+              <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'} />
+              <HeaderButton
+                texto={'PERÍODO NÃO ÚTIL'}
+                url={'/gestao/dias-nao-uteis'}
+              />
             </ul>
           </Box>
 
           <Box className={styles.usuario}>
-
             <h3>{userEmail}</h3>
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={`${userEmail}`} src="/static/images/avatar/2.jpg" />
+                {imagemBase === null ? (
+                  <Avatar
+                    alt={`${dadosUsuarioLogado.imagem}`}
+                    src={dadosUsuarioLogado.imagem}
+                  />
+                ) : (
+                  <img
+                    alt="not fount"
+                    width={'100px'}
+                    className={styles.BorderRadius}
+                    src={`data:image/png;base64, ${imagemBase}`}
+                  />
+                )}
               </IconButton>
             </Tooltip>
 
@@ -145,21 +165,17 @@ export const GestaoHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem>
-                  <Box className={styles.menuBurgerOptions}>
-                    <Link to={'/gestao/perfil'}>
-                      <MenuItem>
-                        EDITAR PERFIL
-                      </MenuItem>
-                    </Link>
+              <MenuItem>
+                <Box className={styles.menuBurgerOptions}>
+                  <Link to={'/gestao/perfil'}>
+                    <MenuItem>EDITAR PERFIL</MenuItem>
+                  </Link>
 
-                    <Box onClick={handleLogout}>
-                      <MenuItem>
-                        SAIR
-                      </MenuItem>
-                    </Box>
+                  <Box onClick={handleLogout}>
+                    <MenuItem>SAIR</MenuItem>
                   </Box>
-                </MenuItem>
+                </Box>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
