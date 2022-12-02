@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }: IChildren) => {
       const { data } = await api.post('/login', user)
 
       api.defaults.headers.common['Authorization'] = data
+      
 
       localStorage.setItem('token', data)
       localStorage.setItem('user', user.email)

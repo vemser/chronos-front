@@ -6,14 +6,17 @@ import { AdminListar } from '../AdminListar/AdminListar'
 import { PaginacaoColaborador } from '../../../components/Paginacao/PaginacaoColaborador/PaginacaoColaborador'
 import { IAdminContext } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
+import { UserContext } from '../../../context/UserContex'
 
 export const AdminHome: React.FC = () => {
   const { dadosColaborador, buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
 
+
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
   }, [])
+
   return (
     <>
       <AdminHeader />

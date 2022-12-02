@@ -22,7 +22,6 @@ import {
   IChildren
 } from '../../../utils/interfaces'
 
-import { userFormSchema } from '../../../utils/schemas'
 import Switch from '@mui/material/Switch'
 import { AuthContext } from '../../../context/AuthContext'
 
@@ -79,14 +78,13 @@ export const AdminListar: React.FC = () => {
                   </TableCell>
                   <TableCell>
                     {user?.cargos?.map((cargo: IColaborador) => {
-                      return <p>{cargo.descricao}</p>
+                      return <p key={cargo.idCargo}>{cargo.descricao}</p>
                     })}
                   </TableCell>
 
                   <TableCell align="right" width={'40px'}>
                     <Switch
                       checked={status}
-                      defaultChecked={status}
                       onClick={() => alterarStatusColab(user)}
                     />
                   </TableCell>

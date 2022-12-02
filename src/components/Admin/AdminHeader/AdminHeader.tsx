@@ -32,7 +32,6 @@ export const AdminHeader = () => {
   //   loggedUser()
   // }, [])
   const imagemBase = dadosUsuarioLogado.imagem
-  console.log(imagemBase)
   const userEmail = localStorage.getItem('user')
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {

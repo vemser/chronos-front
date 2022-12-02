@@ -20,9 +20,9 @@ export const AdminProvider = ({ children }: IChildren) => {
   const [dadosColaborador, setDadosColaborador] = useState<
     IColaborador[] | undefined
   >(undefined)
-  const [token, setToken] = useState<string>(
-    localStorage.getItem('token') || ''
-  )
+
+  const token  = localStorage.getItem('token');
+
   const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
   const criarDadosColaborador = async (data: IColaborador) => {
@@ -63,22 +63,15 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start();
 
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(
-        `/usuario?pagina=${Number(page) - 1}&tamanho=5`)
-
-        console.log('page::');
-        console.log(page);
-
-        console.log('data::');
-        console.log(data);
-        
-        
+      const { data } = await api.get(`/usuario?pagina=0&tamanho=5`)
         
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
 
     } catch (error) {
       console.log(error)
+      toast.error('Houve um erro ao exibir as informações, por favor tente novamente.')
+
     } finally {
       nProgress.done()
     }
