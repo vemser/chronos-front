@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useLayoutEffect } from 'react'
 import styles from './AdminHome.module.css'
 import { Box } from '@mui/system'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
@@ -11,7 +11,7 @@ export const AdminHome: React.FC = () => {
   const { dadosColaborador, buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     buscarDadosColaborador('1')
   }, [])
   return (

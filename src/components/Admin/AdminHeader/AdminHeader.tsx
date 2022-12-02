@@ -158,7 +158,7 @@ export const AdminHeader = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
+              <ul>
                 <Box className={styles.menuBurgerOptions}>
                   <MenuItem
                     className={styles.HoverButton}
@@ -176,7 +176,7 @@ export const AdminHeader = () => {
                       </MenuItem>
                   </Box>
                 </Box>
-              </MenuItem>
+              </ul>
             </Menu>
           </Box>
         </Toolbar>

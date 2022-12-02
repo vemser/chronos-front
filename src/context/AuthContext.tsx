@@ -52,11 +52,11 @@ export const AuthProvider = ({ children }: IChildren) => {
 
       loggedUser()
 
-      if (rolesArray && rolesArray[0] === 'ROLE_ADMIN') {
+      if (rolesArray.includes('ROLE_ADMIN')) {
         navigate(`/admin`)
-      } else if (rolesArray && rolesArray[0] === 'ROLE_GESTAO_DE_PESSOAS') {
+      } else if (rolesArray.includes('ROLE_GESTAO_DE_PESSOAS')) {
         navigate(`/gestao`)
-      } else if (rolesArray && rolesArray[0] === 'ROLE_INSTRUTOR') {
+      } else if (rolesArray.includes('ROLE_INSTRUTOR')) {
         navigate(`/instrutor`)
       } else {
         navigate(`/`)

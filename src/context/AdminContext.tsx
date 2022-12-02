@@ -60,14 +60,27 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const buscarDadosColaborador = async (page: string) => {
     try {
+      nProgress.start();
+
       api.defaults.headers.common['Authorization'] = token
       const { data } = await api.get(
-        `/usuario?pagina=${Number(page) - 1}&tamanho=5`
-      )
+        `/usuario?pagina=${Number(page) - 1}&tamanho=5`)
+
+        console.log('page::');
+        console.log(page);
+
+        console.log('data::');
+        console.log(data);
+        
+        
+        
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
+
     } catch (error) {
       console.log(error)
+    } finally {
+      nProgress.done()
     }
   }
 

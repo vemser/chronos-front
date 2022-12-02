@@ -28,18 +28,14 @@ import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminListar: React.FC = () => {
   const { dadosUsuarioLogado } = useContext<any>(AuthContext)
-
+  
   const navigate = useNavigate()
-  const { dadosColaborador, buscarDadosColaborador } =
-    useContext<IAdminContext>(AdminContext)
-
-  const { deletarColaborador } = useContext(AdminContext)
-
+  const { dadosColaborador, buscarDadosColaborador, deletarColaborador, alterarStatusColab } =
+  useContext<IAdminContext>(AdminContext)
+  
   useEffect(() => {
     buscarDadosColaborador('1')
   }, [])
-
-  const { alterarStatusColab } = useContext(AdminContext)
 
   return (
     <>
