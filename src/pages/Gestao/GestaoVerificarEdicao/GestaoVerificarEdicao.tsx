@@ -25,7 +25,7 @@ export const GestaoVerificarEdicao = () => {
   const idEdicao = Number(edicao)
 
   const navigate = useNavigate();
-  const { deleteEtapa, getEtapas, etapas, edicoes } = useContext(UserContext)
+  const { deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } = useContext(UserContext)
 
   
 
@@ -105,7 +105,7 @@ export const GestaoVerificarEdicao = () => {
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <HighlightOffIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon onClick={() => deleteProcesso(processo.idProcesso)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
                   </TableRow>
                   )

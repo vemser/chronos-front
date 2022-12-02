@@ -67,14 +67,18 @@ export const AuthProvider = ({ children }: IChildren) => {
   }
 
   const handleLogout = async () => {
+    
+    navigate('/')
+    setRoles(undefined)
+    
+    api.defaults.headers.common['Authorization'] = undefined
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    api.defaults.headers.common['Authorization'] = undefined
   }
 
   return (
     <AuthContext.Provider
-      value={{ roles, handleLogin, handleLogout, dadosUsuarioLogado }}
+      value={{ roles, setRoles, handleLogin, handleLogout, dadosUsuarioLogado }}
     >
       {children}
     </AuthContext.Provider>

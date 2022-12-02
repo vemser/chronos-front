@@ -12,6 +12,7 @@ export interface IUser {
 // INTERFACES AUTH
 
 export interface IAuthContext {
+  setRoles: (roles: string[]) => void,
   roles: string[] | undefined
   handleLogin: (user: IUser) => Promise<void>
   handleLogout: () => Promise<void>
@@ -68,8 +69,8 @@ export interface IUserContext {
   deleteEtapa: (idEtapa: number, idEdicao: number) => Promise<void>
   createEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
   editEtapa: (etapa: IEtapa, idEdicao: number) => Promise<void>
-  // getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
-  // deleteProcesso: (idProcesso: number) => Promise<void>,
+  getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
+  deleteProcesso: (idProcesso: number) => Promise<void>,
   // createProcesso: (processo: IProcesso) => Promise<void>,
   // editProcesso: (processo: IProcesso) => Promise<void>
   ativoInativo: (data: IEdicao) => Promise<void>

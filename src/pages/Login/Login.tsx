@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {
   Button,
   TextField,
@@ -17,14 +17,14 @@ import { useForm } from 'react-hook-form'
 import { IUser } from '../../utils/interfaces'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { userFormSchema } from '../../utils/schemas'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 interface State {
   password: string
   showPassword: boolean
 }
 
-// const { handleLogin } = useContext(AuthContext)
+
 
 export const Login = () => {
   const [values, setValues] = React.useState<State>({
@@ -50,7 +50,9 @@ export const Login = () => {
     event.preventDefault()
   }
 
-  const { handleLogin } = useContext(AuthContext)
+  // FUNCTION
+
+  const { handleLogin, roles, setRoles } = useContext(AuthContext)
   const token = localStorage.getItem('token')
 
   const {
@@ -61,6 +63,27 @@ export const Login = () => {
     resolver: yupResolver(userFormSchema)
   })
 
+
+  useEffect(() => {
+    if(token){
+      let decodedJWT = JSON.parse(atob(token.split('.')[1]))
+      let roleArray = decodedJWT.CARGOS
+
+      
+      setRoles(roleArray)
+    }
+    
+  },[])
+
+    if(roles?.includes('ROLE_ADMIN')) {
+      return <Navigate to ='/admin' />
+    } else if (roles?.includes('ROLE_GESTAO_DE_PESSOAS')){
+      return <Navigate to ='/gestao' />
+    } else if  (roles?.includes('ROLE_INSTRUTOR')) {
+      return <Navigate to ='/instrutor' />
+    } 
+  
+ 
   return (
     <Box display={'flex'} className={styles.container}>
       <Box

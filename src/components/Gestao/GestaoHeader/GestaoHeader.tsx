@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -17,6 +17,7 @@ import imgLogo from '../../../assets/login-logo.png'
 import { HeaderButton } from '../../HeaderButton/HeaderButton'
 import styles from './GestaoHeader.module.css'
 import { List } from '@mui/material'
+import { AuthContext } from '../../../context/AuthContext'
 
 export const GestaoHeader = () => {
   
@@ -46,6 +47,8 @@ export const GestaoHeader = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+  const { handleLogout } = useContext(AuthContext) 
   return (
     <AppBar position="static" className={styles.header} sx={{ backgroundColor: '#ffffff'}}>
       <Container maxWidth={false} className={styles.headerContainer}>
@@ -150,11 +153,11 @@ export const GestaoHeader = () => {
                       </MenuItem>
                     </Link>
 
-                    <Link to={'/'}>
+                    <Box onClick={handleLogout}>
                       <MenuItem>
                         SAIR
                       </MenuItem>
-                    </Link>
+                    </Box>
                   </Box>
                 </MenuItem>
             </Menu>

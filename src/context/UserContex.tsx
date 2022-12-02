@@ -227,20 +227,23 @@ export const UserProvider = ({ children }: IChildren) => {
             nProgress.done();
         }
     }
-  
 
-
-
-    // const deleteProcesso = async (idProcesso: number) => {
-    //     try {
-    //         api.defaults.headers.common['Authorization'] = token;
-    //         await api.delete(`/processo/${idProcesso}`)
+    const deleteProcesso = async (idProcesso: number) => {
+        try {
+            nProgress.start()
+            api.defaults.headers.common['Authorization'] = token;
+            await api.delete(`/processo/${idProcesso}`);
+            toast.success(`Processo removido com sucesso!`);
             
-    //     } catch (error) {
-    //         console.error(error);
+        } catch (error) {
+            console.error(error);
+            toast.error(`Houve um erro ao remover um processo`);
 
-  //     }
-  // }
+        } finally {
+            nProgress.done();
+
+        }
+    }
 
   // const createProcesso = async (processo: IProcesso) => {
   //     try {
@@ -282,7 +285,9 @@ export const UserProvider = ({ children }: IChildren) => {
         deleteEtapa,
         createEtapa,
         editEtapa,
-        ativoInativo
+        ativoInativo,
+        getProcessos,
+        deleteProcesso
       }}
     >
       {children}

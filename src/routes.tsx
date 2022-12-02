@@ -31,6 +31,7 @@ import { Calendario } from './pages/Calendario/Calendario'
 import { GestaoEditarEtapa } from './pages/Gestao/GestaoEditarEtapa/GestaoEditarEtapa'
 
 export const AppRoutes = () => {
+  
   return (
     <BrowserRouter>
       <ToastContainer />
