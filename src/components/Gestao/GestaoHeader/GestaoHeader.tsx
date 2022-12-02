@@ -140,7 +140,7 @@ export const GestaoHeader = () => {
                   />
                 ) : (
                   <img
-                    alt="not fount"
+                    alt="Perfil"
                     width={'100px'}
                     className={styles.BorderRadius}
                     src={`data:image/png;base64, ${imagemBase}`}
