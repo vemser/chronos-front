@@ -81,58 +81,7 @@ export const AdminCadastrar = () => {
               className={styles.ContainerPerfil}
             >
               <Box
-                width={'50%'}
-                display={'flex'}
-                alignItems={'center'}
-                justifyContent={'center'}
-              >
-                <Box
-                  width={'300px'}
-                  height={'300px'}
-                  borderRadius={'8px'}
-                  boxShadow={2}
-                >
-                  {' '}
-                  <svg data-testid="AccountCircleSharpIcon">
-                    <AccountCircleSharpIcon color={'disabled'} />
-                  </svg>
-                  <Box display="flex" justifyContent="center">
-                    <label htmlFor="upload-photo">
-                      <input
-                        style={{ display: 'none' }}
-                        id="upload-photo"
-                        name="upload-photo"
-                        type="file"
-                      />
-                      <Button
-                        component="span"
-                        variant="contained"
-                        endIcon={
-                          <AddAPhotoIcon
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              mb: '4px'
-                            }}
-                          />
-                        }
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '200px',
-                          mt: 2
-                        }}
-                      >
-                        Trocar Foto
-                        <input type="file" hidden name="[name]" />
-                      </Button>
-                    </label>
-                  </Box>
-                </Box>
-              </Box>
-
-              <Box
-                width={'50%'}
+                width={'100%'}
                 display="flex"
                 justifyContent="center"
                 alignItems={'center'}

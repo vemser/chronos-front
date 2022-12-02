@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -20,7 +20,7 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
-  const { dadosUsuarioLogado, handleLogout } =
+  const { dadosUsuarioLogado, handleLogout, loggedUser } =
     React.useContext<any>(AuthContext)
 
   const navigate = useNavigate()
@@ -28,9 +28,10 @@ export const AdminHeader = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
-  // React.useEffect(() => {
-  //   loggedUser()
-  // }, [])
+
+  useEffect(() => {
+    loggedUser()
+  }, [])
   const imagemBase = dadosUsuarioLogado.imagem
   const userEmail = localStorage.getItem('user')
 
@@ -145,10 +146,19 @@ export const AdminHeader = () => {
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt={`${dadosUsuarioLogado.imagem}`}
-                  src={dadosUsuarioLogado.imagem}
-                />
+                {dadosUsuarioLogado.imagem === null ? (
+                  <Avatar
+                    alt={`${dadosUsuarioLogado.imagem}`}
+                    src={dadosUsuarioLogado.imagem}
+                  />
+                ) : (
+                  <img
+                    alt="not fount"
+                    width={'250px'}
+                    className={styles.BorderRadius}
+                    src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}
+                  />
+                )}
               </IconButton>
             </Tooltip>
 
@@ -181,9 +191,7 @@ export const AdminHeader = () => {
                   </MenuItem>
 
                   <Box onClick={handleLogout}>
-                      <MenuItem>
-                        SAIR
-                      </MenuItem>
+                    <MenuItem>SAIR</MenuItem>
                   </Box>
                 </Box>
               </ul>
