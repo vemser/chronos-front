@@ -53,7 +53,7 @@ export const GestaoNovoProcesso = () => {
   }
   return (
     <>
-      {/* <GestaoHeader /> */}
+      <GestaoHeader />
 
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerProcesso}>
@@ -84,7 +84,7 @@ export const GestaoNovoProcesso = () => {
                   isMulti
                   options={options}
                   onChange={(item: any) => setSelectedOptions(item)}
-                  className="select"
+                  className={styles.selectOption}
                   isClearable={true}
                   isSearchable={true}
                   isDisabled={false}
@@ -101,7 +101,7 @@ export const GestaoNovoProcesso = () => {
                   isMulti
                   options={options}
                   onChange={(item: any) => setSelectedOptions(item)}
-                  className="select"
+                  className={styles.selectOption}
                   isClearable={true}
                   isSearchable={true}
                   isDisabled={false}
@@ -131,13 +131,15 @@ export const GestaoNovoProcesso = () => {
                 variant="standard"
                 // {...register('ordem')}
               />
-              <Button
-                className={styles.BotaoGestao}
-                type={'submit'}
-                variant="contained"
-              >
-                Enviar
-              </Button>
+              <div className={styles.ContainerBotao}>
+                <Button
+                  className={styles.BotaoGestao}
+                  type={'submit'}
+                  variant="contained"
+                >
+                  Enviar
+                </Button>
+              </div>
             </form>
           </div>
         </div>
