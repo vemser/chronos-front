@@ -32,36 +32,36 @@ export const PaginacaoColaborador = () => {
         <Box className={style.pagination}>
           <ChevronLeftIcon className={style.icon} />
 
-          <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
+          <Link style={{ color: '#1e62fe' }} to={`/admin/colaboradores?page=${pageNumber}`}>
             {pageNumber}
           </Link>
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link className={style.icon} to={`/admin?page=${pages.length}`}>
+          <Link className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
             {pages.length}
           </Link>
 
           <Link
             className={style.chevron}
-            to={`/admin?page=${Number(pageNumber) + 1}`}
+            to={`/admin/colaboradores?page=${Number(pageNumber) + 1}`}
           >
             <ChevronRightIcon className="chevron" />
           </Link>
         </Box>
       ) : Number(pageNumber) === pages.length ? (
         <Box className={style.pagination}>
-          <Link to={`/admin?page=${Number(pageNumber) - 1}`}>
+          <Link to={`/admin/colaboradores?page=${Number(pageNumber) - 1}`}>
             <ChevronLeftIcon className={style.icon} />
           </Link>
 
-          <Link className={style.icon} to={`/admin?page=${1}`}>
+          <Link className={style.icon} to={`/admin/colaboradores?page=${1}`}>
             {1}
           </Link>
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
+          <Link style={{ color: '#1e62fe' }} to={`/admin/colaboradores?page=${pageNumber}`}>
             {pageNumber}
           </Link>
 
@@ -69,27 +69,27 @@ export const PaginacaoColaborador = () => {
         </Box>
       ) : (
         <Box className={style.pagination}>
-          <Link to={`/admin?page=${Number(pageNumber) - 1}`}>
+          <Link to={`/admin/colaboradores?page=${Number(pageNumber) - 1}`}>
             <ChevronLeftIcon className={style.icon} />
           </Link>
 
-          <Link className={style.icon} to={`/admin?page=${1}`}>
+          <Link className={style.icon} to={`/admin/colaboradores?page=${1}`}>
             {1}
           </Link>
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link style={{ color: '#1e62fe' }} to={`/admin?page=${pageNumber}`}>
+          <Link style={{ color: '#1e62fe' }} to={`/admin/colaboradores?page=${pageNumber}`}>
             {pageNumber}
           </Link>
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link className={style.icon} to={`/admin?page=${pages.length}`}>
+          <Link className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
             {pages.length}
           </Link>
 
-          <Link to={`/admin?page=${Number(pageNumber) + 1}`}>
+          <Link to={`/admin/colaboradores?page=${Number(pageNumber) + 1}`}>
             <ChevronRightIcon className={style.icon} />
           </Link>
         </Box>

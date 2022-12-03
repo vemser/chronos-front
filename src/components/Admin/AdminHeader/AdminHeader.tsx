@@ -120,8 +120,8 @@ export const AdminHeader = () => {
           >
             <ul>
               <HeaderButton
-                texto={'CADASTRAR COLABORADOR'}
-                url={'/admin/cadastrar'}
+                texto={'COLABORADORES'}
+                url={'/admin/colaboradores'}
               />
             </ul>
           </Box>

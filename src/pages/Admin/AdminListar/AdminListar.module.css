@@ -6,3 +6,8 @@
   color: #1e62fe;
   scale: 1.05;
 }
+
+.ContainerTitulo {
+  width: 100%;
+  text-align: center;
+}
