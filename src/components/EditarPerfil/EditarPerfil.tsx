@@ -24,6 +24,8 @@ import FilledInput from '@mui/material/FilledInput'
 import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import { ClassNames } from '@emotion/react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { editarPerfilFormSchema } from '../../utils/schemas'
 
 interface State {
   password: string
@@ -39,15 +41,12 @@ export const EditarPerfil = () => {
   const imagemBase = dadosUsuarioLogado.imagem
   const { state } = useLocation()
 
-  const {
-    register,
-    handleSubmit
-    // formState: { errors }
-  } = useForm<IColaborador>({
+  const { register, handleSubmit, formState: { errors }} = useForm<IColaborador>({
     defaultValues: {
       nome: dadosUsuarioLogado.nome
       // imagem: dadosUsuarioLogado.imagem
-    }
+    },
+    resolver: yupResolver(editarPerfilFormSchema)
   })
 
   const [values, setValues] = React.useState<State>({
@@ -256,18 +255,37 @@ export const EditarPerfil = () => {
                     {...register('senhaAtual')}
                     variant="standard"
                   />
+                  
                   <TextField
                     label="Nova Senha"
                     id="novaSenha"
                     {...register('novaSenha')}
                     variant="standard"
-                  />
+                    error={!!errors.novaSenha}
+                    />
+                    {errors.novaSenha && (<span
+                      className={styles.ContainerError}
+                      id="confirmacao-error"
+                      >
+                        {errors.novaSenha.message}
+                      </span>
+                    )}
+
                   <TextField
                     id="confirmacaoNovaSenha"
                     label="Confirmar Nova Senha"
                     variant="standard"
                     {...register('confirmacaoNovaSenha')}
+                    error={!!errors.confirmacaoNovaSenha}
                   />
+                  {errors.confirmacaoNovaSenha && (<span
+                      className={styles.ContainerError}
+                      id="confirmacao-error"
+                      >
+                        {errors.confirmacaoNovaSenha.message}
+                      </span>
+                  )}
+                  
                   <div className={styles.ContainerEnviar}>
                     <label htmlFor="submit">
                       <input

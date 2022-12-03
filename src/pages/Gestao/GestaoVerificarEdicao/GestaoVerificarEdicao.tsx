@@ -50,22 +50,22 @@ export const GestaoVerificarEdicao = () => {
           <p>Gerar Calendario</p>
         </Box>
 
-        <Button variant="contained" onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/nova-etapa`, {state: EdicaoAtual})}> + Adicionar nova etapa</Button>
+        <Button variant="contained" id='addButton' onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/nova-etapa`, {state: EdicaoAtual})}> + Adicionar nova etapa</Button>
       </Box>
       
-      {etapas?.map((etapa: any) => {
+      {etapas?.map((etapa: any, index) => {
         return(<Box key={etapa.idEtapa} sx={{padding: '20px'}}> 
           <Box sx={{display: 'flex', alignItems:'center', justifyContent: 'space-between' }}> 
             <Box sx={{display: 'flex', alignItems:'center', gap: '40px' }}> 
               <h3>{etapa.nome}</h3>
               
               <Box sx={{display: 'flex', alignItems:'center', gap: '12px' }}>
-                <EditIcon onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/editar-etapa/${etapa.idEtapa}`, {state: etapa})} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
-                <HighlightOffIcon onClick={() => {deleteEtapa(etapa.idEtapa, idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                <EditIcon id={`editar-etapa-${index}`} onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/editar-etapa/${etapa.idEtapa}`, {state: etapa})} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                <HighlightOffIcon id={`deletar-etapa-${index}`} onClick={() => {deleteEtapa(etapa.idEtapa, idEdicao)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
               </Box> 
             </Box>
             
-            <Button variant="contained" onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/novo-processo`, {state: etapa})}> + NOVO PROCESSO</Button>
+            <Button variant="contained" id={`novo-processo-${index}`} onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/novo-processo`, {state: etapa})}> + NOVO PROCESSO</Button>
           </Box>
             
           <Box>
@@ -83,7 +83,7 @@ export const GestaoVerificarEdicao = () => {
               </TableHead>
 
               <TableBody>
-                {etapa.processos?.map((processo: any) => {
+                {etapa.processos?.map((processo: any, procIndex: number) => {
                   return(<TableRow
                     key={processo.idProcesso}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
@@ -101,11 +101,11 @@ export const GestaoVerificarEdicao = () => {
                     </TableCell>
 
                     <TableCell component="th" scope="row" align="center" width={'120px'}>
-                      <EditIcon sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon id={`editar-processo-${procIndex}`} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <HighlightOffIcon onClick={() => deleteProcesso(processo.idProcesso, idEdicao)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon id={`deletar-processo-${procIndex}`} onClick={() => deleteProcesso(processo.idProcesso, idEdicao)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
                   </TableRow>
                   )

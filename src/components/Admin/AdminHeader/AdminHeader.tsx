@@ -32,6 +32,7 @@ export const AdminHeader = () => {
   useEffect(() => {
     loggedUser()
   }, [])
+  
   const imagemBase = dadosUsuarioLogado.imagem
   const userEmail = localStorage.getItem('user')
 

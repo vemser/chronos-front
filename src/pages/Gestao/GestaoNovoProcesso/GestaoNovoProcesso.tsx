@@ -27,21 +27,32 @@ export const GestaoNovoProcesso = () => {
 
   //HOOKS
 
+  
   const { state } = useLocation()
-  const [selectedOptions, setSelectedOptions] = useState([])
+  const [selectedOptions, setSelectedOptions] = useState<any>([])
   const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis } = useContext(UserContext)
   const { register, handleSubmit, formState: { errors }, control} = useForm({
     resolver: yupResolver(cadastrarEtapaFormSchema)
   })
-
+  
   useEffect(() => {
     getAreaEnvolvida()
     getResponsavel()
-
+    
   }, [])
+
+
+  const handleChange = (value: any) => { 
+    const list = value.map((item: any) => item.value)
+    setSelectedOptions(list)
+  }
+
+  console.log(selectedOptions)
+
 
   // SELECT 
 
+  
   const selectAreaEnvolvida:object[] = []
   const selectResponsavel:object[] = []
 
@@ -61,15 +72,10 @@ export const GestaoNovoProcesso = () => {
   })
 
 
-  const handleSelect = () => {
-    console.log(selectedOptions)
-  }
 
-
+  console.log(selectedOptions);
   
 
-
- 
   return (
     <>
       <GestaoHeader />
@@ -100,7 +106,7 @@ export const GestaoNovoProcesso = () => {
                 <CreatableSelect
                   components={animatedComponents}
                   options={selectAreaEnvolvida}
-                  onChange={(item: any) => setSelectedOptions(item)}
+                  onChange={handleChange}
                   className={styles.selectOption}
                   isClearable={true}
                   isSearchable={true}
@@ -113,23 +119,9 @@ export const GestaoNovoProcesso = () => {
                   id={'area-envolvida'}
                 />
               </label>
-              <label htmlFor="selectGroup">
-                Responsável
-                <CreatableSelect
-                  components={animatedComponents}
-                  options={selectResponsavel}
-                  isMulti
-                  onChange={(item: any) => setSelectedOptions(item)}
-                  className={styles.selectOption}
-                  isClearable={true}
-                  isSearchable={true}
-                  isDisabled={false}
-                  isLoading={false}
-                  isRtl={false}
-                  closeMenuOnSelect={false}
-                  id={'responsavel'}
-                />
-              </label>
+
+
+
               <TextField
                 className={styles.FormRow}
                 id="duracaoProcesso"

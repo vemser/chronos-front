@@ -63,7 +63,7 @@ export const GestaoHeader = () => {
             className={styles.logoImg}
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/gestao">
+            <Link to="/gestao" id='homeLogo'>
               <img src={imgLogo} alt="Logo DBC" title="Logo" />
             </Link>
           </Box>
@@ -125,18 +125,15 @@ export const GestaoHeader = () => {
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
             <ul>
-              <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'} />
-              <HeaderButton
-                texto={'PERÍODO NÃO ÚTIL'}
-                url={'/gestao/dias-nao-uteis'}
-              />
+              <HeaderButton id={'botaoEdicao'} texto={'EDIÇÕES'} url={'/gestao/edicoes'}/>
+              <HeaderButton id={'botaoNaoUtil'} texto={'PERÍODO NÃO ÚTIL'} url={'/gestao/dias-nao-uteis'}/>
             </ul>
           </Box>
 
           <Box className={styles.usuario}>
             <h3>{dadosUsuarioLogado.nome}</h3>
 
-            <Tooltip title="Exibir detalhes">
+            <Tooltip title="Exibir detalhes" id='exibirDetalhes'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {dadosUsuarioLogado.imagem === null ? (
                   <Avatar
@@ -177,12 +174,12 @@ export const GestaoHeader = () => {
                     onClick={() => {
                       navigate('/gestao/perfil')
                       // , {state }
-                    }}
+                    }} id='editarPerfil'
                   >
                     EDITAR PERFIL
                   </MenuItem>
 
-                  <Box onClick={handleLogout}>
+                  <Box onClick={handleLogout} id='logout'>
                     <MenuItem>SAIR</MenuItem>
                   </Box>
                 </Box>

@@ -1,24 +1,29 @@
+import React from 'react'
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import { Box } from '@mui/material'
-import React, { useState} from 'react'
-import { CalendarioHeader } from '../../components/Calendario/Header/CalendarioHeader'
-import { Meses } from '../../components/Calendario/Meses/Meses'
-import { Sidebar } from '../../components/Calendario/Sidebar/Sidebar'
-import { getMonth } from '../../utils/calendar'
+import './Calendario.css'
 
 export const Calendario = () => {
-    
-    const [ mesAtual , setMesAtual ] = useState(getMonth())
 
   return (
     <>
-      <Box sx={{ display: 'flex', flexDirection:'column'}}>
+      <Box className="CalendarContainer">
+        <FullCalendar
+          plugins={[ dayGridPlugin ]}
+          locale={'pt-br'}
+          initialView="dayGridMonth"
+          weekends={true}
 
-        <CalendarioHeader />
-
-        <Box sx={{ display: 'flex', gap:'40px', flexDirection: 'column', mt:'40px'}}>
-            <Sidebar />
-            <Meses month={mesAtual}/>
-        </Box>
+          events={[
+            { title: 'Processo 1', date: '2022-11-01' },
+            { title: 'Processo 1', date: '2022-11-02' },
+            { title: 'Processo 1', date: '2022-11-03' },
+            { title: 'Processo 1', date: '2022-11-04' },
+            { title: 'Processo 2', date: '2022-11-07' },
+            { title: 'Processo 3', date: '2022-11-16' },
+          ]}
+        />
       </Box>
     </>
   )

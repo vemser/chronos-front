@@ -31,7 +31,7 @@ export const GestaoDiaNaoUtil = () => {
             </div>
 
             <Link to={'/gestao/cadastrar-dias-nao-uteis'}>
-              <Button className={styles.addBtn} variant="contained"> ADICIONAR PERÍODO NÃO ÚTIL</Button>
+              <Button className={styles.addBtn} variant="contained" id='addButton'> ADICIONAR PERÍODO NÃO ÚTIL</Button>
             </Link>
           </Box>
 
@@ -52,7 +52,7 @@ export const GestaoDiaNaoUtil = () => {
               </TableHead>
 
               <TableBody>
-                {diasNaoUteis?.map((dia) => {
+                {diasNaoUteis?.map((dia, index) => {
 
                   if(dia.repeticaoAnual === 'ATIVO') {
                       var status = true
@@ -60,12 +60,17 @@ export const GestaoDiaNaoUtil = () => {
                     var status = false
                   }
 
+                  
+
+                  const dataIniciaFormatada = dia.dataInicial.split("-").reverse().join("/")
+                  
 
 
 
                   return(
                   <TableRow
                     key={dia.idDiaNaoUtil}
+                    id={`linha-nao-util-${index}`}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row" align="justify" width={'300px'}>
@@ -77,7 +82,7 @@ export const GestaoDiaNaoUtil = () => {
                     </TableCell>
 
                     <TableCell align="justify" width={'300px'}>
-                      {}
+                      {dataIniciaFormatada}
                     </TableCell>
 
                     <TableCell align="justify" width={'300px'}>
@@ -89,11 +94,11 @@ export const GestaoDiaNaoUtil = () => {
                     </TableCell>
 
                     <TableCell align="right" >
-                      <EditIcon onClick={() => {navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon id={`linha-nao-util-editar-${index}`} onClick={() => {navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                     <TableCell align="right" >
-                      <HighlightOffIcon onClick={() => deleteDiaNaoUtil(dia.idDiaNaoUtil)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon id={`linha-nao-util-deletar-${index}`} onClick={() => deleteDiaNaoUtil(dia.idDiaNaoUtil)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                   </TableRow>

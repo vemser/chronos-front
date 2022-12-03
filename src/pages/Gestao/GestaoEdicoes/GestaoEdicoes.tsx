@@ -42,7 +42,7 @@ export const GestaoEdicoes: React.FC = () => {
             </div>
 
             <Link to={'/gestao/cadastrar-edicao'}>
-              <Button variant="contained"> ADICIONAR EDIÇÃO</Button>
+              <Button variant="contained" id='addButton'> ADICIONAR EDIÇÃO</Button>
             </Link>
           </Box>
 
@@ -60,7 +60,7 @@ export const GestaoEdicoes: React.FC = () => {
               </TableHead>
 
               <TableBody>
-                {edicoes?.map((edicao) => {
+                {edicoes?.map((edicao, index) => {
 
                   if(edicao.status === 'ATIVO') {
                       var status = true
@@ -71,6 +71,7 @@ export const GestaoEdicoes: React.FC = () => {
                   return(
                   <TableRow
                     key={edicao.idEdicao}
+                    id={`linha-edicao-${index}`}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
                   >
                     <TableCell component="th" scope="row" align="justify">
@@ -78,24 +79,24 @@ export const GestaoEdicoes: React.FC = () => {
                     </TableCell>
 
                     <TableCell component="th" scope="row" align="center" width={'120px'}>
-                      <SearchIcon onClick={() => {navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <SearchIcon id={`edicao-verificar-${index}`} onClick={() => {navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>
-                      <Switch onClick={() => ativoInativo(edicao)} checked={status} />
+                      <Switch id={`edicao-status-${index}`} onClick={() => ativoInativo(edicao)} checked={status} />
                     </TableCell>
 
                     <TableCell align="right" width={'40px'}>
-                      <EditIcon onClick={() => {navigate(`/gestao/editar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon id={`edicao-editar-${index}`} onClick={() => {navigate(`/gestao/editar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
 
                     <TableCell align="right" width={'40px'}>
-                      <ContentCopyIcon onClick={() => cloneEdicao(edicao)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <ContentCopyIcon id={`edicao-clonar-${index}`} onClick={() => cloneEdicao(edicao)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
                     
                     <TableCell align="right" width={'40px'}>
-                      <HighlightOffIcon onClick={() => {deleteEdicao(edicao.idEdicao, edicao.nome)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon id={`edicao-deletar-${index}`} onClick={() => {deleteEdicao(edicao.idEdicao, edicao.nome)}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                   </TableRow>

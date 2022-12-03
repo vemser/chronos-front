@@ -12,6 +12,29 @@ export const userFormSchema = yup.object().shape({
     .min(6, 'A senha deve ter no mínimo 6 caracteres')
 })
 
+export const editarPerfilFormSchema = yup.object().shape({
+
+novaSenha: yup
+  .string()
+  .required('Senha Obrigatória')
+  .matches(/(?=[A-Z])/, 'A senha deve ter, no mínimo, uma letra maiúscula')
+  .matches(/(?=[a-z])/, 'A senha deve ter, no mínimo, uma letra minúscula')
+  .matches(/(?=[0-9])/, 'A senha deve ter, no mínimo, um número')
+  .matches(
+    /(?=.[!@#$%^&*._])/,
+    'A senha deve ter, no mínimo, um caractere especial'
+  )
+  .min(8, 'A senha deve ter, no mínimo, 8 caracteres'),
+  confirmacaoNovaSenha: yup
+  .string()
+  .oneOf([yup.ref('novaSenha')], 'Senhas não coincidem'),
+
+})
+
+
+
+
+
 export const cadastrarEdicaoFormSchema = yup.object().shape({
   nome: yup.string().required('Por favor, digite o nome da edição'),
 
