@@ -16,14 +16,10 @@ import styles from './EditarPerfil.module.css'
 import { AdminContext } from '../../context/AdminContext'
 import { useForm } from 'react-hook-form'
 import { IColaborador } from '../../utils/interfaces'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-import Input from '@mui/material/Input'
-import FilledInput from '@mui/material/FilledInput'
 import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-import { ClassNames } from '@emotion/react'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { editarPerfilFormSchema } from '../../utils/schemas'
 
@@ -44,7 +40,7 @@ export const EditarPerfil = () => {
   const { register, handleSubmit, formState: { errors }} = useForm<IColaborador>({
     defaultValues: {
       nome: dadosUsuarioLogado.nome
-      // imagem: dadosUsuarioLogado.imagem
+  
     },
     resolver: yupResolver(editarPerfilFormSchema)
   })
@@ -228,13 +224,23 @@ export const EditarPerfil = () => {
                   <TextField
                     label="Senha atual"
                     id="senhaAtual"
+                    type={'password'}
                     {...register('senhaAtual')}
                     variant="standard"
+                    error={!!errors.novaSenha}
                   />
+                   {errors.senhaAtual && (<span
+                      className={styles.ContainerError}
+                      id="confirmacao-error"
+                      >
+                        {errors.senhaAtual.message}
+                      </span>
+                    )}
                   
                   <TextField
                     label="Nova Senha"
                     id="novaSenha"
+                    type={'password'}
                     {...register('novaSenha')}
                     variant="standard"
                     error={!!errors.novaSenha}
@@ -250,6 +256,7 @@ export const EditarPerfil = () => {
                   <TextField
                     id="confirmacaoNovaSenha"
                     label="Confirmar Nova Senha"
+                    type={'password'}
                     variant="standard"
                     {...register('confirmacaoNovaSenha')}
                     error={!!errors.confirmacaoNovaSenha}

@@ -148,7 +148,7 @@ export const Login = () => {
                   Senha
                 </InputLabel>
                 <OutlinedInput
-                  {...register('senha')}
+                  {...register('senha', {required: true})}
                   className={styles.loginText}
                   id="input-login-senha"
                   type={values.showPassword ? 'text' : 'password'}
