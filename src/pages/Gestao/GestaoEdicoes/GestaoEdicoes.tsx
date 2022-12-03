@@ -36,7 +36,7 @@ export const GestaoEdicoes: React.FC = () => {
 
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>
-          
+
           <Box className={styles.ContainerNova}>
             <div className={styles.ContainerTitle}>
               <h2>Edições do Vem Ser</h2>

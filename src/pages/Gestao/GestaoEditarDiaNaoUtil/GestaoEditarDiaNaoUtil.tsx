@@ -3,9 +3,7 @@ import styles from './GestaoEditarDiaNaoUtil.module.css'
 import TextField from '@mui/material/TextField'
 import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { Dayjs } from 'dayjs'
 import 'dayjs/locale/pt-br'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { Link, useLocation } from 'react-router-dom'
 import { IDiaNaoUtil } from '../../../utils/interfaces'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
@@ -58,14 +56,14 @@ export const GestaoEditarDiaNaoUtil = () => {
                   </span>
                 )}
 
-                <FormControlLabel control={<Checkbox checked={status} />} label="Repetir todos os anos"  id='repeticaoAnual'  {...register('repeticaoAnual')}/>
+                <FormControlLabel control={<Checkbox defaultChecked={status} />} label="Repetir todos os anos" id='repeticaoAnual'  {...register('repeticaoAnual')}/>
             </div>
 
 
               <Box className={styles.ContainerMenorCalendario}>
                 <Box className={styles.dateContainer} >
                   <p>Data Inicial</p>
-                  <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')}/>
+                  <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" defaultValue={state?.dataInicial} {...register('dataInicial')}/>
                   {errors.dataInicial && (<span
                       className={styles.ContainerError}
                       id="login-error-email"
@@ -77,9 +75,13 @@ export const GestaoEditarDiaNaoUtil = () => {
 
                 <Box className={styles.dateContainer}>
                   <p>Data Final</p>
-                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"  {...register('dataFinal')}/>
-
+                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" defaultValue={state?.dataFinal} {...register('dataFinal')}/>
                 </Box>
+
+                <Box className={styles.dateContainer}>
+                  <TextField id="idDiaNaoUtil" sx={{display: 'none'}} value={state.idDiaNaoUtil} {...register('idDiaNaoUtil')}/>
+                </Box>
+
               </Box>
             
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>

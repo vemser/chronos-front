@@ -44,4 +44,21 @@ export const PrivateRoute = (props: IPrivateRoute) => {
     } else {
         return auth ? <Outlet /> : <Navigate to={'/'} />
     }
+
+}
+
+export const AccessRoute = () => {
+    const { role } = useAuth()
+    let access = false
+
+    role?.includes('ROLE_ADMIN') ? access = true : access = false
+    role?.includes('ROLE_GESTAO_DE_PESSOAS') ? access = true : access = false
+    role?.includes('ROLE_INSTRUTOR') ? access = true : access = false
+     
+    
+    if (access = true) {
+        return <Outlet />
+    } else {
+        return <Navigate to={'/'} />
+    }
 }

@@ -61,9 +61,8 @@ export const GestaoDiaNaoUtil = () => {
                     var status = false
                   }
 
-                  
-
                   const dataIniciaFormatada = dia.dataInicial.split("-").reverse().join("/")
+                  const dataFinalFormatada = dia.dataFinal?.split("-").reverse().join("/")
                   
 
 
@@ -87,7 +86,7 @@ export const GestaoDiaNaoUtil = () => {
                     </TableCell>
 
                     <TableCell align="justify" width={'300px'}>
-                      {dia.dataFinal}
+                      {dataFinalFormatada}
                     </TableCell>
 
                     <TableCell align="justify" width={'600px'}>

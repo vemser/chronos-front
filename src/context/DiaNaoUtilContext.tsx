@@ -76,6 +76,15 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
     const putDiaNaoUtil = async (data: IDiaNaoUtil) => {
         try {
+
+            
+            if(data.repeticaoAnual === true) {
+                data.repeticaoAnual = 'ATIVO'
+            } else {
+                data.repeticaoAnual = 'INATIVO'
+            }
+
+
             nProgress.start()
             await api.put(`/dia-nao-util/${data.idDiaNaoUtil}`, data)
             toast.success('Dia Não Útil atualizado com sucesso!', toastConfig)
