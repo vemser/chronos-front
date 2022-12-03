@@ -54,7 +54,7 @@ export const GestaoCadastrarEdicao = () => {
                 
                 <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"  {...register('dataFinal')} error={!!errors.dataFinal}/>
 
-                {errors.dataFinal && (<span className={styles.ContainerError} id="erro-data-inicial">
+                {errors.dataFinal && (<span className={styles.ContainerError} id="erro-data-final">
                   {errors.dataFinal.message}  
                 </span>)}
               </Box>
