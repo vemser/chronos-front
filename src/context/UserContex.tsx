@@ -268,15 +268,17 @@ export const UserProvider = ({ children }: IChildren) => {
     };
 
 
-  const createProcesso = async (processo: IProcesso, idEtapa: number, idEdicao: number) => {
+  const createProcesso = async (processo: IProcesso, area: string[], responsaveis:string[], idEtapa: number, idEdicao: number) => {
 
     try {
         nProgress.start();
 
         api.defaults.headers.common[`Authorization`] = token;
-        await api.post(`/processo/${idEtapa}`, processo);
+        //await api.post(`/processo/${idEtapa}`, processo);
 
-        navigate(`/gestao/verificar-edicao/${idEdicao}`);
+        console.log('aaa');
+        
+        //navigate(`/gestao/verificar-edicao/${idEdicao}`);
 
     } catch (error) {
         console.error(error);

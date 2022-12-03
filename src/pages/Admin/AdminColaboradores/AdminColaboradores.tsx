@@ -19,7 +19,7 @@ export const AdminColaboradores = () => {
     buscarDadosColaborador('1')
   }, [])
 
-  return (
+  return (  
     <>
       <AdminHeader />
 

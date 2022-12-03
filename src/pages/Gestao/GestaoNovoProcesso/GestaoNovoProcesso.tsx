@@ -5,7 +5,7 @@ import Select from 'react-select'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
 import { IEtapa, IProcesso } from '../../../utils/interfaces'
 import { useForm, Controller } from 'react-hook-form'
@@ -29,8 +29,14 @@ export const GestaoNovoProcesso = () => {
 
   
   const { state } = useLocation()
-  const [selectedOptions, setSelectedOptions] = useState<any>([])
-  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis } = useContext(UserContext)
+  const { edicao } = useParams();
+
+  const idEdicao = Number(edicao)
+
+  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<any>([])
+  const [responsaveisState, setResponsaveisState] = useState<any>([])
+
+  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
   const { register, handleSubmit, formState: { errors }, control} = useForm({
     resolver: yupResolver(cadastrarEtapaFormSchema)
   })
@@ -42,13 +48,15 @@ export const GestaoNovoProcesso = () => {
   }, [])
 
 
-  const handleChange = (value: any) => { 
+  const handleChangeAreas = (value: any) => { 
     const list = value.map((item: any) => item.value)
-    setSelectedOptions(list)
+    setAreasEnvolvidasState(list)
   }
 
-  console.log(selectedOptions)
-
+  const handleChangeResponsaveis = (value: any) => { 
+    const list = value.map((item: any) => item.value)
+    setResponsaveisState(list)
+  }
 
   // SELECT 
 
@@ -72,8 +80,6 @@ export const GestaoNovoProcesso = () => {
   })
 
 
-
-  console.log(selectedOptions);
   
 
   return (
@@ -89,7 +95,7 @@ export const GestaoNovoProcesso = () => {
             <form
               className={styles.ContainerForm}
               onSubmit={handleSubmit((data: any) =>
-                console.log(data, state.idEdicao)
+                console.log(data, state.idEtapa, idEdicao)
               )}
             >
 
@@ -106,7 +112,7 @@ export const GestaoNovoProcesso = () => {
                 <CreatableSelect
                   components={animatedComponents}
                   options={selectAreaEnvolvida}
-                  onChange={handleChange}
+                  onChange={handleChangeAreas}
                   className={styles.selectOption}
                   isClearable={true}
                   isSearchable={true}
@@ -117,6 +123,26 @@ export const GestaoNovoProcesso = () => {
                   closeMenuOnSelect={false}
                   placeholder={'Área Envolvida'}
                   id={'area-envolvida'}
+                />
+              </label>
+
+              <label htmlFor="selectGroup">
+                Responsável
+
+                <CreatableSelect
+                  components={animatedComponents}
+                  options={selectResponsavel}
+                  onChange={handleChangeResponsaveis}
+                  className={styles.selectOption}
+                  isClearable={true}
+                  isSearchable={true}
+                  isDisabled={false}
+                  isLoading={false}
+                  isRtl={false}
+                  isMulti
+                  closeMenuOnSelect={false}
+                  placeholder={'Responsável'}
+                  id={'responsavel'}
                 />
               </label>
 

@@ -81,11 +81,7 @@ export interface IUserContext {
 
   getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
   deleteProcesso: (idProcesso: number, idEdicao: number) => Promise<void>
-  createProcesso: (
-    processo: IProcesso,
-    idEtapa: number,
-    idEdicao: number
-  ) => Promise<void>
+  createProcesso: (processo: IProcesso, area: string[], responsaveis: string[], idEtapa: number, idEdicao: number) => Promise<void>
   editProcesso: (
     processo: IProcesso,
     idEtapa: number,
