@@ -44,7 +44,7 @@ export const EditarPerfil = () => {
   const { register, handleSubmit, formState: { errors }} = useForm<IColaborador>({
     defaultValues: {
       nome: dadosUsuarioLogado.nome
-      // imagem: dadosUsuarioLogado.imagem
+  
     },
     resolver: yupResolver(editarPerfilFormSchema)
   })
@@ -228,13 +228,23 @@ export const EditarPerfil = () => {
                   <TextField
                     label="Senha atual"
                     id="senhaAtual"
+                    type={'password'}
                     {...register('senhaAtual')}
                     variant="standard"
+                    error={!!errors.novaSenha}
                   />
+                   {errors.senhaAtual && (<span
+                      className={styles.ContainerError}
+                      id="confirmacao-error"
+                      >
+                        {errors.senhaAtual.message}
+                      </span>
+                    )}
                   
                   <TextField
                     label="Nova Senha"
                     id="novaSenha"
+                    type={'password'}
                     {...register('novaSenha')}
                     variant="standard"
                     error={!!errors.novaSenha}
@@ -250,6 +260,7 @@ export const EditarPerfil = () => {
                   <TextField
                     id="confirmacaoNovaSenha"
                     label="Confirmar Nova Senha"
+                    type={'password'}
                     variant="standard"
                     {...register('confirmacaoNovaSenha')}
                     error={!!errors.confirmacaoNovaSenha}
