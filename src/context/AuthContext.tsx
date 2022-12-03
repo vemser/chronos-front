@@ -47,7 +47,6 @@ export const AuthProvider = ({ children }: IChildren) => {
 
       api.defaults.headers.common['Authorization'] = data;
       
-
       localStorage.setItem('token', data);
       localStorage.setItem('user', user.email);
 
@@ -68,8 +67,7 @@ export const AuthProvider = ({ children }: IChildren) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error('Houve um erro ao realizar o login, por favor tente novamente');
-
+      toast.error('Senha inválida!');
     };
   };
 
