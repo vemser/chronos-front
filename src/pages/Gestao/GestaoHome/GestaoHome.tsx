@@ -7,6 +7,7 @@ import { GestaoNovoProcesso } from '../GestaoNovoProcesso/GestaoNovoProcesso'
 import styles from './GestaoHome.module.css'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import { Header } from '../../../components/Header/Header'
 
 
 
@@ -21,7 +22,7 @@ export const GestaoHome = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header />
       <FullCalendar
         plugins={[ dayGridPlugin ]}
         locale={'pt-br'}

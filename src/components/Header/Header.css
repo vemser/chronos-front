@@ -1,0 +1,67 @@
+.header {
+    background-color: var(--color-white);
+  }
+  .headerContainer {
+    max-width: 80%;
+  }
+  
+  .toolbar {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    height: 80px;
+    justify-content: space-between;
+  }
+  
+  .logoImg {
+    justify-content: center;
+  }
+  .logoImg img {
+    width: 100px;
+  }
+  
+  .menuBurgerContainer {
+    align-items: center;
+  }
+  .menuBurgerContainer .burgerIcon {
+    fill: var(--color-blue);
+  }
+  .menuBurgerOptions {
+    display: flex;
+    flex-direction: column;
+  }
+  .menuBurgerOptions a li {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .BorderRadius {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
+  
+  .navbar {
+    flex-grow: 1;
+  }
+  .navbar ul {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .usuario {
+    flex-grow: 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .usuario h3 {
+    color: var(--color-blue);
+  }
+  
+  .HoverButton:hover {
+    color: blue !important;
+  }
+  
+.hide{
+    display: none !important;
+}

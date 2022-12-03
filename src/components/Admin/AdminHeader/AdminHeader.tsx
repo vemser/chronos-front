@@ -20,7 +20,7 @@ import { List } from '@mui/material'
 import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminHeader = () => {
-  const { dadosUsuarioLogado, handleLogout, loggedUser } =
+  const { dadosUsuarioLogado, handleLogout, loggedUser, roles } =
     React.useContext<any>(AuthContext)
 
   const navigate = useNavigate()
@@ -35,6 +35,23 @@ export const AdminHeader = () => {
   
   const imagemBase = dadosUsuarioLogado.imagem
   const userEmail = localStorage.getItem('user')
+  let homeLink = ''
+
+
+  console.log(roles)
+
+  if (roles && roles.includes('ROLE_ADMIN')) {
+    homeLink = '/admin'
+
+  } else if (roles && roles.includes('ROLE_GESTAO_DE_PESSOAS')) {
+    homeLink = '/gestao'
+
+  } else {
+    homeLink = '/instrutor'
+
+  }
+
+
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -50,6 +67,10 @@ export const AdminHeader = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+
+
+
   return (
     <AppBar
       position="static"
@@ -62,7 +83,7 @@ export const AdminHeader = () => {
             className={styles.logoImg}
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/admin">
+            <Link to={homeLink}>
               <img src={imgLogo} alt="Logo DBC" title="Logo" />
             </Link>
           </Box>
@@ -124,6 +145,17 @@ export const AdminHeader = () => {
                 texto={'COLABORADORES'}
                 url={'/admin/colaboradores'}
               />
+
+              <HeaderButton
+                texto={'EDIÇÕES'}
+                url={'/gestao/edicoes'}
+              />
+
+              <HeaderButton
+                texto={'PERÍODO NÃO ÚTIL'}
+                url={'/gestao/dias-nao-uteis'}
+              />
+
             </ul>
           </Box>
 

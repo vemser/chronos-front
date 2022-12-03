@@ -161,3 +161,9 @@ export const toastConfig: object = {
 export interface IPrivateRoute {
   roleRequired: any
 }
+
+// CALENDARIO CONTEXT
+
+export interface ICalendarioContext {
+  
+}
