@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import styles from './GestaoNovoProcesso.module.css'
+import styles from './GestaoEditarProcesso.module.css'
 import Select from 'react-select'
 
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
@@ -10,13 +10,12 @@ import { UserContext } from '../../../context/UserContex'
 import { IEtapa, IProcesso } from '../../../utils/interfaces'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { cadastrarEtapaFormSchema } from '../../../utils/schemas'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 
 const animatedComponents = makeAnimated()
 
-export const GestaoNovoProcesso = () => {
+export const GestaoEditarProcesso = () => {
   // const {
   //   register,
   //   handleSubmit,
@@ -36,7 +35,7 @@ export const GestaoNovoProcesso = () => {
   const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<any>([])
   const [responsaveisState, setResponsaveisState] = useState<any>([])
 
-  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
+  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
   const { register, handleSubmit } = useForm()
   
   useEffect(() => {
@@ -59,6 +58,16 @@ export const GestaoNovoProcesso = () => {
     })
     setResponsaveisState(list)
   }
+
+  const defaultAreaValue = state.areasEnvolvidas.map((area: any) => {
+    return {label: area.nome, value: area.nome}
+  })
+
+  const defaultResponsavelValue = state.responsaveis.map((responsavel: any) => {
+    return {label: responsavel.nome, value: responsavel.nome}
+  })
+
+
 
   // SELECT 
 
@@ -96,7 +105,7 @@ export const GestaoNovoProcesso = () => {
           <div>
             <form
               className={styles.ContainerForm}
-              onSubmit={handleSubmit((data: any) => createProcesso(data, areasEnvolvidasState, responsaveisState, state.idEtapa, idEdicao)
+              onSubmit={handleSubmit((data: any) => editProcesso(data, areasEnvolvidasState, responsaveisState, idEdicao)
               )}
             >
 
@@ -105,6 +114,7 @@ export const GestaoNovoProcesso = () => {
                 id="nome"
                 label="Nome"
                 variant="standard"
+                defaultValue={state.nome}
                 {...register('nome')}
               />
               <label htmlFor="selectGroup">
@@ -124,6 +134,7 @@ export const GestaoNovoProcesso = () => {
                   closeMenuOnSelect={false}
                   placeholder={'Área Envolvida'}
                   id={'area-envolvida'}
+                  defaultValue={defaultAreaValue}
                 />
               </label>
 
@@ -144,6 +155,7 @@ export const GestaoNovoProcesso = () => {
                   closeMenuOnSelect={false}
                   placeholder={'Responsável'}
                   id={'responsavel'}
+                  defaultValue={defaultResponsavelValue}
                 />
               </label>
 
@@ -154,6 +166,7 @@ export const GestaoNovoProcesso = () => {
                 id="duracaoProcesso"
                 label="Duração do processo"
                 variant="standard"
+                defaultValue={state.duracaoProcesso}
                 {...register('duracaoProcesso')}
               />
               <TextField
@@ -161,14 +174,23 @@ export const GestaoNovoProcesso = () => {
                 id="diasUteis"
                 label="Dias uteis"
                 variant="standard"
+                defaultValue={state.diasUteis}
                 {...register('diasUteis')}
               />
               <TextField
                 className={styles.FormRow}
                 id="ordemExecucao"
                 label="Ordem"
+                defaultValue={state.ordemExecucao}
                 variant="standard"
                 {...register('ordemExecucao')}
+              />
+
+              <TextField
+                style={{display: 'none'}}
+                id="idProcesso"
+                value={state.idProcesso}
+                {...register('idProcesso')}
               />
               <div className={styles.ContainerBotao}>
                 <Button

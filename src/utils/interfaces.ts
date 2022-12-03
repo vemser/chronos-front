@@ -82,11 +82,7 @@ export interface IUserContext {
   getProcessos: (idEdicao: number, idEtapa: number) => Promise<void>
   deleteProcesso: (idProcesso: number, idEdicao: number) => Promise<void>
   createProcesso: (processo: IProcesso, area: string[], responsaveis: string[], idEtapa: number, idEdicao: number) => Promise<void>
-  editProcesso: (
-    processo: IProcesso,
-    idEtapa: number,
-    idEdicao: number
-  ) => Promise<void>
+  editProcesso: (processo: IProcesso, area: string[], responsaveis: string[], idEdicao: number) => Promise<void>
 
   getAreaEnvolvida: () => Promise<void>
   getResponsavel: () => Promise<void>
@@ -109,11 +105,11 @@ export interface IEtapa {
 export interface IProcesso {
   nome: string
   idEtapa: number
-  areaEnvolvida: string[]
-  responsavel: string[]
+  areasEnvolvidas: string[]
+  responsaveis: string[]
   duracaoProcesso: number
   diasUteis: number
-  ordem: number
+  ordemExecucao: number
   idProcesso: number
 }
 

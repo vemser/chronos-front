@@ -274,11 +274,17 @@ export const UserProvider = ({ children }: IChildren) => {
         nProgress.start();
 
         api.defaults.headers.common[`Authorization`] = token;
-        //await api.post(`/processo/${idEtapa}`, processo);
 
-        console.log('aaa');
+        processo.areasEnvolvidas = area
+        processo.responsaveis = responsaveis
+        processo.diasUteis = Number(processo.diasUteis)
+        processo.ordemExecucao = Number(processo.ordemExecucao)
+
+        await api.post(`/processo/${idEtapa}`, processo);
+
+        toast.success('Processo cadastrado com sucesso!', toastConfig)
         
-        //navigate(`/gestao/verificar-edicao/${idEdicao}`);
+        navigate(`/gestao/verificar-edicao/${idEdicao}`);
 
     } catch (error) {
         console.error(error);
@@ -291,11 +297,17 @@ export const UserProvider = ({ children }: IChildren) => {
   };
     
 
-  const editProcesso = async (processo: IProcesso, idEtapa: number, idEdicao: number) => {
+  const editProcesso = async (processo: IProcesso, area: string[], responsaveis:string[], idEdicao: number) => {
     try {
         nProgress.start();
 
         api.defaults.headers.common['Authorization'] = token;
+
+        processo.areasEnvolvidas = area
+        processo.responsaveis = responsaveis
+        processo.diasUteis = Number(processo.diasUteis)
+        processo.ordemExecucao = Number(processo.ordemExecucao)
+
         await api.put(`/processo/${processo.idProcesso}`, processo);
 
         navigate(`/gestao/verificar-edicao/${idEdicao}`);

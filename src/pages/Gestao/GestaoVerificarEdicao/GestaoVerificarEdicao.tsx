@@ -101,7 +101,7 @@ export const GestaoVerificarEdicao = () => {
                     </TableCell>
 
                     <TableCell component="th" scope="row" align="center" width={'120px'}>
-                      <EditIcon id={`editar-processo-${procIndex}`} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon id={`editar-processo-${procIndex}`} onClick={() => navigate(`/gestao/verificar-edicao/${idEdicao}/editar-processo/${processo.idProcesso}`, {state: processo})} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>

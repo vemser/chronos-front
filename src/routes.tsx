@@ -30,6 +30,7 @@ import { GestaoEditarEdicao } from './pages/Gestao/GestaoEditarEdicao/GestaoEdit
 import { Calendario } from './pages/Calendario/Calendario'
 import { GestaoEditarEtapa } from './pages/Gestao/GestaoEditarEtapa/GestaoEditarEtapa'
 import { AdminColaboradores } from './pages/Admin/AdminColaboradores/AdminColaboradores'
+import { GestaoEditarProcesso } from './pages/Gestao/GestaoEditarProcesso/GestaoEditarProcesso'
 
 export const AppRoutes = () => {
   return (
@@ -112,6 +113,11 @@ export const AppRoutes = () => {
                     path="/gestao/verificar-edicao/:edicao/novo-processo"
                     element={<GestaoNovoProcesso />}
                   />
+                  <Route
+                    path="/gestao/verificar-edicao/:edicao/editar-processo/:processo"
+                    element={<GestaoEditarProcesso />}
+                  />
+
                 </Route>
 
                 <Route
