@@ -63,7 +63,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start();
 
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(`/usuario?pagina=${Number(page) - 1}&tamanho=5`)
+      const { data } = await api.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=5`)
         
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)

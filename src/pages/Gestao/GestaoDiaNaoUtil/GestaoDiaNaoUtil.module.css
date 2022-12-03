@@ -27,16 +27,16 @@
     width: 80%;
   }
   
-  .ButtonSearch {
-    margin-right: 15%;
-  }
+
   
   .ContainerGeral {
     max-width: 1600px;
-    height: 100vh;
+    height: 100%;
     display: flex;
-    justify-content: center;
     margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
   
   .ContainerTitle {
@@ -46,6 +46,9 @@
     justify-content: center;
     align-items: flex-end;
   }
+  .ContainerTitle h2{
+   margin-left: 25%;
+  }
   
   .ContainerHead {
     display: flex;
@@ -54,3 +57,7 @@
     margin: auto;
   }
   
+  .paginacao{
+    display: flex;
+    justify-content: center;
+  }

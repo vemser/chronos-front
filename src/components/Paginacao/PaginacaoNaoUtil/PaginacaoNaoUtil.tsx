@@ -4,12 +4,12 @@ import { Link, useSearchParams } from 'react-router-dom'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import style from './PaginacaoColaborador.module.css'
+import style from './PaginacaoNaoUtil.module.css'
 import { Box } from '@mui/material'
-import { UserContext } from '../../../context/UserContex'
+import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 
-export const PaginacaoEdicoes = () => {
-  const { totalPages, getEdicoesList } = useContext(UserContext)
+export const PaginacaoNaoUtil = () => {
+  const { totalPages, getDiaNaoUtil } = useContext(DiaNaoUtilContext)
   const [searchParam] = useSearchParams()
   const pageNumber = searchParam.get('page') || '1'
 
@@ -19,11 +19,12 @@ export const PaginacaoEdicoes = () => {
     for (let i = 1; i <= totalPages; i++) {
       pageList.push(i)
     }
+
     return pageList
   }, [totalPages])
 
   useEffect(() => {
-    getEdicoesList(pageNumber)
+    getDiaNaoUtil(pageNumber)
   }, [pageNumber])
 
   return (
@@ -32,15 +33,15 @@ export const PaginacaoEdicoes = () => {
           <Box className={style.pagination}>
             <ChevronLeftIcon className={style.icon} />
 
-            <Link style={{ color: '#1e62fe' }} to={`/gestao/edicoes?page=${pageNumber}`}>
+            <Link style={{ color: '#1e62fe' }} to={`/gestao/dias-nao-uteis?page=${pageNumber}`}>
               {pageNumber}
             </Link>
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/gestao/edicoes?page=${pages.length}`}>{pages.length}</Link>
+            <Link className={style.icon} to={`/gestao/dias-nao-uteis?page=${pages.length}`}>{pages.length}</Link>
 
-            <Link className={style.chevron} to={`/gestao/edicoes?page=${Number(pageNumber) + 1}`}>
+            <Link className={style.chevron} to={`/gestao/dias-nao-uteis?page=${Number(pageNumber) + 1}`}>
               <ChevronRightIcon className="chevron" />
             </Link>
           </Box>
@@ -48,17 +49,17 @@ export const PaginacaoEdicoes = () => {
         ) : (Number(pageNumber) === pages.length) ? (
           <Box className={style.pagination}> 
 
-            <Link to={`/gestao/edicoes?page=${Number(pageNumber) - 1}`}>
+            <Link to={`/gestao/dias-nao-uteis?page=${Number(pageNumber) - 1}`}>
               <ChevronLeftIcon className={style.icon} />
             </Link>
 
-            <Link className={style.icon} to={`/gestao/edicoes?page=${1}`}>
+            <Link className={style.icon} to={`/gestao/dias-nao-uteis?page=${1}`}>
               {1}
             </Link>
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link style={{ color: '#1e62fe' }}  to={`/gestao/edicoes?page=${pageNumber}`}>
+            <Link style={{ color: '#1e62fe' }}  to={`/gestao/dias-nao-uteis?page=${pageNumber}`}>
               {pageNumber}
             </Link>
             
@@ -66,25 +67,25 @@ export const PaginacaoEdicoes = () => {
           </Box>
         ) : (
           <Box className={style.pagination}> 
-            <Link to={`/gestao/edicoes?page=${Number(pageNumber) - 1}`}>
+            <Link to={`/gestao/dias-nao-uteis?page=${Number(pageNumber) - 1}`}>
               <ChevronLeftIcon className={style.icon}/>
             </Link>
 
-            <Link className={style.icon} to={`/gestao/edicoes?page=${1}`}>
+            <Link className={style.icon} to={`/gestao/dias-nao-uteis?page=${1}`}>
               {1}
             </Link>
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link style={{ color: '#1e62fe' }}  to={`/gestao/edicoes?page=${pageNumber}`}>
+            <Link style={{ color: '#1e62fe' }}  to={`/gestao/dias-nao-uteis?page=${pageNumber}`}>
               {pageNumber}
             </Link>
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/gestao/edicoes?page=${pages.length}`}>{pages.length}</Link>
+            <Link className={style.icon} to={`/gestao/dias-nao-uteis?page=${pages.length}`}>{pages.length}</Link>
 
-            <Link to={`/gestao/edicoes?page=${Number(pageNumber) + 1}`}>
+            <Link to={`/gestao/dias-nao-uteis?page=${Number(pageNumber) + 1}`}>
               <ChevronRightIcon className={style.icon}/>
             </Link>
           </Box>

@@ -7,6 +7,7 @@ import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHead
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
 import styles from './GestaoDiaNaoUtil.module.css'
 import { Header } from '../../../components/Header/Header';
+import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
 
 
 export const GestaoDiaNaoUtil = () => {
@@ -15,7 +16,7 @@ export const GestaoDiaNaoUtil = () => {
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
-    getDiaNaoUtil()
+    getDiaNaoUtil('1')
   }, [])
 
   return (
@@ -107,6 +108,9 @@ export const GestaoDiaNaoUtil = () => {
               </TableBody>
             </Table>
           </TableContainer>
+        </div>
+        <div className={styles.paginacao}>
+          <PaginacaoNaoUtil />
         </div>
 </section>
     </>

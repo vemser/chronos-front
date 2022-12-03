@@ -128,8 +128,9 @@ export interface IResponsaveis {
 // INTERFACES DIA NAO UTIL
 
 export interface IDiaNaoUtilContext {
-  diasNaoUteis: IDiaNaoUtil[]
-  getDiaNaoUtil: () => Promise<void>
+  diasNaoUteis: IDiaNaoUtil[],
+  totalPages: number,
+  getDiaNaoUtil: (page: string) => Promise<void>
   postDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
   deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>
   putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>

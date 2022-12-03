@@ -24,9 +24,9 @@ export const UserProvider = ({ children }: IChildren) => {
             nProgress.start();
 
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/listar?pagina=${Number(page) - 1}&tamanho=20`);
+            const { data } = await api.get(`/edicao/listar?pagina=${Number(page) - 1}&tamanho=5`);
 
-            setTotalPages(data.totalPages);
+            setTotalPages(data.quantidadePaginas);
             setEdicoes(data.elementos);
 
         } catch (error) {

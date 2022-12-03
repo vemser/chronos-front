@@ -88,7 +88,6 @@ export const AppRoutes = () => {
                   <Route index element={<InstHome />} />
                   </Route>
 
-
                 </Routes>
               </DiaNaoUtilProvider>
             </CalendarioProvider>
