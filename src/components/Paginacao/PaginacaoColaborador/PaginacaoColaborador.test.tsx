@@ -1,0 +1,1 @@
+import { PaginacaoColaborador } from "./PaginacaoColaborador";

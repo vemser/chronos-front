@@ -14,11 +14,8 @@ export default function BasicDatePicker() {
     
   }, [value])
 
-
   console.log(value?.toDate());
   
-  
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'pt-br'}>
       <DatePicker
