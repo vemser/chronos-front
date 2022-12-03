@@ -28,6 +28,7 @@ export interface IColaborador2 {
   cargos: Object[]
 }
 
+
 export interface IColaborador {
   nome: string
   email: string
@@ -55,7 +56,7 @@ export interface IAdminContext {
   alterarStatusColab: (idUsuario: IColaborador) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
   inserirFotoUsuario: (data: any) => Promise<void>
-  incluirFotoColab: (idUsuario: number, data: any) => Promise<void>
+ 
 }
 
 // INTERFACES USER

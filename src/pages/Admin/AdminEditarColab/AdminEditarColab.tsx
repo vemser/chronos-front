@@ -6,8 +6,7 @@ import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp'
-import Button from '@mui/material/Button'
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
+
 import { useForm } from 'react-hook-form'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -17,17 +16,23 @@ import FormHelperText from '@mui/material/FormHelperText'
 import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
 import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
-import Input from '@mui/material/Input'
+
 import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+import { EditarFormSchema } from '../../../utils/schemas'
 
 export const AdminEditarColab = () => {
   const { state } = useLocation()
-  const { editarColaborador, incluirFotoColab } = useContext(AdminContext)
+  const { editarColaborador } = useContext(AdminContext)
   console.log(state)
   const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
-  console.log(state.imagem)
+  // const aaaa = state.map((value: any) => {
+  //   return console.log(value.cargos)
+  // })
+  // console.log(aaaa)
 
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
@@ -38,22 +43,18 @@ export const AdminEditarColab = () => {
   // } = useForm<IColaborador>({})
   // // resolver: yupResolver(CadastroDePessoasSchema)
 
-  const { register, handleSubmit } = useForm<IColaborador>({
+  const { register, handleSubmit, formState: { errors} } = useForm<IColaborador>({
     defaultValues: {
       nome: state.nome,
       email: state.email,
-      imagem: state.imagem
-    }
+      imagem: state.imagem,
+      cargos: state.cargos
+    }, 
+     resolver: yupResolver(EditarFormSchema) 
   })
 
-  const { inserirFotoUsuario } = useContext(AdminContext)
 
   const atualizarDadosPerfil = (idUsuario: number, data: IColaborador) => {
-    // const formData = new FormData()
-    // if (selectedImage) {
-    //   formData.append('imagem', selectedImage)
-    incluirFotoColab(idUsuario, data)
-
     editarColaborador(data, idUsuario)
   }
 
@@ -177,7 +178,16 @@ export const AdminEditarColab = () => {
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
                     {...register('nome')}
+                    error={!!errors.nome}
                   />
+                   {errors.nome && (
+                    <span
+                      className={styles.ContainerError}
+                      id="colab-error-email"
+                    >
+                      {errors.nome.message}
+                    </span>
+                  )}
                   <TextField
                     id="email"
                     label="Email"
@@ -188,7 +198,6 @@ export const AdminEditarColab = () => {
                   />
                   <FormControl
                     required
-                    // error={error}
                     component="fieldset"
                     sx={{ m: 3 }}
                     variant="standard"
@@ -197,9 +206,10 @@ export const AdminEditarColab = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            // checked={Administrador}
+                  
                             id="Administrador"
                             {...register('Administrador')}
+                            defaultChecked={state.cargos.some((item : IColaborador) => item.descricao == 'Administrador')}
                           />
                         }
                         label="Administrador"
@@ -207,20 +217,22 @@ export const AdminEditarColab = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            // checked={GestaoDePessoas}
+                            
                             id="GestaoDePessoas"
                             {...register('GestaoDePessoas')}
+                            defaultChecked={state.cargos.some((item : IColaborador) => item.descricao == 'Gestão de pessoas')}
                           />
+                        
                         }
                         label="Gestão De Pessoas"
                       />
                       <FormControlLabel
                         control={
                           <Checkbox
-                            // checked={Instrutor}
-
+                          
                             id="Instrutor"
                             {...register('Instrutor')}
+                            defaultChecked={state.cargos.some((item : IColaborador) => item.descricao == 'Instrutor')}
                           />
                         }
                         label="Instrutor"

@@ -11,17 +11,13 @@ import {
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp'
-
 import styles from './AdminListar.module.css'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-
 import { AdminContext } from '../../../context/AdminContext'
 import {
   IColaborador,
-  IAdminContext,
-  IChildren
+  IAdminContext
 } from '../../../utils/interfaces'
-
 import Switch from '@mui/material/Switch'
 import { AuthContext } from '../../../context/AuthContext'
 
@@ -42,7 +38,6 @@ export const AdminListar: React.FC = () => {
 
   return (
     <>
-      
       <TableContainer
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >

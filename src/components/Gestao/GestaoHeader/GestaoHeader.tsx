@@ -16,7 +16,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import imgLogo from '../../../assets/login-logo.png'
 import { HeaderButton } from '../../HeaderButton/HeaderButton'
 import styles from './GestaoHeader.module.css'
-import { List } from '@mui/material'
+
 import { AuthContext } from '../../../context/AuthContext'
 
 export const GestaoHeader = () => {

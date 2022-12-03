@@ -129,21 +129,7 @@ export const AdminHeader = () => {
 
           <Box className={styles.usuario}>
             <h3>{dadosUsuarioLogado.nome}</h3>
-            {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {imagemBase === null ? (
-                  <Avatar
-                    alt={`${dadosUsuarioLogado.imagem}`}
-                    src={dadosUsuarioLogado.imagem}
-                  />
-                ) : (
-                  <img
-                    alt=""
-                    width={'100px'}
-                    className={styles.BorderRadius}
-                    src={`data:image/png;base64, ${imagemBase}`}
-                  />
-                )}
-              </IconButton> */}
+        
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

@@ -121,7 +121,7 @@ export const GestaoNaoUteis = () => {
               />
             </TableCell>
           </TableRow>
-          {/* ))} */}
+    
         </TableBody>
       </Table>
     </TableContainer>
