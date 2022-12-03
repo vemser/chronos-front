@@ -27,7 +27,7 @@ export const Row: React.FC = () => {
         </TableHead>
 
         <TableBody>
-          {/* {rows.map(row => ( */}
+         
           <TableRow>
             <TableCell>Henrique Soares</TableCell>
             <TableCell>henrique@hotmail.com </TableCell>
@@ -73,7 +73,7 @@ export const Row: React.FC = () => {
             </TableCell>
           </TableRow>
 
-          {/* ))} */}
+     
         </TableBody>
       </Table>
     </TableContainer>

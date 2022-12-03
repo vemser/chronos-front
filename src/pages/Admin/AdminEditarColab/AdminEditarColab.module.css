@@ -50,6 +50,10 @@
   height: 180px;
   width: 180px;
 }
+
+.ContainerError{
+  color: rgb(171, 33, 33);
+}
 @media (max-width: 1100px) {
   .ContainerPerfil {
     margin-top: 50px;

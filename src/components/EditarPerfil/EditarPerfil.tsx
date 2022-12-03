@@ -225,31 +225,7 @@ export const EditarPerfil = () => {
                     variant="standard"
                     className={styles.FormPerfil}
                   />
-                  {/* <FormControl sx={{ m: 1, width: '30ch' }} variant="standard">
-                    <InputLabel htmlFor="standard-adornment-password">
-                      Senha Atual
-                    </InputLabel>
-                    <Input
-                      type={values.showPassword ? 'text' : 'password'}
-                      id="senhaAtual"
-                      {...register('senhaAtual')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {values.showPassword ? (
-                              <VisibilityOff />
-                            ) : (
-                              <Visibility />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl> */}
+  
                   <TextField
                     label="Senha atual"
                     id="senhaAtual"

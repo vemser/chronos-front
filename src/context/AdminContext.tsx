@@ -119,7 +119,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       await api.put(`usuario/update-cadastro/${idUsuario}`, dadosColaborador)
 
       toast.success('Usuário editado com sucesso!', toastConfig)
-      navigate('/admin')
+      navigate('/admin/colaboradores')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
@@ -191,20 +191,6 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   //(ADMIN) Colocar uma foto no colaborador específico
 
-  const incluirFotoColab = async (idUsuario: number, data: any) => {
-    try {
-      nProgress.start()
-      api.defaults.headers.common['Authorization'] = token
-      await api.put(`/foto/upload-image/${idUsuario}`, data)
-      toast.success('Usuário editado com sucesso!', toastConfig)
-    } catch (error) {
-      toast.error('Houve algum error, tente novamente!', toastConfig)
-      console.log(error)
-    } finally {
-      nProgress.done()
-    }
-  }
-
   return (
     <AdminContext.Provider
       value={{
@@ -216,8 +202,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         editarColaborador,
         alterarStatusColab,
         atualizarSenhaUsuario,
-        inserirFotoUsuario,
-        incluirFotoColab
+        inserirFotoUsuario
+     
       }}
     >
       {children}
