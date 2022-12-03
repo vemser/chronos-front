@@ -1,9 +1,8 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 
@@ -13,18 +12,60 @@ import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
-import { Link } from 'react-router-dom'
-import ImgLogo from '../../assets/logo-dbc-branco.png'
-import { HeaderButton } from '../HeaderButton/HeaderButton'
+import { Link, useNavigate } from 'react-router-dom'
+import imgLogo from '../../assets/login-logo.png'
 
-const pages = ['Products', 'Pricing', 'Blog']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+import { List } from '@mui/material'
+import { AuthContext } from '../../context/AuthContext'
+import { HeaderButton } from '../HeaderButton/HeaderButton'
+import './Header.css'
 
 export const Header = () => {
+  const { dadosUsuarioLogado, handleLogout, loggedUser, roles } =
+    React.useContext<any>(AuthContext)
+
+  const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
+
+  useEffect(() => {
+    loggedUser()
+    renderizarBotoes()
+  }, [])
+  
+  const imagemBase = dadosUsuarioLogado.imagem
+  const userEmail = localStorage.getItem('user')
+  let homeLink = ''
+
+
+  if (roles && roles.includes('ROLE_ADMIN')) {
+    homeLink = '/admin'
+
+  } else if (roles && roles.includes('ROLE_GESTAO_DE_PESSOAS')) {
+    homeLink = '/gestao'
+
+  } else {
+    homeLink = '/instrutor'
+
+  }
+
+  // BOTOES
+
+  const renderizarBotoes = () => {
+
+    roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
+
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide') 
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
+    
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
+
+  } 
+
+
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -40,37 +81,30 @@ export const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+
+
+
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#1e62fe' }}>
-      <Container maxWidth={false} sx={{ maxWidth: '80%' }}>
-        <Toolbar
-          disableGutters
-          sx={{
-            display: 'flex',
-            gap: '60px',
-            alignItems: 'center',
-            height: '80px',
-            justifyContent: 'space-between'
-          }}
-        >
+    <AppBar
+      position="static"
+      className={'header'}
+      sx={{ backgroundColor: '#ffffff' }}
+    >
+      <Container maxWidth={false} className={'headerContainer'}>
+        <Toolbar disableGutters className={'toolbar'}>
           <Box
-            display={'flex'}
-            justifyContent={'center'}
-            sx={{
-              display: { xs: 'none', md: 'flex' }
-            }}
+            className={'logoImg'}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/">
-              {' '}
-              <img src={ImgLogo} width="100px" alt="" />
+            <Link to={homeLink}>
+              <img src={imgLogo} alt="Logo DBC" title="Logo" />
             </Link>
           </Box>
 
           <Box
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              alignItems: 'center'
-            }}
+            className={'menuBurgerContainer'}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
           >
             <IconButton
               size="large"
@@ -79,8 +113,8 @@ export const Header = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
             >
-            <MenuIcon sx={{ fill: '#fff'}}/>
-            </IconButton >
+              <MenuIcon className={'burgerIcon'} />
+            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -96,84 +130,94 @@ export const Header = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' }, color:"#fff"
-              }} 
+                display: { xs: 'block', md: 'none' }
+              }}
             >
-              <Box display={'flex'} flexDirection={'column'}>
-
-                <ul>
-
-             
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    EDIÇÃO
-                  </Link>
-                </MenuItem>
-
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    ETAPA
-                  </Link>
-                </MenuItem>
-
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    PROCESSO
-                  </Link>
-                </MenuItem>
-
-              </ul>
+              <Box className={'menuBurgerOptions'}>
+                <Link to={'/admin/cadastrar'}>
+                  <MenuItem>CADASTRAR COLABORADOR</MenuItem>
+                </Link>
               </Box>
-
             </Menu>
           </Box>
 
           <Box
-            justifyContent={'center'}
-            sx={{
-              display: { xs: 'flex', md: 'none' }
-            }}
+            className={'logoImg'}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
           >
             <Link to="/">
-              {' '}
-              <img src={ImgLogo} width="100px" alt="Logo DBC" />
+              <img src={imgLogo} alt="Logo DBC" />
             </Link>
           </Box>
 
+          <Box
+            className={'navbar'}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
+            <ul>
+              <MenuItem id="colaboradores" className='hide'>
+                <HeaderButton 
+                  texto={'COLABORADORES'}
+                  url={'/admin/colaboradores'}
+                />
+              </MenuItem>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap:'40px'}}>
-            <HeaderButton texto={'Edição'} url={'/'}/>
-          
-            <HeaderButton texto={'Etapa'} url={'/aaa'}/>
-              
-            <HeaderButton texto={'Processo'} url={'/aaa'}/>
+              <MenuItem id="gestaoEdicoes" className='hide'>
+                <HeaderButton
+                  texto={'EDIÇÕES'}
+                  url={'/gestao/edicoes'}
+                />
+              </MenuItem>
+
+              <MenuItem id="gestaoNaoUtil" className='hide'>
+                <HeaderButton
+                  texto={'PERÍODO NÃO ÚTIL'}
+                  url={'/gestao/dias-nao-uteis'}
+                />
+              </MenuItem>
+
+              <MenuItem id="instrutorEdicoes" className='hide'>
+                <HeaderButton
+                  texto={'EDIÇÕES'}
+                  url={'/instrutor/edicoes'}
+                />
+              </MenuItem>
+
+              <MenuItem id="instrutorNaoUtil" className='hide'>
+                <HeaderButton
+                  texto={'PERÍODO NÃO ÚTIL'}
+                  url={'/instrutor/dias-nao-uteis'}
+                />
+              </MenuItem>
+
+
+
+
+            </ul>
           </Box>
 
-          <Box
-            sx={{
-              flexGrow: 0,
-              display: 'flex',
-              gap: '10px',
-              alignItems: 'center'
-            }}
-          >
-
-            <h3 style={{color: '#fff'}}>USUARIO</h3>
+          <Box className={'usuario'}>
+            <h3>{dadosUsuarioLogado.nome}</h3>
+        
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {dadosUsuarioLogado.imagem === null ? (
+                  <Avatar
+                    alt={`${dadosUsuarioLogado.imagem}`}
+                    src={dadosUsuarioLogado.imagem}
+                  />
+                ) : (
+                  <img
+                    alt="not fount"
+                    width={'250px'}
+                    className={'BorderRadius'}
+                    src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}
+                  />
+                )}
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -190,25 +234,24 @@ export const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    Editar Perfil
-                  </Link>
-                </MenuItem>
+              <ul>
+                <Box className={'menuBurgerOptions'}>
+                  <MenuItem
+                    className={'HoverButton'}
+                    onClick={() => {
+                      navigate('/admin/perfil')
+                      // , {state }
+                    }}
+                  >
+                    EDITAR PERFIL
+                  </MenuItem>
 
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Link to={'/'} style={{
-                    fontWeight: '500',
-                    fontSize: '1rem'
-                  }}>
-                    Sair
-                  </Link>
-                </MenuItem>
+                  <Box onClick={handleLogout}>
+                    <MenuItem>SAIR</MenuItem>
+                  </Box>
+                </Box>
+              </ul>
             </Menu>
-            <Link style={{color: '#fff'}} to="/">Sair</Link>
           </Box>
         </Toolbar>
       </Container>

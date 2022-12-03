@@ -7,6 +7,7 @@ interface IHeaderButton {
     texto?: string,
     url?: string
     id?: string
+    cargos?: string
 }
 
 export const HeaderButton = (props: IHeaderButton) => {
