@@ -41,6 +41,10 @@
   margin-top: 20px;
 }
 
+.ContainerError{
+  color: rgb(171, 33, 33);
+}
+
 .BorderRadius {
   border-radius: 50%;
   height: 180px;
@@ -60,7 +64,7 @@
 
     justify-content: center;
     align-items: center;
-    height: 700px;
+    height: 810px;
   }
 
   .FormPerfil {
