@@ -25,7 +25,6 @@ import 'nprogress/nprogress.css'
 import { DiaNaoUtilProvider } from './context/DiaNaoUtilContext'
 import { GestaoEditarDiaNaoUtil } from './pages/Gestao/GestaoEditarDiaNaoUtil/GestaoEditarDiaNaoUtil'
 import { GestaoEditarEdicao } from './pages/Gestao/GestaoEditarEdicao/GestaoEditarEdicao'
-import { Calendario } from './pages/Calendario/Calendario'
 import { GestaoEditarEtapa } from './pages/Gestao/GestaoEditarEtapa/GestaoEditarEtapa'
 import { AdminColaboradores } from './pages/Admin/AdminColaboradores/AdminColaboradores'
 import { GestaoEditarProcesso } from './pages/Gestao/GestaoEditarProcesso/GestaoEditarProcesso'
@@ -33,6 +32,9 @@ import { GestaoEditarProcesso } from './pages/Gestao/GestaoEditarProcesso/Gestao
 import { Perfil } from './pages/Perfil/Perfil'
 import { CalendarioProvider } from './context/CalendarioContext'
 import { InstHome } from './pages/Instrutor/InstHome/InstHome'
+import { InstEdicoes } from './pages/Instrutor/InstEdicoes/InstEdicoes'
+import { InstNaoUteis } from './pages/Instrutor/InstNaoUteis/InstNaoUteis'
+import { InstVerificarEdicao } from './pages/Instrutor/InstVerificarEdicao/InstVerifficarEdicao'
 
 export const AppRoutes = () => {
   return (
@@ -49,7 +51,6 @@ export const AppRoutes = () => {
                   
                   <Route path="/" element={<Login />} />
                   <Route path="*" element={<NotFind />} />
-                  <Route path="/calendario" element={<Calendario />} />
 
                   <Route path="/perfil" element={<AccessRoute/> } >
                     <Route index element={<Perfil />}  />
@@ -85,7 +86,10 @@ export const AppRoutes = () => {
                   </Route>
 
                   <Route path="/instrutor" element={<PrivateRoute roleRequired="ROLE_INSTRUTOR" />}>
-                  <Route index element={<InstHome />} />
+                    <Route index element={<InstHome />} />
+                    <Route path='/instrutor/edicoes'  element={<InstEdicoes /> }/>
+                    <Route path='/instrutor/dias-nao-uteis'  element={<InstNaoUteis /> }/>
+                    <Route path='/instrutor/verificar-edicao/:edicao'  element={<InstVerificarEdicao /> }/>
                   </Route>
 
                 </Routes>

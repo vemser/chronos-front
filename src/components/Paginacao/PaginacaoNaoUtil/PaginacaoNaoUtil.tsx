@@ -39,7 +39,7 @@ export const PaginacaoNaoUtil = () => {
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/gestao/dias-nao-uteis?page=${pages.length}`}>{pages.length}</Link>
+            <Link id='ultimaPagina' className={style.icon} to={`/gestao/dias-nao-uteis?page=${pages.length}`}>{pages.length}</Link>
 
             <Link className={style.chevron} to={`/gestao/dias-nao-uteis?page=${Number(pageNumber) + 1}`}>
               <ChevronRightIcon className="chevron" />
@@ -83,7 +83,7 @@ export const PaginacaoNaoUtil = () => {
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/gestao/dias-nao-uteis?page=${pages.length}`}>{pages.length}</Link>
+            <Link id='ultimaPagina' className={style.icon} to={`/gestao/dias-nao-uteis?page=${pages.length}`}>{pages.length}</Link>
 
             <Link to={`/gestao/dias-nao-uteis?page=${Number(pageNumber) + 1}`}>
               <ChevronRightIcon className={style.icon}/>

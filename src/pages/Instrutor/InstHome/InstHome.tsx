@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { AuthContext } from '../../../context/AuthContext'
 import { Header } from '../../../components/Header/Header'
-import styles from './InstHome.module.css'
+import { Calendario } from '../../../components/Calendario/Calendario'
+
+
 
 export const InstHome = () => {
+
+
+  const { loggedUser} = useContext<any>(AuthContext)
+  
+  useEffect(() => {
+    loggedUser()
+  }, [])
+
   return (
     <>
       <Header />
+      <Calendario />
     </>
-
   )
 }
+
