@@ -13,7 +13,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 
-const animatedComponents = makeAnimated()
+
+
 
 export const GestaoEditarProcesso = () => {
   // const {
@@ -25,7 +26,7 @@ export const GestaoEditarProcesso = () => {
   // })
 
   //HOOKS
-
+  const animatedComponents = makeAnimated()
   
   const { state } = useLocation()
   const { edicao } = useParams();
@@ -100,7 +101,7 @@ export const GestaoEditarProcesso = () => {
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerProcesso}>
           <div>
-            <h2>Cadastrar processo</h2>
+            <h2>Editar processo</h2>
           </div>
           <div>
             <form

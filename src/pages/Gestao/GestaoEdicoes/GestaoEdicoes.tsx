@@ -19,6 +19,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { UserContext } from '../../../context/UserContex'
 import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
+import { Header } from '../../../components/Header/Header';
 
 export const GestaoEdicoes: React.FC = () => {
 
@@ -31,7 +32,7 @@ export const GestaoEdicoes: React.FC = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header/>
 
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>

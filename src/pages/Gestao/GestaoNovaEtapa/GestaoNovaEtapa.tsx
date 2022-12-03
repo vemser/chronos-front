@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styles from './GestaoNovaEtapa.module.css'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
+
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { IEtapa } from '../../../utils/interfaces'
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { EtapaSchema } from '../../../utils/schemas'
+import { Header } from '../../../components/Header/Header'
 
 export const GestaoNovaEtapa = () => {
 
@@ -22,7 +23,7 @@ export const GestaoNovaEtapa = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header/>
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerTitle}>
           <h2>Cadastrar etapa</h2>

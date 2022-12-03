@@ -2,12 +2,13 @@ import React, { useContext } from 'react'
 import styles from './GestaoCadastrarEdicao.module.css'
 import { Box, TextField, Button } from '@mui/material'
 import 'dayjs/locale/pt-br'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
+
 import { IEdicao } from '../../../utils/interfaces'
 import { useForm } from 'react-hook-form'
 import { cadastrarEdicaoFormSchema } from '../../../utils/schemas'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { UserContext } from '../../../context/UserContex'
+import { Header } from '../../../components/Header/Header'
 
 export const GestaoCadastrarEdicao = () => {
 
@@ -21,7 +22,7 @@ export const GestaoCadastrarEdicao = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header/>
       <section className={styles.ContainerSection}>
         <div className={styles.ContainerCalendario}>
           <div className={styles.ContainerTitle}>

@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
 import styles from './GestaoDiaNaoUtil.module.css'
+import { Header } from '../../../components/Header/Header';
 
 
 export const GestaoDiaNaoUtil = () => {
@@ -19,7 +20,7 @@ export const GestaoDiaNaoUtil = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header/>
 
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>

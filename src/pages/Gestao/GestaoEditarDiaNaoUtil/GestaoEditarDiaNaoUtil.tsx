@@ -11,6 +11,7 @@ import { IDiaNaoUtil } from '../../../utils/interfaces'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { cadastrarDiaNaoUtilFormSchema } from '../../../utils/schemas'
+import { Header } from '../../../components/Header/Header'
 
 
 export const GestaoEditarDiaNaoUtil = () => {
@@ -32,7 +33,7 @@ export const GestaoEditarDiaNaoUtil = () => {
 
   return (
     <>
-    <GestaoHeader />
+    <Header/>
       <section className={styles.ContainerSection}>
         <div className={styles.ContainerTitle}>
           <h2>Editar {state?.descricao}</h2>

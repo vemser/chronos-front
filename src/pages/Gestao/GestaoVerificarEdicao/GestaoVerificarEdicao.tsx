@@ -16,6 +16,7 @@ import {
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { UserContext } from '../../../context/UserContex'
+import { Header } from '../../../components/Header/Header'
 
 export const GestaoVerificarEdicao = () => {
 
@@ -40,7 +41,7 @@ export const GestaoVerificarEdicao = () => {
 
   return (
     <>
-    <GestaoHeader />
+    <Header/>
 
     <Box sx={{ margin: '50px auto', maxWidth: '1200px', boxShadow: 2, borderRadius: '12px'}}>
 

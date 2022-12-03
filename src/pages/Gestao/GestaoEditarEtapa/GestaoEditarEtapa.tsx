@@ -9,6 +9,7 @@ import { IEtapa } from '../../../utils/interfaces'
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { EtapaSchema } from '../../../utils/schemas'
+import { Header } from '../../../components/Header/Header'
 
 export const GestaoEditarEtapa = () => {
 
@@ -25,7 +26,7 @@ export const GestaoEditarEtapa = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header/>
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerTitle}>
           <h2>Editar etapa</h2>

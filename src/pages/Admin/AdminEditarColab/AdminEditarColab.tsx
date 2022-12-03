@@ -22,6 +22,7 @@ import { AuthContext } from '../../../context/AuthContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { EditarFormSchema } from '../../../utils/schemas'
+import { Header } from '../../../components/Header/Header'
 
 export const AdminEditarColab = () => {
   const { state } = useLocation()
@@ -60,7 +61,7 @@ export const AdminEditarColab = () => {
 
   return (
     <>
-      <AdminHeader />
+      <Header/>
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
           className={styles.FormAdmin}

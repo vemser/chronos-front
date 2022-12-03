@@ -4,11 +4,12 @@ import TextField from '@mui/material/TextField'
 import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import 'dayjs/locale/pt-br'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
+
 import { IDiaNaoUtil } from '../../../utils/interfaces'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { cadastrarDiaNaoUtilFormSchema } from '../../../utils/schemas'
+import { Header } from '../../../components/Header/Header'
 
 
 export const GestaoCadastrarDiaNaoUtil = () => {
@@ -20,7 +21,7 @@ export const GestaoCadastrarDiaNaoUtil = () => {
 
   return (
     <>
-    <GestaoHeader />
+    <Header/>
       <section className={styles.ContainerSection}>
         <div className={styles.ContainerCalendario}>
           <div className={styles.ContainerTitle}>

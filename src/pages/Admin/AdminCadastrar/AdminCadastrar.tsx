@@ -14,12 +14,13 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
 import FormHelperText from '@mui/material/FormHelperText'
-import { AdminHeader } from '../../../components/Admin/AdminHeader/AdminHeader'
+
 import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 import Input from '@mui/material/Input'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CadastroDePessoasSchema } from '../../../utils/schemas'
+import { Header } from '../../../components/Header/Header'
 
 export const AdminCadastrar = () => {
   const {
@@ -34,7 +35,7 @@ export const AdminCadastrar = () => {
 
   return (
     <>
-      <AdminHeader />
+      <Header/>
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
           className={styles.FormAdmin}
