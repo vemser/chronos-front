@@ -16,14 +16,10 @@ import styles from './EditarPerfil.module.css'
 import { AdminContext } from '../../context/AdminContext'
 import { useForm } from 'react-hook-form'
 import { IColaborador } from '../../utils/interfaces'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-import Input from '@mui/material/Input'
-import FilledInput from '@mui/material/FilledInput'
 import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-import { ClassNames } from '@emotion/react'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { editarPerfilFormSchema } from '../../utils/schemas'
 
