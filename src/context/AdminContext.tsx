@@ -51,7 +51,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       dadosColaborador.nome = data.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
       await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
-      navigate('/admin')
+      navigate('/admin/colaboradores')
     } catch (error) {
       console.log(error)
       toast.error('Algo deu errado, tente novamente', toastConfig)
@@ -111,7 +111,7 @@ export const AdminProvider = ({ children }: IChildren) => {
         nome: 'ROLE_INSTRUTOR',
         descricao: 'Instrutor'
       })
-    console.log(dadosColaborador)
+    
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token

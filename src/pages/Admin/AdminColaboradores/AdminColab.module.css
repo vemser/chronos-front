@@ -1,0 +1,20 @@
+.ContainerHeader {
+  width: 80%;
+ 
+  
+  align-items: flex-end;
+}
+
+.ContainerTitulo {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+ 
+}
+
+.ContainerButton {
+  display: flex;
+  justify-content: flex-end;
+}

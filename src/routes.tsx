@@ -29,9 +29,9 @@ import { GestaoEditarDiaNaoUtil } from './pages/Gestao/GestaoEditarDiaNaoUtil/Ge
 import { GestaoEditarEdicao } from './pages/Gestao/GestaoEditarEdicao/GestaoEditarEdicao'
 import { Calendario } from './pages/Calendario/Calendario'
 import { GestaoEditarEtapa } from './pages/Gestao/GestaoEditarEtapa/GestaoEditarEtapa'
+import { AdminColaboradores } from './pages/Admin/AdminColaboradores/AdminColaboradores'
 
 export const AppRoutes = () => {
-  
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ToastContainer />
@@ -53,6 +53,10 @@ export const AppRoutes = () => {
                   <Route index element={<AdminHome />} />
                   <Route path="/admin/perfil" element={<AdminPerfil />} />
                   <Route path="/admin/cadastrar" element={<AdminCadastrar />} />
+                  <Route
+                    path="/admin/colaboradores"
+                    element={<AdminColaboradores />}
+                  />
                   <Route
                     path="/admin/editar-colaborador/:colaborador"
                     element={<AdminEditarColab />}
@@ -91,15 +95,23 @@ export const AppRoutes = () => {
                     element={<GestaoEditarEdicao />}
                   />
 
-                  <Route path='/gestao/verificar-edicao/:edicao' element={<GestaoVerificarEdicao />}/>
-                  <Route path='/gestao/verificar-edicao/:edicao/nova-etapa' element={<GestaoNovaEtapa />} />
-                  <Route path='/gestao/verificar-edicao/:edicao/editar-etapa/:idEtapa' element={<GestaoEditarEtapa />} />
+                  <Route
+                    path="/gestao/verificar-edicao/:edicao"
+                    element={<GestaoVerificarEdicao />}
+                  />
+                  <Route
+                    path="/gestao/verificar-edicao/:edicao/nova-etapa"
+                    element={<GestaoNovaEtapa />}
+                  />
+                  <Route
+                    path="/gestao/verificar-edicao/:edicao/editar-etapa/:idEtapa"
+                    element={<GestaoEditarEtapa />}
+                  />
 
-
-
-
-
-                  <Route path='/gestao/verificar-edicao/:edicao/novo-processo'element={<GestaoNovoProcesso />} />
+                  <Route
+                    path="/gestao/verificar-edicao/:edicao/novo-processo"
+                    element={<GestaoNovoProcesso />}
+                  />
                 </Route>
 
                 <Route

@@ -27,37 +27,36 @@ import { AuthContext } from '../../../context/AuthContext'
 
 export const AdminListar: React.FC = () => {
   const { dadosUsuarioLogado } = useContext<any>(AuthContext)
-  
+
   const navigate = useNavigate()
-  const { dadosColaborador, buscarDadosColaborador, deletarColaborador, alterarStatusColab } =
-  useContext<IAdminContext>(AdminContext)
-  
+  const {
+    dadosColaborador,
+    buscarDadosColaborador,
+    deletarColaborador,
+    alterarStatusColab
+  } = useContext<IAdminContext>(AdminContext)
+
   useEffect(() => {
     buscarDadosColaborador('1')
   }, [])
 
   return (
     <>
+      
       <TableContainer
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >
         <Table>
-          <TableHead sx={{ backgroundColor: '#1e62fe', borderRadius: '8px' }}>
+          <TableHead sx={{ backgroundColor: '#fff', borderRadius: '8px' }}>
             <TableRow>
-              <TableCell sx={{ color: '#fff' }}>Colaborador(a)</TableCell>
-              <TableCell sx={{ color: '#fff' }}>E-mail</TableCell>
-              <TableCell sx={{ color: '#fff' }}>Cargo</TableCell>
+              <TableCell>Colaborador(a)</TableCell>
+              <TableCell>E-mail</TableCell>
+              <TableCell>Cargo</TableCell>
 
-              <TableCell sx={{ color: '#fff' }} align="right">
-                Ativo
-              </TableCell>
-              <TableCell sx={{ color: '#fff' }} align="right">
-                Editar
-              </TableCell>
+              <TableCell align="right">Ativo</TableCell>
+              <TableCell align="right">Editar</TableCell>
 
-              <TableCell sx={{ color: '#fff' }} align="right">
-                Excluir
-              </TableCell>
+              <TableCell align="right">Excluir</TableCell>
             </TableRow>
           </TableHead>
 
