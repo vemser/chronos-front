@@ -24,7 +24,7 @@ export const AdminColaboradores = () => {
        
         <Box className={styles.ContainerHeader}>
             <div className={styles.ContainerTitulo}>
-            <h2 >Colaboradores</h2>
+            <h2>Colaboradores</h2>
             </div>
             <div className={styles.ContainerButton}><ButtonCadastrar /></div>
           </Box>

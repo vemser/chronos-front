@@ -92,7 +92,7 @@ export const EtapaSchema = yup.object().shape({
     .required('Por favor, digite o nome da etapa')
     .min(3, 'O nome da etapa deve ter no mínimo 3 caracteres'),
 
-  ordemExecucao: yup.number().required('Por favor informe a ordem de execução')
+  ordemExecucao: yup.string().required('Por favor informe a ordem de execução').matches(/[0-9]+/g , 'Por favor, digite somente números')
 })
 
 
@@ -107,3 +107,9 @@ export const ProcessoSchema = yup.object().shape({
 })
 
 
+export const GestaoNovoProcessoSchema = yup.object().shape({
+  nome: yup
+    .string()
+    .required('Por favor, digite o nome do processo')
+    .min(3, 'O nome do processo deve ter no mínimo 3 caracteres'),
+})
