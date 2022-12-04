@@ -4,7 +4,7 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
-  IconButton
+  IconButton,
 } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import Grid from '@mui/material/Grid'
@@ -37,17 +37,20 @@ export const EditarPerfil = () => {
   const imagemBase = dadosUsuarioLogado.imagem
   const { state } = useLocation()
 
-  const { register, handleSubmit, formState: { errors }} = useForm<IColaborador>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IColaborador>({
     defaultValues: {
-      nome: dadosUsuarioLogado.nome
-  
+      nome: dadosUsuarioLogado.nome,
     },
-    resolver: yupResolver(editarPerfilFormSchema)
+    resolver: yupResolver(editarPerfilFormSchema),
   })
 
   const [values, setValues] = React.useState<State>({
     password: '',
-    showPassword: false
+    showPassword: false,
   })
 
   const handleChange =
@@ -58,7 +61,7 @@ export const EditarPerfil = () => {
   const handleClickShowPassword = () => {
     setValues({
       ...values,
-      showPassword: !values.showPassword
+      showPassword: !values.showPassword,
     })
   }
 
@@ -93,7 +96,7 @@ export const EditarPerfil = () => {
           sx={{
             mt: 2,
             mb: 3,
-            padding: 0
+            padding: 0,
           }}
         >
           <Grid
@@ -187,7 +190,7 @@ export const EditarPerfil = () => {
                             sx={{
                               display: 'flex',
                               alignItems: 'center',
-                              mb: '4px'
+                              mb: '4px',
                             }}
                           />
                         }
@@ -195,7 +198,7 @@ export const EditarPerfil = () => {
                           display: 'flex',
                           alignItems: 'center',
                           width: '200px',
-                          mt: 2
+                          mt: 2,
                         }}
                       >
                         Trocar Foto
@@ -220,7 +223,12 @@ export const EditarPerfil = () => {
                     variant="standard"
                     className={styles.FormPerfil}
                   />
-  
+                  {errors.nome && (
+                    <span className={styles.ContainerError} id="nome-error">
+                      {' '}
+                      {errors.nome.message}{' '}
+                    </span>
+                  )}
                   <TextField
                     label="Senha atual"
                     id="senhaAtual"
@@ -229,14 +237,15 @@ export const EditarPerfil = () => {
                     variant="standard"
                     error={!!errors.novaSenha}
                   />
-                   {errors.senhaAtual && (<span
+                  {errors.senhaAtual && (
+                    <span
                       className={styles.ContainerError}
-                      id="confirmacao-error"
-                      >
-                        {errors.senhaAtual.message}
-                      </span>
-                    )}
-                  
+                      id="senha-atual-error"
+                    >
+                      {errors.senhaAtual.message}
+                    </span>
+                  )}
+
                   <TextField
                     label="Nova Senha"
                     id="novaSenha"
@@ -244,14 +253,15 @@ export const EditarPerfil = () => {
                     {...register('novaSenha')}
                     variant="standard"
                     error={!!errors.novaSenha}
-                    />
-                    {errors.novaSenha && (<span
+                  />
+                  {errors.novaSenha && (
+                    <span
                       className={styles.ContainerError}
-                      id="confirmacao-error"
-                      >
-                        {errors.novaSenha.message}
-                      </span>
-                    )}
+                      id="nova-senha-error"
+                    >
+                      {errors.novaSenha.message}
+                    </span>
+                  )}
 
                   <TextField
                     id="confirmacaoNovaSenha"
@@ -261,14 +271,15 @@ export const EditarPerfil = () => {
                     {...register('confirmacaoNovaSenha')}
                     error={!!errors.confirmacaoNovaSenha}
                   />
-                  {errors.confirmacaoNovaSenha && (<span
+                  {errors.confirmacaoNovaSenha && (
+                    <span
                       className={styles.ContainerError}
                       id="confirmacao-error"
-                      >
-                        {errors.confirmacaoNovaSenha.message}
-                      </span>
+                    >
+                      {errors.confirmacaoNovaSenha.message}
+                    </span>
                   )}
-                  
+
                   <div className={styles.ContainerEnviar}>
                     <label htmlFor="submit">
                       <input

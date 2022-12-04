@@ -13,6 +13,7 @@ export const userFormSchema = yup.object().shape({
 })
 
 export const editarPerfilFormSchema = yup.object().shape({
+  nome:yup.string().required('Por favor, digite seu nome!'),
   senhaAtual: yup
   .string()
   .required('Digite a senha atual '),
