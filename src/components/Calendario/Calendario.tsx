@@ -1,9 +1,9 @@
-import React, { useContext, useState, useLayoutEffect } from 'react'
+import React, { useContext } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import { Box, dialogActionsClasses } from '@mui/material'
+import { Box } from '@mui/material'
 import './Calendario.css'
-import { useParams } from 'react-router-dom'
+
 import { CalendarioContext } from '../../context/CalendarioContext'
 import { title } from 'process'
 import { ClassNames } from '@emotion/react'
@@ -13,16 +13,8 @@ export const Calendario = () => {
 
   const { calendarioEdicao } = useContext(CalendarioContext)
 
-  const[ concatedArray, setConcatedArray ] = useState()
-
   const gerarCalendario = () => {
-  
-  
-    
-    let proc;
-    let etap
 
-    let etapaClasseAtual = 1
 
     // ETAPAS
     const etapaFilter: any = calendarioEdicao.filter((dia) => {
@@ -40,7 +32,7 @@ export const Calendario = () => {
 
     const etapaMap: any = etapaFilter.map((dia: any) => {
       
-      let classesCounter = 0
+      let classesCounter = 1
 
       if(arrayEtapaUnico[classesCounter] !== dia.etapa) {
         classesCounter++
