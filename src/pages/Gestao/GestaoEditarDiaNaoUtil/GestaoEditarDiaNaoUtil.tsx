@@ -50,7 +50,7 @@ export const GestaoEditarDiaNaoUtil = () => {
               />
                {errors.descricao && (<span
                     className={styles.ContainerError}
-                    id="login-error-email"
+                    id="erro-descricao-editar-n-util"
                   >
                     {errors.descricao.message}
                   </span>
@@ -66,7 +66,7 @@ export const GestaoEditarDiaNaoUtil = () => {
                   <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" defaultValue={state?.dataInicial} {...register('dataInicial')}/>
                   {errors.dataInicial && (<span
                       className={styles.ContainerError}
-                      id="login-error-email"
+                      id="erro-data-editar-n-util"
                     >
                       {errors.dataInicial.message}
                     </span>
