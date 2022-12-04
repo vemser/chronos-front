@@ -35,6 +35,7 @@ import { InstHome } from './pages/Instrutor/InstHome/InstHome'
 import { InstEdicoes } from './pages/Instrutor/InstEdicoes/InstEdicoes'
 import { InstNaoUteis } from './pages/Instrutor/InstNaoUteis/InstNaoUteis'
 import { InstVerificarEdicao } from './pages/Instrutor/InstVerificarEdicao/InstVerifficarEdicao'
+import { Calendario } from './components/Calendario/Calendario'
 
 export const AppRoutes = () => {
   return (
@@ -56,6 +57,9 @@ export const AppRoutes = () => {
                     <Route index element={<Perfil />}  />
                   </Route>
 
+                  <Route path="/calendario/:edicao" element={<AccessRoute/> } >
+                    <Route index element={<Calendario />}  />
+                  </Route>
 
                   {/* PRIVATE ROUTES */}
                   
