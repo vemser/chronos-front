@@ -17,7 +17,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     const getDiaNaoUtil = async ( page: string) => {
         try {
             nProgress.start();
-            const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=5`)
+            const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=10`)
 
             console.log(data.elementos)
             
