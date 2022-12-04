@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
 import { Header } from '../../../components/Header/Header'
-import { Calendario } from '../../../components/Calendario/Calendario'
+import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
+import { CalendarioContext } from '../../../context/CalendarioContext'
 
 
 
@@ -10,14 +11,17 @@ export const GestaoHome = () => {
 
   const { loggedUser} = useContext<any>(AuthContext)
 
+  const { getCalendarioGeral  } = useContext(CalendarioContext)
+
   useEffect(() => {
     loggedUser()
+    getCalendarioGeral()
   }, [])
 
   return (
     <>
       <Header />
-      <Calendario />
+      <CalendarioGeral />
     </>
   )
 }
