@@ -24,10 +24,13 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             setTotalPages(data.quantidadePaginas)
             setDiasNaoUteis(data.elementos)
 
-        } catch (error) {
-            console.error(error);
-            toast.error('Algo de errado aconteceu, por favor tente novamente.')
-            
+        } catch (error: any) {
+            console.log(error)
+            if(error.response.status === 400){
+                toast.error(error.response.data.errors[0], toastConfig)
+            } else {
+                toast.error('Houve um erro no Dia Não Útil!', toastConfig)
+            }
         } finally {
             nProgress.done();
             
@@ -50,10 +53,13 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
             navigate('/gestao/dias-nao-uteis')
 
-        } catch (error) {
-            console.error(error);
-            toast.error('Houve um erro ao cadastrar um Dia Não Útil!', toastConfig)
-
+        } catch (error: any) {
+            console.log(error)
+            if(error.response.status === 400){
+                toast.error(error.response.data.errors[0], toastConfig)
+            } else {
+                toast.error('Houve um erro ao cadastrar um Dia Não Útil!', toastConfig)
+            }
         } finally{  
             nProgress.done()
 
@@ -67,10 +73,13 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             toast.success('Dia Não Útil removido com sucesso!', toastConfig)
             getDiaNaoUtil('1')
 
-        } catch (error) {
-            console.error(error);
-            toast.error('Houve um erro ao remover um Dia Não Útil!', toastConfig)
-
+        } catch (error: any) {
+            console.log(error)
+            if(error.response.status === 400){
+                toast.error(error.response.data.errors[0], toastConfig)
+            } else {
+                toast.error('Houve um erro ao remover um Dia Não Útil!', toastConfig)
+            }
         } finally {
             nProgress.done()
 
@@ -94,10 +103,13 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
             navigate('/gestao/dias-nao-uteis')
 
-        } catch (error) {
-            console.error(error);
-            toast.error('Houve um erro ao atualizado um Dia Não Útil!', toastConfig)
-
+        } catch (error: any) {
+            console.log(error)
+            if(error.response.status === 400){
+                toast.error(error.response.data.errors[0], toastConfig)
+            } else {
+                toast.error('Houve um erro ao atualizado um Dia Não Útil!', toastConfig)
+            }
         } finally {
             nProgress.done();
 
