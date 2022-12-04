@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { CalendarioContext } from '../../context/CalendarioContext'
 import { title } from 'process'
 import { ClassNames } from '@emotion/react'
+import { Header } from '../Header/Header'
 
 export const Calendario = () => {
 
@@ -74,7 +75,8 @@ export const Calendario = () => {
 
   return (
     <>
-      <Box className="CalendarContainer">
+    <Header/>
+      <Box className="CalendarContainer" mt={'50px'}>
         <FullCalendar
           plugins={[ dayGridPlugin ]}
           locale={'pt-br'}

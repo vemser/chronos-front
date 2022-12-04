@@ -82,7 +82,7 @@ export const GestaoEditarEdicao = () => {
 
               </Box>
 
-              <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>
+              <Box sx={{ display: 'flex', justifyContent: 'center'}}>
               <Button
                 className={styles.submitButton}
                 type="submit"

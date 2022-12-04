@@ -63,10 +63,9 @@ export const AdminCadastrar = () => {
               height={'50px'}
               display="flex"
               justifyContent="center"
-              color={'#fff'}
-              borderRadius={'8px 8px 0px 0px'}
-              boxShadow={2}
-              sx={{ backgroundColor: '#1E62FE', width: '100%' }}
+              color={'#000'}
+            
+     
             >
               <Box>
                 {' '}

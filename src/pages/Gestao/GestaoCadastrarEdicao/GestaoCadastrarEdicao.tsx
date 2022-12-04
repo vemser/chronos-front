@@ -61,7 +61,7 @@ export const GestaoCadastrarEdicao = () => {
               </Box>
             </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>
+            <Box sx={{ display: 'flex', justifyContent: 'center'}}>
               <Button className={styles.submitButton} type="submit" variant="contained" id="button-cadastrar-edicao" sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe'}}>
                 Enviar
               </Button>

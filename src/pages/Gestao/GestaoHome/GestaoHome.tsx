@@ -17,7 +17,7 @@ export const GestaoHome = () => {
   return (
     <>
       <Header />
-      <Calendario />
+    
     </>
   )
 }

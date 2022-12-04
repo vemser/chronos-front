@@ -80,7 +80,7 @@ export const GestaoEdicoes: React.FC = () => {
                     </TableCell>
 
                     <TableCell component="th" scope="row" align="center" width={'120px'}>
-                      <SearchIcon  className={`edicao-verificar-${index}`} onClick={() => {navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <SearchIcon id={'button-exibir-detalhes'} className={`edicao-verificar-${index}`} onClick={() => {navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
  
                     <TableCell align="right" width={'40px'}>

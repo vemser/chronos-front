@@ -238,6 +238,7 @@ export const Header = () => {
                 <Box className={'menuBurgerOptions'}>
                   <MenuItem
                     className={'HoverButton'}
+                    id={'button-editar-perfil'}
                     onClick={() => {
                       navigate('/perfil')
                     

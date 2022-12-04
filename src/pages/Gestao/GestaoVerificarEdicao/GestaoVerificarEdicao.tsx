@@ -49,7 +49,9 @@ export const GestaoVerificarEdicao = () => {
       <Box sx={{ display: 'flex', justifyContent:'space-between', padding: '20px', mb: '60px'}}>
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <h2>{EdicaoAtual?.nome}</h2>
+          <Button variant="outlined">
           <p onClick={() => getCalendarioPorEdicao(idEdicao)}>Gerar Calendario</p>
+          </Button>
         </Box>
 
         <Button variant="contained" id='addButton' onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/nova-etapa`, {state: EdicaoAtual})}> + Adicionar nova etapa</Button>
