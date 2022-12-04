@@ -29,6 +29,7 @@
 .ContainerTitle h2{
   color: #1e62fe;
   margin-bottom: 40px;
+  
 }
 
 .ContainerNomeEdicao {
@@ -106,4 +107,6 @@
     flex-direction: column;
     align-items: center;
   }
+
+
 }
