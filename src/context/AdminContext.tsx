@@ -50,7 +50,8 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       dadosColaborador.nome = data.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
       const retorno = await api.post('/usuario', dadosColaborador)
-      toast.success('Usuário editado com sucesso!', toastConfig)
+      toast.success('Usuário criado com sucesso!', toastConfig)
+      navigate("/admin/colaboradores")
     } catch (error: any) {
       console.log(error)
       if(error.response.status === 400){
@@ -66,7 +67,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start();
 
       api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=5`)
+      const { data } = await api.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=10`)
         
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
