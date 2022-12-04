@@ -11,10 +11,24 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
- 
+  margin-bottom: 50px;
 }
 
 .ContainerButton {
   display: flex;
   justify-content: flex-end;
+  margin-top: -80px;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 1200px) {
+  .ContainerButton {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+  .ContainerTitulo {
+  
+    margin-bottom: 0px;
+  }
+  
 }

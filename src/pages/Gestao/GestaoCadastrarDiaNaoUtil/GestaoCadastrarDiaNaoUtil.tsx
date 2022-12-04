@@ -33,8 +33,10 @@ export const GestaoCadastrarDiaNaoUtil = () => {
             <TextField
               id="descricao"
               label="Descrição do Período Não Útil"
+              className={styles.dataPickerDescription}
               variant="standard"
-              className={styles.NomeEdicao}
+              
+             
               error={!!errors.descricao}
               {...register('descricao')}
             />
@@ -46,7 +48,10 @@ export const GestaoCadastrarDiaNaoUtil = () => {
               </span>
               )}
 
-              <FormControlLabel control={<Checkbox />} label="Repetir todos os anos"  id='repeticaoAnual'  {...register('repeticaoAnual')}/>
+              <FormControlLabel control={<Checkbox /> } 
+              label="Repetir todos os anos"  id='repeticaoAnual' className={styles.dataPicker}
+              
+                {...register('repeticaoAnual')} sx={{mt: 2}}/>
           </div>
 
         
