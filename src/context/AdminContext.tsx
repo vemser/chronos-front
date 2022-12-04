@@ -52,9 +52,10 @@ export const AdminProvider = ({ children }: IChildren) => {
       await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin/colaboradores')
+
     } catch (error) {
       console.log(error)
-      toast.error('Algo deu errado, tente novamente', toastConfig)
+      toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
     }
   }
 
@@ -84,7 +85,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       toast.success('Usuário deletado com sucesso!', toastConfig)
       buscarDadosColaborador('1')
     } catch (error) {
-      toast.error('Houve algum error, tente novamente!', toastConfig)
+      toast.error(`Erro ao deletar o usuario ${idUsuario} , tente novamente!`, toastConfig)
       console.log(error)
     }
   }

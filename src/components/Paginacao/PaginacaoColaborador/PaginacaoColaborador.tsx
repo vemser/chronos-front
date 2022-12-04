@@ -38,7 +38,7 @@ export const PaginacaoColaborador = () => {
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
+          <Link id='ultimaPagina' className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
             {pages.length}
           </Link>
 
@@ -85,7 +85,7 @@ export const PaginacaoColaborador = () => {
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
+          <Link id='ultimaPagina' className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
             {pages.length}
           </Link>
 

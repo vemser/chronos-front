@@ -38,7 +38,7 @@ export const PaginacaoEdicoes = () => {
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/gestao/edicoes?page=${pages.length}`}>{pages.length}</Link>
+            <Link id='ultimaPagina' className={style.icon} to={`/gestao/edicoes?page=${pages.length}`}>{pages.length}</Link>
 
             <Link className={style.chevron} to={`/gestao/edicoes?page=${Number(pageNumber) + 1}`}>
               <ChevronRightIcon className="chevron" />
@@ -82,7 +82,7 @@ export const PaginacaoEdicoes = () => {
 
             <MoreHorizIcon className={style.icon} />
 
-            <Link className={style.icon} to={`/gestao/edicoes?page=${pages.length}`}>{pages.length}</Link>
+            <Link id='ultimaPagina' className={style.icon} to={`/gestao/edicoes?page=${pages.length}`}>{pages.length}</Link>
 
             <Link to={`/gestao/edicoes?page=${Number(pageNumber) + 1}`}>
               <ChevronRightIcon className={style.icon}/>
