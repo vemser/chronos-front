@@ -49,13 +49,15 @@ export const AdminProvider = ({ children }: IChildren) => {
 
     try {
       dadosColaborador.nome = data.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
-      await api.post('/usuario', dadosColaborador)
+      const retorno = await api.post('/usuario', dadosColaborador)
       toast.success('Usuário editado com sucesso!', toastConfig)
-      navigate('/admin/colaboradores')
-
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
-      toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
+      if(error.response.status === 400){
+        toast.error(error.response.data.errors[0], toastConfig)
+      } else {
+        toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
+      }
     }
   }
 
@@ -121,9 +123,13 @@ export const AdminProvider = ({ children }: IChildren) => {
 
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin/colaboradores')
-    } catch (error) {
-      toast.error('Houve algum error, tente novamente!', toastConfig)
+    } catch (error: any) {
       console.log(error)
+      if(error.response.status === 400){
+        toast.error(error.response.data.errors[0], toastConfig)
+      } else {
+        toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
+      }
     } finally {
       nProgress.done()
     }
@@ -159,11 +165,15 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       nProgress.start()
       api.defaults.headers.common['Authorization'] = token
-      toast.success('Usuário editado com sucesso!', toastConfig)
       await api.put(`usuario/update-perfil`, data)
-    } catch (error) {
-      toast.error('Houve algum error, tente novamente!', toastConfig)
+      toast.success('Usuário editado com sucesso!', toastConfig)
+    } catch (error: any) {
       console.log(error)
+      if(error.response.status === 400){
+        toast.error(error.response.data.errors[0], toastConfig)
+      } else {
+        toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
+      }
     } finally {
       nProgress.done()
     }
