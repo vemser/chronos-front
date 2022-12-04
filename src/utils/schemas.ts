@@ -96,3 +96,14 @@ export const EtapaSchema = yup.object().shape({
 })
 
 
+export const ProcessoSchema = yup.object().shape({
+  nome: yup.string().required('Por favor informe o nome do processo.'),
+
+  duracaoProcesso: yup.string().required('Por favor, informe a duração do processo.'),
+
+  diasUteis: yup.string().required('Por favor, informe quantos os dias uteis do processo.'),
+
+  ordemExecucao: yup.number().required('Por favor, informe a ordem de execução')
+})
+
+

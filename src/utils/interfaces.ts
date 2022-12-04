@@ -116,13 +116,13 @@ export interface IProcesso {
 
 export interface IAreasEnvolvidas {
   nome: string
-  idResponsavel: number
+  idAreaEnvolvida: number
   value: any
 }
 
 export interface IResponsaveis {
   nome: string
-  idAreaEnvolvida: number
+  idResponsavel: number
 }
 
 // INTERFACES DIA NAO UTIL
@@ -166,5 +166,13 @@ export interface IPrivateRoute {
 // CALENDARIO CONTEXT
 
 export interface ICalendarioContext {
-  
+  calendarioEdicao: ICalendarioEdicao[]
+  getCalendarioPorEdicao: (idEdicao: number) => Promise<void>
 }
+
+export interface ICalendarioEdicao {
+  dia: string,
+  etapa: string | null,
+  processo: string | undefined | null
+  feriado: string | undefined | null
+} 

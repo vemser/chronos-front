@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }: IChildren) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error('Senha inválida!');
+      toast.error('Usuário ou senha inválida!');
     };
   };
 
