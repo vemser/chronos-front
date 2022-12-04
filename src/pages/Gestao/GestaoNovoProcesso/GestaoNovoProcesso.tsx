@@ -10,24 +10,13 @@ import { UserContext } from '../../../context/UserContex'
 import { IEtapa, IProcesso } from '../../../utils/interfaces'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { cadastrarEtapaFormSchema } from '../../../utils/schemas'
+import {  GestaoNovoProcessoSchema, ProcessoSchema } from '../../../utils/schemas'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 
 const animatedComponents = makeAnimated()
 
 export const GestaoNovoProcesso = () => {
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors }
-  // } = useForm<any>({
-  //   // resolver: yupResolver(cadastrarEtapaFormSchema)
-  // })
-
-  //HOOKS
-
   
   const { state } = useLocation()
   const { edicao } = useParams();
@@ -38,14 +27,17 @@ export const GestaoNovoProcesso = () => {
   const [responsaveisState, setResponsaveisState] = useState<any>([])
 
   const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
-  const { register, handleSubmit } = useForm()
+
+  const { register, handleSubmit, formState: {errors} } = useForm<any>({
+    resolver: yupResolver(ProcessoSchema)
+     })
+
   
   useEffect(() => {
     getAreaEnvolvida()
     getResponsavel()
     
   }, [])
-
 
   const handleChangeAreas = (value: any) => { 
     const list = value.map((item: any) => {
@@ -62,11 +54,9 @@ export const GestaoNovoProcesso = () => {
   }
 
   // SELECT 
-
   
   const selectAreaEnvolvida:object[] = []
   const selectResponsavel:object[] = []
-
 
   areasEnvolvidas.map((area) => {
     selectAreaEnvolvida.push({
@@ -81,9 +71,6 @@ export const GestaoNovoProcesso = () => {
       label: responsavel.nome
     })
   })
-
-
-  
 
   return (
     <>
@@ -107,7 +94,16 @@ export const GestaoNovoProcesso = () => {
                 label="Nome"
                 variant="standard"
                 {...register('nome')}
+                error={!!errors.nome}
               />
+       {errors.duracaoProcesso && (
+                    <span
+                      className={styles.ContainerError}
+                      id="duracaoProcesso-error"
+                    >
+                      <p className={styles.ContainerError}>Por favor, digite os nomes</p>
+                    </span>
+                  )}
               <label htmlFor="selectGroup">
                 Área Envolvida
 
@@ -148,29 +144,56 @@ export const GestaoNovoProcesso = () => {
                 />
               </label>
 
-
-
               <TextField
                 className={styles.FormRow}
                 id="duracaoProcesso"
                 label="Duração do processo"
                 variant="standard"
                 {...register('duracaoProcesso')}
+                error={!!errors.duracaoProcesso}
               />
+              {errors.duracaoProcesso && (
+                    <span
+                      className={styles.ContainerError}
+                      id="duracaoProcesso-error"
+                    >
+                      <p className={styles.ContainerError}>Por favor, digite a duração do processo</p>
+                    </span>
+                    
+                  )}
               <TextField
                 className={styles.FormRow}
                 id="diasUteis"
                 label="Dias uteis"
                 variant="standard"
                 {...register('diasUteis')}
+                error={!!errors.diasUteis}
               />
+              {errors.duracaoProcesso && (
+                    <span
+                      className={styles.ContainerError}
+                      id="duracaoProcesso-error"
+                    >
+                      <p className={styles.ContainerError}>Por favor, digite os dias úteis</p>
+                    </span>
+                    
+                  )}
               <TextField
                 className={styles.FormRow}
                 id="ordemExecucao"
                 label="Ordem"
                 variant="standard"
                 {...register('ordemExecucao')}
+                error={!!errors.ordemExecucao}
               />
+              {errors.duracaoProcesso && (
+                    <span
+                      className={styles.ContainerError}
+                      id="duracaoProcesso-error"
+                    >
+                      <p className={styles.ContainerError}>Por favor, digite a ordem de execução</p>
+                    </span>
+                  )}
               <div className={styles.ContainerBotao}>
                 <Button
                   className={styles.BotaoGestao}

@@ -52,6 +52,7 @@ export const GestaoNovaEtapa = () => {
             <TextField
               id="ordemExecucao"
               label="Ordem"
+              type='number'
               variant="standard"
               className={styles.Nome}
               {...register('ordemExecucao')}

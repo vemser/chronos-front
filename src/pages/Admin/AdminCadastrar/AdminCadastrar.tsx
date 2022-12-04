@@ -100,7 +100,7 @@ export const AdminCadastrar = () => {
                   {errors.nome && (
                     <span
                       className={styles.ContainerError}
-                      id="colab-error-email"
+                      id="colab-error-nome"
                     >
                       {errors.nome.message}
                     </span>
