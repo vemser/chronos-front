@@ -192,4 +192,4 @@ export interface ICalendarioEdicao {
     diasUteis: number
     ordemExecucao: number
   } | null
-}
+} 

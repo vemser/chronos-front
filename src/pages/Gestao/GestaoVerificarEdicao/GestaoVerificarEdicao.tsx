@@ -17,6 +17,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { UserContext } from '../../../context/UserContex'
 import { Header } from '../../../components/Header/Header'
+import { CalendarioContext } from '../../../context/CalendarioContext'
 
 export const GestaoVerificarEdicao = () => {
 
@@ -27,6 +28,8 @@ export const GestaoVerificarEdicao = () => {
 
   const navigate = useNavigate();
   const { deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } = useContext(UserContext)
+
+  const { getCalendarioPorEdicao } = useContext(CalendarioContext)
 
   
 
@@ -48,7 +51,7 @@ export const GestaoVerificarEdicao = () => {
       <Box sx={{ display: 'flex', justifyContent:'space-between', padding: '20px', mb: '60px'}}>
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <h2>{EdicaoAtual?.nome}</h2>
-          <p>Gerar Calendario</p>
+          <p onClick={() => getCalendarioPorEdicao(idEdicao)}>Gerar Calendario</p>
         </Box>
 
         <Button variant="contained" id='addButton' onClick={() => navigate(`/gestao/verificar-edicao/${edicao}/nova-etapa`, {state: EdicaoAtual})}> + Adicionar nova etapa</Button>

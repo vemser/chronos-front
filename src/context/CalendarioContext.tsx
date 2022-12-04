@@ -1,5 +1,6 @@
 import nProgress from 'nprogress'
 import React, { createContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../utils/api'
 import { ICalendarioContext, ICalendarioEdicao, IChildren } from '../utils/interfaces'
 
@@ -7,6 +8,8 @@ import { ICalendarioContext, ICalendarioEdicao, IChildren } from '../utils/inter
 export const CalendarioContext = createContext ({} as ICalendarioContext)
 
 export const CalendarioProvider = ({ children }: IChildren) => {
+    
+    const navigate = useNavigate()
 
     const [ calendarioEdicao, setCalendarioEdicao ] = useState<ICalendarioEdicao[]>([]);
 
@@ -15,9 +18,11 @@ export const CalendarioProvider = ({ children }: IChildren) => {
         try{
             nProgress.start();
 
-            const { data } = await api.get(`/edicao/calendario/${idEdicao}`);
+            const { data } = await api.get(`/edicao/calendario-edicao/${idEdicao}`);
 
             setCalendarioEdicao(data)
+
+            navigate(`/calendario/${idEdicao}`)
 
         } catch(error) {
             console.error(error);

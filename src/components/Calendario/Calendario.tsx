@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useLayoutEffect } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import { Box } from '@mui/material'
@@ -12,11 +12,14 @@ export const Calendario = () => {
 
   const {edicao} = useParams()
 
-  getCalendarioPorEdicao(Number(edicao) - 1)
+  useLayoutEffect(() => {
+    getCalendarioPorEdicao(Number(edicao))
+    
+  }, [])
 
-  console.log(calendarioEdicao);
+  console.log(calendarioEdicao)
+
   
-
   return (
     <>
       <Box className="CalendarContainer">
