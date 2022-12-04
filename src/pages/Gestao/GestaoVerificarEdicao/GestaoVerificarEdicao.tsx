@@ -36,8 +36,6 @@ export const GestaoVerificarEdicao = () => {
   const EdicaoAtual = edicoes?.find((data) => data.idEdicao == idEdicao)
 
   
-
-  
   useLayoutEffect(() => {
     getEtapas(idEdicao)
   }, []) 

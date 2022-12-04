@@ -8,17 +8,11 @@ import { CalendarioContext } from '../../context/CalendarioContext'
 
 export const Calendario = () => {
 
-  const { getCalendarioPorEdicao, calendarioEdicao } = useContext(CalendarioContext)
+  const { calendarioEdicao } = useContext(CalendarioContext)
 
-  const {edicao} = useParams()
 
-  useLayoutEffect(() => {
-    getCalendarioPorEdicao(Number(edicao))
-    
-  }, [])
 
   console.log(calendarioEdicao)
-
   
   return (
     <>
