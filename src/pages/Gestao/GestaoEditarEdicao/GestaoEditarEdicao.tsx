@@ -70,7 +70,7 @@ export const GestaoEditarEdicao = () => {
                    
                   {errors.dataFinal && (<span
                       className={styles.ContainerError}
-                      id="erro-data-inicial"
+                      id="erro-data-final"
                     >
                       {errors.dataFinal.message}
                       
