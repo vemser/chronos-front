@@ -77,6 +77,9 @@ export const GestaoEditarEdicao = () => {
                     </span>
                   )}
                 </Box>
+
+                <TextField id="idEdicao" sx={{ display: 'none'}} value={state.idEdicao} {...register('idEdicao')}/>
+
               </Box>
 
               <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>

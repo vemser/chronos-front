@@ -12,8 +12,6 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
-import FormHelperText from '@mui/material/FormHelperText'
-
 import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 

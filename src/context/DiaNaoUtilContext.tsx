@@ -10,15 +10,18 @@ export const DiaNaoUtilContext = createContext({} as IDiaNaoUtilContext);
 export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
     const [ diasNaoUteis, setDiasNaoUteis ] = useState<IDiaNaoUtil[]>([])
+    const [totalPages, setTotalPages] = useState(0)
+
     const navigate = useNavigate();
 
-    const getDiaNaoUtil = async () => {
+    const getDiaNaoUtil = async ( page: string) => {
         try {
             nProgress.start();
-            const { data } = await api.get('/dia-nao-util?pagina=0&tamanho=5')
+            const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=5`)
 
             console.log(data.elementos)
             
+            setTotalPages(data.quantidadePaginas)
             setDiasNaoUteis(data.elementos)
 
         } catch (error) {
@@ -62,7 +65,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             nProgress.start()
             await api.delete(`/dia-nao-util/${idDiaNaoUtil}`)
             toast.success('Dia Não Útil removido com sucesso!', toastConfig)
-            getDiaNaoUtil()
+            getDiaNaoUtil('1')
 
         } catch (error) {
             console.error(error);
@@ -76,6 +79,15 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
     const putDiaNaoUtil = async (data: IDiaNaoUtil) => {
         try {
+
+            
+            if(data.repeticaoAnual === true) {
+                data.repeticaoAnual = 'ATIVO'
+            } else {
+                data.repeticaoAnual = 'INATIVO'
+            }
+
+
             nProgress.start()
             await api.put(`/dia-nao-util/${data.idDiaNaoUtil}`, data)
             toast.success('Dia Não Útil atualizado com sucesso!', toastConfig)
@@ -93,7 +105,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     }
 
     return(
-        <DiaNaoUtilContext.Provider value={{ diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil }}>
+        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil }}>
             { children }
         </DiaNaoUtilContext.Provider>
     )

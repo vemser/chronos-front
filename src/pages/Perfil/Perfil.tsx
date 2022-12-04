@@ -1,8 +1,13 @@
 import React from 'react'
-import syles from './Perfil.module.css'
+import { EditarPerfil } from '../../components/EditarPerfil/EditarPerfil'
+import { Header } from '../../components/Header/Header'
+
 
 export const Perfil = () => {
   return (
-    <div>Perfil</div>
+    <>
+      <Header/>
+      <EditarPerfil />
+    </>
   )
 }

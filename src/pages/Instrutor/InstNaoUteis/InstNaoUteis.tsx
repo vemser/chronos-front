@@ -2,18 +2,15 @@ import React, { useContext, useLayoutEffect } from 'react'
 import { TableCell, TableContainer, Table, TableBody, TableRow, Box, Button, TableHead, Checkbox } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
-import { Link, useNavigate } from 'react-router-dom'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
-import styles from './GestaoDiaNaoUtil.module.css'
+import styles from './InstNaoUteis.module.css'
 import { Header } from '../../../components/Header/Header';
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
 
 
-export const GestaoDiaNaoUtil = () => {
+export const InstNaoUteis = () => {
 
-  const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil } = useContext(DiaNaoUtilContext)
-  const navigate = useNavigate();
+  const { diasNaoUteis, getDiaNaoUtil } = useContext(DiaNaoUtilContext)
 
   useLayoutEffect(() => {
     getDiaNaoUtil('1')
@@ -31,10 +28,6 @@ export const GestaoDiaNaoUtil = () => {
             <div className={styles.ContainerTitle}>
               <h2>Períodos Não Úteis</h2>
             </div>
-
-            <Link to={'/gestao/cadastrar-dias-nao-uteis'}>
-              <Button className={styles.addBtn} variant="contained" id='addButton'> ADICIONAR PERÍODO NÃO ÚTIL</Button>
-            </Link>
           </Box>
 
           
@@ -95,11 +88,11 @@ export const GestaoDiaNaoUtil = () => {
                     </TableCell>
 
                     <TableCell align="right" >
-                      <EditIcon id={`linha-nao-util-editar-${index}`} onClick={() => {navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon id={`linha-nao-util-editar-${index}`} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                     <TableCell align="right" >
-                      <HighlightOffIcon id={`linha-nao-util-deletar-${index}`} onClick={() => deleteDiaNaoUtil(dia.idDiaNaoUtil)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <HighlightOffIcon id={`linha-nao-util-deletar-${index}`} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
                   </TableRow>

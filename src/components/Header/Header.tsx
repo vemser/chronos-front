@@ -155,35 +155,35 @@ export const Header = () => {
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
             <ul>
-              <MenuItem id="colaboradores" className='hide'>
+              <MenuItem id="colaboradores" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                 <HeaderButton 
                   texto={'COLABORADORES'}
                   url={'/admin/colaboradores'}
                 />
               </MenuItem>
 
-              <MenuItem id="gestaoEdicoes" className='hide'>
+              <MenuItem id="gestaoEdicoes" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                 <HeaderButton
                   texto={'EDIÇÕES'}
                   url={'/gestao/edicoes'}
                 />
               </MenuItem>
 
-              <MenuItem id="gestaoNaoUtil" className='hide'>
+              <MenuItem id="gestaoNaoUtil" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                 <HeaderButton
                   texto={'PERÍODO NÃO ÚTIL'}
                   url={'/gestao/dias-nao-uteis'}
                 />
               </MenuItem>
 
-              <MenuItem id="instrutorEdicoes" className='hide'>
+              <MenuItem id="instrutorEdicoes" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                 <HeaderButton
                   texto={'EDIÇÕES'}
                   url={'/instrutor/edicoes'}
                 />
               </MenuItem>
 
-              <MenuItem id="instrutorNaoUtil" className='hide'>
+              <MenuItem id="instrutorNaoUtil" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                 <HeaderButton
                   texto={'PERÍODO NÃO ÚTIL'}
                   url={'/instrutor/dias-nao-uteis'}
@@ -239,8 +239,8 @@ export const Header = () => {
                   <MenuItem
                     className={'HoverButton'}
                     onClick={() => {
-                      navigate('/admin/perfil')
-                      // , {state }
+                      navigate('/perfil')
+                    
                     }}
                   >
                     EDITAR PERFIL

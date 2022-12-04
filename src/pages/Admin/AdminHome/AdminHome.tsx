@@ -18,7 +18,7 @@ export const AdminHome: React.FC = () => {
   return (
     <>
       <Header />
-      <Link to='/gestao'>ACESSAR</Link>
+
     </>
   )
 }
