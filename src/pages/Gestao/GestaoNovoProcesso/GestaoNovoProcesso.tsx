@@ -104,7 +104,7 @@ export const GestaoNovoProcesso = () => {
                       <p className={styles.ContainerError}>Por favor, digite os nomes</p>
                     </span>
                   )}
-              <label htmlFor="selectGroup">
+              <label htmlFor="selectGroup" id='area-envolvida'>
                 Área Envolvida
 
                 <CreatableSelect
@@ -120,11 +120,11 @@ export const GestaoNovoProcesso = () => {
                   isMulti
                   closeMenuOnSelect={false}
                   placeholder={'Área Envolvida'}
-                  id={'area-envolvida'}
+        
                 />
               </label>
 
-              <label htmlFor="selectGroup">
+              <label htmlFor="selectGroup" id='responsavel'>
                 Responsável
 
                 <CreatableSelect
@@ -140,7 +140,7 @@ export const GestaoNovoProcesso = () => {
                   isMulti
                   closeMenuOnSelect={false}
                   placeholder={'Responsável'}
-                  id={'responsavel'}
+          
                 />
               </label>
 
