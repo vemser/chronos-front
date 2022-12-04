@@ -7,6 +7,7 @@ export const ButtonCadastrar = () => {
     <>
       <Link to={'/admin/cadastrar'}>
         <Button variant="contained">CADASTRAR COLABORADOR</Button>
+      
       </Link>
     </>
   )
