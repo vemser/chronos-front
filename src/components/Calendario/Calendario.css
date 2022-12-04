@@ -1,15 +1,15 @@
 
 .a1{
-    background-color: red;
+    background-color: red !important;
 }
 .a2{
-    background-color: blue;
+    background-color: blue !important;
 }
 .a3{
-    background-color: green;
+    background-color: green !important;
 }
 .a4{
-    background-color: purple;
+    background-color: purple !important;
 }
 
 

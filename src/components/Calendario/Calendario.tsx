@@ -16,30 +16,41 @@ export const Calendario = () => {
 
   const gerarCalendario = () => {
   
+  
+    
     let proc;
     let etap
 
     let etapaClasseAtual = 1
-
-    for(let i = 0; i < calendarioEdicao.length; i++){
-
-    }
-
 
     // ETAPAS
     const etapaFilter: any = calendarioEdicao.filter((dia) => {
       return dia.etapa !== null
     })
 
+    const arrayEtapaString = etapaFilter.map((etapa: any) => {
+      return etapa.etapa
+    })
+    
+    const arrayEtapaUnico = [...new Set(arrayEtapaString)];
+
+
+
+
     const etapaMap: any = etapaFilter.map((dia: any) => {
-      let counter = 1
-     
-        if(counter < etapaFilter.length && dia.etapa !== etapaFilter[counter].etapa){
-          etapaClasseAtual++
-        }
-        return { date: dia.dia, display: 'background', classNames:[`a${etapaClasseAtual}`]} 
+      
+      let classesCounter = 0
+
+      if(arrayEtapaUnico[classesCounter] !== dia.etapa) {
+        classesCounter++
+      }
+      
+      return { date: dia.dia, display: 'background', classNames:[`a${classesCounter}`]} 
     })
 
+    console.log(calendarioEdicao);
+    
+  
     // PROCESSO 
     const processoFilter: any = calendarioEdicao.filter((dia) => {
       return dia.processo !== null
