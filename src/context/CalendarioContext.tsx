@@ -18,7 +18,7 @@ export const CalendarioProvider = ({ children }: IChildren) => {
         try{
             nProgress.start();
 
-            const { data } = await api.get(`/edicao/calendario-edicao/${idEdicao}`);
+            const { data } = await api.get(`/edicao/calendario-edicao/${idEdicao}`);    
 
             setCalendarioEdicao(data)
 

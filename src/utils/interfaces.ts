@@ -172,24 +172,7 @@ export interface ICalendarioContext {
 
 export interface ICalendarioEdicao {
   dia: string,
-  diaUtil: {
-    ehDiaUtil: boolean,
-    ehDiaNaoUtil: boolean,
-    descricao: string
-  },
-  etapa: {
-    nome: string,
-    ordemExecucao: number,
-    idEtapa: number,
-    processos: null
-  } | null,
-  processo: {
-    idProcesso: number
-    nome: string
-    areasEnvolvidas:any,
-    responsaveis: any
-    duracaoProcesso: string
-    diasUteis: number
-    ordemExecucao: number
-  } | null
+  etapa: string | null,
+  processo: string | undefined | null
+  feriado: string | undefined | null
 } 
