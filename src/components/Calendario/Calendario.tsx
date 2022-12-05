@@ -10,124 +10,141 @@ import { ClassNames } from '@emotion/react'
 import { Header } from '../Header/Header'
 
 export const Calendario = () => {
-
   const { calendarioEdicao } = useContext(CalendarioContext)
 
-  console.log(calendarioEdicao);
-  
-  const encerramento = calendarioEdicao[calendarioEdicao.length - 1].dia.split("-").reverse().join("/")
-  
+  console.log(calendarioEdicao)
+
+  const encerramento = calendarioEdicao[calendarioEdicao.length - 1].dia
+    .split('-')
+    .reverse()
+    .join('/')
 
   const gerarCalendario = () => {
-
     // DIA UTIL
-    const etapaFilter: any = calendarioEdicao.filter((dia) => {
+    const etapaFilter: any = calendarioEdicao.filter(dia => {
       return dia.etapa !== null
-    })    
+    })
 
     // ETAPA
     const etapaMap: any = etapaFilter.map((dia: any) => {
-      return{ date: dia.dia, title: dia.processo, backgroundColor: dia.cor, display: 'background', classNames: ['etapa']}
+      return {
+        date: dia.dia,
+        title: dia.processo,
+        backgroundColor: dia.cor,
+        display: 'background',
+        classNames: ['etapa']
+      }
     })
-  
-    // PROCESSO 
-    const processoFilter: any = calendarioEdicao.filter((dia) => {
+
+    // PROCESSO
+    const processoFilter: any = calendarioEdicao.filter(dia => {
       return dia.processo !== null
     })
     const processoMap: any = processoFilter.map((dia: any) => {
-      return { date: dia.dia, title: dia.processo} 
+      return { date: dia.dia, title: dia.processo }
     })
 
     // AREAS
     const areasMap: any = processoFilter.map((dia: any) => {
-      return { date: dia.dia, title: dia.areas, classNames:['areas']} 
+      return { date: dia.dia, title: dia.areas, classNames: ['areas'] }
     })
 
     // FERIADOS
-    const feriadosFilter: any = calendarioEdicao.filter((dia) => {
+    const feriadosFilter: any = calendarioEdicao.filter(dia => {
       return dia.processo === null && dia.feriado !== null
     })
     const feriadosMap: any = feriadosFilter.map((dia: any) => {
-      return { date: dia.dia, display: 'background', backgroundColor:'#e5e7eb', title: dia.feriado, classNames: ['feriado'] } 
+      return {
+        date: dia.dia,
+        display: 'background',
+        backgroundColor: '#e5e7eb',
+        title: dia.feriado,
+        classNames: ['feriado']
+      }
     })
 
     // FINAIS DE SEMANA
-    const fdsFilter: any = calendarioEdicao.filter((dia) => {
+    const fdsFilter: any = calendarioEdicao.filter(dia => {
       return dia.processo === null && dia.feriado === null
     })
     const fdsMap: any = fdsFilter.map((dia: any) => {
-      return { date: dia.dia, display: 'background', backgroundColor:'#e5e7eb', classNames: ['feriado'] } 
+      return {
+        date: dia.dia,
+        display: 'background',
+        backgroundColor: '#e5e7eb',
+        classNames: ['feriado']
+      }
     })
 
-   
-    
-    return etapaMap.concat(areasMap, feriadosMap, fdsMap);
+    return etapaMap.concat(areasMap, feriadosMap, fdsMap)
   }
 
+  const diasUteis: any = calendarioEdicao.filter(dia => {
+    return dia.etapa !== null
+  })
 
+  const arrayCorEtapa: any = diasUteis.map((dia: any) => {
+    return { etapa: dia.etapa, cor: dia.cor }
+  })
 
-    const diasUteis: any = calendarioEdicao.filter((dia) => {
-      return dia.etapa !== null
-    }) 
-    
-    const arrayCorEtapa: any = diasUteis.map((dia: any) => {
-      return {etapa: dia.etapa, cor: dia.cor}
-    })
+  const etapaCorUnica: any = new Set()
 
-    const etapaCorUnica: any = new Set();
+  const unique = arrayCorEtapa.filter((element: any) => {
+    const isDuplicate = etapaCorUnica.has(element.etapa)
 
-    
-    const unique = arrayCorEtapa.filter((element: any) => {
-      
-      const isDuplicate = etapaCorUnica.has(element.etapa);
+    etapaCorUnica.add(element.etapa)
 
-      etapaCorUnica.add(element.etapa)
-    
-      if (!isDuplicate) {
-        return true;
-      }
-    
-      return false;
-    });
+    if (!isDuplicate) {
+      return true
+    }
+
+    return false
+  })
 
   return (
     <>
-    <Header/>
-    
-    <Box className='calendario'>
+      <Header />
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', margin: '40px auto', maxWidth: '1200px' }}> 
+      <Box className="calendario">
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            margin: '40px auto',
+            maxWidth: '1200px'
+          }}
+        >
           <h2>Previsão de encerramento: {encerramento} </h2>
         </Box>
-        <Box className='legendaSection'>
-          <div className='legenda'>
+        <Box className="legendaSection">
+          <div className="legenda">
             <h1>Etapas</h1>
-            {unique && unique.map((etapa: any) => {
-              return <div>
-                
-                <div className='legendaLinha'>
-                  <div style={{backgroundColor: `${etapa.cor} `}} className='cardCor'></div>
-                  <p>{etapa.etapa}</p>
-                </div>
-
-
-              </div>
-            })}
+            {unique &&
+              unique.map((etapa: any) => {
+                return (
+                  <div>
+                    <div className="legendaLinha">
+                      <div
+                        style={{ backgroundColor: `${etapa.cor} ` }}
+                        className="cardCor"
+                      ></div>
+                      <p>{etapa.etapa}</p>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
         </Box>
         <Box className="CalendarContainer" mt={'50px'}>
           <FullCalendar
-            plugins={[ dayGridPlugin ]}
+            plugins={[dayGridPlugin]}
             locale={'pt-br'}
             initialView="dayGridMonth"
             weekends={true}
-
             events={gerarCalendario()}
           />
         </Box>
-
-    </Box>
-      
+      </Box>
     </>
   )
 }

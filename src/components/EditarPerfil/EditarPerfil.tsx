@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {
   FormControl,
   InputAdornment,
@@ -32,18 +33,17 @@ export const EditarPerfil = () => {
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
   const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
-  console.log(dadosUsuarioLogado)
 
-  const imagemBase = dadosUsuarioLogado.imagem
+  const imagemBase: any = dadosUsuarioLogado.imagem
   const { state } = useLocation()
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<IColaborador>({
     defaultValues: {
-      nome: dadosUsuarioLogado.nome,
+      nome: dadosUsuarioLogado.nome
     },
     resolver: yupResolver(editarPerfilFormSchema),
   })
@@ -85,7 +85,6 @@ export const EditarPerfil = () => {
 
   return (
     <>
-      <p>aaaa</p>
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <Grid
           container
@@ -113,8 +112,9 @@ export const EditarPerfil = () => {
             sx={{ backgroundColor: '#1E62FE', width: '100%' }}
           >
             <Box>
-              {' '}
-              <h2 style={{ color: '#fff' }}>Editar Perfil</h2>{' '}
+              <h2 data-testid="titulo-editar-perfil" style={{ color: '#fff' }}>
+                Editar Perfil
+              </h2>{' '}
             </Box>
           </Grid>
           <form
@@ -184,6 +184,7 @@ export const EditarPerfil = () => {
                         }}
                       />
                       <Button
+                        data-testid="botao-trocar-foto"
                         component="span"
                         variant="contained"
                         endIcon={
@@ -224,12 +225,7 @@ export const EditarPerfil = () => {
                     variant="standard"
                     className={styles.FormPerfil}
                   />
-                  {errors.nome && (
-                    <span className={styles.ContainerError} id="nome-error">
-                      {' '}
-                      {errors.nome.message}{' '}
-                    </span>
-                  )}
+
                   <TextField
                     label="Senha atual"
                     id="senhaAtual"
@@ -241,7 +237,7 @@ export const EditarPerfil = () => {
                   {errors.senhaAtual && (
                     <span
                       className={styles.ContainerError}
-                      id="senha-atual-error"
+                      id="confirmacao-error"
                     >
                       {errors.senhaAtual.message}
                     </span>
@@ -258,7 +254,7 @@ export const EditarPerfil = () => {
                   {errors.novaSenha && (
                     <span
                       className={styles.ContainerError}
-                      id="nova-senha-error"
+                      id="confirmacao-error"
                     >
                       {errors.novaSenha.message}
                     </span>

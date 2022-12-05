@@ -35,7 +35,7 @@ export const AdminCadastrar = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
           className={styles.FormAdmin}
@@ -64,8 +64,6 @@ export const AdminCadastrar = () => {
               display="flex"
               justifyContent="center"
               color={'#000'}
-            
-     
             >
               <Box>
                 {' '}
@@ -132,7 +130,6 @@ export const AdminCadastrar = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            // checked={Administrador}
                             id="Administrador"
                             {...register('Administrador')}
                           />
@@ -142,7 +139,6 @@ export const AdminCadastrar = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            // checked={GestaoDePessoas}
                             id="GestaoDePessoas"
                             {...register('GestaoDePessoas')}
                           />
@@ -151,12 +147,7 @@ export const AdminCadastrar = () => {
                       />
                       <FormControlLabel
                         control={
-                          <Checkbox
-                            // checked={Instrutor}
-
-                            id="Instrutor"
-                            {...register('Instrutor')}
-                          />
+                          <Checkbox id="Instrutor" {...register('Instrutor')} />
                         }
                         label="Instrutor"
                       />

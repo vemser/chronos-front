@@ -66,6 +66,11 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios)/)"
+    ]
+  },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
     "@types/nprogress": "^0.2.0"

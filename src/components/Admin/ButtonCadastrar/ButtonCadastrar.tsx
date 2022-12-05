@@ -6,8 +6,9 @@ export const ButtonCadastrar = () => {
   return (
     <>
       <Link to={'/admin/cadastrar'}>
-        <Button variant="contained">CADASTRAR COLABORADOR</Button>
-      
+        <Button data-testid="botao-cadastrar" variant="contained">
+          CADASTRAR COLABORADOR
+        </Button>
       </Link>
     </>
   )

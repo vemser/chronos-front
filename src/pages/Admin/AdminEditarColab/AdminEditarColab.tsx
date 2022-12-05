@@ -25,33 +25,24 @@ import { Header } from '../../../components/Header/Header'
 export const AdminEditarColab = () => {
   const { state } = useLocation()
   const { editarColaborador } = useContext(AdminContext)
-  console.log(state)
-  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
-  // const aaaa = state.map((value: any) => {
-  //   return console.log(value.cargos)
-  // })
-  // console.log(aaaa)
+  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
-  // const {
-  //   register,
-  //   handleSubmit
-  //   // formState: { errors }
-  // } = useForm<IColaborador>({})
-  // // resolver: yupResolver(CadastroDePessoasSchema)
-
-  const { register, handleSubmit, formState: { errors} } = useForm<IColaborador>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IColaborador>({
     defaultValues: {
       nome: state.nome,
       email: state.email,
       imagem: state.imagem,
       cargos: state.cargos
-    }, 
-     resolver: yupResolver(EditarFormSchema) 
+    },
+    resolver: yupResolver(EditarFormSchema)
   })
-
 
   const atualizarDadosPerfil = (idUsuario: number, data: IColaborador) => {
     editarColaborador(data, idUsuario)
@@ -59,7 +50,7 @@ export const AdminEditarColab = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
           className={styles.FormAdmin}
@@ -179,7 +170,7 @@ export const AdminEditarColab = () => {
                     {...register('nome')}
                     error={!!errors.nome}
                   />
-                   {errors.nome && (
+                  {errors.nome && (
                     <span
                       className={styles.ContainerError}
                       id="colab-error-email"
@@ -205,10 +196,12 @@ export const AdminEditarColab = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                  
                             id="Administrador"
                             {...register('Administrador')}
-                            defaultChecked={state.cargos.some((item : IColaborador) => item.descricao == 'Administrador')}
+                            defaultChecked={state.cargos.some(
+                              (item: IColaborador) =>
+                                item.descricao == 'Administrador'
+                            )}
                           />
                         }
                         label="Administrador"
@@ -216,22 +209,25 @@ export const AdminEditarColab = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            
                             id="GestaoDePessoas"
                             {...register('GestaoDePessoas')}
-                            defaultChecked={state.cargos.some((item : IColaborador) => item.descricao == 'Gestão de pessoas')}
+                            defaultChecked={state.cargos.some(
+                              (item: IColaborador) =>
+                                item.descricao == 'Gestão de pessoas'
+                            )}
                           />
-                        
                         }
                         label="Gestão De Pessoas"
                       />
                       <FormControlLabel
                         control={
                           <Checkbox
-                          
                             id="Instrutor"
                             {...register('Instrutor')}
-                            defaultChecked={state.cargos.some((item : IColaborador) => item.descricao == 'Instrutor')}
+                            defaultChecked={state.cargos.some(
+                              (item: IColaborador) =>
+                                item.descricao == 'Instrutor'
+                            )}
                           />
                         }
                         label="Instrutor"

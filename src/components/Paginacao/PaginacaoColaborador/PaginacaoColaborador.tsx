@@ -30,15 +30,25 @@ export const PaginacaoColaborador = () => {
     <>
       {pageNumber === '1' ? (
         <Box className={style.pagination}>
-          <ChevronLeftIcon className={style.icon} />
+          <ChevronLeftIcon
+            data-testid="icon-chevron-left"
+            className={style.icon}
+          />
 
-          <Link style={{ color: '#1e62fe' }} to={`/admin/colaboradores?page=${pageNumber}`}>
+          <Link
+            style={{ color: '#1e62fe' }}
+            to={`/admin/colaboradores?page=${pageNumber}`}
+          >
             {pageNumber}
           </Link>
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link id='ultimaPagina' className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
+          <Link
+            id="ultimaPagina"
+            className={style.icon}
+            to={`/admin/colaboradores?page=${pages.length}`}
+          >
             {pages.length}
           </Link>
 
@@ -61,7 +71,10 @@ export const PaginacaoColaborador = () => {
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link style={{ color: '#1e62fe' }} to={`/admin/colaboradores?page=${pageNumber}`}>
+          <Link
+            style={{ color: '#1e62fe' }}
+            to={`/admin/colaboradores?page=${pageNumber}`}
+          >
             {pageNumber}
           </Link>
 
@@ -79,13 +92,20 @@ export const PaginacaoColaborador = () => {
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link style={{ color: '#1e62fe' }} to={`/admin/colaboradores?page=${pageNumber}`}>
+          <Link
+            style={{ color: '#1e62fe' }}
+            to={`/admin/colaboradores?page=${pageNumber}`}
+          >
             {pageNumber}
           </Link>
 
           <MoreHorizIcon className={style.icon} />
 
-          <Link id='ultimaPagina' className={style.icon} to={`/admin/colaboradores?page=${pages.length}`}>
+          <Link
+            id="ultimaPagina"
+            className={style.icon}
+            to={`/admin/colaboradores?page=${pages.length}`}
+          >
             {pages.length}
           </Link>
 
