@@ -58,8 +58,6 @@ export const InstNaoUteis = () => {
                   <TableCell align="justify">Período Inicial</TableCell>
                   <TableCell align="justify">Período Final</TableCell>
                   <TableCell align="justify">Repetir</TableCell>
-                  <TableCell align="right">Editar</TableCell>
-                  <TableCell align="right">Excluir</TableCell>
                 </TableRow>
               </TableHead>
 
@@ -112,30 +110,8 @@ export const InstNaoUteis = () => {
                         {dataFinalFormatada}
                       </TableCell>
 
-                      <TableCell align="justify" width={'600px'}>
+                      <TableCell align="justify" width={'300px'}>
                         <Checkbox checked={status} />
-                      </TableCell>
-
-                      <TableCell align="right">
-                        <EditIcon
-                          id={`linha-nao-util-editar-${index}`}
-                          sx={{
-                            cursor: 'pointer',
-                            transition: '100ms all ease-in-out',
-                            '&:hover': { color: '#1e62fe' }
-                          }}
-                        />
-                      </TableCell>
-
-                      <TableCell align="right">
-                        <HighlightOffIcon
-                          id={`linha-nao-util-deletar-${index}`}
-                          sx={{
-                            cursor: 'pointer',
-                            transition: '100ms all ease-in-out',
-                            '&:hover': { color: '#1e62fe' }
-                          }}
-                        />
                       </TableCell>
                     </TableRow>
                   )
