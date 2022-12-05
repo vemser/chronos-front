@@ -1,8 +1,40 @@
+body::-webkit-scrollbar {
+  background-color: #fff;
+}
+
+body::-webkit-scrollbar-thumb {
+  width: 12px !important;
+  border-radius: 20px !important;
+
+  border: solid 1px rgb(213, 213, 213) !important;
+}
 .calendario {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100%;
+  margin-bottom: 100px;
+}
+
+.fc .fc-scroller::-webkit-scrollbar {
+  background-color: #fff;
+}
+
+.fc .fc-scroller-liquid-absolute::-webkit-scrollbar-thumb {
+  width: 5px !important;
+  border-radius: 20px !important;
+  border: solid 1px rgb(213, 213, 213) !important;
+}
+
+/* .fc .fc-scroller-liquid-absolute {
+  width: 12px !important;
+  border-radius: 20px !important;
+} */
+/* .fc-scroller-harness {
+  overflow: hidden !important;
+} */
+.fc-scroller {
+  overflow: hidden scroll !important;
 }
 
 .cardCor {
@@ -110,8 +142,8 @@
 }
 
 .etapa .fc-event-title {
-    margin-top: 30px !important;
-    font-style: normal !important;
+  margin-top: 30px !important;
+  font-style: normal !important;
 }
 
 .areas {

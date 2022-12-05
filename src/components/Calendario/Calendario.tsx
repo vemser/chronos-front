@@ -13,8 +13,8 @@ import { useLocation, useParams } from 'react-router-dom'
 export const Calendario = () => {
   const { calendarioEdicao } = useContext(CalendarioContext)
 
-  const { state } = useLocation();
-    
+  const { state } = useLocation()
+
   const gerarCalendario = () => {
     // DIA UTIL
     const etapaFilter: any = calendarioEdicao?.filter(dia => {
@@ -42,7 +42,12 @@ export const Calendario = () => {
 
     // AREAS
     const areasMap: any = processoFilter?.map((dia: any) => {
-      return { date: dia.dia, title: dia.areas, classNames: ['areas'], textColor:"#000000" }
+      return {
+        date: dia.dia,
+        title: dia.areas,
+        classNames: ['areas'],
+        textColor: '#000000'
+      }
     })
 
     // FERIADOS
@@ -76,10 +81,9 @@ export const Calendario = () => {
   }
 
   const encerramento = calendarioEdicao[calendarioEdicao?.length - 1].dia
-  .split('-')
-  .reverse()
-  .join('/')
-
+    .split('-')
+    .reverse()
+    .join('/')
 
   const diasUteis: any = calendarioEdicao?.filter(dia => {
     return dia.etapa !== null
@@ -108,10 +112,7 @@ export const Calendario = () => {
       <Header />
 
       <Box className="calendario">
-        
-        <Box>
-          {state.nome}
-        </Box>
+        <Box>{state.nome}</Box>
 
         <Box
           sx={{
