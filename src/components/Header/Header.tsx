@@ -50,8 +50,6 @@ export const Header = () => {
   // BOTOES
 
   const renderizarBotoes = () => {
-    roles.includes('ROLE_ADMIN') &&
-      document.getElementById('colaboradores')?.classList.remove('hide')
 
     roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
     roles.includes('ROLE_ADMIN') && document.getElementById('colaboradoresResp')?.classList.remove('hide')
@@ -135,47 +133,38 @@ export const Header = () => {
               }}
             >
               <Box className={'menuBurgerOptions'}>
-              <ul>
-              <MenuItem data-testid="id-menu-cadastrar" id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton 
-                  texto={'COLABORADORES'}
-                  url={'/admin/colaboradores'}
-                />
-              </MenuItem>
+                <ul>
 
-              <MenuItem id="gestaoEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton
-                  texto={'EDIÇÕES'}
-                  url={'/gestao/edicoes'}
-                />
-              </MenuItem>
-                    
+                <MenuItem data-testid="id-menu-cadastrar" id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                  <Link to='/admin/colaboradores'>
+                      <p>COLABORADORES</p>
+                  </Link> 
+                </MenuItem>
 
-              <MenuItem id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton
-                  texto={'PERÍODO NÃO ÚTIL'}
-                  url={'/gestao/dias-nao-uteis'}
-                />
-              
-                  </MenuItem>
+                <MenuItem data-testid="id-menu-cadastrar" id="gestaoEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                  <Link to='/gestao/edicoes'>
+                      <p>EDIÇÕES</p>
+                  </Link> 
+                </MenuItem>
 
-              <MenuItem id="instrutorEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton
-                  texto={'EDIÇÕES'}
-                  url={'/instrutor/edicoes'}
-                />
-              </MenuItem>
+                <MenuItem data-testid="id-menu-cadastrar" id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                  <Link to='/gestao/dias-nao-uteis'>
+                      <p>PERÍODO NÃO ÚTIL</p>
+                  </Link> 
+                </MenuItem>
 
-              <MenuItem id="instrutorNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton
-                  texto={'PERÍODO NÃO ÚTIL'}
-                  url={'/instrutor/dias-nao-uteis'}
-                />
-              </MenuItem>
-
-
-
-
+                <MenuItem data-testid="id-menu-cadastrar" id="instrutorEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                  <Link to='/instrutor/edicoes'>
+                      <p>EDIÇÕES</p>
+                  </Link> 
+                </MenuItem>
+                      
+                <MenuItem data-testid="id-menu-cadastrar" id="instrutorNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                  <Link to='/instrutor/dias-nao-uteis'>
+                      <p>PERÍODO NÃO ÚTIL</p>
+                  </Link> 
+                </MenuItem>
+                
             </ul>
               </Box>
             </Menu>
@@ -247,8 +236,8 @@ export const Header = () => {
           </Box>
 
           <Box className={'usuario'}>
-            <h3>{dadosUsuarioLogado.nome}</h3>
-
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}><h3>{dadosUsuarioLogado.nome}</h3></Box>
+           
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {dadosUsuarioLogado.imagem === null ? (

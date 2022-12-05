@@ -26,7 +26,7 @@ export const AdminColaboradores = () => {
             <div className={styles.ContainerTitulo}>
             <h2>Colaboradores</h2>
             </div>
-            <div className={styles.ContainerButton}><ButtonCadastrar /></div>
+            <Box className={styles.ContainerButton} sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }}><ButtonCadastrar /></Box>
           </Box>
         <Box width={'80%'}>
           <AdminListar />

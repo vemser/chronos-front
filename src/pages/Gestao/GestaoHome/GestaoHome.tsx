@@ -10,11 +10,12 @@ export const GestaoHome = () => {
 
   const { loggedUser} = useContext<any>(AuthContext)
 
+ 
 
   return (
     <>
       <Header />
-      <CalendarioGeral />
+      <CalendarioGeral /> 
     </>
   )
 }

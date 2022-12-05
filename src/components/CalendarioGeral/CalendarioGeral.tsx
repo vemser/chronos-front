@@ -76,7 +76,7 @@ export const CalendarioGeral = () => {
       <Box>
         <div className='legenda'>
 
-            <h1>Etapas</h1>
+            
             {etapaLegendas && etapaLegendas.map((data: any, index: number) =>{
 
 
