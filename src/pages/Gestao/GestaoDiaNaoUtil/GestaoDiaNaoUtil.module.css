@@ -62,3 +62,24 @@
     display: flex;
     justify-content: center;
   }
+
+  @media (max-width: 620px) { 
+    .ContainerNova {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .ContainerTitle {
+      width: 400px;
+     padding-right: 20%;
+     padding-bottom: 20px;
+
+      }
+    .ContainerTitle h2 {
+      width: 100%;
+      text-align: center;
+
+      }
+
+  }
