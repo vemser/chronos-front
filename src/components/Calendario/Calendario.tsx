@@ -113,7 +113,9 @@ export const Calendario = () => {
     <>
       <Header />
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between'}} >
+      <Box className="calendario" sx={{ display: 'flex', flexDirection:'row' }}>
+        
+
           <Box>
             <h3>Previsão de encerramento: {encerramento} </h3>
           </Box>
@@ -124,11 +126,7 @@ export const Calendario = () => {
           </h3>
         </Box>
         
-       
-        
-      
 
-        
 
         <Box className="CalendarContainer" mt={'50px'}>
           <FullCalendar
@@ -139,7 +137,6 @@ export const Calendario = () => {
             events={gerarCalendario()}
           />
         </Box>
-        
         <Box className="legendaSection">
           <div className="containerTitulo">
             <h2>Etapas</h2>
@@ -161,6 +158,7 @@ export const Calendario = () => {
               })}
           </div>
         </Box>
+      </Box>
     </>
   )
 }
