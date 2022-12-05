@@ -56,7 +56,7 @@ export const InstVerificarEdicao = () => {
           <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <h2>{EdicaoAtual?.nome}</h2>
             <Button variant="outlined">
-              <p onClick={() => getCalendarioPorEdicao(idEdicao)}>
+              <p onClick={() => getCalendarioPorEdicao(EdicaoAtual)}>
                 Gerar Calendario
               </p>
             </Button>

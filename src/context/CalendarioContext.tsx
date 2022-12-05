@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { api } from '../utils/api'
-import { ICalendarioContext, ICalendarioEdicao, ICalendarioGeral, IChildren, toastConfig } from '../utils/interfaces'
+import { ICalendarioContext, ICalendarioEdicao, ICalendarioGeral, IChildren, IEdicao, toastConfig } from '../utils/interfaces'
 
 
 export const CalendarioContext = createContext ({} as ICalendarioContext)
@@ -17,15 +17,15 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
 
 
-    const getCalendarioPorEdicao = async (idEdicao: number) => {
+    const getCalendarioPorEdicao = async (edicao: IEdicao | undefined) => {
         try{
             nProgress.start();
 
-            const { data } = await api.get(`/edicao/calendario-edicao/${idEdicao}`);    
+            const { data } = await api.get(`/edicao/calendario-edicao/${edicao?.idEdicao}`);    
 
             setCalendarioEdicao(data)
 
-            navigate(`/calendario/${idEdicao}`)
+            navigate(`/calendario/${edicao?.idEdicao}`, {state: edicao})
 
         } catch(error) {
             console.error(error);

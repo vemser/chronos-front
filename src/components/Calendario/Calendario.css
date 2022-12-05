@@ -1,6 +1,4 @@
-*{
-    z-index: 0 !important;
-}
+
 .cardCor{
     height: 25px;
     width: 50px;
@@ -38,13 +36,11 @@
 /* QUADRADO DO DIA */
 
 .fc-daygrid-day-number{
-    font-weight: 800;
+    font-weight: 600;
     color: #000000;
     font-size: 1rem;  
     left: -4px;
     top:  -10px;
-    opacity: 80% !important;
-    z-index: 1 !important;
 }
 
 .fc-daygrid-day-top{
@@ -92,6 +88,9 @@
 }
 
 
+.fc .fc-day-other .fc-daygrid-day-top {
+    opacity: 100% !important;
+}
 
 
 .etapa div{
@@ -102,6 +101,7 @@
 
 .etapa .fc-event-title {
     margin-top: 30px !important;
+    font-style: normal !important;
 }
 
 .areas{
@@ -110,6 +110,7 @@
     font-weight: 600;
     border: none;
     z-index: 1;
+    opacity: 90% !important;
 }
 
 .areas .fc-event-title{

@@ -168,7 +168,7 @@ export interface IPrivateRoute {
 export interface ICalendarioContext {
   calendarioEdicao: ICalendarioEdicao[]
   calendarioGeral: ICalendarioGeral[]
-  getCalendarioPorEdicao: (idEdicao: number) => Promise<void>
+  getCalendarioPorEdicao: (idEdicao: IEdicao | undefined) => Promise<void>
   getCalendarioGeral: () => Promise<void>
 }
 

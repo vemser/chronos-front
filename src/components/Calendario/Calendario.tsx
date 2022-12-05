@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import { Box } from '@mui/material'
@@ -8,25 +8,21 @@ import { CalendarioContext } from '../../context/CalendarioContext'
 import { title } from 'process'
 import { ClassNames } from '@emotion/react'
 import { Header } from '../Header/Header'
+import { useLocation, useParams } from 'react-router-dom'
 
 export const Calendario = () => {
   const { calendarioEdicao } = useContext(CalendarioContext)
 
-  console.log(calendarioEdicao)
-
-  const encerramento = calendarioEdicao[calendarioEdicao.length - 1].dia
-    .split('-')
-    .reverse()
-    .join('/')
-
+  const { state } = useLocation();
+    
   const gerarCalendario = () => {
     // DIA UTIL
-    const etapaFilter: any = calendarioEdicao.filter(dia => {
+    const etapaFilter: any = calendarioEdicao?.filter(dia => {
       return dia.etapa !== null
     })
 
     // ETAPA
-    const etapaMap: any = etapaFilter.map((dia: any) => {
+    const etapaMap: any = etapaFilter?.map((dia: any) => {
       return {
         date: dia.dia,
         title: dia.processo,
@@ -37,23 +33,23 @@ export const Calendario = () => {
     })
 
     // PROCESSO
-    const processoFilter: any = calendarioEdicao.filter(dia => {
+    const processoFilter: any = calendarioEdicao?.filter(dia => {
       return dia.processo !== null
     })
-    const processoMap: any = processoFilter.map((dia: any) => {
+    const processoMap: any = processoFilter?.map((dia: any) => {
       return { date: dia.dia, title: dia.processo }
     })
 
     // AREAS
-    const areasMap: any = processoFilter.map((dia: any) => {
+    const areasMap: any = processoFilter?.map((dia: any) => {
       return { date: dia.dia, title: dia.areas, classNames: ['areas'], textColor:"#000000" }
     })
 
     // FERIADOS
-    const feriadosFilter: any = calendarioEdicao.filter(dia => {
+    const feriadosFilter: any = calendarioEdicao?.filter(dia => {
       return dia.processo === null && dia.feriado !== null
     })
-    const feriadosMap: any = feriadosFilter.map((dia: any) => {
+    const feriadosMap: any = feriadosFilter?.map((dia: any) => {
       return {
         date: dia.dia,
         display: 'background',
@@ -64,10 +60,10 @@ export const Calendario = () => {
     })
 
     // FINAIS DE SEMANA
-    const fdsFilter: any = calendarioEdicao.filter(dia => {
+    const fdsFilter: any = calendarioEdicao?.filter(dia => {
       return dia.processo === null && dia.feriado === null
     })
-    const fdsMap: any = fdsFilter.map((dia: any) => {
+    const fdsMap: any = fdsFilter?.map((dia: any) => {
       return {
         date: dia.dia,
         display: 'background',
@@ -79,18 +75,24 @@ export const Calendario = () => {
     return etapaMap.concat(areasMap, feriadosMap, fdsMap)
   }
 
-  const diasUteis: any = calendarioEdicao.filter(dia => {
+  const encerramento = calendarioEdicao[calendarioEdicao?.length - 1].dia
+  .split('-')
+  .reverse()
+  .join('/')
+
+
+  const diasUteis: any = calendarioEdicao?.filter(dia => {
     return dia.etapa !== null
   })
 
-  const arrayCorEtapa: any = diasUteis.map((dia: any) => {
+  const arrayCorEtapa: any = diasUteis?.map((dia: any) => {
     return { etapa: dia.etapa, cor: dia.cor }
   })
 
   const etapaCorUnica: any = new Set()
 
-  const unique = arrayCorEtapa.filter((element: any) => {
-    const isDuplicate = etapaCorUnica.has(element.etapa)
+  const unique = arrayCorEtapa?.filter((element: any) => {
+    const isDuplicate = etapaCorUnica?.has(element.etapa)
 
     etapaCorUnica.add(element.etapa)
 
@@ -106,6 +108,11 @@ export const Calendario = () => {
       <Header />
 
       <Box className="calendario">
+        
+        <Box>
+          {state.nome}
+        </Box>
+
         <Box
           sx={{
             display: 'flex',
