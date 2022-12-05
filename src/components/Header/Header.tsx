@@ -34,38 +34,37 @@ export const Header = () => {
     loggedUser()
     renderizarBotoes()
   }, [])
-  
+
   const imagemBase = dadosUsuarioLogado.imagem
   const userEmail = localStorage.getItem('user')
   let homeLink = ''
 
-
   if (roles && roles.includes('ROLE_ADMIN')) {
     homeLink = '/admin'
-
   } else if (roles && roles.includes('ROLE_GESTAO_DE_PESSOAS')) {
     homeLink = '/gestao'
-
   } else {
     homeLink = '/instrutor'
-
   }
 
   // BOTOES
 
   const renderizarBotoes = () => {
+    roles.includes('ROLE_ADMIN') &&
+      document.getElementById('colaboradores')?.classList.remove('hide')
 
-    roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true &&
+      document.getElementById('gestaoEdicoes')?.classList.remove('hide')
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true &&
+      document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide') 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
-    
-    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
-    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
-
-  } 
-
-
+    roles.includes('ROLE_INSTRUTOR') &&
+      !roles.includes('ROLE_GESTAO_DE_PESSOAS') &&
+      document.getElementById('instrutorEdicoes')?.classList.remove('hide')
+    roles.includes('ROLE_INSTRUTOR') &&
+      !roles.includes('ROLE_GESTAO_DE_PESSOAS') &&
+      document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
+  }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -82,9 +81,6 @@ export const Header = () => {
     setAnchorElUser(null)
   }
 
-
-
-
   return (
     <AppBar
       position="static"
@@ -94,6 +90,7 @@ export const Header = () => {
       <Container maxWidth={false} className={'headerContainer'}>
         <Toolbar disableGutters className={'toolbar'}>
           <Box
+            data-testid="id-logo"
             className={'logoImg'}
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
@@ -135,7 +132,9 @@ export const Header = () => {
             >
               <Box className={'menuBurgerOptions'}>
                 <Link to={'/admin/cadastrar'}>
-                  <MenuItem>CADASTRAR COLABORADOR</MenuItem>
+                  <MenuItem data-testid="id-menu-cadastrar">
+                    CADASTRAR COLABORADOR
+                  </MenuItem>
                 </Link>
               </Box>
             </Menu>
@@ -155,50 +154,59 @@ export const Header = () => {
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
             <ul>
-              <MenuItem id="colaboradores" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton 
+              <MenuItem
+                id="colaboradores"
+                className="hide"
+                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+              >
+                <HeaderButton
                   texto={'COLABORADORES'}
                   url={'/admin/colaboradores'}
                 />
               </MenuItem>
 
-              <MenuItem id="gestaoEdicoes" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton
-                  texto={'EDIÇÕES'}
-                  url={'/gestao/edicoes'}
-                />
+              <MenuItem
+                id="gestaoEdicoes"
+                className="hide"
+                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+              >
+                <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'} />
               </MenuItem>
 
-              <MenuItem id="gestaoNaoUtil" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+              <MenuItem
+                id="gestaoNaoUtil"
+                className="hide"
+                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+              >
                 <HeaderButton
                   texto={'PERÍODO NÃO ÚTIL'}
                   url={'/gestao/dias-nao-uteis'}
                 />
               </MenuItem>
 
-              <MenuItem id="instrutorEdicoes" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                <HeaderButton
-                  texto={'EDIÇÕES'}
-                  url={'/instrutor/edicoes'}
-                />
+              <MenuItem
+                id="instrutorEdicoes"
+                className="hide"
+                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+              >
+                <HeaderButton texto={'EDIÇÕES'} url={'/instrutor/edicoes'} />
               </MenuItem>
 
-              <MenuItem id="instrutorNaoUtil" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+              <MenuItem
+                id="instrutorNaoUtil"
+                className="hide"
+                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+              >
                 <HeaderButton
                   texto={'PERÍODO NÃO ÚTIL'}
                   url={'/instrutor/dias-nao-uteis'}
                 />
               </MenuItem>
-
-
-
-
             </ul>
           </Box>
 
           <Box className={'usuario'}>
             <h3>{dadosUsuarioLogado.nome}</h3>
-        
 
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -209,6 +217,7 @@ export const Header = () => {
                   />
                 ) : (
                   <img
+                    data-testid="imagem-usuario"
                     alt="not fount"
                     width={'250px'}
                     className={'BorderRadius'}
@@ -241,7 +250,6 @@ export const Header = () => {
                     id={'button-editar-perfil'}
                     onClick={() => {
                       navigate('/perfil')
-                    
                     }}
                   >
                     EDITAR PERFIL

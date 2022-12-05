@@ -24,8 +24,6 @@ interface State {
   showPassword: boolean
 }
 
-
-
 export const Login = () => {
   const [values, setValues] = React.useState<State>({
     password: '',
@@ -63,27 +61,23 @@ export const Login = () => {
     resolver: yupResolver(userFormSchema)
   })
 
-
   useEffect(() => {
-    if(token){
+    if (token) {
       let decodedJWT = JSON.parse(atob(token.split('.')[1]))
       let roleArray = decodedJWT.CARGOS
 
-      
       setRoles(roleArray)
     }
-    
-  },[])
+  }, [])
 
-    if(roles?.includes('ROLE_ADMIN')) {
-      return <Navigate to ='/admin' />
-    } else if (roles?.includes('ROLE_GESTAO_DE_PESSOAS')){
-      return <Navigate to ='/gestao' />
-    } else if  (roles?.includes('ROLE_INSTRUTOR')) {
-      return <Navigate to ='/instrutor' />
-    } 
-  
- 
+  if (roles?.includes('ROLE_ADMIN')) {
+    return <Navigate to="/admin" />
+  } else if (roles?.includes('ROLE_GESTAO_DE_PESSOAS')) {
+    return <Navigate to="/gestao" />
+  } else if (roles?.includes('ROLE_INSTRUTOR')) {
+    return <Navigate to="/instrutor" />
+  }
+
   return (
     <Box display={'flex'} className={styles.container}>
       <Box
@@ -148,7 +142,7 @@ export const Login = () => {
                   Senha
                 </InputLabel>
                 <OutlinedInput
-                  {...register('senha', {required: true})}
+                  {...register('senha', { required: true })}
                   className={styles.loginText}
                   id="input-login-senha"
                   type={values.showPassword ? 'text' : 'password'}
