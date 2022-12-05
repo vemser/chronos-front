@@ -34,11 +34,10 @@ export const GestaoEditarDiaNaoUtil = () => {
     <>
       <Header />
       <section className={styles.ContainerSection}>
-        <div className={styles.ContainerTitle}>
-          <h2>Editar {state?.descricao}</h2>
-        </div>
-
         <div className={styles.ContainerCalendario}>
+          <div className={styles.ContainerTitle}>
+            <h2>Editar {state?.descricao}</h2>
+          </div>
           <form
             onSubmit={handleSubmit((data: IDiaNaoUtil) => putDiaNaoUtil(data))}
           >
@@ -100,10 +99,10 @@ export const GestaoEditarDiaNaoUtil = () => {
                   {...register('dataFinal')}
                 />
               </Box>
-
               <Box className={styles.dateContainer}>
                 <TextField
                   id="idDiaNaoUtil"
+                  className={styles.dataPicker}
                   sx={{ display: 'none' }}
                   value={state.idDiaNaoUtil}
                   {...register('idDiaNaoUtil')}
@@ -111,15 +110,13 @@ export const GestaoEditarDiaNaoUtil = () => {
               </Box>
             </Box>
 
-            <Box
-              sx={{ display: 'flex', justifyContent: 'center', mt: '220px' }}
-            >
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: '50px' }}>
               <Button
                 className={styles.submitButton}
                 type="submit"
                 variant="contained"
                 id="button-login"
-                sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe' }}
+                sx={{ backgroundColor: '#1e62fe' }}
               >
                 Enviar
               </Button>
