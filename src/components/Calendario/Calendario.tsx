@@ -46,7 +46,7 @@ export const Calendario = () => {
 
     // AREAS
     const areasMap: any = processoFilter.map((dia: any) => {
-      return { date: dia.dia, title: dia.areas, classNames: ['areas'] }
+      return { date: dia.dia, title: dia.areas, classNames: ['areas'], textColor:"#000000" }
     })
 
     // FERIADOS
@@ -116,7 +116,7 @@ export const Calendario = () => {
         >
           <h2>Previsão de encerramento: {encerramento} </h2>
         </Box>
-        <Box className="legendaSection">
+         <Box className="legendaSection">
           <div className="legenda">
             <h1>Etapas</h1>
             {unique &&
