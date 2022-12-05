@@ -1,125 +1,142 @@
-*{
-    z-index: 0 !important;
-}
-.cardCor{
-    height: 25px;
-    width: 50px;
-    opacity: 90%;
+.calendario {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }
 
-.legendaLinha{
-    display: flex;
-    gap: 10px;
-    align-items: center;
+.cardCor {
+  height: 25px;
+  width: 25px;
+  opacity: 90%;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
-.fc-bg-event{
-    opacity: 90% !important;
+.legenda h1 {
+  margin-bottom: 30px;
+}
+
+.legendaLinha {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.containerTitulo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+}
+
+.fc-bg-event {
+  opacity: 90% !important;
 }
 
 /* CALENDARIO COMPLETO*/
-.fc-media-screen{
-    margin: 0 auto;
-    max-width: 1200px;
-    max-height: 700px;
+.fc-media-screen {
+  margin: 0 auto;
+  max-width: 1200px;
+  max-height: 700px;
 }
 
-.fc-daygrid{
-    border-radius: 16px !important;
+.fc-daygrid {
+  border-radius: 16px !important;
 }
 /* TABELA */
 
-.fc table{
-    border-collapse: initial;
-    border-spacing: 8px;
+.fc table {
+  border-collapse: initial;
+  border-spacing: 8px;
 }
-
 
 /* QUADRADO DO DIA */
 
-.fc-daygrid-day-number{
-    font-weight: 800;
-    color: #000000;
-    font-size: 1rem;  
-    left: -4px;
-    top:  -10px;
-    opacity: 80% !important;
-    z-index: 1 !important;
+.fc-daygrid-day-number {
+  font-weight: 600;
+  color: #000000;
+  font-size: 1rem;
+  left: -4px;
+  top: -10px;
+  opacity: 80% !important;
 }
 
-.fc-daygrid-day-top{
-    margin-right: 6px;
+.fc-daygrid-day-top {
+  margin-right: 6px;
 }
 
 .fc-daygrid-day {
-    width: auto !important;
-    height: 200px;
-    border-radius: 12px !important;
+  width: auto !important;
+  height: 200px;
+  border-radius: 12px !important;
 }
 
-.fc-daygrid-bg-harness{
-    border-radius: 12px !important;
-    position: absolute !important;
+.fc-daygrid-bg-harness {
+  border-radius: 12px !important;
+  position: absolute !important;
 }
 
 .fc-daygrid-day .fc-day {
-    border-radius: 12px !important;
+  border-radius: 12px !important;
 }
 
 /* EVENTO */
 
-
 .fc-event-title {
-   padding-left: 4px !important;
-   margin: 0 8px ;
-   opacity: 100% !important;
-   position: relative !important;
-   z-index: 12 !important;
+  padding-left: 4px !important;
+  margin: 0 8px;
+  opacity: 100% !important;
+  position: relative !important;
+  z-index: 12 !important;
 }
 
-.fc-bg-event{
-    border-radius:inherit;
-    border: 4px solid #ffffff;
+.fc-bg-event {
+  border-radius: inherit;
+  border: 4px solid #ffffff;
 }
 
-
-.feriado{
-    font-weight: 600;
-    color: #000000;
-    font-size: 1rem;   
-    opacity: 100% !important;
-    
+.feriado {
+  font-weight: 600;
+  color: #000000;
+  font-size: 1rem;
+  opacity: 100% !important;
 }
 
-
-
-
-.etapa div{
-    font-weight: 800;
-    color: #000000;
-    margin-right: 12px !important;
+.etapa div {
+  font-weight: 800;
+  color: #000000;
+  margin-right: 12px !important;
 }
 
 .etapa .fc-event-title {
-    margin-top: 30px !important;
+  margin-top: 30px !important;
 }
 
-.areas{
-    margin-top: 40px !important;
-    background-color: inherit;
-    font-weight: 600;
-    border: none;
-    z-index: 1;
+.areas {
+  margin-top: 40px !important;
+  background-color: inherit;
+  font-weight: 600;
+  border: none;
+  z-index: 999 !important;
+  display: absolute !important;
 }
 
-.areas .fc-event-title{
-    display: flex !important;
-    flex-wrap: wrap !important;
-    max-height: auto !important; 
-    overflow: auto;
+.areas .fc-event-title {
+  display: flex !important;
+  /* width: 143px; */
+  height: auto !important;
+
+  word-break: break-word !important;
 }
-.legendaSection{
-    position: absolute;
-    left: 5%;
-    bottom: 50%;
+.legenda {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.fc .fc-day-other .fc-daygrid-day-top {
+  opacity: 100% !important;
 }
