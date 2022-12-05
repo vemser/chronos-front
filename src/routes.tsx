@@ -9,7 +9,6 @@ import { AdminHome } from './pages/Admin/AdminHome/AdminHome'
 
 import { GestaoCadastrarDiaNaoUtil } from './pages/Gestao/GestaoCadastrarDiaNaoUtil/GestaoCadastrarDiaNaoUtil'
 import { GestaoCadastrarEdicao } from './pages/Gestao/GestaoCadastrarEdicao/GestaoCadastrarEdicao'
-// import { GestaoDiaNaoUtil } from './pages/Gestao/GestaoDiaNaoUtil/GestaoDiaNaoUtil'
 import { GestaoEdicoes } from './pages/Gestao/GestaoEdicoes/GestaoEdicoes'
 import { GestaoHome } from './pages/Gestao/GestaoHome/GestaoHome'
 import { GestaoNovaEtapa } from './pages/Gestao/GestaoNovaEtapa/GestaoNovaEtapa'
@@ -36,6 +35,7 @@ import { InstEdicoes } from './pages/Instrutor/InstEdicoes/InstEdicoes'
 import { InstNaoUteis } from './pages/Instrutor/InstNaoUteis/InstNaoUteis'
 import { InstVerificarEdicao } from './pages/Instrutor/InstVerificarEdicao/InstVerifficarEdicao'
 import { Calendario } from './components/Calendario/Calendario'
+import { GestaoDiaNaoUtil } from './pages/Gestao/GestaoDiaNaoUtil/GestaoDiaNaoUtil'
 
 export const AppRoutes = () => {
   return (
@@ -92,7 +92,7 @@ export const AppRoutes = () => {
 
                     <Route
                       path="/gestao/dias-nao-uteis"
-                      // element={<GestaoDiaNaoUtil />}
+                      element={<GestaoDiaNaoUtil />}
                     />
                     <Route
                       path="/gestao/cadastrar-dias-nao-uteis"

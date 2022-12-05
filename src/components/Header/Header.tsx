@@ -136,7 +136,7 @@ export const Header = () => {
             >
               <Box className={'menuBurgerOptions'}>
               <ul>
-              <MenuItem id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+              <MenuItem data-testid="id-menu-cadastrar" id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                 <HeaderButton 
                   texto={'COLABORADORES'}
                   url={'/admin/colaboradores'}
@@ -148,7 +148,7 @@ export const Header = () => {
                   texto={'EDIÇÕES'}
                   url={'/gestao/edicoes'}
                 />
-              </MenuItem data-testid="id-menu-cadastrar">
+              </MenuItem>
                     
 
               <MenuItem id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
