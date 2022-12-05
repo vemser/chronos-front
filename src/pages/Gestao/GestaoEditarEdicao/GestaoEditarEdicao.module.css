@@ -6,19 +6,17 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 50px;
-
 }
 
-.dataPicker{
+.dataPicker {
   width: 220px;
 }
-.ContainerTitle h2{
+.ContainerTitle h2 {
   color: #1e62fe;
   margin-bottom: 40px;
 }
 .ContainerConteudo {
   width: 80%;
-  background-color: #ccc;
 }
 
 .ContainerCalendario {
@@ -47,7 +45,7 @@
   flex-direction: column;
   justify-content: center;
 }
-.ContainerMenorCalendario{
+.ContainerMenorCalendario {
   display: flex;
   gap: 40px;
 }
@@ -56,25 +54,25 @@
   color: rgb(171, 33, 33);
 }
 
-.dateContainer{
+.dateContainer {
   display: flex;
   flex-direction: column;
 }
 
-.dateContainer p{
+.dateContainer p {
   font-size: 1.125rem;
   font-weight: 600;
   padding-left: none;
   margin: none;
 }
 
-.submitButton{
+.submitButton {
   width: 200px;
 }
 
 @media (max-width: 1200px) {
   .ContainerSection {
-    height: 100%; 
+    height: 100%;
   }
   .ContainerCalendario {
     width: 95%;
