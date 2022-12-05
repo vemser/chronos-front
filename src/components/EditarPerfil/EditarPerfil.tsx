@@ -224,7 +224,16 @@ export const EditarPerfil = () => {
                     {...register('nome')}
                     variant="standard"
                     className={styles.FormPerfil}
+                    error={!!errors.nome}
                   />
+                  {errors.nome && (
+                    <span
+                      className={styles.ContainerError}
+                      id="nome-error"
+                    >
+                      {errors.nome.message}
+                    </span>
+                  )}
 
                   <TextField
                     label="Senha atual"
@@ -237,7 +246,7 @@ export const EditarPerfil = () => {
                   {errors.senhaAtual && (
                     <span
                       className={styles.ContainerError}
-                      id="confirmacao-error"
+                      id="senha-atual-error"
                     >
                       {errors.senhaAtual.message}
                     </span>
@@ -254,7 +263,7 @@ export const EditarPerfil = () => {
                   {errors.novaSenha && (
                     <span
                       className={styles.ContainerError}
-                      id="confirmacao-error"
+                      id="nova-senha-error"
                     >
                       {errors.novaSenha.message}
                     </span>

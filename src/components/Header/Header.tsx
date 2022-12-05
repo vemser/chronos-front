@@ -68,6 +68,22 @@ export const Header = () => {
 
   } 
 
+  roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
+    roles.includes('ROLE_ADMIN') && document.getElementById('colaboradoresResp')?.classList.remove('hide')
+
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide') 
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoesResp')?.classList.remove('hide') 
+
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtilResp')?.classList.remove('hide')
+    
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoesResp')?.classList.remove('hide')
+
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtilResp')?.classList.remove('hide')
+
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -135,31 +151,31 @@ export const Header = () => {
               <Box className={'menuBurgerOptions'}>
                 <ul>
 
-                <MenuItem data-testid="id-menu-cadastrar" id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <MenuItem id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                   <Link to='/admin/colaboradores'>
                       <p>COLABORADORES</p>
                   </Link> 
                 </MenuItem>
 
-                <MenuItem data-testid="id-menu-cadastrar" id="gestaoEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <MenuItem id="gestaoEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                   <Link to='/gestao/edicoes'>
                       <p>EDIÇÕES</p>
                   </Link> 
                 </MenuItem>
 
-                <MenuItem data-testid="id-menu-cadastrar" id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <MenuItem  id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                   <Link to='/gestao/dias-nao-uteis'>
                       <p>PERÍODO NÃO ÚTIL</p>
                   </Link> 
                 </MenuItem>
 
-                <MenuItem data-testid="id-menu-cadastrar" id="instrutorEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <MenuItem  id="instrutorEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                   <Link to='/instrutor/edicoes'>
                       <p>EDIÇÕES</p>
                   </Link> 
                 </MenuItem>
                       
-                <MenuItem data-testid="id-menu-cadastrar" id="instrutorNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <MenuItem id="instrutorNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
                   <Link to='/instrutor/dias-nao-uteis'>
                       <p>PERÍODO NÃO ÚTIL</p>
                   </Link> 

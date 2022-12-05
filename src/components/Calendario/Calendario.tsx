@@ -80,6 +80,12 @@ export const Calendario = () => {
   .reverse()
   .join('/')
 
+  const inicio = calendarioEdicao[0].dia
+  .split('-')
+  .reverse()
+  .join('/')
+
+
 
   const diasUteis: any = calendarioEdicao?.filter(dia => {
     return dia.etapa !== null
@@ -107,22 +113,24 @@ export const Calendario = () => {
     <>
       <Header />
 
-      <Box className="calendario">
+      <Box className="calendario" sx={{ display: 'flex', flexDirection:'row' }}>
         
-        <Box>
-          {state.nome}
-        </Box>
+       
+        <Box sx={{ display: 'flex', justifyContent: 'space-between'}} >
+          <Box>
+            <h3>Previsão de encerramento: {encerramento} </h3>
+          </Box>
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            margin: '40px auto',
-            maxWidth: '1200px'
-          }}
-        >
-          <h2>Previsão de encerramento: {encerramento} </h2>
+          <Box>
+            <h3>{state.nome} - de {inicio} até {encerramento}</h3>
+          </Box>
         </Box>
+        
+       
+        
+      
+
+        
 
         <Box className="CalendarContainer" mt={'50px'}>
           <FullCalendar

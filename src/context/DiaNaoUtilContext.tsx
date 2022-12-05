@@ -11,11 +11,13 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
     const [ diasNaoUteis, setDiasNaoUteis ] = useState<IDiaNaoUtil[]>([])
     const [totalPages, setTotalPages] = useState(0)
+    const token = localStorage.getItem('token');
 
     const navigate = useNavigate();
 
     const getDiaNaoUtil = async ( page: string) => {
         try {
+            api.defaults.headers.common['Authorization'] = token;
             nProgress.start();
             const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=10`)
 

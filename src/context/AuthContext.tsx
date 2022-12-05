@@ -16,6 +16,8 @@ export const AuthProvider = ({ children }: IChildren) => {
   const [token, setToken] = useState<string | any>('');
   const [dadosUsuarioLogado, setDadosUsuarioLogado] = useState<any>({});
 
+  const accesstoken = localStorage.getItem('token')
+
   const parseJwt = async (token: any) => {
     try {
       let decodedJWT = JSON.parse(atob(token.split('.')[1]));
@@ -31,9 +33,10 @@ export const AuthProvider = ({ children }: IChildren) => {
 
   const loggedUser = async () => {
     try {
+      api.defaults.headers.common['Authorization'] = accesstoken;
       const { data } = await api.get('/usuario/logged-user');
       setDadosUsuarioLogado(data);
-      console.log(data);
+  
     } catch (error) {
       console.log(error);
     };
@@ -41,7 +44,6 @@ export const AuthProvider = ({ children }: IChildren) => {
 
   const handleLogin = async (user: IUser) => {
     try {
-      console.log('iniciou');
 
       const { data } = await api.post('/login', user);
 

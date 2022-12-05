@@ -332,9 +332,6 @@ export const UserProvider = ({ children }: IChildren) => {
         const { data } = await api.get('/area-envolvida');
         setAreasEnvolvidas(data)
 
-        console.log('Area Envolvida');
-        console.log(data)
-
     } catch (error) {
         console.error(error);
         toast.error('Houve um erro em receber as areas envolvidas cadastradas', toastConfig)
@@ -352,9 +349,6 @@ export const UserProvider = ({ children }: IChildren) => {
   
           const { data } = await api.get('/responsavel');
           setResponsaveis(data);
-
-          console.log('Responsavel');
-          console.log(data)
   
       } catch (error) {
           console.error(error);
