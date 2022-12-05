@@ -1,63 +1,58 @@
 .ContainerNova {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-  .ContainerNova a button{
-    width: 280px;
-  }
-  
-  .ButtonContainer {
-    transition: 0.2s;
-  
-    margin-right: 7px;
-  }
-  .ButtonContainer:hover {
-    scale: 1.05;
-  
-    cursor: pointer;
-  }
-  
-  .ContainerButton {
-    width: 25%;
-  }
-  .ContainerGestaoEdicoes {
-    width: 80%;
-  }
-  
+.ContainerNova a button {
+  width: 280px;
+}
 
-  
-  .ContainerGeral {
-    max-width: 1600px;
-    height: 100%;
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .ContainerTitle {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-  .ContainerTitle h2{
-   margin-left: 25%;
-  }
-  
-  .ContainerHead {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto;
-  }
-  
-  .paginacao{
-    display: flex;
-    justify-content: center;
-  }
+.ButtonContainer {
+  transition: 0.2s;
+
+  margin-right: 7px;
+}
+.ButtonContainer:hover {
+  scale: 1.05;
+
+  cursor: pointer;
+}
+
+.ContainerButton {
+  width: 25%;
+}
+.ContainerGestaoEdicoes {
+  width: 80%;
+}
+
+.ContainerGeral {
+  max-width: 1600px;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ContainerTitle {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.ContainerHead {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+}
+
+.paginacao {
+  display: flex;
+  justify-content: center;
+}
