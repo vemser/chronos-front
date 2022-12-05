@@ -56,12 +56,19 @@ export const Header = () => {
   const renderizarBotoes = () => {
 
     roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
+    roles.includes('ROLE_ADMIN') && document.getElementById('colaboradoresResp')?.classList.remove('hide')
 
     roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide') 
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoesResp')?.classList.remove('hide') 
+
     roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtilResp')?.classList.remove('hide')
     
     roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoesResp')?.classList.remove('hide')
+
     roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
+    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtilResp')?.classList.remove('hide')
 
   } 
 
@@ -134,9 +141,46 @@ export const Header = () => {
               }}
             >
               <Box className={'menuBurgerOptions'}>
-                <Link to={'/admin/cadastrar'}>
-                  <MenuItem>CADASTRAR COLABORADOR</MenuItem>
-                </Link>
+              <ul>
+              <MenuItem id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <HeaderButton 
+                  texto={'COLABORADORES'}
+                  url={'/admin/colaboradores'}
+                />
+              </MenuItem>
+
+              <MenuItem id="gestaoEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <HeaderButton
+                  texto={'EDIÇÕES'}
+                  url={'/gestao/edicoes'}
+                />
+              </MenuItem>
+
+              <MenuItem id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <HeaderButton
+                  texto={'PERÍODO NÃO ÚTIL'}
+                  url={'/gestao/dias-nao-uteis'}
+                />
+              </MenuItem>
+
+              <MenuItem id="instrutorEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <HeaderButton
+                  texto={'EDIÇÕES'}
+                  url={'/instrutor/edicoes'}
+                />
+              </MenuItem>
+
+              <MenuItem id="instrutorNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
+                <HeaderButton
+                  texto={'PERÍODO NÃO ÚTIL'}
+                  url={'/instrutor/dias-nao-uteis'}
+                />
+              </MenuItem>
+
+
+
+
+            </ul>
               </Box>
             </Menu>
           </Box>
@@ -209,7 +253,7 @@ export const Header = () => {
                   />
                 ) : (
                   <img
-                    alt="not fount"
+                    alt=""
                     width={'250px'}
                     className={'BorderRadius'}
                     src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}

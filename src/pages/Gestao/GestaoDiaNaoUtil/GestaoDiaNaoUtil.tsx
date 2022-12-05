@@ -29,7 +29,7 @@ export const GestaoDiaNaoUtil = () => {
           
           <Box className={styles.ContainerNova}>
             <div className={styles.ContainerTitle}>
-              <h2>Períodos Não Úteis</h2>
+              <h2>Períodos Não Úteis </h2>
             </div>
 
             <Link to={'/gestao/cadastrar-dias-nao-uteis'}>

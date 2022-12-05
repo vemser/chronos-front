@@ -167,7 +167,9 @@ export interface IPrivateRoute {
 
 export interface ICalendarioContext {
   calendarioEdicao: ICalendarioEdicao[]
+  calendarioGeral: ICalendarioGeral[]
   getCalendarioPorEdicao: (idEdicao: number) => Promise<void>
+  getCalendarioGeral: () => Promise<void>
 }
 
 export interface ICalendarioEdicao {
@@ -175,4 +177,14 @@ export interface ICalendarioEdicao {
   etapa: string | null,
   processo: string | undefined | null
   feriado: string | undefined | null
+  idEtapa: number
+} 
+
+
+export interface ICalendarioGeral {
+  dia: string,
+  etapa: string | null,
+  processo: string | undefined | null
+  feriado: string | undefined | null
+  idEtapa: number
 } 

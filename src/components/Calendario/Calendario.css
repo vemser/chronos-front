@@ -1,34 +1,54 @@
-
-.a1{
-    background-color: red !important;
-}
-.a2{
-    background-color: blue !important;
-}
-.a3{
-    background-color: green !important;
-}
-.a4{
-    background-color: purple !important;
+.cardCor{
+    height: 25px;
+    width: 50px;
+    opacity: 60%;
 }
 
+.legendaLinha{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.fc-bg-event{
+    opacity: 60% !important;
+}
 
 
 
+.fc-daygrid-day-number{
+    font-weight: 800;
+    color: #000000;
+    font-size: 1rem;  
 
-
-
-
+}
 .fc-media-screen{
     margin: 0 auto;
     max-width: 1200px;
-    max-height: 800px;
+    max-height: 700px;
 }
 
 .feriado{
+    font-weight: 600;
+    color: #000000;
+    font-size: 1rem;   
+    opacity: 100% !important;
+    
+}
+
+
+.etapa div{
     font-weight: 800;
     color: #000000;
-    font-size: 1.25rem;   
-    opacity: 35% !important;
-    
+    margin-right: 12px !important;
+}
+
+.areas{
+    margin-top: 40px !important;
+}
+
+.legendaSection{
+    position: absolute;
+    left: 5%;
+    bottom: 50%;
 }
