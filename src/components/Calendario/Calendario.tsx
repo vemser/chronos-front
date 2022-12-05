@@ -123,9 +123,21 @@ export const Calendario = () => {
         >
           <h2>Previsão de encerramento: {encerramento} </h2>
         </Box>
-         <Box className="legendaSection">
+
+        <Box className="CalendarContainer" mt={'50px'}>
+          <FullCalendar
+            plugins={[dayGridPlugin]}
+            locale={'pt-br'}
+            initialView="dayGridMonth"
+            weekends={true}
+            events={gerarCalendario()}
+          />
+        </Box>
+        <Box className="legendaSection">
+          <div className="containerTitulo">
+            <h2>Etapas</h2>
+          </div>
           <div className="legenda">
-            <h1>Etapas</h1>
             {unique &&
               unique.map((etapa: any) => {
                 return (
@@ -141,15 +153,6 @@ export const Calendario = () => {
                 )
               })}
           </div>
-        </Box>
-        <Box className="CalendarContainer" mt={'50px'}>
-          <FullCalendar
-            plugins={[dayGridPlugin]}
-            locale={'pt-br'}
-            initialView="dayGridMonth"
-            weekends={true}
-            events={gerarCalendario()}
-          />
         </Box>
       </Box>
     </>

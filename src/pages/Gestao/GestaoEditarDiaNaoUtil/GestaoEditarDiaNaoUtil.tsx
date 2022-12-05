@@ -11,19 +11,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { cadastrarDiaNaoUtilFormSchema } from '../../../utils/schemas'
 import { Header } from '../../../components/Header/Header'
 
-
 export const GestaoEditarDiaNaoUtil = () => {
+  const { putDiaNaoUtil } = useContext(DiaNaoUtilContext)
 
- const { putDiaNaoUtil } = useContext(DiaNaoUtilContext)
+  const { state } = useLocation()
 
- const { state } = useLocation(); 
-
-  const { register, handleSubmit,  formState: { errors }} = useForm<IDiaNaoUtil>(({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IDiaNaoUtil>({
     resolver: yupResolver(cadastrarDiaNaoUtilFormSchema)
-  }))
+  })
 
-  
-  if(state.repeticaoAnual === 'ATIVO') {
+  if (state.repeticaoAnual === 'ATIVO') {
     var status = true
   } else {
     var status = false
@@ -31,14 +32,16 @@ export const GestaoEditarDiaNaoUtil = () => {
 
   return (
     <>
-    <Header/>
+      <Header />
       <section className={styles.ContainerSection}>
         <div className={styles.ContainerTitle}>
           <h2>Editar {state?.descricao}</h2>
         </div>
 
         <div className={styles.ContainerCalendario}>
-        <form onSubmit={handleSubmit((data: IDiaNaoUtil) => putDiaNaoUtil(data))}>
+          <form
+            onSubmit={handleSubmit((data: IDiaNaoUtil) => putDiaNaoUtil(data))}
+          >
             <div className={styles.ContainerNomeEdicao}>
               <TextField
                 id="descricao"
@@ -48,51 +51,77 @@ export const GestaoEditarDiaNaoUtil = () => {
                 className={styles.NomeEdicao}
                 {...register('descricao')}
               />
-               {errors.descricao && (<span
-                    className={styles.ContainerError}
-                    id="erro-descricao-editar-n-util"
-                  >
-                    {errors.descricao.message}
-                  </span>
-                )}
+              {errors.descricao && (
+                <span
+                  className={styles.ContainerError}
+                  id="erro-descricao-editar-n-util"
+                >
+                  {errors.descricao.message}
+                </span>
+              )}
 
-                <FormControlLabel control={<Checkbox defaultChecked={status} />} label="Repetir todos os anos" id='repeticaoAnual'  {...register('repeticaoAnual')}/>
+              <FormControlLabel
+                control={<Checkbox defaultChecked={status} />}
+                label="Repetir todos os anos"
+                id="repeticaoAnual"
+                {...register('repeticaoAnual')}
+              />
             </div>
 
-
-              <Box className={styles.ContainerMenorCalendario}>
-                <Box className={styles.dateContainer} >
-                  <p>Data Inicial</p>
-                  <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" defaultValue={state?.dataInicial} {...register('dataInicial')}/>
-                  {errors.dataInicial && (<span
-                      className={styles.ContainerError}
-                      id="erro-data-editar-n-util"
-                    >
-                      {errors.dataInicial.message}
-                    </span>
-                  )}
-                </Box>
-
-                <Box className={styles.dateContainer}>
-                  <p>Data Final</p>
-                  <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" defaultValue={state?.dataFinal} {...register('dataFinal')}/>
-                </Box>
-
-                <Box className={styles.dateContainer}>
-                  <TextField id="idDiaNaoUtil" sx={{display: 'none'}} value={state.idDiaNaoUtil} {...register('idDiaNaoUtil')}/>
-                </Box>
-
+            <Box className={styles.ContainerMenorCalendario}>
+              <Box className={styles.dateContainer}>
+                <p>Data Inicial</p>
+                <TextField
+                  id="dataInicial"
+                  className={styles.dataPicker}
+                  type={'date'}
+                  variant="standard"
+                  defaultValue={state?.dataInicial}
+                  {...register('dataInicial')}
+                />
+                {errors.dataInicial && (
+                  <span
+                    className={styles.ContainerError}
+                    id="erro-data-editar-n-util"
+                  >
+                    {errors.dataInicial.message}
+                  </span>
+                )}
               </Box>
-            
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: '220px'}}>
+
+              <Box className={styles.dateContainer}>
+                <p>Data Final</p>
+                <TextField
+                  id="dataFinal"
+                  className={styles.dataPicker}
+                  type={'date'}
+                  variant="standard"
+                  defaultValue={state?.dataFinal}
+                  {...register('dataFinal')}
+                />
+              </Box>
+
+              <Box className={styles.dateContainer}>
+                <TextField
+                  id="idDiaNaoUtil"
+                  sx={{ display: 'none' }}
+                  value={state.idDiaNaoUtil}
+                  {...register('idDiaNaoUtil')}
+                />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{ display: 'flex', justifyContent: 'center', mt: '220px' }}
+            >
               <Button
                 className={styles.submitButton}
                 type="submit"
                 variant="contained"
-                id="button-login" 
+                id="button-login"
                 sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe' }}
-                >
-                  Enviar
+              >
+                Enviar
               </Button>
             </Box>
           </form>
