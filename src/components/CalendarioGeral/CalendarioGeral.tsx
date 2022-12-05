@@ -24,50 +24,38 @@ export const CalendarioGeral = () => {
   const gerarCalendario = () => {
 
     // DIAS UTEIS
-    const etapaFilter: any = calendarioGeral.filter((dia) => {
-        return dia.etapa !== null
-    })
-    const arrayEtapaString = etapaFilter.map((etapa: any) => {
-        return etapa.etapa
+    const diasUteis: any = calendarioGeral.filter((dia) => {
+      return dia.etapa !== null
     })
     
-    // CRIA UM ARRAY DE ETAPAS PARA DEFINIR AS CORES DE CADA ETAPA
-    const arrayEtapaUnico = [...new Set(arrayEtapaString)];
-
-    console.log(arrayEtapaUnico)
-    
-    // ETAPAS
-    const etapaMap: any = etapaFilter.map((dia: any) => {
-      let counter = 0
-      if(arrayEtapaUnico[counter] !== dia.etapa) {
-        counter++
-      }
-
-      console.log(counter);
-      
-      return { 
-        date: dia.dia,
-        backgroundColor: colors[counter],
-      }
+    // FERIADOS
+    const feriadosFilter: any = calendarioGeral.filter((dia) => {
+      return dia.processo === null && dia.feriado !== null
+    })
+    const feriadosMap: any = feriadosFilter.map((dia: any) => {
+      return { date: dia.dia, display: 'background', backgroundColor:'#cecece', title: dia.feriado, classNames: ['feriado'] } 
     })
 
-    const edicaoMap: any = etapaFilter.map((dia: any) => {
-        let counter = 0
-        if(arrayEtapaUnico[counter] !== dia.etapa) {
-          counter++
-        }
-  
-        console.log(counter);
-        
-        return { 
-          date: dia.dia,
-      
-        }
-      })
-   
-      const concatedArray = etapaMap.concat(edicaoMap)
+    // FINAIS DE SEMANA
+    const fdsFilter: any = calendarioGeral.filter((dia) => {
+      return dia.processo === null && dia.feriado === null
+    })
+    const fdsMap: any = feriadosFilter.map((dia: any) => {
+      return { date: dia.dia, display: 'background', backgroundColor:'#cecece', title: dia.feriado, classNames: ['feriado'] } 
+    })
 
-    setCalendario(concatedArray)
+
+    // EDICAO
+    const etapaProcesso = diasUteis.map((dia: any) => {
+      return{ date: dia.dia, title: dia.processo, backgroundColor: dia.cor}
+    })
+    const etapaEdicao = diasUteis.map((dia: any) => {
+      return{ date: dia.dia, title: dia.edicao, backgroundColor: dia.cor}
+    })
+
+
+
+      return etapaEdicao.concat(etapaProcesso,fdsMap , feriadosMap)
   }
 
 
@@ -80,7 +68,7 @@ export const CalendarioGeral = () => {
           initialView="dayGridMonth"
           weekends={true}
 
-          events={calendario}
+          events={gerarCalendario()}
           
         />
       </Box>

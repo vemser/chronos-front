@@ -209,7 +209,7 @@ export const Header = () => {
                   />
                 ) : (
                   <img
-                    alt="not fount"
+                    alt=""
                     width={'250px'}
                     className={'BorderRadius'}
                     src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}

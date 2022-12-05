@@ -8,15 +8,8 @@ import { CalendarioContext } from '../../../context/CalendarioContext'
 
 export const GestaoHome = () => {
 
-
   const { loggedUser} = useContext<any>(AuthContext)
 
-  const { getCalendarioGeral  } = useContext(CalendarioContext)
-
-  useEffect(() => {
-    loggedUser()
-    getCalendarioGeral()
-  }, [])
 
   return (
     <>

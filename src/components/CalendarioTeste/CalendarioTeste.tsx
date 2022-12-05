@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import { Box } from '@mui/material'
-import './Calendario.css'
+import './CalendarioTeste.css'
 
 import { CalendarioContext } from '../../context/CalendarioContext'
 import { title } from 'process'
 import { ClassNames } from '@emotion/react'
 import { Header } from '../Header/Header'
 
-export const Calendario = () => {
+export const CalendarioTeste = () => {
 
   const { calendarioEdicao } = useContext(CalendarioContext)
 
@@ -18,16 +18,33 @@ export const Calendario = () => {
 
   const gerarCalendario = () => {
 
+
     // DIA UTIL
-    const etapaFilter: any = calendarioEdicao.filter((dia) => {
+    const diaUtil: any = calendarioEdicao.filter((dia) => {
       return dia.etapa !== null
     })    
 
+    const arrayDeEtapasUnicas: any = [...new Set(diaUtil)];
+
+    
+
+
     // ETAPA
-    const etapaMap: any = etapaFilter.map((dia: any) => {
-      return{ date: dia.dia, title: dia.etapa, backgroundColor: dia.cor, display: 'background'}
+    const etapaMap: any = diaUtil.map((dia: any) => {
+      let counter = 0
+      let arrayEtapas = []
+      
+      if(arrayDeEtapasUnicas[counter] == dia.etapa){
+        arrayEtapas.push({ date: dia.dia, title: dia.etapa, ClassNames:`a${counter}`, display: 'background'})
+      } else {
+        counter++
+        arrayEtapas.push({ date: dia.dia, title: dia.etapa, ClassNames:`a${counter}`, display: 'background'})
+      }
+
+      return arrayEtapas
     })
   
+
     // PROCESSO 
     const processoFilter: any = calendarioEdicao.filter((dia) => {
       return dia.processo !== null
