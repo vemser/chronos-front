@@ -113,15 +113,19 @@ export const Calendario = () => {
     <>
       <Header />
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box
+        className="containerData"
+        sx={{ display: 'flex', justifyContent: 'space-between' }}
+      >
         <Box>
-          <h3>Previsão de encerramento: {encerramento} </h3>
+          <h4>
+            {' '}
+            {state.nome} - de {inicio} até {encerramento}{' '}
+          </h4>
         </Box>
 
         <Box>
-          <h3>
-            {state.nome} - de {inicio} até {encerramento}
-          </h3>
+          <h4>Previsão de encerramento: {encerramento} </h4>
         </Box>
       </Box>
 
