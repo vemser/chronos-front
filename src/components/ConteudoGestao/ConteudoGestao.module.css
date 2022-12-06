@@ -16,6 +16,21 @@
   max-width: 600px;
   font-size: 60px;
 }
+.Logo {
+  transform: translatey(0px);
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 
 @media (max-width: 1200px) {
   .ContainerInstrutor {
