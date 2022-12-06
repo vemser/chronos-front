@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
 
-import { Calendario } from '../../../components/Calendario/Calendario'
-import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
 import { Header } from '../../../components/Header/Header'
+import { ConteudoInstrutor } from '../../../components/ConteudoInstrutor/ConteudoInstrutor'
 
 export const InstHome = () => {
   const { loggedUser } = useContext<any>(AuthContext)
@@ -15,7 +14,7 @@ export const InstHome = () => {
   return (
     <>
       <Header />
-      <CalendarioGeral />
+      <ConteudoInstrutor />
     </>
   )
 }
