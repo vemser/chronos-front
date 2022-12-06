@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../../components/Header/Header'
 import style from './NotFind.module.css'
-import notFindLogo from '../../assets/notFindLogo.svg'
+import notFindLogo from '../../assets/adminLogo.svg'
 import { Link } from 'react-router-dom'
 
 export const NotFind = () => {

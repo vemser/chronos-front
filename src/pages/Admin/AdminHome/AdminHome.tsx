@@ -6,6 +6,7 @@ import { AdminContext } from '../../../context/AdminContext'
 import { Header } from '../../../components/Header/Header'
 import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
 import { CalendarioContext } from '../../../context/CalendarioContext'
+import { ConteudoAdmin } from '../../../components/ConteudoAdmin/ConteudoAdmin'
 
 export const AdminHome: React.FC = () => {
   const { dadosColaborador, buscarDadosColaborador } =
@@ -18,7 +19,7 @@ export const AdminHome: React.FC = () => {
   return (
     <>
       <Header />
-    
+      <ConteudoAdmin />
     </>
   )
 }
