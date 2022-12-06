@@ -127,37 +127,37 @@ export const Calendario = () => {
         <Box>
           <h4>Previsão de encerramento: {encerramento} </h4>
         </Box>
+      </Box>
 
-        <Box className="CalendarContainer" mt={'50px'}>
-          <FullCalendar
-            plugins={[dayGridPlugin]}
-            locale={'pt-br'}
-            initialView="dayGridMonth"
-            weekends={true}
-            events={gerarCalendario()}
-          />
-        </Box>
-        <Box className="legendaSection">
-          <div className="containerTitulo">
-            <h2>Etapas</h2>
-          </div>
-          <div className="legenda">
-            {unique &&
-              unique.map((etapa: any) => {
-                return (
-                  <div>
-                    <div className="legendaLinha">
-                      <div
-                        style={{ backgroundColor: `${etapa.cor} ` }}
-                        className="cardCor"
-                      ></div>
-                      <p>{etapa.etapa}</p>
-                    </div>
+      <Box className="CalendarContainer" mt={'50px'}>
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          locale={'pt-br'}
+          initialView="dayGridMonth"
+          weekends={true}
+          events={gerarCalendario()}
+        />
+      </Box>
+      <Box className="legendaSection">
+        <div className="containerTitulo">
+          <h2>Etapas</h2>
+        </div>
+        <div className="legenda">
+          {unique &&
+            unique.map((etapa: any) => {
+              return (
+                <div>
+                  <div className="legendaLinha">
+                    <div
+                      style={{ backgroundColor: `${etapa.cor} ` }}
+                      className="cardCor"
+                    ></div>
+                    <p>{etapa.etapa}</p>
                   </div>
-                )
-              })}
-          </div>
-        </Box>
+                </div>
+              )
+            })}
+        </div>
       </Box>
     </>
   )
