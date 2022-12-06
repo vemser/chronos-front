@@ -21,18 +21,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .fc .fc-scroller-liquid-absolute::-webkit-scrollbar-thumb {
-  width: 5px !important;
+  width: 12px !important;
   border-radius: 20px !important;
   border: solid 1px rgb(213, 213, 213) !important;
 }
 
-/* .fc .fc-scroller-liquid-absolute {
-  width: 12px !important;
-  border-radius: 20px !important;
-} */
-/* .fc-scroller-harness {
-  overflow: hidden !important;
-} */
 .fc-scroller {
   overflow: hidden scroll !important;
 }
@@ -140,10 +133,14 @@ body::-webkit-scrollbar-thumb {
   color: #000000;
   margin-right: 12px !important;
 }
+.fc-event-title {
+  margin-top: 30px !important;
+}
 
 .etapa .fc-event-title {
   margin-top: 30px !important;
   font-style: normal !important;
+  word-break: break-word !important;
 }
 
 .areas {
@@ -172,4 +169,44 @@ body::-webkit-scrollbar-thumb {
 
 .fc .fc-day-other .fc-daygrid-day-top {
   opacity: 100% !important;
+}
+
+.containerData {
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 55px;
+  margin-bottom: -20px;
+}
+
+.fc-today-button {
+  background-color: #fff !important;
+  border: 2px solid #1e62fe !important;
+  color: #1e62fe !important;
+  font-weight: 600 !important;
+}
+
+.fc-next-button {
+  background-color: #1e62fe !important;
+  border: 1px solid #fff !important;
+  border-radius: 0px 5px 5px 0px !important;
+}
+
+.fc-prev-button {
+  background-color: #1e62fe !important;
+  border: 1px solid #fff !important;
+  border-radius: 5px 0px 0px 5px !important;
+}
+
+@media (max-width: 1230px) {
+  .containerData {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .fc-event-title {
+    font-size: 12px !important;
+    word-break: break-word !important;
+  }
 }
