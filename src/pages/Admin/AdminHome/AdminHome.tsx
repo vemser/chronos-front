@@ -11,13 +11,6 @@ export const AdminHome: React.FC = () => {
   const { dadosColaborador, buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
 
-
-  const { getCalendarioGeral  } = useContext(CalendarioContext)
-
-  useEffect(() => {
-    getCalendarioGeral()
-  }, [])
-
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
   }, [])
@@ -25,7 +18,7 @@ export const AdminHome: React.FC = () => {
   return (
     <>
       <Header />
-      <CalendarioGeral />
+    
     </>
   )
 }

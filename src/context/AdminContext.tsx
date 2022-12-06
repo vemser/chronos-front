@@ -168,6 +168,9 @@ export const AdminProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = token
       await api.put(`usuario/update-perfil`, data)
       toast.success('Usuário editado com sucesso!', toastConfig)
+
+      navigate('/')
+
     } catch (error: any) {
       console.log(error)
       if(error.response.status === 400){
@@ -191,7 +194,6 @@ export const AdminProvider = ({ children }: IChildren) => {
 
       await api.put(`/foto/upload-image-perfil`, data)
 
-      toast.success('Usuário editado com sucesso!', toastConfig)
       console.log('funcionou!')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)

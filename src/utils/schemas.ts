@@ -4,13 +4,18 @@ export const userFormSchema = yup.object().shape({
   email: yup
     .string()
     .required('Por favor, digite seu Email!')
-    .email('Por favor, digite um email válido'),
+    .email('Por favor, digite um email válido')
+    .matches(/dbccompany/, 'Por favor, digite um email da DBC'),
 
   senha: yup
     .string()
     .required('Por favor, digite sua senha!')
     .min(6, 'A senha deve ter no mínimo 6 caracteres')
+    
 })
+
+
+
 
 export const editarPerfilFormSchema = yup.object().shape({
   nome:yup.string().required('Por favor, digite seu nome!'),
@@ -85,6 +90,7 @@ export const CadastroDePessoasSchema = yup.object().shape({
     .string()
     .required('Por favor, digite seu email!')
     .email('Por favor, digite um email válido')
+    .matches(/dbccompany/, 'Por favor, digite um email da DBC'),
 })
 
 export const EtapaSchema = yup.object().shape({

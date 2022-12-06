@@ -55,6 +55,9 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
 }
 
+.legendaSection{
+  margin-bottom: 60px;
+}
 .fc-bg-event {
   opacity: 90% !important;
 }

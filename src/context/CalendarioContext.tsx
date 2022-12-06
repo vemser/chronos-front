@@ -11,6 +11,7 @@ export const CalendarioContext = createContext ({} as ICalendarioContext)
 export const CalendarioProvider = ({ children }: IChildren) => {
     
     const navigate = useNavigate()
+    const token = localStorage.getItem('token');
 
     const [ calendarioEdicao, setCalendarioEdicao ] = useState<ICalendarioEdicao[]>([]);
     const [ calendarioGeral, setcalendarioGeral ] = useState<ICalendarioGeral[]>([]);
@@ -21,6 +22,7 @@ export const CalendarioProvider = ({ children }: IChildren) => {
         try{
             nProgress.start();
 
+            api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/calendario-edicao/${edicao?.idEdicao}`);    
 
             setCalendarioEdicao(data)
@@ -41,6 +43,7 @@ export const CalendarioProvider = ({ children }: IChildren) => {
         try{
             nProgress.start();
 
+            api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/calendario-geral/`);    
 
             setcalendarioGeral(data)

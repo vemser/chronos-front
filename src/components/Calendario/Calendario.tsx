@@ -140,7 +140,7 @@ export const Calendario = () => {
       </Box>
       <Box className="legendaSection">
         <div className="containerTitulo">
-          <h2>Etapas</h2>
+          <h2>Legenda de etapas:</h2>
         </div>
         <div className="legenda">
           {unique &&
