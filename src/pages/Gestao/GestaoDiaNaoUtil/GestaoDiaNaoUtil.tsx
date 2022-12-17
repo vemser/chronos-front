@@ -8,6 +8,8 @@ import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
 import styles from './GestaoDiaNaoUtil.module.css'
 import { Header } from '../../../components/Header/Header';
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
+import { TOptionsConfirmDialog } from '../../../utils/interfaces';
+import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 
 export const GestaoDiaNaoUtil = () => {
@@ -19,26 +21,26 @@ export const GestaoDiaNaoUtil = () => {
     getDiaNaoUtil('1')
   }, [])
 
+  const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
+    isOpen: false,
+    title: "",
+    onConfirm: () => { }
+  });
+
   return (
     <>
       <Header/>
 
       <section className={styles.ContainerGeral}>
-        <div className={styles.ContainerGestaoEdicoes}>
-
-          
+        <div className={styles.ContainerGestaoEdicoes}>          
           <Box className={styles.ContainerNova}>
             <div className={styles.ContainerTitle}>
               <h2>Períodos Não Úteis </h2>
             </div>
-
             <Link to={'/gestao/cadastrar-dias-nao-uteis'}>
               <Button className={styles.addBtn} variant="contained" id='addButton'> ADICIONAR PERÍODO NÃO ÚTIL</Button>
             </Link>
-          </Box>
-
-          
-
+          </Box>     
           <TableContainer sx={{ boxShadow: 1, width: 'auto', borderRadius: '5px', maxWidth: 1366, margin: '50px auto' }}>
             <Table sx={{ minWidth: 650, maxWidth: 1366}} aria-label="simple table">
               <TableHead>
@@ -52,7 +54,6 @@ export const GestaoDiaNaoUtil = () => {
                   <TableCell align="right">Excluir</TableCell>
                 </TableRow>
               </TableHead>
-
               <TableBody>
                 {diasNaoUteis?.map((dia, index) => {
 
@@ -63,10 +64,7 @@ export const GestaoDiaNaoUtil = () => {
                   }
 
                   const dataIniciaFormatada = dia.dataInicial.split("-").reverse().join("/")
-                  const dataFinalFormatada = dia.dataFinal?.split("-").reverse().join("/")
-                  
-
-
+                  const dataFinalFormatada = dia.dataFinal?.split("-").reverse().join("/")  
 
                   return(
                   <TableRow
@@ -98,15 +96,38 @@ export const GestaoDiaNaoUtil = () => {
                       <EditIcon id={`linha-nao-util-editar-${index}`} onClick={() => {navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
                     </TableCell>
 
-                    <TableCell align="right" >
-                      <HighlightOffIcon id={`linha-nao-util-deletar-${index}`} onClick={() => deleteDiaNaoUtil(dia.idDiaNaoUtil)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                    <TableCell align="right" >                      
+                      <HighlightOffIcon onClick={(event) => {
+                            setConfirmDialog({
+                              isOpen: true,
+                              title: 'Confirma a exclusão desse registro?',
+                              onConfirm: () => {
+                                setConfirmDialog({
+                                  ...confirmDialog,
+                                  isOpen: false
+                                })
+                                deleteDiaNaoUtil(dia.idDiaNaoUtil)
+                              }
+                            });
+                          }} sx={{
+                            cursor: 'pointer',
+                            width: '25px',
+                            height: '25px',
+                            "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                            "& :active": {
+                              transform: 'scale(.99)',
+                            }
+                          }} />
                     </TableCell>
-
                   </TableRow>
                   )
                 })}
               </TableBody>
             </Table>
+            <ConfirmDialog
+              confirmDialog={confirmDialog}
+              setConfirmDialog={setConfirmDialog}
+            />
           </TableContainer>
         </div>
         <div className={styles.paginacao}>

@@ -180,7 +180,6 @@ export interface ICalendarioEdicao {
   idEtapa: number
 } 
 
-
 export interface ICalendarioGeral {
   dia: string,
   etapa: string | null,
@@ -188,3 +187,16 @@ export interface ICalendarioGeral {
   feriado: string | undefined | null
   idEtapa: number
 } 
+
+// Confirmar Exclusão
+
+export interface TOptionsConfirmDialog {
+  isOpen: boolean,
+  title: string,
+  onConfirm(): void
+}
+
+export interface Props {
+  confirmDialog: TOptionsConfirmDialog,
+  setConfirmDialog(options:TOptionsConfirmDialog): void
+}
