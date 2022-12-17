@@ -66,7 +66,18 @@ export const GestaoVerificarEdicao = () => {
         >
           <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <h2>{EdicaoAtual?.nome}</h2>
-            <Button variant="outlined">
+            <Button variant="outlined"
+            sx={{
+              boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+              transition: '0.5s',
+              "&:hover":{
+                transform: 'scale(1.02)'
+              },
+              "&:active":{
+                transform: 'scale(0.98)'
+              }
+            }}
+            >
               <p onClick={() => getCalendarioPorEdicao(EdicaoAtual)}>
                 Gerar Calendario
               </p>
@@ -81,6 +92,17 @@ export const GestaoVerificarEdicao = () => {
                 state: EdicaoAtual
               })
             }
+            sx={{
+              boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+              transition: '0.3s',
+              "&:hover":{
+                boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+                transform: 'scale(1.02)'
+              },
+              "&:active":{
+                transform: 'scale(0.98)'
+              }
+            }}
           >
             {' '}
             + Adicionar nova etapa
@@ -154,6 +176,17 @@ export const GestaoVerificarEdicao = () => {
                       { state: etapa }
                     )
                   }
+                  sx={{
+                    boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+                    transition: '0.3s',
+                    "&:hover":{
+                      boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+                      transform: 'scale(1.02)'
+                    },
+                    "&:active":{
+                      transform: 'scale(0.98)'
+                    }
+                  }}
                 >
                   {' '}
                   + NOVO PROCESSO
