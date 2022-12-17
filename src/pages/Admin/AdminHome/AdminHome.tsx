@@ -20,6 +20,7 @@ export const AdminHome: React.FC = () => {
     <>
       <Header />
       <ConteudoAdmin />
+      {/* <CalendarioGeral /> */}
     </>
   )
 }
