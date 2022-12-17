@@ -106,7 +106,7 @@ export const AdminListar: React.FC = () => {
                       onClick={(event) => {
                         setConfirmDialog({
                           isOpen: true,
-                          title: 'Confirma a exclusão desse registro?',
+                          title: `Confirma a exclusão do colaborador ${user.nome}?`,
                           onConfirm: () => {
                             setConfirmDialog({
                               ...confirmDialog,

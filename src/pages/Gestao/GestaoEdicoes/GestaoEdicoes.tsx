@@ -108,7 +108,7 @@ export const GestaoEdicoes: React.FC = () => {
                           onClick={(event) => {
                             setConfirmDialog({
                               isOpen: true,
-                              title: 'Confirma a exclusão desse registro?',
+                              title: `Confirma a exclusão da edição ${edicao.nome}?`,
                               onConfirm: () => {
                                 setConfirmDialog({
                                   ...confirmDialog,
