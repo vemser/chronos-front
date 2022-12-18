@@ -11,11 +11,6 @@ export const GestaoHome = () => {
 
   const { getCalendarioGeral  } = useContext(CalendarioContext)
 
-  
-  useEffect(() => {
-    getCalendarioGeral()
-  }, [])
-
   const { loggedUser} = useContext<any>(AuthContext)
 
  
@@ -23,7 +18,7 @@ export const GestaoHome = () => {
   return (
     <>
       <Header />
-      <CalendarioGeral />   
+      <CalendarioGeral />
     </>
   )
 }

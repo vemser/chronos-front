@@ -38,13 +38,13 @@ export const AdminListar: React.FC = () => {
 
   return (
     <>
-      <TableContainer
+      <TableContainer className={styles.tableContainer}
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >
         <Table>
           <TableHead sx={{ backgroundColor: '#fff', borderRadius: '8px' }}>
             <TableRow>
-              <TableCell>Colaborador(a)</TableCell>
+              <TableCell >Colaborador(a)</TableCell>
               <TableCell>E-mail</TableCell>
               <TableCell>Cargo</TableCell>
 
@@ -64,25 +64,28 @@ export const AdminListar: React.FC = () => {
               }
               return (
                 <TableRow key={user.idUsuario}>
-                  <TableCell component="th" scope="row" align="justify">
+
+                  <TableCell data-title='Colaborador(a)'>
                     {user.nome}
                   </TableCell>
-                  <TableCell component="th" scope="row" align="justify">
+                  <TableCell data-title='E-mail'>
                     {user.email}
                   </TableCell>
-                  <TableCell>
+                  
+                  <TableCell data-title='Cargo'>
                     {user?.cargos?.map((cargo: IColaborador) => {
                       return <p key={cargo.idCargo}>{cargo.descricao}</p>
                     })}
                   </TableCell>
 
-                  <TableCell align="right" width={'40px'}>
+                  <TableCell data-title='Ativo' >
                     <Switch
                       checked={status}
                       onClick={() => alterarStatusColab(user)}
                     />
                   </TableCell>
-                  <TableCell align="right" width={'40px'}>
+
+                  <TableCell data-title='Editar' >
                     <ModeEditSharpIcon
                       sx={{ mr: 1, cursor: 'pointer' }}
                       className={styles.ButtonContainer}
@@ -93,7 +96,7 @@ export const AdminListar: React.FC = () => {
                       }}
                     />
                   </TableCell>
-                  <TableCell align="right" width={'40px'} sx={{ pr: 3 }}>
+                  <TableCell data-title='Excluir' sx={{ pr: 3 }}>
                     <HighlightOffIcon
                       sx={{ cursor: 'pointer' }}
                       className={styles.ButtonContainer}

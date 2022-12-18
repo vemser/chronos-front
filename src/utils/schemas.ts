@@ -34,15 +34,11 @@ novaSenha: yup
     'A senha deve ter, no mínimo, um caractere especial'
   )
   .min(8, 'A senha deve ter, no mínimo, 8 caracteres'),
-  confirmacaoNovaSenha: yup
+
+confirmacaoNovaSenha: yup
   .string()
   .oneOf([yup.ref('novaSenha')], 'Senhas não coincidem'),
-
 })
-
-
-
-
 
 export const cadastrarEdicaoFormSchema = yup.object().shape({
   nome: yup.string().required('Por favor, digite o nome da edição'),

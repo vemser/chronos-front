@@ -130,6 +130,8 @@ export const Calendario = () => {
       </Box>
 
       <Box className="CalendarContainer" mt={'50px'}>
+
+
         <FullCalendar
           plugins={[dayGridPlugin]}
           locale={'pt-br'}
@@ -137,6 +139,8 @@ export const Calendario = () => {
           weekends={true}
           events={gerarCalendario()}
         />
+
+        
       </Box>
       <Box className="legendaSection">
         <div className="containerTitulo">
