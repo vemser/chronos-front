@@ -16,6 +16,7 @@
   max-width: 600px;
   font-size: 60px;
 }
+
 .Logo {
   transform: translatey(0px);
   animation: float 5s ease-in-out infinite;
