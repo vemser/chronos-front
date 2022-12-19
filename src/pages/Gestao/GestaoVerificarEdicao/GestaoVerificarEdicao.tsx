@@ -16,6 +16,8 @@ import { UserContext } from '../../../context/UserContex'
 import { Header } from '../../../components/Header/Header'
 import { CalendarioContext } from '../../../context/CalendarioContext'
 import { IEtapa, IProcesso } from '../../../utils/interfaces'
+import { TOptionsConfirmDialog } from '../../../utils/interfaces'
+import { ConfirmDialog } from '../../../components/ConfirmDialog'
 
 export const GestaoVerificarEdicao = () => {
   const { edicao } = useParams()
@@ -33,6 +35,12 @@ export const GestaoVerificarEdicao = () => {
   useLayoutEffect(() => {
     getEtapas(idEdicao)
   }, [])
+
+  const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
+    isOpen: false,
+    title: "",
+    onConfirm: () => { }
+  });
 
   return (
     <>
@@ -56,7 +64,18 @@ export const GestaoVerificarEdicao = () => {
         >
           <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <h2>{EdicaoAtual?.nome}</h2>
-            <Button variant="outlined">
+            <Button variant="outlined"
+            sx={{
+              boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+              transition: '0.5s',
+              "&:hover":{
+                transform: 'scale(1.02)'
+              },
+              "&:active":{
+                transform: 'scale(0.98)'
+              }
+            }}
+            >
               <p onClick={() => getCalendarioPorEdicao(EdicaoAtual)}>
                 Gerar Calendario
               </p>
@@ -71,6 +90,17 @@ export const GestaoVerificarEdicao = () => {
                 state: EdicaoAtual
               })
             }
+            sx={{
+              boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+              transition: '0.3s',
+              "&:hover":{
+                boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+                transform: 'scale(1.02)'
+              },
+              "&:active":{
+                transform: 'scale(0.98)'
+              }
+            }}
           >
             {' '}
             + Adicionar nova etapa
@@ -110,15 +140,27 @@ export const GestaoVerificarEdicao = () => {
                       }}
                     />
                     <HighlightOffIcon
-                      id={`deletar-etapa-${index}`}
-                      onClick={() => {
-                        deleteEtapa(etapa.idEtapa, idEdicao)
-                      }}
-                      sx={{
+                      onClick={(event) => {
+                        setConfirmDialog({
+                          isOpen: true,
+                          title: `Confirma a exclusão da etapa ${etapa.nome}?`,
+                          onConfirm: () => {
+                            setConfirmDialog({
+                              ...confirmDialog,
+                              isOpen: false
+                            })
+                            deleteEtapa(etapa.idEtapa, idEdicao)
+                          }
+                        });
+                      }} sx={{
                         cursor: 'pointer',
-                        transition: '100ms all ease-in-out',
-                        '&:hover': { color: '#1e62fe' }
-                      }}
+                        width: '25px',
+                        height: '25px',
+                        "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                        "& :active": {
+                          transform: 'scale(.99)',
+                        }
+                      }} 
                     />
                   </Box>
                 </Box>
@@ -132,6 +174,17 @@ export const GestaoVerificarEdicao = () => {
                       { state: etapa }
                     )
                   }
+                  sx={{
+                    boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+                    transition: '0.3s',
+                    "&:hover":{
+                      boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
+                      transform: 'scale(1.02)'
+                    },
+                    "&:active":{
+                      transform: 'scale(0.98)'
+                    }
+                  }}
                 >
                   {' '}
                   + NOVO PROCESSO
@@ -215,21 +268,29 @@ export const GestaoVerificarEdicao = () => {
                                   }}
                                 />
                               </TableCell>
-
-                              <TableCell align="right" width={'40px'}>
+                              <TableCell align="right" width={'40px'}>   
                                 <HighlightOffIcon
-                                  id={`deletar-processo-${procIndex}`}
-                                  onClick={() =>
-                                    deleteProcesso(
-                                      processo.idProcesso,
-                                      idEdicao
-                                    )
-                                  }
-                                  sx={{
+                                  onClick={(event) => {
+                                    setConfirmDialog({
+                                      isOpen: true,
+                                      title: `Confirma a exclusão do processo ${processo.nome}?`,
+                                      onConfirm: () => {
+                                        setConfirmDialog({
+                                          ...confirmDialog,
+                                          isOpen: false
+                                        })
+                                        deleteProcesso(processo.idProcesso, idEdicao)
+                                      }
+                                    });
+                                  }} sx={{
                                     cursor: 'pointer',
-                                    transition: '100ms all ease-in-out',
-                                    '&:hover': { color: '#1e62fe' }
-                                  }}
+                                    width: '25px',
+                                    height: '25px',
+                                    "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                                    "& :active": {
+                                      transform: 'scale(.99)',
+                                    }
+                                  }} 
                                 />
                               </TableCell>
                             </TableRow>
@@ -238,6 +299,10 @@ export const GestaoVerificarEdicao = () => {
                       )}
                     </TableBody>
                   </Table>
+                  <ConfirmDialog
+                    confirmDialog={confirmDialog}
+                    setConfirmDialog={setConfirmDialog}
+                  />
                 </TableContainer>
               </Box>
             </Box>

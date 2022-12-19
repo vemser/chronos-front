@@ -23,7 +23,8 @@ export const AdminHome: React.FC = () => {
   return (
     <>
       <Header />
-      <ConteudoAdmin />
+      {/* <ConteudoAdmin /> */}
+      <CalendarioGeral />
     </>
   )
 }
