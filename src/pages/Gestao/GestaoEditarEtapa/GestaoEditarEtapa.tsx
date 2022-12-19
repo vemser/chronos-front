@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import styles from './GestaoEditarEtapa.module.css'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'

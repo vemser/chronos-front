@@ -16,7 +16,6 @@ import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 
 import { useLocation } from 'react-router-dom'
-import { AuthContext } from '../../../context/AuthContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { EditarFormSchema } from '../../../utils/schemas'
@@ -25,8 +24,6 @@ import { Header } from '../../../components/Header/Header'
 export const AdminEditarColab = () => {
   const { state } = useLocation()
   const { editarColaborador } = useContext(AdminContext)
-
-  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
 
   const [selectedImage, setSelectedImage] = useState<any>(null)
 

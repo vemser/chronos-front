@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoEditarProcesso.module.css'
-import Select from 'react-select'
 
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
-import { IEtapa, IProcesso } from '../../../utils/interfaces'
-import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 
@@ -33,10 +30,10 @@ export const GestaoEditarProcesso = () => {
 
   const idEdicao = Number(edicao)
 
-  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<any>([])
-  const [responsaveisState, setResponsaveisState] = useState<any>([])
+  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>([])
+  const [responsaveisState, setResponsaveisState] = useState<string[]>([])
 
-  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
+  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
   const { register, handleSubmit } = useForm()
   
   useEffect(() => {

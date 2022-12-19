@@ -16,7 +16,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './GestaoEdicoes.module.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { UserContext } from '../../../context/UserContex'
 import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 import { Header } from '../../../components/Header/Header';

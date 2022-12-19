@@ -1,0 +1,41 @@
+.ButtonContainer {
+    color: #111827;
+    transition: 0.2s;
+  }
+  .ButtonContainer:hover {
+    color: #1e62fe;
+    scale: 1.05;
+  }
+  
+  .ContainerTitulo {
+    width: 100%;
+    text-align: center;
+  }
+  
+  @media (max-width: 930px) {
+    .tableContainer table thead {
+      display: none;
+    }
+  
+    .tableContainer table td {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .tableContainer table tr {
+      display: block;
+    }
+  
+    .tableContainer table td:first-of-type {
+      font-weight: bold;
+      font-style: 1.2rem;
+      text-align: center;
+      display: block;
+    }
+  
+    .tableContainer table td:not(:first-of-type):before {
+      content: attr(data-title);
+      font-weight: bold;
+      display: block;
+    }
+  }

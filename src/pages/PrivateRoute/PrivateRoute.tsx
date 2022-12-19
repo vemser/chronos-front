@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Outlet, Navigate } from 'react-router'
 import { AuthContext } from '../../context/AuthContext'
 import { IPrivateRoute } from '../../utils/interfaces'

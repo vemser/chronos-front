@@ -16,8 +16,6 @@ export const CalendarioProvider = ({ children }: IChildren) => {
     const [ calendarioEdicao, setCalendarioEdicao ] = useState<ICalendarioEdicao[]>([]);
     const [ calendarioGeral, setcalendarioGeral ] = useState<ICalendarioGeral[]>([]);
 
-
-
     const getCalendarioPorEdicao = async (edicao: IEdicao | undefined) => {
         try{
             nProgress.start();
@@ -37,7 +35,6 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
         }
     }
-
 
     const getCalendarioGeral = async () => {
         try{

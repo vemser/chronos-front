@@ -20,8 +20,6 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             api.defaults.headers.common['Authorization'] = token;
             nProgress.start();
             const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=10`)
-
-            console.log(data.elementos)
             
             setTotalPages(data.quantidadePaginas)
             setDiasNaoUteis(data.elementos)
@@ -42,7 +40,6 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     const postDiaNaoUtil = async (data: IDiaNaoUtil) => {
         try {
             nProgress.start()
-            console.log(data);
 
             if(data.repeticaoAnual === true) {
                 data.repeticaoAnual = 'ATIVO'
@@ -60,7 +57,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             if(error.response.status === 400){
                 toast.error(error.response.data.errors[0], toastConfig)
             } else {
-                toast.error('Houve um erro ao cadastrar um Dia Não Útil!', toastConfig)
+                toast.error('Data final não informada', toastConfig)
             }
         } finally{  
             nProgress.done()

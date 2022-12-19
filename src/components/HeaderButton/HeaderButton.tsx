@@ -1,14 +1,8 @@
 import React from 'react'
 import { Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import styles from './HeaderButton.module.css'
+import { IHeaderButton } from '../../utils/interfaces'
 
-interface IHeaderButton {
-  texto?: string
-  url?: string
-  id?: string
-  cargos?: string
-}
 
 export const HeaderButton = (props: IHeaderButton) => {
   return (

@@ -1,7 +1,5 @@
 import React, { useContext, useLayoutEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-
-import styles from './GestaoVerificarEdicao.module.css'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   TableCell,
   TableContainer,
@@ -11,13 +9,13 @@ import {
   Box,
   Button,
   TableHead,
-  Switch
 } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import EditIcon from '@mui/icons-material/Edit'
 import { UserContext } from '../../../context/UserContex'
 import { Header } from '../../../components/Header/Header'
 import { CalendarioContext } from '../../../context/CalendarioContext'
+import { IEtapa, IProcesso } from '../../../utils/interfaces'
 
 export const GestaoVerificarEdicao = () => {
   const { edicao } = useParams()
@@ -79,7 +77,7 @@ export const GestaoVerificarEdicao = () => {
           </Button>
         </Box>
 
-        {etapas?.map((etapa: any, index) => {
+        {etapas?.map((etapa: IEtapa, index) => {
           return (
             <Box key={etapa.idEtapa} sx={{ padding: '20px' }}>
               <Box
@@ -162,7 +160,7 @@ export const GestaoVerificarEdicao = () => {
 
                     <TableBody>
                       {etapa.processos?.map(
-                        (processo: any, procIndex: number) => {
+                        (processo: IProcesso, procIndex: number) => {
                           return (
                             <TableRow
                               key={processo.idProcesso}
