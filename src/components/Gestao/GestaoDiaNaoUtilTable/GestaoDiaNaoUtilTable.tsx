@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
+import { TOptionsConfirmDialog } from '../../../utils/interfaces';
+import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export const GestaoDiaNaoUtilTable = () => {
 
@@ -13,6 +15,12 @@ export const GestaoDiaNaoUtilTable = () => {
     useEffect(() => {
         getDiaNaoUtil('1')
     }, [])
+
+    const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
+      isOpen: false,
+      title: "",
+      onConfirm: () => { }
+    });
 
   return (
     <TableContainer sx={{ boxShadow: 1, width: 'auto', borderRadius: '5px', maxWidth: 1366, margin: '50px auto' }}>
@@ -75,13 +83,37 @@ export const GestaoDiaNaoUtilTable = () => {
                     </TableCell>
 
                     <TableCell align="right" >
-                      <HighlightOffIcon id={`linha-nao-util-deletar-${index}`} onClick={() => deleteDiaNaoUtil(dia.idDiaNaoUtil)} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                    <HighlightOffIcon onClick={(event) => {
+                          setConfirmDialog({
+                            isOpen: true,
+                            title: `Confirma a exclusão de ${dia.descricao}?`,
+                            onConfirm: () => {
+                              setConfirmDialog({
+                                ...confirmDialog,
+                                isOpen: false
+                              })
+                              deleteDiaNaoUtil(dia.idDiaNaoUtil)
+                            }
+                          });
+                        }} sx={{
+                          cursor: 'pointer',
+                          width: '25px',
+                          height: '25px',
+                          "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                          "& :active": {
+                            transform: 'scale(.99)',
+                          }
+                        }} />
                     </TableCell>
 
                   </TableRow>
                   )
                 })}
               </TableBody>
+              <ConfirmDialog
+              confirmDialog={confirmDialog}
+              setConfirmDialog={setConfirmDialog}
+              />
             </Table>
           </TableContainer>
   )

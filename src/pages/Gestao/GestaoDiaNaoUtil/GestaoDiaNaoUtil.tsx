@@ -4,26 +4,9 @@ import { Link } from 'react-router-dom'
 import styles from './GestaoDiaNaoUtil.module.css'
 import { Header } from '../../../components/Header/Header';
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
-import { TOptionsConfirmDialog } from '../../../utils/interfaces';
-import { ConfirmDialog } from '../../../components/ConfirmDialog';
 import { GestaoDiaNaoUtilTable } from '../../../components/Gestao/GestaoDiaNaoUtilTable/GestaoDiaNaoUtilTable';
 
-
 export const GestaoDiaNaoUtil = () => {
-
-  const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil } = useContext(DiaNaoUtilContext)
-  const navigate = useNavigate();
-
-  useLayoutEffect(() => {
-    getDiaNaoUtil('1')
-  }, [])
-
-  const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
-    isOpen: false,
-    title: "",
-    onConfirm: () => { }
-  });
-
   return (
     <>
       <Header />
