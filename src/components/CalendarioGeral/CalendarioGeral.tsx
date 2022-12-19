@@ -14,7 +14,7 @@ export const CalendarioGeral: React.FC = () => {
   const [etapaLegendas, setEtapaLegendas] = useState<any>([])
   const colors: string[] = ['#ef4444', '#3b82f6', '#84cc16', '#8b5cf6']
 
-  console.log(etapaLegendas);
+  // console.log(calendarioGeral);
 
 
   useEffect(() => {
@@ -49,14 +49,39 @@ export const CalendarioGeral: React.FC = () => {
 
     // EDICAO
     const etapaProcesso = diasUteis.map((dia: any) => {
-      return { date: dia.dia, title: dia.processo, backgroundColor: dia.cor, classNames: ['teste'] }
+      return { date: dia.dia, title: dia.processo, backgroundColor: dia.cor}
     })
     const etapaEdicao = diasUteis.map((dia: any) => {
       return { date: dia.dia, title: dia.edicao, backgroundColor: dia.cor }
     })
-    // console.log(etapaProcesso)
+    // console.log(etapaEdicao.concat(etapaProcesso, fdsMap, feriadosMap))
     return etapaEdicao.concat(etapaProcesso, fdsMap, feriadosMap)
   }
+
+  const dia = [
+    {
+      date: "2022-11-28",
+      title: "Vem Ser 11",
+      backgroundColor: "#eab308",      
+    },
+    {
+      date: "2022-11-28",
+      title: "Vem Ser 12 - Período de Divulgação e Inscrições",
+      backgroundColor: "#ef4444",
+      classNames: ["teste"],      
+    },
+    {
+      date: "2022-11-28",
+      title: "Vem Ser 13",
+      backgroundColor: "#3b82f6",
+      eventRender: function(title:any) {
+        let selector = title.el.querySelector('.fc-event-title-container');
+        if (selector) { 
+          selector.innerHTML = '<br><span class="texto">Subtitle</span>';
+        }
+      }
+    },
+  ]
 
   return (
     <>
@@ -68,7 +93,7 @@ export const CalendarioGeral: React.FC = () => {
           locale={'pt-br'}
           initialView="dayGridMonth"
           weekends={true}
-          events={gerarCalendario()}
+          events={dia}
           selectable={true}
         />
       </Box>
