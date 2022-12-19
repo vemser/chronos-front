@@ -1,16 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoNovoProcesso.module.css'
-import Select from 'react-select'
 
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
-import { IEtapa, IProcesso } from '../../../utils/interfaces'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {  GestaoNovoProcessoSchema, ProcessoSchema } from '../../../utils/schemas'
+import { ProcessoSchema } from '../../../utils/schemas'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 
@@ -23,12 +21,12 @@ export const GestaoNovoProcesso = () => {
 
   const idEdicao = Number(edicao)
 
-  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<any>([])
-  const [responsaveisState, setResponsaveisState] = useState<any>([])
+  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>([])
+  const [responsaveisState, setResponsaveisState] = useState<string[]>([])
 
-  const { createEtapa, getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
+  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
 
-  const { register, handleSubmit, formState: {errors} } = useForm<any>({
+  const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: yupResolver(ProcessoSchema)
      })
 

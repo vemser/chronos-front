@@ -33,7 +33,7 @@ import { CalendarioProvider } from './context/CalendarioContext'
 import { InstHome } from './pages/Instrutor/InstHome/InstHome'
 import { InstEdicoes } from './pages/Instrutor/InstEdicoes/InstEdicoes'
 import { InstNaoUteis } from './pages/Instrutor/InstNaoUteis/InstNaoUteis'
-import { InstVerificarEdicao } from './pages/Instrutor/InstVerificarEdicao/InstVerifficarEdicao'
+import { InstVerificarEdicao } from './pages/Instrutor/InstVerificarEdicao/InstVerificarEdicao'
 import { Calendario } from './components/Calendario/Calendario'
 import { GestaoDiaNaoUtil } from './pages/Gestao/GestaoDiaNaoUtil/GestaoDiaNaoUtil'
 

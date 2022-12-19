@@ -1,10 +1,8 @@
-import { JoinFullTwoTone } from '@mui/icons-material'
-import { applyInitialState } from '@mui/x-data-grid/hooks/features/columns/gridColumnsUtils'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { api } from '../utils/api'
-import { IAuthContext, IChildren, IUser } from '../utils/interfaces'
+import { IAuthContext, IChildren, IUser, IUsuarioLogado } from '../utils/interfaces'
 
 export const AuthContext = createContext({} as IAuthContext)
 
@@ -13,8 +11,8 @@ export const AuthProvider = ({ children }: IChildren) => {
   const navigate = useNavigate();
 
   const [roles, setRoles] = useState<string[] | undefined>([]);
-  const [token, setToken] = useState<string | any>('');
-  const [dadosUsuarioLogado, setDadosUsuarioLogado] = useState<any>({});
+
+  const [dadosUsuarioLogado, setDadosUsuarioLogado] = useState<IUsuarioLogado | {} >({});
 
   const accesstoken = localStorage.getItem('token')
 
@@ -36,7 +34,7 @@ export const AuthProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = accesstoken;
       const { data } = await api.get('/usuario/logged-user');
       setDadosUsuarioLogado(data);
-  
+      
     } catch (error) {
       console.log(error);
     };

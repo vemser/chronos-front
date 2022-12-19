@@ -6,12 +6,9 @@ import {
   TableBody,
   TableRow,
   Box,
-  Button,
   TableHead,
   Checkbox
 } from '@mui/material'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff'
-import EditIcon from '@mui/icons-material/Edit'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import styles from './InstNaoUteis.module.css'
 import { Header } from '../../../components/Header/Header'

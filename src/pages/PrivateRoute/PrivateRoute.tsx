@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Outlet, Navigate } from 'react-router'
 import { AuthContext } from '../../context/AuthContext'
 import { IPrivateRoute } from '../../utils/interfaces'
@@ -15,7 +15,7 @@ const useAuth = () => {
     if(user) {
         return {
             auth: true,
-            role: roles // ['ROLE_ADMIN']
+            role: roles
         }
     }   else {
         return {

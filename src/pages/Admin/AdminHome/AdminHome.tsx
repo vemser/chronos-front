@@ -1,25 +1,31 @@
 import React, { useContext, useEffect, useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 import { IAdminContext } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 import { Header } from '../../../components/Header/Header'
-import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
-import { CalendarioContext } from '../../../context/CalendarioContext'
 import { ConteudoAdmin } from '../../../components/ConteudoAdmin/ConteudoAdmin'
+import { AuthContext } from '../../../context/AuthContext'
+import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
 
 export const AdminHome: React.FC = () => {
-  const { dadosColaborador, buscarDadosColaborador } =
+  const { buscarDadosColaborador } =
     useContext<IAdminContext>(AdminContext)
+
+    const { loggedUser } = useContext<any>(AuthContext)
 
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
   }, [])
 
+  useEffect(() => {
+    loggedUser()
+  }, [])
+
   return (
     <>
       <Header />
-      <ConteudoAdmin />
+      {/* <ConteudoAdmin /> */}
+      <CalendarioGeral />
     </>
   )
 }

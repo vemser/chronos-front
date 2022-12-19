@@ -7,7 +7,7 @@ import {
   IColaborador2
 } from '../utils/interfaces'
 import { api } from '../utils/api'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
 import { AuthContext } from './AuthContext'
@@ -17,13 +17,11 @@ export const AdminContext = createContext({} as IAdminContext)
 export const AdminProvider = ({ children }: IChildren) => {
   const [totalPages, setTotalPages] = useState(0)
   const navigate = useNavigate()
-  const [dadosColaborador, setDadosColaborador] = useState<
-    IColaborador[] | undefined
-  >(undefined)
+  const [dadosColaborador, setDadosColaborador] = useState<IColaborador[] | undefined >(undefined)
 
   const token  = localStorage.getItem('token');
 
-  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
+  const { dadosUsuarioLogado, loggedUser } = useContext(AuthContext)
 
   const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
@@ -48,17 +46,24 @@ export const AdminProvider = ({ children }: IChildren) => {
       })
 
     try {
+      nProgress.start()
+
       dadosColaborador.nome = data.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
       const retorno = await api.post('/usuario', dadosColaborador)
+      
       toast.success('Usuário criado com sucesso!', toastConfig)
       navigate("/admin/colaboradores")
+
     } catch (error: any) {
       console.log(error)
       if(error.response.status === 400){
         toast.error(error.response.data.errors[0], toastConfig)
+
       } else {
         toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
       }
+    } finally {
+      nProgress.done()
     }
   }
 
@@ -83,13 +88,20 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const deletarColaborador = async (idUsuario: number) => {
     try {
+      nProgress.start()
+
       api.defaults.headers.common['Authorization'] = token
       await api.delete(`/usuario/${idUsuario}`)
-      toast.success('Usuário deletado com sucesso!', toastConfig)
+      toast.success(`Usuário ${idUsuario} deletado com sucesso!`, toastConfig)
       buscarDadosColaborador('1')
+      
     } catch (error) {
       toast.error(`Erro ao deletar o usuario ${idUsuario} , tente novamente!`, toastConfig)
       console.log(error)
+      
+    } finally {
+      nProgress.done()
+
     }
   }
 
@@ -149,7 +161,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       }
 
       toast.success(
-        `Status da edição ${data.nome} alterado para ${data.status}!`
+        `Status do(a) colaborador(a) ${data.nome} alterado para ${data.status}!`
       )
       buscarDadosColaborador('1')
     } catch (error) {

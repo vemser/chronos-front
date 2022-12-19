@@ -25,8 +25,7 @@ export const GestaoHeader = () => {
   }, [])
   const navigate = useNavigate()
   const userEmail = localStorage.getItem('user')
-  const { dadosUsuarioLogado, loggedUser, handleLogout } =
-    React.useContext<any>(AuthContext)
+  const { dadosUsuarioLogado, loggedUser, handleLogout } = useContext(AuthContext)
   const imagemBase = dadosUsuarioLogado.imagem
 
   // ==== MATERIAL UI FUNCTIONS ====

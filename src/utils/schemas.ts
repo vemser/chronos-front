@@ -34,15 +34,11 @@ novaSenha: yup
     'A senha deve ter, no mínimo, um caractere especial'
   )
   .min(8, 'A senha deve ter, no mínimo, 8 caracteres'),
-  confirmacaoNovaSenha: yup
+
+confirmacaoNovaSenha: yup
   .string()
   .oneOf([yup.ref('novaSenha')], 'Senhas não coincidem'),
-
 })
-
-
-
-
 
 export const cadastrarEdicaoFormSchema = yup.object().shape({
   nome: yup.string().required('Por favor, digite o nome da edição'),
@@ -104,19 +100,11 @@ export const EtapaSchema = yup.object().shape({
 
 
 export const ProcessoSchema = yup.object().shape({
-  nome: yup.string().required('Por favor informe o nome do processo.'),
+  nome: yup.string().required('Por favor informe o nome do processo.').min(3, 'O nome do processo deve ter no mínimo 3 caracteres'),
 
   duracaoProcesso: yup.string().required('Por favor, informe a duração do processo.'),
 
   diasUteis: yup.string().required('Por favor, informe quantos os dias uteis do processo.'),
 
   ordemExecucao: yup.number().required('Por favor, informe a ordem de execução')
-})
-
-
-export const GestaoNovoProcessoSchema = yup.object().shape({
-  nome: yup
-    .string()
-    .required('Por favor, digite o nome do processo')
-    .min(3, 'O nome do processo deve ter no mínimo 3 caracteres'),
 })

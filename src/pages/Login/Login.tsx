@@ -17,7 +17,7 @@ import { useForm } from 'react-hook-form'
 import { IUser } from '../../utils/interfaces'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { userFormSchema } from '../../utils/schemas'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 interface State {
   password: string

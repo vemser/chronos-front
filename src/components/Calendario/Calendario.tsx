@@ -1,28 +1,31 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import { Box } from '@mui/material'
 import './Calendario.css'
 
 import { CalendarioContext } from '../../context/CalendarioContext'
-import { title } from 'process'
-import { ClassNames } from '@emotion/react'
 import { Header } from '../Header/Header'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { ICalendarioEdicao, ICalendarioProcesso } from '../../utils/interfaces'
 
 export const Calendario = () => {
   const { calendarioEdicao } = useContext(CalendarioContext)
 
   const { state } = useLocation()
 
+  console.log(calendarioEdicao);
+  
+
   const gerarCalendario = () => {
+
     // DIA UTIL
-    const etapaFilter: any = calendarioEdicao?.filter(dia => {
+    const etapaFilter: ICalendarioEdicao[] = calendarioEdicao?.filter(dia => {
       return dia.etapa !== null
     })
 
     // ETAPA
-    const etapaMap: any = etapaFilter?.map((dia: any) => {
+    const etapaMap: any = etapaFilter?.map((dia: ICalendarioEdicao) => {
       return {
         date: dia.dia,
         title: dia.processo,
@@ -33,15 +36,15 @@ export const Calendario = () => {
     })
 
     // PROCESSO
-    const processoFilter: any = calendarioEdicao?.filter(dia => {
+    const processoFilter: ICalendarioEdicao[] = calendarioEdicao?.filter(dia => {
       return dia.processo !== null
     })
-    const processoMap: any = processoFilter?.map((dia: any) => {
+    const processoMap: ICalendarioProcesso[] = processoFilter?.map((dia: ICalendarioEdicao) => {
       return { date: dia.dia, title: dia.processo }
     })
 
     // AREAS
-    const areasMap: any = processoFilter?.map((dia: any) => {
+    const areasMap: any = processoFilter?.map((dia: ICalendarioEdicao) => {
       return {
         date: dia.dia,
         title: dia.areas,
@@ -51,10 +54,10 @@ export const Calendario = () => {
     })
 
     // FERIADOS
-    const feriadosFilter: any = calendarioEdicao?.filter(dia => {
+    const feriadosFilter: ICalendarioEdicao[] = calendarioEdicao?.filter(dia => {
       return dia.processo === null && dia.feriado !== null
     })
-    const feriadosMap: any = feriadosFilter?.map((dia: any) => {
+    const feriadosMap: any = feriadosFilter?.map((dia: ICalendarioEdicao) => {
       return {
         date: dia.dia,
         display: 'background',
@@ -65,10 +68,10 @@ export const Calendario = () => {
     })
 
     // FINAIS DE SEMANA
-    const fdsFilter: any = calendarioEdicao?.filter(dia => {
+    const fdsFilter: ICalendarioEdicao[] = calendarioEdicao?.filter(dia => {
       return dia.processo === null && dia.feriado === null
     })
-    const fdsMap: any = fdsFilter?.map((dia: any) => {
+    const fdsMap: any = fdsFilter?.map((dia: ICalendarioEdicao) => {
       return {
         date: dia.dia,
         display: 'background',
@@ -87,17 +90,17 @@ export const Calendario = () => {
 
   const inicio = calendarioEdicao[0].dia.split('-').reverse().join('/')
 
-  const diasUteis: any = calendarioEdicao?.filter(dia => {
+  const diasUteis: ICalendarioEdicao[] = calendarioEdicao?.filter(dia => {
     return dia.etapa !== null
   })
 
-  const arrayCorEtapa: any = diasUteis?.map((dia: any) => {
+  const arrayCorEtapa: any = diasUteis?.map((dia: ICalendarioEdicao) => {
     return { etapa: dia.etapa, cor: dia.cor }
   })
 
   const etapaCorUnica: any = new Set()
 
-  const unique = arrayCorEtapa?.filter((element: any) => {
+  const unique = arrayCorEtapa?.filter((element: ICalendarioEdicao) => {
     const isDuplicate = etapaCorUnica?.has(element.etapa)
 
     etapaCorUnica.add(element.etapa)
@@ -130,6 +133,8 @@ export const Calendario = () => {
       </Box>
 
       <Box className="CalendarContainer" mt={'50px'}>
+
+
         <FullCalendar
           plugins={[dayGridPlugin]}
           locale={'pt-br'}
@@ -137,6 +142,8 @@ export const Calendario = () => {
           weekends={true}
           events={gerarCalendario()}
         />
+
+        
       </Box>
       <Box className="legendaSection">
         <div className="containerTitulo">
@@ -144,7 +151,7 @@ export const Calendario = () => {
         </div>
         <div className="legenda">
           {unique &&
-            unique.map((etapa: any) => {
+            unique.map((etapa: ICalendarioEdicao) => {
               return (
                 <div>
                   <div className="legendaLinha">

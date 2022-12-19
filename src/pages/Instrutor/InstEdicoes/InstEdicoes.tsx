@@ -1,11 +1,8 @@
 import React, { useContext, useLayoutEffect } from 'react'
-import { TableCell, TableContainer, Table, TableBody, TableRow, Box, Button, TableHead, Switch} from '@mui/material'
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import EditIcon from '@mui/icons-material/Edit';
+import { TableCell, TableContainer, Table, TableBody, TableRow, Box, TableHead, Switch} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './InstEdicoes.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
 import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 import { Header } from '../../../components/Header/Header';

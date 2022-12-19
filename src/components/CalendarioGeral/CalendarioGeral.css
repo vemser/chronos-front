@@ -2,3 +2,49 @@
     padding: 0 1px !important;
     white-space: normal !important;
 }
+
+.teste .fc-event-title-container {
+    text-align: center;
+    line-height: 25px;
+}
+
+.fc-daygrid-day-events{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+
+.fc-daygrid-event-harness:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:before{
+    content: none !important;
+}
+.fc-daygrid-event{
+    white-space: nowrap; 
+    width: 100% ; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    border-radius: 12px !important;
+}
+
+.evento{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px;
+    padding: 6px 12px;
+    
+}
+
+.date-event{
+    border: none !important;
+}
+.evento strong{
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 100%;
+}
+.evento p{
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    width: 100%;
+}

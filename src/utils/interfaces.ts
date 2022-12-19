@@ -9,6 +9,15 @@ export interface IUser {
   senha: string
 }
 
+// INTERFACES HEADER BUTTON 
+
+export interface IHeaderButton {
+  texto?: string
+  url?: string
+  id?: string
+  cargos?: string
+}
+
 // INTERFACES AUTH
 
 export interface IAuthContext {
@@ -43,6 +52,15 @@ export interface IColaborador {
   senhaAtual: string
   novaSenha: string
   confirmacaoNovaSenha: string
+  status: string
+}
+
+export interface IUsuarioLogado {
+  cargos: any,
+  email: string,
+  idUsuario: number,
+  imagem: any,
+  nome: string,
   status: string
 }
 
@@ -101,6 +119,7 @@ export interface IEtapa {
   nome: string
   ordemExecucao: number
   idEtapa: number
+  processos: IProcesso[]
 }
 
 export interface IProcesso {
@@ -178,8 +197,9 @@ export interface ICalendarioEdicao {
   processo: string | undefined | null
   feriado: string | undefined | null
   idEtapa: number
+  cor: string
+  areas: string | string[]
 } 
-
 
 export interface ICalendarioGeral {
   dia: string,
@@ -187,4 +207,23 @@ export interface ICalendarioGeral {
   processo: string | undefined | null
   feriado: string | undefined | null
   idEtapa: number
+  idEdicao: number
 } 
+
+// Confirmar Exclusão
+
+export interface TOptionsConfirmDialog {
+  isOpen: boolean,
+  title: string,
+  onConfirm(): void
+}
+
+export interface Props {
+  confirmDialog: TOptionsConfirmDialog,
+  setConfirmDialog(options:TOptionsConfirmDialog): void
+}
+
+export interface ICalendarioProcesso {
+  date: string,
+  title: string | null | undefined
+}

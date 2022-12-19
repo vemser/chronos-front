@@ -1,92 +1,117 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid' 
+import dayGridPlugin from '@fullcalendar/daygrid'
 import { Box } from '@mui/material'
 import './CalendarioGeral.css'
 
 import { CalendarioContext } from '../../context/CalendarioContext'
 
-export const CalendarioGeral = () => {
-    
 
-  const { calendarioGeral  } = useContext(CalendarioContext)
-  const [ calendario, setCalendario ] = useState<any>([])
+export const CalendarioGeral: React.FC = () => {
+
+
+  const { calendarioGeral, getCalendarioGeral } = useContext(CalendarioContext)
   const [etapaLegendas, setEtapaLegendas] = useState<any>([])
-  const colors:string[] = ['#ef4444', '#3b82f6', '#84cc16', '#8b5cf6']
-
-  console.log(calendarioGeral);
-  
 
   useEffect(() => {
-    gerarCalendario()
+    getCalendarioGeral();
+    gerarCalendario();
+
   }, [])
 
+
+  console.log(calendarioGeral)
+
+  // DIAS UTEIS
+  const diasUteis: any = calendarioGeral.filter((dia: any) => {
+    return dia.etapa !== null
+  })
+
+  // FERIADOS
+  const feriadosFilter: any = calendarioGeral.filter((dia: any) => {
+    return dia.processo === null && dia.feriado !== null
+  })
+  
+  // FINAIS DE SEMANA
+  const fdsFilter: any = calendarioGeral.filter((dia: any) => {
+    return dia.processo === null && dia.feriado === null
+  })
+
+  
+
   const gerarCalendario = () => {
-
-    // DIAS UTEIS
-    const diasUteis: any = calendarioGeral.filter((dia) => {
-      return dia.etapa !== null
-    })
-    
-    // FERIADOS
-    const feriadosFilter: any = calendarioGeral.filter((dia) => {
-      return dia.processo === null && dia.feriado !== null
-    })
-    const feriadosMap: any = feriadosFilter.map((dia: any) => {
-      return { date: dia.dia, display: 'background', backgroundColor:'#cecece', title: dia.feriado, classNames: ['feriado'] } 
+  diasUteis.map((dia: any) => {
+      return { 
+        date: dia.dia,
+        title: dia.edicao, 
+        backgroundColor: dia.cor, 
+        extendedProps: {
+          processo: dia.processo
+      }}
     })
 
-    // FINAIS DE SEMANA
-    const fdsFilter: any = calendarioGeral.filter((dia) => {
-      return dia.processo === null && dia.feriado === null
-    })
-    const fdsMap: any = feriadosFilter.map((dia: any) => {
-      return { date: dia.dia, display: 'background', backgroundColor:'#cecece', title: dia.feriado, classNames: ['feriado'] } 
-    })
+    // const feriadosMap: any = feriadosFilter.map((dia: any) => {
+    //   return { date: dia.dia, display: 'background', backgroundColor: '#cecece', title: dia.feriado, classNames: ['feriado'] }
+    // })
 
+    // const fdsMap: any = feriadosFilter.map((dia: any) => {
+    //   return { date: dia.dia, display: 'background', backgroundColor: '#cecece', title: dia.feriado, classNames: ['feriado'] }
+    // })
 
     // EDICAO
-    const etapaProcesso = diasUteis.map((dia: any) => {
-      return{ date: dia.dia, title: dia.processo, backgroundColor: dia.cor}
-    })
-    const etapaEdicao = diasUteis.map((dia: any) => {
-      return{ date: dia.dia, title: dia.edicao, backgroundColor: dia.cor}
-    })
+ }
 
+ console.log(diasUteis)
 
-
-      return etapaEdicao.concat(etapaProcesso,fdsMap , feriadosMap)
+  const aaaa = diasUteis.map((day: any) => {
+    return {
+      date: day.dia,
+      title: day.edicao,
+      backgroundColor: day.cor,
+      extendedProps: {
+        processo: day.processo
+      },
+      classNames: ['date-event'],
+      url:`/gestao/verificar-edicao/${day.idEdicao}`
+    }
+  })
+  
+  function renderEventContent(eventInfo: any) {
+    return (
+      <div className='evento'>
+        <strong>{eventInfo.event.title}</strong>
+        <strong>{eventInfo.event.extendedProps.processo}</strong>
+        
+      </div>
+    )
   }
-
-
+  
   return (
     <>
-      <Box className="CalendarContainer">
+      <Box className="CalendarContainer" sx={{
+        margin: '50px 0'
+      }}>
         <FullCalendar
-          plugins={[ dayGridPlugin ]}
+          plugins={[dayGridPlugin]}
           locale={'pt-br'}
           initialView="dayGridMonth"
           weekends={true}
-
-          events={gerarCalendario()}
-          
+          events={aaaa}
+          selectable={true}
+          eventContent={renderEventContent}
+      
         />
       </Box>
 
       <Box>
         <div className='legenda'>
-
-            
-            {etapaLegendas && etapaLegendas.map((data: any, index: number) =>{
-
-
-                return <div className={'legendaContainer'}>
-                    <div className={`legendaColor a${index+1}`}></div>
-                    <p>{data}</p>
-                </div>
-            })}
+          {etapaLegendas && etapaLegendas.map((data: any, index: number) => {
+            return <div className={'legendaContainer'}>
+              <div className={`legendaColor a${index + 1}`}></div>
+              <p>{data}</p>
+            </div>
+          })}
         </div>
-
       </Box>
     </>
   )

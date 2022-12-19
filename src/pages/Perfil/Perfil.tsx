@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/AuthContext'
 export const Perfil = () => {
 
 
-  const { loggedUser} = useContext<any>(AuthContext)
+  const { loggedUser} = useContext(AuthContext)
   useEffect(() => {
     loggedUser()
   }, [])

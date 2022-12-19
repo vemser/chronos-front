@@ -16,8 +16,6 @@ export const CalendarioProvider = ({ children }: IChildren) => {
     const [ calendarioEdicao, setCalendarioEdicao ] = useState<ICalendarioEdicao[]>([]);
     const [ calendarioGeral, setcalendarioGeral ] = useState<ICalendarioGeral[]>([]);
 
-
-
     const getCalendarioPorEdicao = async (edicao: IEdicao | undefined) => {
         try{
             nProgress.start();
@@ -38,13 +36,12 @@ export const CalendarioProvider = ({ children }: IChildren) => {
         }
     }
 
-
     const getCalendarioGeral = async () => {
         try{
             nProgress.start();
 
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/calendario-geral/`);    
+            const { data } = await api.get(`/edicao/calendario-geral`);    
 
             setcalendarioGeral(data)
 
