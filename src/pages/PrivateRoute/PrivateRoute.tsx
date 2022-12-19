@@ -15,7 +15,7 @@ const useAuth = () => {
     if(user) {
         return {
             auth: true,
-            role: roles // ['ROLE_ADMIN']
+            role: roles
         }
     }   else {
         return {

@@ -72,7 +72,7 @@ export const CalendarioGeral: React.FC = () => {
         processo: day.processo
       },
       classNames: ['date-event'],
-      url:`gestao/verificar-edicao/${day.idEdicao}`
+      url:`/gestao/verificar-edicao/${day.idEdicao}`
     }
   })
   
