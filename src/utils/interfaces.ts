@@ -207,6 +207,7 @@ export interface ICalendarioGeral {
   processo: string | undefined | null
   feriado: string | undefined | null
   idEtapa: number
+  idEdicao: number
 } 
 
 // Confirmar Exclusão

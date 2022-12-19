@@ -161,7 +161,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       }
 
       toast.success(
-        `Status da edição ${data.nome} alterado para ${data.status}!`
+        `Status do(a) colaborador(a) ${data.nome} alterado para ${data.status}!`
       )
       buscarDadosColaborador('1')
     } catch (error) {
