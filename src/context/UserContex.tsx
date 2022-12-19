@@ -310,6 +310,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         await api.put(`/processo/${processo.idProcesso}`, processo);
 
+        toast.success('Processo editado com sucesso!', toastConfig)
         navigate(`/gestao/verificar-edicao/${idEdicao}`);
 
     }  catch (error) {
