@@ -14,6 +14,9 @@ export const Calendario = () => {
 
   const { state } = useLocation()
 
+  console.log(calendarioEdicao);
+  
+
   const gerarCalendario = () => {
 
     // DIA UTIL

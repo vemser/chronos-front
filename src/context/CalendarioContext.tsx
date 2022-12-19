@@ -41,7 +41,7 @@ export const CalendarioProvider = ({ children }: IChildren) => {
             nProgress.start();
 
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/calendario-geral/`);    
+            const { data } = await api.get(`/edicao/calendario-geral`);    
 
             setcalendarioGeral(data)
 
