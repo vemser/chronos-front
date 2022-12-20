@@ -16,9 +16,11 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import { AdminContext } from '../../../context/AdminContext'
 import {
   IColaborador,
-  IAdminContext
+  IAdminContext,
+  TOptionsConfirmDialog
 } from '../../../utils/interfaces'
 import Switch from '@mui/material/Switch'
+import { ConfirmDialog } from '../../ConfirmDialog'
 
 
 export const AdminColaboradoresTable = () => {
@@ -34,6 +36,12 @@ export const AdminColaboradoresTable = () => {
   useEffect(() => {
     buscarDadosColaborador('1')
   }, [])
+
+  const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
+    isOpen: false,
+    title: "",
+    onConfirm: () => { }
+  });
 
   return (
     <>
@@ -97,9 +105,27 @@ export const AdminColaboradoresTable = () => {
                   </TableCell>
                   <TableCell data-title='Excluir' sx={{ pr: 3 }}>
                     <HighlightOffIcon
-                      sx={{ cursor: 'pointer' }}
-                      className={styles.ButtonContainer}
-                      onClick={() => deletarColaborador(user.idUsuario)}
+                      onClick={(event) => {
+                        setConfirmDialog({
+                          isOpen: true,
+                          title: `Confirma a exclusão do colaborador ${user.nome}?`,
+                          onConfirm: () => {
+                            setConfirmDialog({
+                              ...confirmDialog,
+                              isOpen: false
+                            })
+                            deletarColaborador(user.idUsuario)
+                          }
+                        });
+                      }} sx={{
+                        cursor: 'pointer',
+                        width: '25px',
+                        height: '25px',
+                        "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                        "& :active": {
+                          transform: 'scale(.99)',
+                        }
+                      }}
                     />
                   </TableCell>
                 </TableRow>
@@ -107,6 +133,10 @@ export const AdminColaboradoresTable = () => {
             })}
           </TableBody>
         </Table>
+        <ConfirmDialog
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+        />
       </TableContainer>
     </>
   )

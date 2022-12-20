@@ -37,7 +37,7 @@ const procurar = (data: any) =>{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'blue'
+          // background: 'blue'
         }}>
           <Box>
             <Box
@@ -47,7 +47,7 @@ const procurar = (data: any) =>{
               display:'flex',
               alignItems: 'center',
               gap: '10px',
-              background: 'red'
+              // background: 'red'
             }}
             >
               <TextField 
@@ -64,7 +64,7 @@ const procurar = (data: any) =>{
               <Button type={'submit'} variant={'contained'}>Buscar</Button>
             </Box>
           </Box>
-          <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' }, background: 'green' }}><ButtonCadastrar /></Box>
+          <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' }}}><ButtonCadastrar /></Box>
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
