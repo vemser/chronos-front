@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
 import { Header } from '../../../components/Header/Header'
 import { ConteudoGestao } from '../../../components/ConteudoGestao/ConteudoGestao'
+import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
 
 export const GestaoHome = () => {
   const { loggedUser } = useContext<any>(AuthContext)
@@ -13,7 +14,8 @@ export const GestaoHome = () => {
   return (
     <>
       <Header />
-      <ConteudoGestao />
+      {/* <ConteudoGestao /> */}
+      <CalendarioGeral />
     </>
   )
 }
