@@ -7,6 +7,7 @@ import { ButtonCadastrar } from '../../../components/Admin/ButtonCadastrar/Butto
 import { Header } from '../../../components/Header/Header'
 import { AdminColaboradoresTable } from '../../../components/Admin/AdminColaboradoresTable/AdminColaboradoresTable'
 
+
 export const AdminColaboradores = () => {
 
   const {buscarDadosColaborador} = useContext(AdminContext)
