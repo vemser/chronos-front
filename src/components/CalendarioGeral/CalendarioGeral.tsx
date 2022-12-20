@@ -63,7 +63,7 @@ export const CalendarioGeral: React.FC = () => {
 
  console.log(diasUteis)
 
-  const aaaa = diasUteis.map((day: any) => {
+  const arrayDiasUteis = diasUteis.map((day: any) => {
     return {
       date: day.dia,
       title: day.edicao,
@@ -72,9 +72,28 @@ export const CalendarioGeral: React.FC = () => {
         processo: day.processo
       },
       classNames: ['date-event'],
-      url:`/gestao/verificar-edicao/${day.idEdicao}`
+      //url:`/gestao/verificar-edicao/${day.idEdicao}`
     }
   })
+
+  const arrayFeriados = feriadosFilter.map((day: any) => {
+    return{
+      date: day.dia,
+      title: day.feriado,
+      display: 'background',
+      backgroundColor: '#e5e7eb',
+    }
+  })
+
+  const arrayFds = fdsFilter.map((day: any) => {
+    return{
+      date: day.dia,
+      display: 'background',
+      backgroundColor: '#e5e7eb'
+    }
+  })
+  
+  const concatArray = arrayDiasUteis.concat(arrayFeriados, arrayFds)
   
   function renderEventContent(eventInfo: any) {
     return (
@@ -96,9 +115,21 @@ export const CalendarioGeral: React.FC = () => {
           locale={'pt-br'}
           initialView="dayGridMonth"
           weekends={true}
-          events={aaaa}
+          events={concatArray}
           selectable={true}
           eventContent={renderEventContent}
+          navLinks={true}
+          headerToolbar={{
+            left: 'dayGridMonth,dayGridWeek,dayGridDay',
+            center: 'title',
+            right: 'prev,next today',
+          }}
+          buttonText={{
+            today: 'Hoje',
+            month: "Mês",
+            week: "Semana",
+            day: 'Dia'
+          }}
       
         />
       </Box>

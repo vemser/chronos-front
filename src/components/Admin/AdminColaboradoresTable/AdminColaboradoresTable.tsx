@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import {
@@ -21,7 +21,7 @@ import {
 import Switch from '@mui/material/Switch'
 
 
-export const AdminColaboradoresTable: React.FC = () => {
+export const AdminColaboradoresTable = () => {
 
   const navigate = useNavigate()
   const {

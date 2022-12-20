@@ -183,21 +183,37 @@ body::-webkit-scrollbar-thumb {
 
 .fc-today-button {
   background-color: #fff !important;
-  border: 2px solid #1e62fe !important;
+  border: 1px solid #1e62fe !important;
   color: #1e62fe !important;
   font-weight: 600 !important;
 }
 
-.fc-next-button {
-  background-color: #1e62fe !important;
-  border: 1px solid #fff !important;
+.fc-next-button, .fc-dayGridDay-button {
+  background-color: transparent !important;
+  color: #1e62fe !important;
   border-radius: 0px 5px 5px 0px !important;
+  border: none !important;
 }
 
-.fc-prev-button {
-  background-color: #1e62fe !important;
-  border: 1px solid #fff !important;
+.fc-prev-button, .fc-dayGridMonth-button {
+  background-color: transparent !important;
+  color: #1e62fe !important;
   border-radius: 5px 0px 0px 5px !important;
+  border: none !important;
+}
+
+.fc-dayGridWeek-button {
+  background-color: transparent !important;
+  color: #1e62fe !important;
+  border-radius: 5px 0px 0px 5px !important;
+  border: none !important;
+}
+
+.fc .fc-button:hover{
+  box-shadow: none !important;
+  background-color: #ffffff !important;
+  color: #1e62fe !important;
+  font-weight: 600 !important;
 }
 
 @media (max-width: 1230px) {
