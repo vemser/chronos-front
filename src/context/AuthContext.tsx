@@ -33,10 +33,13 @@ export const AuthProvider = ({ children }: IChildren) => {
     try {
       api.defaults.headers.common['Authorization'] = accesstoken;
       const { data } = await api.get('/usuario/logged-user');
-      setDadosUsuarioLogado(data);
-      
-    } catch (error) {
+      setDadosUsuarioLogado(data); 
+    } catch (error:any) {
       console.log(error);
+      if (error.response.status === 403) {
+        toast.error('Sessão expirada!');
+        handleLogout();
+      }
     };
   };
 
