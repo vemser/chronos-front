@@ -141,6 +141,18 @@ export const Calendario = () => {
           initialView="dayGridMonth"
           weekends={true}
           events={gerarCalendario()}
+          navLinks={true}
+          headerToolbar={{
+            left: 'dayGridMonth,dayGridWeek,dayGridDay',
+            center: 'title',
+            right: 'prev,next today',
+          }}
+          buttonText={{
+            today: 'Hoje',
+            month: "Mês",
+            week: "Semana",
+            day: 'Dia'
+          }}
         />
 
         

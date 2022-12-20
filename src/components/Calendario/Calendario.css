@@ -209,7 +209,7 @@ body::-webkit-scrollbar-thumb {
   border: none !important;
 }
 
-.fc .fc-button:hover{
+.fc .fc-button:focus{
   box-shadow: none !important;
   background-color: #ffffff !important;
   color: #1e62fe !important;
