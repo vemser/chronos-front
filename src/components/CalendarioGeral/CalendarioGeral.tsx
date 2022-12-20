@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import { Box } from '@mui/material'
+import { Box, modalClasses } from '@mui/material'
 import './CalendarioGeral.css'
 import { CalendarioContext } from '../../context/CalendarioContext'
 import { ICalendarioEdicao } from '../../utils/interfaces'
+import { Link } from 'react-router-dom'
 
 export const CalendarioGeral: React.FC = () => {
 
   const { calendarioGeral, getCalendarioGeral } = useContext(CalendarioContext)
   const [etapaLegendas, setEtapaLegendas] = useState<any>([])
+  const [ modalInfos, setModalInfos ] = useState<any>()
 
   useEffect(() => {
     getCalendarioGeral();
@@ -17,7 +19,6 @@ export const CalendarioGeral: React.FC = () => {
 
   }, [])
 
-  console.log(calendarioGeral)
 
   // DIAS UTEIS
   const diasUteis: any = calendarioGeral.filter((dia: any) => {
@@ -57,17 +58,27 @@ export const CalendarioGeral: React.FC = () => {
     // EDICAO
   }
 
-  console.log(diasUteis)
-
+  console.log(diasUteis);
+  
   const arrayDiasUteis = diasUteis.map((day: any) => {
     return {
       date: day.dia,
       title: day.edicao,
       backgroundColor: day.cor,
       extendedProps: {
-        processo: day.processo
+        processo: day.processo,
+        dia: day.dia.split('-')
+        .reverse()
+        .join('/'),
+        etapa: day.etapa,
+        critico: day.critico,
+        cor: day.cor,
+
+        idEdicao: day.idEdicao,
+        idEtapa: day.idEtapa,
+        idProcesso: day.idProcesso
       },
-      classNames: ['date-event'],
+      classNames: ['date-event', day.critico],
     }
   })
 
@@ -117,9 +128,22 @@ export const CalendarioGeral: React.FC = () => {
     return false
   })
 
+  const handleModal = (info: any) => {
+    
+    setModalInfos(info.event)
+
+    console.log(info.event);
+    
+
+    document.getElementById('modal-id')?.classList.toggle('hide')
+    document.getElementById('CalendarContainer')?.classList.toggle('blur')
+    document.getElementById('legenda')?.classList.toggle('blur')
+    
+  }
+
   return (
     <>
-      <Box className="CalendarContainer" sx={{
+      <Box id='CalendarContainer' className="CalendarContainer" sx={{
         margin: '50px 0'
       }}>
         <FullCalendar
@@ -145,13 +169,13 @@ export const CalendarioGeral: React.FC = () => {
           }}
           eventClick={
             function(info) {
-              alert(info.event.title)
+              handleModal(info)
             }
           }
       
         />
       </Box>
-      <Box className="legendaSection">
+      <Box id='legenda' className="legendaSection">
         <div className="containerTitulo">
           <h2>Legenda de etapas:</h2>
         </div>
@@ -172,6 +196,35 @@ export const CalendarioGeral: React.FC = () => {
             })}
         </div>
       </Box>
+      <div onBlur={() => {document.getElementById('modal-id')?.classList.add('hide')}} id='modal-id' className='event-modal hide'>
+
+          <div onClick={handleModal} className='close-modal'>X</div>
+
+          <div className='modal-date'>
+            <h3>{modalInfos?.extendedProps.dia}</h3>
+          </div>
+
+          <div className='modal-header'>
+            <Link to={`/gestao/verificar-edicao/${modalInfos?.extendedProps.idEdicao}`} title={'Verificar Edição'}>
+              <h3>{modalInfos?.title}</h3>
+            </Link>
+          </div>
+
+          <div className='modal-etapa'>
+            <h3>{modalInfos?.extendedProps.etapa}</h3>
+            <div style={{backgroundColor: modalInfos?.extendedProps.cor }} className='color-tag'></div>
+          </div>
+
+          <div>
+            <div className='modal-divisor'></div>
+            <span>Detalhes do Processo:</span>
+            <h3>{modalInfos?.extendedProps.processo}</h3>
+          </div>
+
+          <div>
+            {modalInfos?.extendedProps.critico == 'ATIVO' ? <div className='modal-critico'></div> : ''}
+          </div>
+        </div>
     </>
   )
 }
