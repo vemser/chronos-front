@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { Box } from '@mui/material'
 import './CalendarioGeral.css'
-
 import { CalendarioContext } from '../../context/CalendarioContext'
 import { ICalendarioEdicao } from '../../utils/interfaces'
 
@@ -69,7 +68,6 @@ export const CalendarioGeral: React.FC = () => {
         processo: day.processo
       },
       classNames: ['date-event'],
-      //url:`/gestao/verificar-edicao/${day.idEdicao}`
     }
   })
 
@@ -131,6 +129,7 @@ export const CalendarioGeral: React.FC = () => {
           weekends={true}
           events={concatArray}
           selectable={true}
+          editable={true}
           eventContent={renderEventContent}
           navLinks={true}
           headerToolbar={{
@@ -144,6 +143,11 @@ export const CalendarioGeral: React.FC = () => {
             week: "Semana",
             day: 'Dia'
           }}
+          eventClick={
+            function(info) {
+              alert(info.event.title)
+            }
+          }
       
         />
       </Box>
