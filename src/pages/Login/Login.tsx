@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Button,
   TextField,
@@ -19,34 +19,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { userFormSchema } from '../../utils/schemas'
 import { Navigate } from 'react-router-dom'
 
-interface State {
-  password: string
-  showPassword: boolean
-}
-
 export const Login = () => {
-  const [values, setValues] = React.useState<State>({
-    password: '',
-    showPassword: false
-  })
 
-  const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value })
-    }
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword
-    })
-  }
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault()
-  }
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   // FUNCTION
 
@@ -142,11 +123,10 @@ export const Login = () => {
                   Senha
                 </InputLabel>
                 <OutlinedInput
-                  {...register('senha', { required: true })}
+                  {...register('senha')}
                   className={styles.loginText}
-                  id="input-login-senha"
-                  type={values.showPassword ? 'text' : 'password'}
-                  onChange={handleChange('password')}
+                  id="senha"
+                  type={showPassword ? 'text' : 'password'}
                   error={!!errors.senha}
                   endAdornment={
                     <InputAdornment position="end">
@@ -156,7 +136,7 @@ export const Login = () => {
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
+                        {showPassword ? (
                           <Visibility />
                         ) : (
                           <VisibilityOff />
@@ -176,7 +156,6 @@ export const Login = () => {
                 )}
               </FormControl>
             </Box>
-
             <Button
               className={styles.loginText}
               type="submit"

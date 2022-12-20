@@ -10,12 +10,8 @@ export const userFormSchema = yup.object().shape({
   senha: yup
     .string()
     .required('Por favor, digite sua senha!')
-    .min(6, 'A senha deve ter no mínimo 6 caracteres')
-    
+    .min(6, 'A senha deve ter no mínimo 6 caracteres')    
 })
-
-
-
 
 export const editarPerfilFormSchema = yup.object().shape({
   nome:yup.string().required('Por favor, digite seu nome!'),
@@ -54,9 +50,7 @@ export const EditarFormSchema = yup.object().shape({
     .required('Por favor, digite o nome do colaborador')
     .min(3, 'O nome deve ter no mínimo 3 caracteres')
     .matches(/^[aA-zZ\s]+$/, 'Por favor, digite somente caracteres ')
-
 })
-
 
 export const cadastrarDiaNaoUtilFormSchema = yup.object().shape({
   descricao: yup
