@@ -5,10 +5,9 @@ import { Box } from '@mui/material'
 import './CalendarioGeral.css'
 
 import { CalendarioContext } from '../../context/CalendarioContext'
-
+import { ICalendarioEdicao } from '../../utils/interfaces'
 
 export const CalendarioGeral: React.FC = () => {
-
 
   const { calendarioGeral, getCalendarioGeral } = useContext(CalendarioContext)
   const [etapaLegendas, setEtapaLegendas] = useState<any>([])
@@ -18,7 +17,6 @@ export const CalendarioGeral: React.FC = () => {
     gerarCalendario();
 
   }, [])
-
 
   console.log(calendarioGeral)
 
@@ -31,23 +29,22 @@ export const CalendarioGeral: React.FC = () => {
   const feriadosFilter: any = calendarioGeral.filter((dia: any) => {
     return dia.processo === null && dia.feriado !== null
   })
-  
+
   // FINAIS DE SEMANA
   const fdsFilter: any = calendarioGeral.filter((dia: any) => {
     return dia.processo === null && dia.feriado === null
   })
 
-  
-
   const gerarCalendario = () => {
-  diasUteis.map((dia: any) => {
-      return { 
+    diasUteis.map((dia: any) => {
+      return {
         date: dia.dia,
-        title: dia.edicao, 
-        backgroundColor: dia.cor, 
+        title: dia.edicao,
+        backgroundColor: dia.cor,
         extendedProps: {
           processo: dia.processo
-      }}
+        }
+      }
     })
 
     // const feriadosMap: any = feriadosFilter.map((dia: any) => {
@@ -59,9 +56,9 @@ export const CalendarioGeral: React.FC = () => {
     // })
 
     // EDICAO
- }
+  }
 
- console.log(diasUteis)
+  console.log(diasUteis)
 
   const aaaa = diasUteis.map((day: any) => {
     return {
@@ -72,20 +69,37 @@ export const CalendarioGeral: React.FC = () => {
         processo: day.processo
       },
       classNames: ['date-event'],
-      url:`/gestao/verificar-edicao/${day.idEdicao}`
+      // url:`/gestao/verificar-edicao/${day.idEdicao}`
     }
   })
-  
+
   function renderEventContent(eventInfo: any) {
     return (
       <div className='evento'>
         <strong>{eventInfo.event.title}</strong>
         <strong>{eventInfo.event.extendedProps.processo}</strong>
-        
       </div>
     )
   }
-  
+
+  const arrayCorEtapa: any = diasUteis?.map((dia: ICalendarioEdicao) => {
+    return { etapa: dia.etapa, cor: dia.cor }
+  })
+
+  const etapaCorUnica: any = new Set()
+
+  const unique = arrayCorEtapa?.filter((element: ICalendarioEdicao) => {
+    const isDuplicate = etapaCorUnica?.has(element.etapa)
+
+    etapaCorUnica.add(element.etapa)
+
+    if (!isDuplicate) {
+      return true
+    }
+
+    return false
+  })
+
   return (
     <>
       <Box className="CalendarContainer" sx={{
@@ -99,18 +113,28 @@ export const CalendarioGeral: React.FC = () => {
           events={aaaa}
           selectable={true}
           eventContent={renderEventContent}
-      
+
         />
       </Box>
-
-      <Box>
-        <div className='legenda'>
-          {etapaLegendas && etapaLegendas.map((data: any, index: number) => {
-            return <div className={'legendaContainer'}>
-              <div className={`legendaColor a${index + 1}`}></div>
-              <p>{data}</p>
-            </div>
-          })}
+      <Box className="legendaSection">
+        <div className="containerTitulo">
+          <h2>Legenda de etapas:</h2>
+        </div>
+        <div className="legenda">
+          {unique &&
+            unique.map((etapa: ICalendarioEdicao) => {
+              return (
+                <div>
+                  <div className="legendaLinha">
+                    <div
+                      style={{ backgroundColor: `${etapa.cor} ` }}
+                      className="cardCor"
+                    ></div>
+                    <p>{etapa.etapa}</p>
+                  </div>
+                </div>
+              )
+            })}
         </div>
       </Box>
     </>
