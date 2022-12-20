@@ -138,9 +138,21 @@ export const Calendario = () => {
         <FullCalendar
           plugins={[dayGridPlugin]}
           locale={'pt-br'}
-          initialView="dayGridMonth"
+          initialView="dayGridWeek"
           weekends={true}
           events={gerarCalendario()}
+          navLinks={true}
+          headerToolbar={{
+            left: 'dayGridMonth,dayGridWeek,dayGridDay',
+            center: 'title',
+            right: 'prev,next today',
+          }}
+          buttonText={{
+            today: 'Hoje',
+            month: "Mês",
+            week: "Semana",
+            day: 'Dia'
+          }}
         />
 
         
