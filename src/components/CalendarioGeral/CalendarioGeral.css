@@ -38,17 +38,13 @@
 }
 .evento strong{
     color: black;
-    overflow: hidden;
-    text-overflow: ellipsis; 
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; 
     width: 100%;
 }
 .evento p{
     color: black;
-    overflow: hidden;
-    text-overflow: ellipsis; 
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; 
     width: 100%;
 }
-
-/* .fc {
-    height: 73vh !important;
-} */
