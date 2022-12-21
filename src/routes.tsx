@@ -36,7 +36,8 @@ import { InstNaoUteis } from './pages/Instrutor/InstNaoUteis/InstNaoUteis'
 import { InstVerificarEdicao } from './pages/Instrutor/InstVerificarEdicao/InstVerificarEdicao'
 import { Calendario } from './components/Calendario/Calendario'
 import { GestaoDiaNaoUtil } from './pages/Gestao/GestaoDiaNaoUtil/GestaoDiaNaoUtil'
-import { BuscarProvider } from './context/buscaContext'
+import { BuscarProvider } from './context/BuscaContext'
+
 
 export const AppRoutes = () => {
   return (

@@ -45,8 +45,6 @@ export const AuthProvider = ({ children }: IChildren) => {
 
   const handleLogin = async (user: IUser) => {
     try {
-
-      console.log(user);
       
       const { data } = await authApi.post('/usuario/login', user);
 
