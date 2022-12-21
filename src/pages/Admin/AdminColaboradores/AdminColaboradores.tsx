@@ -28,11 +28,18 @@ export const AdminColaboradores = () => {
     <>
       <Header />
       <Box width={'100%'} display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'} mt={'50px'}>
+        <Box sx={{
+          // background: 'red',
+          width: '80%',
+          mb: '30px'
+        }}>
+          {/* fdg */}
+        </Box>        
         <Box className={styles.ContainerHeader}>
           <div className={styles.ContainerTitulo}>
             <h2>Colaboradores</h2>
-            <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }}><ButtonCadastrar /></Box>
           </div>
+            <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }} className={styles.ContainerButton}><ButtonCadastrar /></Box>
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
