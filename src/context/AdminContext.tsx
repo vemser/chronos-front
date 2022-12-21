@@ -8,6 +8,7 @@ import {
   IEditarColaborador
 } from '../utils/interfaces'
 import { api, authApi } from '../utils/api'
+import { api, authApi } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'

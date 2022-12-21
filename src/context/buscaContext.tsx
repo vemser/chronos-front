@@ -1,7 +1,7 @@
 import nProgress from "nprogress";
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { api } from "../utils/api";
+import { authApi } from "../utils/api";
 import { IAdminContext, IBuscaContext, IChildren } from "../utils/interfaces";
 import { AdminContext } from "./AdminContext";
 
@@ -14,14 +14,13 @@ export const BuscarProvider = ({ children }: IChildren) => {
 
     const token = localStorage.getItem('token');
 
-    const buscarColaborador = async (data: any) => {
-        console.log(data)
+    const buscarColaborador = async (pesquisa: any) => {
         try {
             nProgress.start();
 
-            api.defaults.headers.common['Authorization'] = token
-            const { data } = await api.get(`/usuario?pagina=${Number(1) - 1}&tamanho=8`)
-
+            authApi.defaults.headers.common['Authorization'] = token
+            const { data } = await authApi.get(`/usuario/filtrarLoginCargo?pagina=${0}&tamanho=${10}&login=${pesquisa.login}&nomeCargo=${pesquisa.cargo}`)
+            console.log(data.elementos)
             setTotalPages(data.quantidadePaginas)
             setDadosColaborador(data.elementos)
 
