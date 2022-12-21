@@ -7,9 +7,11 @@ import { AuthContext } from '../../../context/AuthContext'
 import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
 
 export const AdminHome: React.FC = () => {
-
   const { loggedUser, roles } = useContext<any>(AuthContext)
 
+  useEffect(() => {
+    loggedUser()
+  }, [])
   return (
     <>
       <Header />

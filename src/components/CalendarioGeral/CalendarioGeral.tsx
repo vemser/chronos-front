@@ -16,7 +16,6 @@ export const CalendarioGeral: React.FC = () => {
   useEffect(() => {
     getCalendarioGeral();
     gerarCalendario();
-
   }, [])
 
 

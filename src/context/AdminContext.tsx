@@ -63,10 +63,8 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       nProgress.start()
 
-      console.log(dadosColaborador)
-
       dadosColaborador.login = data.login.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
-     // const retorno = await authApi.post('/usuario', dadosColaborador)
+      const retorno = await authApi.post('/usuario', dadosColaborador)
       
       console.log('deu certo')
 
@@ -242,7 +240,6 @@ export const AdminProvider = ({ children }: IChildren) => {
 
       loggedUser()
 
-      console.log('funcionou!')
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)
       console.log(error)
