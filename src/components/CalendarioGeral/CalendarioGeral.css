@@ -23,6 +23,7 @@
     overflow: hidden;
     text-overflow: ellipsis; 
     border-radius: 12px !important;
+    margin-top: 8px !important;
 }
 
 .evento{
@@ -79,26 +80,44 @@
     justify-content: center;
 }
 
+.modal-processo-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-processo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-processo h3{
+    max-width: 90%;
+}
+
 .modal-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
 }
 
 .modal-header a{
-   color: black;
+   color: #000000;
    transition: all ease-out 200ms
 }
 .modal-header a:hover{
-    color: var(--color-blue);
+    color: rgba(0, 0, 0, 50%);
 }
 
 .modal-critico{
-    height: 16px;
-    width: 100px;
-    border-radius: 20px;
+    height: 24px;
+    width: 24px;
+    border-radius: 100px;
     background-color: #EF4444;
+    color: #ffffff;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
 }
 .modal-etapa{
     display: flex;
@@ -109,7 +128,6 @@
 .modal-divisor{
     width: 100%;
     height: 2px;
-    background-color: var(--color-blue);
     margin: 20px 0;
 }
 
@@ -125,16 +143,13 @@
     opacity: 0.3;
 }
 
-span[critico]{
-    width: 20px;
-    height: 20px;
-    background-color: blue;
+.ATIVO{
+    border: 2px solid #ffffff !important;
+    outline: 2px solid #EF4444 !important;
+    box-shadow: 2px 4px 10px 2px #EF4444 !important;
+}
+.INATIVO{
+    border: 2px solid transparent !important;
+    outline: 2px solid transparent !important;
 }
 
-.ATIVO::before{
-    content: '.';
-    display: flex;
-    color: blue;
-    flex-direction: row-reverse;
-    z-index: 9 !important;
-}

@@ -196,7 +196,8 @@ export const CalendarioGeral: React.FC = () => {
             })}
         </div>
       </Box>
-      <div onBlur={() => {document.getElementById('modal-id')?.classList.add('hide')}} id='modal-id' className='event-modal hide'>
+      <div onBlur={() => {document.getElementById('modal-id')?.classList.add('hide')}} 
+          style={{border:`2px solid ${modalInfos?.extendedProps.cor}`}} id='modal-id' className='event-modal hide'>
 
           <div onClick={handleModal} className='close-modal'>X</div>
 
@@ -215,14 +216,16 @@ export const CalendarioGeral: React.FC = () => {
             <div style={{backgroundColor: modalInfos?.extendedProps.cor }} className='color-tag'></div>
           </div>
 
-          <div>
-            <div className='modal-divisor'></div>
+          <div className='modal-processo-container'>
+            <div className='modal-divisor' style={{backgroundColor: modalInfos?.extendedProps.cor }}></div>
             <span>Detalhes do Processo:</span>
-            <h3>{modalInfos?.extendedProps.processo}</h3>
+            <div className='modal-processo'>
+              <h3>{modalInfos?.extendedProps.processo}</h3> 
+              {modalInfos?.extendedProps.critico == 'ATIVO' ? <div className='modal-critico'><p>!</p></div> : ''}
+            </div>
           </div>
 
           <div>
-            {modalInfos?.extendedProps.critico == 'ATIVO' ? <div className='modal-critico'></div> : ''}
           </div>
         </div>
     </>
