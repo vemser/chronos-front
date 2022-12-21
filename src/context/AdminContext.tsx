@@ -223,6 +223,7 @@ export const AdminProvider = ({ children }: IChildren) => {
         criarDadosColaborador,
         buscarDadosColaborador,
         dadosColaborador,
+        setDadosColaborador,
         deletarColaborador,
         totalPages,
         editarColaborador,
