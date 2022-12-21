@@ -114,9 +114,10 @@ export const AdminColaboradores = () => {
                       height: '44px'
                     }}
                   >
-                    <MenuItem value={'Administrador'}>Administrador</MenuItem>
-                    <MenuItem value={'Gestão de pessoas'}>Gestão de pessoas</MenuItem>
-                    <MenuItem value={'Instrutor'}>Instrutor</MenuItem>
+                    <MenuItem value={'ROLE_ADMIN'}>Administrador</MenuItem>
+                    <MenuItem value={'ROLE_GESTAO_DE_PESSOAS'}>Gestão de pessoas</MenuItem>
+                    <MenuItem value={'ROLE_INSTRUTOR'}>Instrutor</MenuItem>
+                    <MenuItem value={'ROLE_ALUNO'}>Aluno</MenuItem>
                   </Select>
                   {/* <CreatableSelect
                   components={animatedComponents}
@@ -165,38 +166,3 @@ export const AdminColaboradores = () => {
     </>
   )
 }
-
-{/* <Box sx={{
-  width: '80%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  // background: 'blue'
-}}>
-  <Box>
-    <Box
-      component={'form'}
-      onSubmit={handleSubmit(procurar)}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-        // background: 'red'
-      }}
-    >
-      <TextField
-        label='Buscar'
-        id='procurar'
-        type='text'
-        {...register('procurar')}
-        sx={{
-          "& .MuiInputBase-input": {
-            height: '10px'
-          }
-        }}
-      />
-      <Button type={'submit'} variant={'contained'}>Buscar</Button>
-      <Button onClick={() => { buscarDadosColaborador('1'); reset() }} variant={'contained'}>Limpar</Button>
-    </Box>
-  </Box>
-</Box> */}

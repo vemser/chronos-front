@@ -39,6 +39,7 @@ export interface IColaborador2 {
 
 
 export interface IColaborador {
+  login: string
   nome: string
   email: string
   cargos: any
@@ -52,7 +53,7 @@ export interface IColaborador {
   senhaAtual: string
   novaSenha: string
   confirmacaoNovaSenha: string
-  status: string
+  status: string,
 }
 
 export interface IUsuarioLogado {
@@ -75,7 +76,7 @@ export interface IAdminContext {
   alterarStatusColab: (idUsuario: IColaborador) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
   inserirFotoUsuario: (data: any) => Promise<void>
- 
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>
 }
 
 // INTERFACES USER

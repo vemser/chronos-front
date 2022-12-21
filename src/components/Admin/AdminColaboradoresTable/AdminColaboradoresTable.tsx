@@ -74,7 +74,7 @@ export const AdminColaboradoresTable = () => {
                 <TableRow key={user.idUsuario}>
 
                   <TableCell data-title='Colaborador(a)'>
-                    {user.nome}
+                    {user.login}
                   </TableCell>
                   <TableCell data-title='E-mail'>
                     {user.email}
