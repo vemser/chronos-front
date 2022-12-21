@@ -32,26 +32,26 @@ export interface IAuthContext {
 // INTERFACES ADMIN
 
 export interface IColaborador2 {
-  nome: string
-  email: string
+  login: string
+  cargos: Object[]
+}
+export interface IEditarColaborador{
   cargos: Object[]
 }
 
-
 export interface IColaborador {
-  nome: string
+  login: string
   email: string
   cargos: any
   idCargo: number
   Administrador: string
   GestaoDePessoas: string
   Instrutor: string
-  imagem: string | File
+  Gestor: string
+  Aluno: string
+  Colaborador: string
   idUsuario: number | any
   descricao: any
-  senhaAtual: string
-  novaSenha: string
-  confirmacaoNovaSenha: string
   status: string
 }
 
@@ -76,6 +76,15 @@ export interface IAdminContext {
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
   inserirFotoUsuario: (data: any) => Promise<void>
  
+}
+
+export interface ICargos {
+  administrador: boolean,
+  gestaoDePessoas: boolean,
+  instrutor: boolean,
+  gestor: boolean,
+  aluno: boolean,
+  colaborador: boolean
 }
 
 // INTERFACES USER

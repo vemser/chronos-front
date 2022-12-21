@@ -1,7 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './AdminEditarColab.module.css'
-
-import TextField from '@mui/material/TextField'
 
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
@@ -12,18 +10,18 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
-import { IColaborador } from '../../../utils/interfaces'
+import { ICargos, IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 
 import { useLocation } from 'react-router-dom'
-import { yupResolver } from '@hookform/resolvers/yup'
 
-import { EditarFormSchema } from '../../../utils/schemas'
 import { Header } from '../../../components/Header/Header'
 
 export const AdminEditarColab = () => {
   const { state } = useLocation()
   const { editarColaborador } = useContext(AdminContext)
+
+  const [ userCargos, setUserCargos ] = useState<ICargos>()
 
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
@@ -33,26 +31,52 @@ export const AdminEditarColab = () => {
     formState: { errors }
   } = useForm<IColaborador>({
     defaultValues: {
-      nome: state.nome,
-      email: state.email,
-      imagem: state.imagem,
-      cargos: state.cargos
-    },
-    resolver: yupResolver(EditarFormSchema)
+      login: state.login,
+    }
   })
 
-  const atualizarDadosPerfil = (idUsuario: number, data: IColaborador) => {
-    editarColaborador(data, idUsuario)
-  }
+  // CARGOS
+  var administrador = false
+  var gestaoDePessoas = false
+  var instrutor = false
+  var gestor = false
+  var aluno = false
+  var colaborador = false
 
+    for(let i = 0; i < state.cargos.length; i++) {
+
+      if(state.cargos[i].nome.includes('ROLE_ADMIN')){
+        administrador = true
+      } 
+
+      if(state.cargos[i].nome.includes('ROLE_GESTAO_DE_PESSOAS')){
+        gestaoDePessoas = true
+      } 
+      
+      if(state.cargos[i].nome.includes('ROLE_INSTRUTOR')){
+        instrutor = true
+      } 
+
+      if(state.cargos[i].nome.includes('ROLE_GESTOR')){
+        gestor = true
+      } 
+
+      if(state.cargos[i].nome.includes('ROLE_ALUNO')){
+        aluno = true
+      } 
+
+      if(state.cargos[i].nome.includes('ROLE_COLABORADOR')){
+        colaborador = true
+      } 
+    }
+  
   return (
     <>
       <Header />
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
           className={styles.FormAdmin}
-          onSubmit={handleSubmit((data: IColaborador) =>
-            atualizarDadosPerfil(state.idUsuario, data)
+          onSubmit={handleSubmit((data: IColaborador) => editarColaborador(data, state.idUsuario)
           )}
         >
           <Grid
@@ -158,31 +182,13 @@ export const AdminEditarColab = () => {
                 alignItems={'center'}
               >
                 <Box display="flex" flexDirection="column" gap="20px">
-                  <TextField
-                    id="nome"
-                    label="Nome"
-                    variant="standard"
-                    sx={{ width: '450px' }}
-                    className={styles.FormPerfil}
-                    {...register('nome')}
-                    error={!!errors.nome}
-                  />
-                  {errors.nome && (
-                    <span
-                      className={styles.ContainerError}
-                      id="colab-error-nome"
-                    >
-                      {errors.nome.message}
-                    </span>
-                  )}
-                  <TextField
-                    id="email"
-                    label="Email"
-                    variant="standard"
-                    sx={{ width: '450px' }}
-                    className={styles.FormPerfil}
-                    value={state.email}
-                  />
+                  
+                  <h2>Editar Cargos</h2>
+
+                  <Box>
+                    <input type="text" style={{display: 'none'}} defaultValue={state.login} />
+                  </Box>
+
                   <FormControl
                     required
                     component="fieldset"
@@ -191,43 +197,45 @@ export const AdminEditarColab = () => {
                   >
                     <FormGroup>
                       <FormControlLabel
-                        control={
-                          <Checkbox
-                            id="Administrador"
-                            {...register('Administrador')}
-                            defaultChecked={state.cargos.some(
-                              (item: IColaborador) =>
-                                item.descricao == 'Administrador'
-                            )}
-                          />
-                        }
+                        control={<Checkbox defaultChecked={administrador} />}
                         label="Administrador"
+                        id="Administrador"
+                        {...register('Administrador')}
                       />
+
                       <FormControlLabel
-                        control={
-                          <Checkbox
-                            id="GestaoDePessoas"
-                            {...register('GestaoDePessoas')}
-                            defaultChecked={state.cargos.some(
-                              (item: IColaborador) =>
-                                item.descricao == 'Gestão de pessoas'
-                            )}
-                          />
-                        }
-                        label="Gestão De Pessoas"
+                        control={<Checkbox defaultChecked={gestaoDePessoas} />}
+                        label="Gestao de Pessoas"
+                        id="GestaoDePessoa"
+                        {...register('GestaoDePessoas')}
                       />
+
                       <FormControlLabel
-                        control={
-                          <Checkbox
-                            id="Instrutor"
-                            {...register('Instrutor')}
-                            defaultChecked={state.cargos.some(
-                              (item: IColaborador) =>
-                                item.descricao == 'Instrutor'
-                            )}
-                          />
-                        }
+                        control={<Checkbox defaultChecked={instrutor} />}
                         label="Instrutor"
+                        id="Instrutor"
+                        {...register('Instrutor')}
+                      />
+                      
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked={gestor} />}
+                        label="Gestor"
+                        id="Gestor"
+                        {...register('Gestor')}
+                      />
+
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked={aluno} />}
+                        label="Aluno"
+                        id="Aluno"
+                        {...register('Aluno')}
+                      />
+
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked={colaborador} />}
+                        label="Colaborador"
+                        id="Colaborador"
+                        {...register('Colaborador')}
                       />
                     </FormGroup>
                   </FormControl>

@@ -86,34 +86,18 @@ export const AdminCadastrar = () => {
                     variant="standard"
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
-                    {...register('nome')}
-                    error={!!errors.nome}
+                    {...register('login')}
+                    error={!!errors.login}
                   />
-                  {errors.nome && (
+                  {errors.login && (
                     <span
                       className={styles.ContainerError}
-                      id="colab-error-nome"
+                      id="colab-error-login"
                     >
-                      {errors.nome.message}
+                      {errors.login.message}
                     </span>
                   )}
-                  <TextField
-                    id="email"
-                    label="Email"
-                    variant="standard"
-                    sx={{ width: '450px' }}
-                    className={styles.FormPerfil}
-                    {...register('email')}
-                    error={!!errors.email}
-                  />
-                  {errors.email && (
-                    <span
-                      className={styles.ContainerError}
-                      id="colab-error-email"
-                    >
-                      {errors.email.message}
-                    </span>
-                  )}
+                  
                   <FormControl
                     required
                     // error={error}
@@ -131,6 +115,7 @@ export const AdminCadastrar = () => {
                         }
                         label="Administrador"
                       />
+
                       <FormControlLabel
                         control={
                           <Checkbox
@@ -140,12 +125,37 @@ export const AdminCadastrar = () => {
                         }
                         label="Gestão De Pessoas"
                       />
+
                       <FormControlLabel
                         control={
-                          <Checkbox id="Instrutor" {...register('Instrutor')} />
+                          <Checkbox id="Instrutor" 
+                          {...register('Instrutor')} 
+                          />
                         }
                         label="Instrutor"
                       />
+
+                      <FormControlLabel
+                        control={
+                          <Checkbox id="Gestor" {...register('Gestor')} />
+                        }
+                        label="Gestor"
+                      />
+
+                      <FormControlLabel
+                        control={
+                          <Checkbox id="Aluno" {...register('Aluno')} />
+                        }
+                        label="Aluno"
+                      />
+
+                      <FormControlLabel
+                        control={
+                          <Checkbox id="Colaborador" {...register('Colaborador')} />
+                        }
+                        label="Colaborador"
+                      />
+
                     </FormGroup>
                   </FormControl>
                   <div className={styles.ContainerEnviar}>

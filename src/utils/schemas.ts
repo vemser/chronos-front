@@ -42,14 +42,6 @@ export const cadastrarEdicaoFormSchema = yup.object().shape({
   dataFinal: yup.string().required('Por favor informe a data final')
 })
 
-export const EditarFormSchema = yup.object().shape({
-  nome: yup
-    .string()
-    .required('Por favor, digite o nome do colaborador')
-    .min(3, 'O nome deve ter no mínimo 3 caracteres')
-    .matches(/^[aA-zZ\s]+$/, 'Por favor, digite somente caracteres ')
-})
-
 export const cadastrarDiaNaoUtilFormSchema = yup.object().shape({
   descricao: yup
     .string()
@@ -68,17 +60,11 @@ export const cadastrarEtapaFormSchema = yup.object().shape({
 })
 
 export const CadastroDePessoasSchema = yup.object().shape({
-  nome: yup
+  login: yup
     .string()
     .required('Por favor, digite o nome do colaborador')
     .min(3, 'O nome deve ter no mínimo 3 caracteres')
     .matches(/^[aA-zZ\s]+$/, 'Por favor, digite somente caracteres '),
-
-  email: yup
-    .string()
-    .required('Por favor, digite seu email!')
-    .email('Por favor, digite um email válido')
-    .matches(/dbccompany/, 'Por favor, digite um email da DBC'),
 })
 
 export const EtapaSchema = yup.object().shape({

@@ -4,7 +4,8 @@ import {
   IAdminContext,
   IColaborador,
   toastConfig,
-  IColaborador2
+  IColaborador2,
+  IEditarColaborador
 } from '../utils/interfaces'
 import { api, authApi } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
@@ -25,32 +26,50 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
-      nome: data.nome,
-      email: data.email,
+      login: data.login,
       cargos: []
     }
     data.Administrador &&
-      dadosColaborador.cargos.push({
-        nome: 'ROLE_ADMIN',
-        descricao: 'Administrador'
-      })
-    data.GestaoDePessoas &&
-      dadosColaborador.cargos.push({
-        nome: 'ROLE_GESTAO_DE_PESSOAS',
-        descricao: 'GestaoDePessoas'
-      })
-    data.Instrutor &&
-      dadosColaborador.cargos.push({
-        nome: 'ROLE_INSTRUTOR',
-        descricao: 'Instrutor'
-      })
+    dadosColaborador.cargos.push({
+      nome: 'ROLE_ADMIN',
+      descricao: 'Administrador'
+    })
+  data.GestaoDePessoas &&
+    dadosColaborador.cargos.push({
+      nome: 'ROLE_GESTAO_DE_PESSOAS',
+      descricao: 'GestaoDePessoas'
+    })
+  data.Instrutor &&
+    dadosColaborador.cargos.push({
+      nome: 'ROLE_INSTRUTOR',
+      descricao: 'Instrutor'
+    })
+  data.Gestor &&
+    dadosColaborador.cargos.push({
+      nome: 'ROLE_GESTOR',
+      descricao: 'Gestor'
+    })
+  data.Aluno &&
+    dadosColaborador.cargos.push({
+      nome: 'ROLE_ALUNO',
+      descricao: 'Aluno'
+    })
+  data.Colaborador &&
+    dadosColaborador.cargos.push({
+      nome: 'ROLE_COLABORADOR',
+      descricao: 'Colaborador'
+    })
 
     try {
       nProgress.start()
 
-      dadosColaborador.nome = data.nome.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
-      const retorno = await api.post('/usuario', dadosColaborador)
+      console.log(dadosColaborador)
+
+      dadosColaborador.login = data.login.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
+     // const retorno = await authApi.post('/usuario', dadosColaborador)
       
+      console.log('deu certo')
+
       toast.success('Usuário criado com sucesso!', toastConfig)
       navigate("/admin/colaboradores")
 
@@ -71,8 +90,9 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       nProgress.start();
 
-      api.defaults.headers.common['Authorization'] = token
-      const { data } = await api.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=8`)
+      authApi.defaults.headers.common['Authorization'] = token
+      const { data } = await authApi.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=8`)
+
         
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
@@ -107,11 +127,10 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   // Atualizar cadastro e cargo do usuário
   const editarColaborador = async (data: IColaborador, idUsuario: number) => {
-    let dadosColaborador: IColaborador2 = {
-      nome: data.nome,
-      email: data.email,
+    let dadosColaborador: IEditarColaborador = {
       cargos: []
     }
+    
     data.Administrador &&
       dadosColaborador.cargos.push({
         nome: 'ROLE_ADMIN',
@@ -127,12 +146,27 @@ export const AdminProvider = ({ children }: IChildren) => {
         nome: 'ROLE_INSTRUTOR',
         descricao: 'Instrutor'
       })
+    data.Gestor &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_GESTOR',
+        descricao: 'Gestor'
+      })
+    data.Aluno &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_ALUNO',
+        descricao: 'Aluno'
+      })
+    data.Colaborador &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_COLABORADOR',
+        descricao: 'Colaborador'
+      })
     
     try {
       nProgress.start()
-      api.defaults.headers.common['Authorization'] = token
+      authApi.defaults.headers.common['Authorization'] = token
 
-      await api.put(`usuario/update-cadastro/${idUsuario}`, dadosColaborador)
+      await authApi.put(`usuario/update-cargos/${idUsuario}`, dadosColaborador)
 
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin/colaboradores')
@@ -161,7 +195,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       }
 
       toast.success(
-        `Status do(a) colaborador(a) ${data.nome} alterado para ${data.status}!`
+        `Status do(a) colaborador(a) ${data.login} alterado para ${data.status}!`
       )
       buscarDadosColaborador('1')
     } catch (error) {
@@ -205,6 +239,8 @@ export const AdminProvider = ({ children }: IChildren) => {
       authApi.defaults.headers.common['Authorization'] = token
 
       await authApi.put(`/foto/upload-image-perfil`, data)
+
+      loggedUser()
 
       console.log('funcionou!')
     } catch (error) {

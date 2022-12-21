@@ -53,7 +53,7 @@ export const AdminListar: React.FC = () => {
           <TableHead sx={{ backgroundColor: '#fff', borderRadius: '8px' }}>
             <TableRow>
               <TableCell >Colaborador(a)</TableCell>
-              <TableCell>E-mail</TableCell>
+        
               <TableCell>Cargo</TableCell>
 
               <TableCell align="right">Ativo</TableCell>
@@ -74,7 +74,7 @@ export const AdminListar: React.FC = () => {
                 <TableRow key={user.idUsuario}>
 
                   <TableCell data-title='Colaborador(a)'>
-                    {user.nome}
+                    {user.login}
                   </TableCell>
                   <TableCell data-title='E-mail'>
                     {user.email}
@@ -109,7 +109,7 @@ export const AdminListar: React.FC = () => {
                       onClick={(event) => {
                         setConfirmDialog({
                           isOpen: true,
-                          title: `Confirma a exclusão do colaborador ${user.nome}?`,
+                          title: `Confirma a exclusão do colaborador ${user.login}?`,
                           onConfirm: () => {
                             setConfirmDialog({
                               ...confirmDialog,

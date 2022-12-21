@@ -55,9 +55,7 @@ export const AdminColaboradoresTable = () => {
           }}>
             <TableRow>
               <TableCell >Colaborador(a)</TableCell>
-              <TableCell>E-mail</TableCell>
               <TableCell>Cargo</TableCell>
-              <TableCell align="right">Ativo</TableCell>
               <TableCell align="right">Editar</TableCell>
               <TableCell align="right">Excluir</TableCell>
             </TableRow>
@@ -74,11 +72,9 @@ export const AdminColaboradoresTable = () => {
                 <TableRow key={user.idUsuario}>
 
                   <TableCell data-title='Colaborador(a)'>
-                    {user.nome}
+                    {user.login}
                   </TableCell>
-                  <TableCell data-title='E-mail'>
-                    {user.email}
-                  </TableCell>
+              
                   
                   <TableCell data-title='Cargo'>
                     {user?.cargos?.map((cargo: IColaborador) => {
@@ -86,14 +82,8 @@ export const AdminColaboradoresTable = () => {
                     })}
                   </TableCell>
 
-                  <TableCell data-title='Ativo' >
-                    <Switch
-                      checked={status}
-                      onClick={() => alterarStatusColab(user)}
-                    />
-                  </TableCell>
 
-                  <TableCell data-title='Editar' >
+                  <TableCell data-title='Editar' align="right">
                     <ModeEditSharpIcon
                       sx={{ mr: 1, cursor: 'pointer' }}
                       className={styles.ButtonContainer}
@@ -104,12 +94,12 @@ export const AdminColaboradoresTable = () => {
                       }}
                     />
                   </TableCell>
-                  <TableCell data-title='Excluir' sx={{ pr: 3 }}>
+                  <TableCell data-title='Excluir' sx={{ pr: 3 }} align="right">
                     <HighlightOffIcon
                       onClick={(event) => {
                         setConfirmDialog({
                           isOpen: true,
-                          title: `Confirma a exclusão do colaborador ${user.nome}?`,
+                          title: `Confirma a exclusão do colaborador ${user.login}?`,
                           onConfirm: () => {
                             setConfirmDialog({
                               ...confirmDialog,
