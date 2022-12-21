@@ -9,18 +9,16 @@ export const BuscarContext = createContext({} as IBuscaContext)
 
 export const BuscarProvider = ({ children }: IChildren) => {
 
-    const [totalPages, setTotalPages] = useState(0)
-    const { dadosColaborador, setDadosColaborador } = useContext<IAdminContext>(AdminContext)
+    const { setTotalPages } = useContext<IAdminContext>(AdminContext)
+    const { setDadosColaborador } = useContext<IAdminContext>(AdminContext)
 
     const token = localStorage.getItem('token');
 
     const buscarColaborador = async (pesquisa: any) => {
         try {
             nProgress.start();
-
             authApi.defaults.headers.common['Authorization'] = token
             const { data } = await authApi.get(`/usuario/filtrarLoginCargo?pagina=${0}&tamanho=${10}&login=${pesquisa.login}&nomeCargo=${pesquisa.cargo}`)
-            console.log(data.elementos)
             setTotalPages(data.quantidadePaginas)
             setDadosColaborador(data.elementos)
 

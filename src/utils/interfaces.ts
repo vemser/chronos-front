@@ -75,7 +75,16 @@ export interface IAdminContext {
   alterarStatusColab: (idUsuario: IColaborador) => Promise<void>
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
   inserirFotoUsuario: (data: any) => Promise<void>
- 
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>
+}
+
+export interface ICargos {
+  administrador: boolean,
+  gestaoDePessoas: boolean,
+  instrutor: boolean,
+  gestor: boolean,
+  aluno: boolean,
+  colaborador: boolean
 }
 
 export interface ICargos {

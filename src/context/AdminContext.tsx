@@ -262,8 +262,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         editarColaborador,
         alterarStatusColab,
         atualizarSenhaUsuario,
-        inserirFotoUsuario
-     
+        inserirFotoUsuario,
+        setTotalPages
       }}
     >
       {children}
