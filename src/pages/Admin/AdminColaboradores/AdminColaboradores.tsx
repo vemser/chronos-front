@@ -10,7 +10,7 @@ import { Button, Select, TextField, MenuItem  } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import CreatableSelect from 'react-select/dist/declarations/src/Creatable'
 import makeAnimated from 'react-select/animated'
-import { BuscarContext } from '../../../context/BuscarContext'
+import { BuscarContext } from '../../../context/BuscaContext'
 
 export const AdminColaboradores = () => {
 
