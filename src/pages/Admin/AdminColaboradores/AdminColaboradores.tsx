@@ -31,42 +31,8 @@ export const AdminColaboradores = () => {
         <Box className={styles.ContainerHeader}>
           <div className={styles.ContainerTitulo}>
             <h2>Colaboradores</h2>
+            <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }}><ButtonCadastrar /></Box>
           </div>
-        </Box>
-        <Box sx={{
-          width: '80%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          // background: 'blue'
-        }}>
-          <Box>
-            <Box
-              component={'form'}
-              onSubmit={handleSubmit(procurar)}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                // background: 'red'
-              }}
-            >
-              <TextField
-                label='Buscar'
-                id='procurar'
-                type='text'
-                {...register('procurar')}
-                sx={{
-                  "& .MuiInputBase-input": {
-                    height: '10px'
-                  }
-                }}
-              />
-              <Button type={'submit'} variant={'contained'}>Buscar</Button>
-              <Button onClick={() => { buscarDadosColaborador('1'); reset() }} variant={'contained'}>Limpar</Button>
-            </Box>
-          </Box>
-          <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }}><ButtonCadastrar /></Box>
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
@@ -78,3 +44,38 @@ export const AdminColaboradores = () => {
     </>
   )
 }
+
+{/* <Box sx={{
+  width: '80%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  // background: 'blue'
+}}>
+  <Box>
+    <Box
+      component={'form'}
+      onSubmit={handleSubmit(procurar)}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        // background: 'red'
+      }}
+    >
+      <TextField
+        label='Buscar'
+        id='procurar'
+        type='text'
+        {...register('procurar')}
+        sx={{
+          "& .MuiInputBase-input": {
+            height: '10px'
+          }
+        }}
+      />
+      <Button type={'submit'} variant={'contained'}>Buscar</Button>
+      <Button onClick={() => { buscarDadosColaborador('1'); reset() }} variant={'contained'}>Limpar</Button>
+    </Box>
+  </Box>
+</Box> */}
