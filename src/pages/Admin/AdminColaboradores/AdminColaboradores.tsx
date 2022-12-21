@@ -8,21 +8,22 @@ import { Header } from '../../../components/Header/Header'
 import { AdminColaboradoresTable } from '../../../components/Admin/AdminColaboradoresTable/AdminColaboradoresTable'
 import { Button, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
-
+import { BuscarContext } from '../../../context/buscaContext'
 
 export const AdminColaboradores = () => {
 
   const { buscarDadosColaborador } = useContext(AdminContext)
+  const { buscarColaborador } = useContext(BuscarContext)
 
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
   }, [])
 
-  const {register, handleSubmit} = useForm<any>({})
+  const { register, handleSubmit, reset } = useForm<any>({})
 
-const procurar = (data: any) =>{
-  console.log(data)
-}
+  const procurar = (data: any) => {
+    buscarColaborador(data);
+  }
   return (
     <>
       <Header />
@@ -41,30 +42,31 @@ const procurar = (data: any) =>{
         }}>
           <Box>
             <Box
-            component={'form'}
-            onSubmit={handleSubmit(procurar)}
-            sx={{
-              display:'flex',
-              alignItems: 'center',
-              gap: '10px',
-              // background: 'red'
-            }}
-            >
-              <TextField 
-              label= 'Buscar'
-              id= 'procurar'
-              type='text'
-              {...register('procurar')}
+              component={'form'}
+              onSubmit={handleSubmit(procurar)}
               sx={{
-                "& .MuiInputBase-input": {
-                  height: '10px'
-                }
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                // background: 'red'
               }}
+            >
+              <TextField
+                label='Buscar'
+                id='procurar'
+                type='text'
+                {...register('procurar')}
+                sx={{
+                  "& .MuiInputBase-input": {
+                    height: '10px'
+                  }
+                }}
               />
               <Button type={'submit'} variant={'contained'}>Buscar</Button>
+              <Button onClick={() => { buscarDadosColaborador('1'); reset() }} variant={'contained'}>Limpar</Button>
             </Box>
           </Box>
-          <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' }}}><ButtonCadastrar /></Box>
+          <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }}><ButtonCadastrar /></Box>
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />

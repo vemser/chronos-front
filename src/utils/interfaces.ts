@@ -68,6 +68,7 @@ export interface IAdminContext {
   criarDadosColaborador: (colaborador: IColaborador) => Promise<void>
   buscarDadosColaborador: (page: string) => Promise<void>
   dadosColaborador: IColaborador[] | undefined
+  setDadosColaborador: any
   deletarColaborador: (idUsuario: number) => Promise<void>
   totalPages: number
   editarColaborador: (data: IColaborador, idUsuario: number) => Promise<void>
@@ -226,4 +227,10 @@ export interface Props {
 export interface ICalendarioProcesso {
   date: string,
   title: string | null | undefined
+}
+
+// Busca colaboradores
+
+export interface IBuscaContext {
+  buscarColaborador: (data: any) => Promise<void>
 }

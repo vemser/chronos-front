@@ -18,7 +18,6 @@ export const CalendarioGeral: React.FC = () => {
 
   }, [])
 
-  console.log(calendarioGeral)
 
   // DIAS UTEIS
   const diasUteis: any = calendarioGeral.filter((dia: any) => {
@@ -56,9 +55,7 @@ export const CalendarioGeral: React.FC = () => {
     // })
 
     // EDICAO
-  }
-
-  console.log(diasUteis)
+  } 
 
   const arrayDiasUteis = diasUteis.map((day: any) => {
     return {
@@ -155,7 +152,7 @@ export const CalendarioGeral: React.FC = () => {
           {unique &&
             unique.map((etapa: ICalendarioEdicao) => {
               return (
-                <div>
+                <div key={etapa.etapa}>
                   <div className="legendaLinha">
                     <div
                       style={{ backgroundColor: `${etapa.cor} ` }}

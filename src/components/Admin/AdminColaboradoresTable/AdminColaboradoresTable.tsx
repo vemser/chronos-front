@@ -49,15 +49,16 @@ export const AdminColaboradoresTable = () => {
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >
         <Table>
-          <TableHead sx={{ backgroundColor: '#fff', borderRadius: '8px' }}>
+          <TableHead sx={{ 
+            backgroundColor: '#fff', 
+            borderRadius: '8px'                 
+          }}>
             <TableRow>
               <TableCell >Colaborador(a)</TableCell>
               <TableCell>E-mail</TableCell>
               <TableCell>Cargo</TableCell>
-
               <TableCell align="right">Ativo</TableCell>
               <TableCell align="right">Editar</TableCell>
-
               <TableCell align="right">Excluir</TableCell>
             </TableRow>
           </TableHead>
