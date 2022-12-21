@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { api } from '../utils/api'
+import { api, authApi } from '../utils/api'
 import { IAuthContext, IChildren, IUser, IUsuarioLogado } from '../utils/interfaces'
 
 export const AuthContext = createContext({} as IAuthContext)
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: IChildren) => {
   const parseJwt = async (token: any) => {
     try {
       let decodedJWT = JSON.parse(atob(token.split('.')[1]));
-      let roleArray = decodedJWT.CARGOS;
+      let roleArray = decodedJWT.cargos;
 
       return roleArray;
 
@@ -46,18 +46,18 @@ export const AuthProvider = ({ children }: IChildren) => {
   const handleLogin = async (user: IUser) => {
     try {
 
-      const { data } = await api.post('/login', user);
+      console.log(user);
+      
+      const { data } = await authApi.post('/usuario/login', user);
 
-      api.defaults.headers.common['Authorization'] = data;
+      authApi.defaults.headers.common['Authorization'] = data;
       
       localStorage.setItem('token', data);
-      localStorage.setItem('user', user.email);
+      localStorage.setItem('user', user.username );
 
       let rolesArray = await parseJwt(localStorage.getItem('token'));
 
       setRoles(rolesArray);
-
-      loggedUser();
 
       if (rolesArray.includes('ROLE_ADMIN')) {
         navigate(`/admin`);
@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }: IChildren) => {
       } else {
         navigate(`/`);
       }
+
     } catch (error) {
       console.error(error);
       toast.error('Usuário ou senha inválida!');

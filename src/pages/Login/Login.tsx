@@ -100,20 +100,20 @@ export const Login = () => {
             >
               <Box sx={{ mb: 3 }}>
                 <TextField
-                  {...register('email')}
+                  {...register('username')}
                   className={styles.loginText}
                   id="input-login-email"
-                  label="Email"
+                  label="Login"
                   variant="outlined"
                   style={{ color: 'palette.primary.dark' }}
-                  error={!!errors.email}
+                  error={!!errors.username}
                 />
-                {errors.email && (
+                {errors.username && (
                   <span
                     className={styles.ContainerError}
                     id="login-error-email"
                   >
-                    {errors.email.message}
+                    {errors.username.message}
                   </span>
                 )}
               </Box>
@@ -123,11 +123,11 @@ export const Login = () => {
                   Senha
                 </InputLabel>
                 <OutlinedInput
-                  {...register('senha')}
+                  {...register('password')}
                   className={styles.loginText}
                   id="senha"
                   type={showPassword ? 'text' : 'password'}
-                  error={!!errors.senha}
+                  error={!!errors.password}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -146,12 +146,12 @@ export const Login = () => {
                   }
                   label="Senha"
                 />
-                {errors.senha && (
+                {errors.password && (
                   <span
                     className={styles.ContainerError}
                     id="login-error-senha"
                   >
-                    {errors.senha.message}
+                    {errors.password.message}
                   </span>
                 )}
               </FormControl>

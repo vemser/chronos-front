@@ -5,8 +5,8 @@ export interface IChildren {
 }
 
 export interface IUser {
-  email: string
-  senha: string
+  username: string
+  password: string
 }
 
 // INTERFACES HEADER BUTTON 
