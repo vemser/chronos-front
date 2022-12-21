@@ -132,6 +132,7 @@ export interface IProcesso {
   diasUteis: number
   ordemExecucao: number
   idProcesso: number
+  processoCritico: boolean | string
 }
 
 export interface IAreasEnvolvidas {

@@ -32,55 +32,25 @@ interface State {
 export const EditarPerfil = () => {
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
-  const { dadosUsuarioLogado, loggedUser } = React.useContext<any>(AuthContext)
+  const { dadosUsuarioLogado } = React.useContext<any>(AuthContext)
 
   const imagemBase: any = dadosUsuarioLogado.imagem
   const { state } = useLocation()
+  const{ handleSubmit } = useForm()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<IColaborador>({
-    defaultValues: {
-      nome: dadosUsuarioLogado.nome
-    },
-    resolver: yupResolver(editarPerfilFormSchema),
-  })
+  const { inserirFotoUsuario } = useContext(AdminContext)
 
-  const [values, setValues] = React.useState<State>({
-    password: '',
-    showPassword: false,
-  })
 
-  const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value })
-    }
+  const atualizarDadosPerfil = () => {
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    })
-  }
+    console.log('chamou')
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault()
-  }
-
-  const { atualizarSenhaUsuario, inserirFotoUsuario } = useContext(AdminContext)
-
-  const atualizarDadosPerfil = (data: IColaborador) => {
     const formData = new FormData()
+
     if (selectedImage) {
       formData.append('imagem', selectedImage)
       inserirFotoUsuario(formData)
     }
-
-    atualizarSenhaUsuario(data)
   }
 
   return (
@@ -118,13 +88,11 @@ export const EditarPerfil = () => {
             </Box>
           </Grid>
           <form
-            onSubmit={handleSubmit((data: IColaborador) =>
-              atualizarDadosPerfil(data)
-            )}
+            onSubmit={handleSubmit(() => {atualizarDadosPerfil()})}
             className={styles.FormEditar}
           >
             <Box
-              minHeight={'500px'}
+              minHeight={'420px'}
               width={'100%'}
               display={'flex'}
               justifyContent={'center'}
@@ -137,7 +105,7 @@ export const EditarPerfil = () => {
                 justifyContent={'center'}
               >
                 <Box
-                  height={'300px'}
+                  height={'340px'}
                   className={styles.ContainerMedio}
                   borderRadius={'8px'}
                   boxShadow={2}
@@ -171,7 +139,7 @@ export const EditarPerfil = () => {
                       />
                     )}
                   </div>
-                  <Box display="flex" justifyContent="center">
+                  <Box display="flex" alignItems="center" flexDirection='column'>
                     <label htmlFor="imagem">
                       <input
                         style={{ display: 'none' }}
@@ -207,94 +175,26 @@ export const EditarPerfil = () => {
                         <input type="file" hidden name="[name]" />
                       </Button>
                     </label>
+                      {selectedImage === null ? 
+                        <Button variant="contained" disabled type='submit' sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          width: '200px',
+                          mt: 2,
+                        }}>
+                          Confirmar
+                        </Button> 
+                      : 
+                        <Button variant="contained" type='submit' sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          width: '200px',
+                          mt: 2,
+                        }}>
+                          Confirmar
+                        </Button>
+                      }
                   </Box>
-                </Box>
-              </Box>
-
-              <Box
-                width={'50%'}
-                display="flex"
-                justifyContent="center"
-                alignItems={'center'}
-              >
-                <Box display="flex" flexDirection="column" gap="20px">
-                  <TextField
-                    id="nome"
-                    label="Nome"
-                    {...register('nome')}
-                    variant="standard"
-                    className={styles.FormPerfil}
-                    error={!!errors.nome}
-                  />
-                  {errors.nome && (
-                    <span
-                      className={styles.ContainerError}
-                      id="nome-error"
-                    >
-                      {errors.nome.message}
-                    </span>
-                  )}
-
-                  <TextField
-                    label="Senha atual"
-                    id="senhaAtual"
-                    type={'password'}
-                    {...register('senhaAtual')}
-                    variant="standard"
-                    error={!!errors.novaSenha}
-                  />
-                  {errors.senhaAtual && (
-                    <span
-                      className={styles.ContainerError}
-                      id="senha-atual-error"
-                    >
-                      {errors.senhaAtual.message}
-                    </span>
-                  )}
-
-                  <TextField
-                    label="Nova Senha"
-                    id="novaSenha"
-                    type={'password'}
-                    {...register('novaSenha')}
-                    variant="standard"
-                    error={!!errors.novaSenha}
-                  />
-                  {errors.novaSenha && (
-                    <span
-                      className={styles.ContainerError}
-                      id="nova-senha-error"
-                    >
-                      {errors.novaSenha.message}
-                    </span>
-                  )}
-
-                  <TextField
-                    id="confirmacaoNovaSenha"
-                    label="Confirmar Nova Senha"
-                    type={'password'}
-                    variant="standard"
-                    {...register('confirmacaoNovaSenha')}
-                    error={!!errors.confirmacaoNovaSenha}
-                  />
-                  {errors.confirmacaoNovaSenha && (
-                    <span
-                      className={styles.ContainerError}
-                      id="confirmacao-error"
-                    >
-                      {errors.confirmacaoNovaSenha.message}
-                    </span>
-                  )}
-
-                  <div className={styles.ContainerEnviar}>
-                    <label htmlFor="submit">
-                      <input
-                        type="submit"
-                        className={styles.BotaoEnviar}
-                        value="Enviar"
-                      />
-                    </label>
-                  </div>
                 </Box>
               </Box>
             </Box>

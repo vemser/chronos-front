@@ -6,7 +6,7 @@ import {
   toastConfig,
   IColaborador2
 } from '../utils/interfaces'
-import { api } from '../utils/api'
+import { api, authApi } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
@@ -202,9 +202,9 @@ export const AdminProvider = ({ children }: IChildren) => {
   const inserirFotoUsuario = async (data: any) => {
     try {
       nProgress.start()
-      api.defaults.headers.common['Authorization'] = token
+      authApi.defaults.headers.common['Authorization'] = token
 
-      await api.put(`/foto/upload-image-perfil`, data)
+      await authApi.put(`/foto/upload-image-perfil`, data)
 
       console.log('funcionou!')
     } catch (error) {

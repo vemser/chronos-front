@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoEditarProcesso.module.css'
 
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
-import { TextField } from '@mui/material'
+import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
@@ -14,13 +14,6 @@ import makeAnimated from 'react-select/animated'
 
 
 export const GestaoEditarProcesso = () => {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors }
-  // } = useForm<any>({
-  //   // resolver: yupResolver(cadastrarEtapaFormSchema)
-  // })
 
   //HOOKS
   const animatedComponents = makeAnimated()
@@ -184,13 +177,24 @@ export const GestaoEditarProcesso = () => {
                 {...register('ordemExecucao')}
               />
 
+              
+                <FormControlLabel control={<Checkbox /> } 
+                label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
+              
+                {...register('processoCritico')} sx={{mt: 2}}/>
+
+
               <TextField
                 style={{display: 'none'}}
                 id="idProcesso"
                 value={state.idProcesso}
                 {...register('idProcesso')}
               />
+
+
+
               <div className={styles.ContainerBotao}>
+                
                 <Button
                   className={styles.BotaoGestao}
                   type='submit'

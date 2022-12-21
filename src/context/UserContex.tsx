@@ -231,6 +231,7 @@ export const UserProvider = ({ children }: IChildren) => {
     // PROCESSO
 
     const getProcessos = async (idEtapa: number) => {
+        
         try {
             nProgress.start();
             api.defaults.headers.common['Authorization'] = token;
@@ -275,6 +276,12 @@ export const UserProvider = ({ children }: IChildren) => {
 
         api.defaults.headers.common[`Authorization`] = token;
 
+        if(processo.processoCritico === true) {
+            processo.processoCritico = 'ATIVO'
+        } else {
+            processo.processoCritico = 'INATIVO'
+        }
+
         processo.areasEnvolvidas = area
         processo.responsaveis = responsaveis
         processo.diasUteis = Number(processo.diasUteis)
@@ -284,7 +291,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         toast.success('Processo cadastrado com sucesso!', toastConfig)
         
-        navigate(`/gestao/verificar-edicao/${idEdicao}`);
+        // navigate(`/gestao/verificar-edicao/${idEdicao}`);
 
     } catch (error) {
         console.error(error);
@@ -302,6 +309,12 @@ export const UserProvider = ({ children }: IChildren) => {
         nProgress.start();
 
         api.defaults.headers.common['Authorization'] = token;
+
+        if(processo.processoCritico === true) {
+            processo.processoCritico = 'ATIVO'
+        } else {
+            processo.processoCritico = 'INATIVO'
+        }
 
         processo.areasEnvolvidas = area
         processo.responsaveis = responsaveis

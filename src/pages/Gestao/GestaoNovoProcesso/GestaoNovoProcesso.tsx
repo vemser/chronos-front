@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoNovoProcesso.module.css'
 
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
-import { TextField } from '@mui/material'
+import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
@@ -192,6 +192,12 @@ export const GestaoNovoProcesso = () => {
                       <p className={styles.ContainerError}>Por favor, digite a ordem de execução</p>
                     </span>
                   )}
+
+                <FormControlLabel control={<Checkbox /> } 
+                label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
+              
+                {...register('processoCritico')} sx={{mt: 2}}/>
+
               <div className={styles.ContainerBotao}>
                 <Button
                   className={styles.BotaoGestao}

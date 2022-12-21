@@ -58,13 +58,13 @@
 }
 @media (max-width: 1150px) {
   .ContainerPerfil {
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
 
     justify-content: center;
     align-items: center;
-    height: 810px;
+    height: 610px;
   }
 
   .FormPerfil {

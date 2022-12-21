@@ -7,17 +7,9 @@ import { AuthContext } from '../../../context/AuthContext'
 import { CalendarioGeral } from '../../../components/CalendarioGeral/CalendarioGeral'
 
 export const AdminHome: React.FC = () => {
-  const { buscarDadosColaborador } = useContext<IAdminContext>(AdminContext)
 
   const { loggedUser, roles } = useContext<any>(AuthContext)
 
-  useLayoutEffect(() => {
-    buscarDadosColaborador('1')
-  }, [])
-
-  useEffect(() => {
-    loggedUser()
-  }, [])
   return (
     <>
       <Header />
