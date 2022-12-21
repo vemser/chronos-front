@@ -6,7 +6,7 @@ import {
   toastConfig,
   IColaborador2
 } from '../utils/interfaces'
-import { api } from '../utils/api'
+import { api, authApi } from '../utils/api'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
@@ -71,7 +71,7 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       nProgress.start();
 
-      api.defaults.headers.common['Authorization'] = token
+      authApi.defaults.headers.common['Authorization'] = token
       const { data } = await api.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=8`)
         
       setTotalPages(data.quantidadePaginas)
