@@ -73,7 +73,6 @@ export const AdminColaboradoresTable = () => {
 
                   <TableCell data-title='Colaborador(a)'>
                     {user.login}
-                    {user.login}
                   </TableCell>
               
                   
