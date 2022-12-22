@@ -77,7 +77,7 @@ export const AdminColaboradores = () => {
             display: 'flex',
             justifyContent: 'center'
           }}>
-            <h2>Filtrar Colaboradores</h2>
+            <h2>Colaboradores</h2>
           </Box>
           <Box
             component={'form'}
@@ -164,9 +164,9 @@ export const AdminColaboradores = () => {
             </Box>
           </Box>
         </Box>
-        <Box className={styles.ContainerHeader}>
+        <Box className={styles.ContainerHeader} sx={{mt: '20px'}}>
           <div className={styles.ContainerTitulo}>
-            <h2>Colaboradores</h2>
+            {/* <h2>Colaboradores</h2> */}
           </div>
           <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }} className={styles.ContainerButton}><ButtonCadastrar /></Box>
         </Box>
