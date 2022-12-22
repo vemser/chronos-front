@@ -1,23 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoEditarProcesso.module.css'
-
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
 import { useForm } from 'react-hook-form'
-import CreatableSelect from 'react-select/creatable'
+import CreatableSelect from 'react-select'
 import makeAnimated from 'react-select/animated'
-
-
 
 
 export const GestaoEditarProcesso = () => {
 
   //HOOKS
   const animatedComponents = makeAnimated()
-  
+
   const { state } = useLocation()
   const { edicao } = useParams();
 
@@ -28,43 +25,43 @@ export const GestaoEditarProcesso = () => {
 
   const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
   const { register, handleSubmit } = useForm()
-  
+
   useEffect(() => {
     getAreaEnvolvida()
     getResponsavel()
-    
+
   }, [])
 
 
-  const handleChangeAreas = (value: any) => { 
+  const handleChangeAreas = (value: any) => {
     const list = value.map((item: any) => {
-      return {'nome': item.value}
+      return { 'nome': item.value }
     })
     setAreasEnvolvidasState(list)
   }
 
-  const handleChangeResponsaveis = (value: any) => { 
+  const handleChangeResponsaveis = (value: any) => {
     const list = value.map((item: any) => {
-      return {'nome': item.value}
+      return { 'nome': item.value }
     })
     setResponsaveisState(list)
   }
 
   const defaultAreaValue = state.areasEnvolvidas.map((area: any) => {
-    return {label: area.nome, value: area.nome}
+    return { label: area.nome, value: area.nome }
   })
 
   const defaultResponsavelValue = state.responsaveis.map((responsavel: any) => {
-    return {label: responsavel.nome, value: responsavel.nome}
+    return { label: responsavel.nome, value: responsavel.nome }
   })
 
 
 
   // SELECT 
 
-  
-  const selectAreaEnvolvida:object[] = []
-  const selectResponsavel:object[] = []
+
+  const selectAreaEnvolvida: object[] = []
+  const selectResponsavel: object[] = []
 
 
   areasEnvolvidas.map((area) => {
@@ -80,9 +77,6 @@ export const GestaoEditarProcesso = () => {
       label: responsavel.nome
     })
   })
-
-
-  
 
   return (
     <>
@@ -150,8 +144,6 @@ export const GestaoEditarProcesso = () => {
                 />
               </label>
 
-
-
               <TextField
                 className={styles.FormRow}
                 id="duracaoProcesso"
@@ -177,24 +169,20 @@ export const GestaoEditarProcesso = () => {
                 {...register('ordemExecucao')}
               />
 
-              
-                <FormControlLabel control={<Checkbox /> } 
-                label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
-              
-                {...register('processoCritico')} sx={{mt: 2}}/>
+              <FormControlLabel control={<Checkbox />}
+                label="Processo Crítico" id='processoCritico' className={styles.dataPicker}
+
+                {...register('processoCritico')} sx={{ mt: 2 }} />
 
 
               <TextField
-                style={{display: 'none'}}
+                style={{ display: 'none' }}
                 id="idProcesso"
                 value={state.idProcesso}
                 {...register('idProcesso')}
               />
 
-
-
               <div className={styles.ContainerBotao}>
-                
                 <Button
                   className={styles.BotaoGestao}
                   type='submit'

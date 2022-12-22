@@ -60,7 +60,6 @@ export const AdminColaboradoresTable = () => {
               <TableCell align="right">Excluir</TableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
             {dadosColaborador?.map((user: IColaborador) => {
               if (user.status === 'ATIVO') {
@@ -70,19 +69,14 @@ export const AdminColaboradoresTable = () => {
               }
               return (
                 <TableRow key={user.idUsuario}>
-
                   <TableCell data-title='Colaborador(a)'>
                     {user.login}
-                  </TableCell>
-              
-                  
+                  </TableCell>     
                   <TableCell data-title='Cargo'>
                     {user?.cargos?.map((cargo: IColaborador) => {
                       return <p key={cargo.idCargo}>{cargo.descricao}</p>
                     })}
                   </TableCell>
-
-
                   <TableCell data-title='Editar' align="right">
                     <ModeEditSharpIcon
                       sx={{ mr: 1, cursor: 'pointer' }}

@@ -251,5 +251,5 @@ export interface ICalendarioProcesso {
 // Busca colaboradores
 
 export interface IBuscaContext {
-  buscarColaborador: (data: any) => Promise<void>
+  buscarColaborador: (pesquisa: any, buscarCargos: any) => Promise<void>
 }

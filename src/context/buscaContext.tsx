@@ -1,3 +1,4 @@
+import axios from "axios";
 import nProgress from "nprogress";
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -14,7 +15,11 @@ export const BuscarProvider = ({ children }: IChildren) => {
 
     const token = localStorage.getItem('token');
 
-    const buscarColaborador = async (pesquisa: any) => {
+    const buscarColaborador = async (pesquisa: any, buscarCargos: any) => {
+        buscarCargos.length == 0 ? pesquisa.cargo = '' : 
+        buscarCargos[0].value === undefined? pesquisa.cargo = '' : 
+        pesquisa.cargo = buscarCargos[0].value;   
+
         try {
             nProgress.start();
             authApi.defaults.headers.common['Authorization'] = token
@@ -24,6 +29,15 @@ export const BuscarProvider = ({ children }: IChildren) => {
 
         } catch (error) {
             console.log(error)
+            // if (axios.isAxiosError(error) && error.response && error.response.data) {
+            //     if (error.response.data.message) {
+            //         toast.error(error.response.data.message);
+            //     } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
+            //         toast.error(error.response.data.errors.join("\n"));
+            //     }
+            // } else {
+            //     toast.error('Houve um erro ao exibir as informações, tente novamente mais tarde.');
+            // }
             toast.error('Houve um erro ao exibir as informações, por favor tente novamente.')
 
         } finally {
