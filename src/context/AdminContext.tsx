@@ -107,8 +107,8 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       nProgress.start()
 
-      api.defaults.headers.common['Authorization'] = token
-      await api.delete(`/usuario/${idUsuario}`)
+      authApi.defaults.headers.common['Authorization'] = token
+      await authApi.delete(`/usuario/${idUsuario}`)
       toast.success(`Usuário ${idUsuario} deletado com sucesso!`, toastConfig)
       buscarDadosColaborador('1')
       
