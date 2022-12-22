@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }: IChildren) => {
         navigate(`/instrutor`);
       } else {
         navigate(`/`);
+        toast.error('Usuário sem permissão de acesso')
       }
 
     } catch (error) {
