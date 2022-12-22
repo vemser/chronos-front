@@ -14,8 +14,10 @@ export const ConteudoAdmin = () => {
     <div className={styles.ContainerInstrutor}>
       <div className={styles.containerBemVindo}>
         <h1>
+          Olá {dadosUsuarioLogado.login}!
+        </h1>
+        <h1>
           Seja bem vindo ao <span className={styles.corChronos}>Chronos</span>
-          , {dadosUsuarioLogado.nome} !
         </h1>
       </div>
       <div>
