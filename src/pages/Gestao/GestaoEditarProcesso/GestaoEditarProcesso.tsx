@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoEditarProcesso.module.css'
 
 import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { Box, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
@@ -177,12 +177,14 @@ export const GestaoEditarProcesso = () => {
                 {...register('ordemExecucao')}
               />
 
-              
-                <FormControlLabel control={<Checkbox /> } 
-                label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
-              
-                {...register('processoCritico')} sx={{mt: 2}}/>
-
+              <Box>
+                <FormControlLabel
+                  control={<Checkbox /> } 
+                  label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
+                
+                  {...register('processoCritico')} sx={{mt: 2}}
+                />
+              </Box>
 
               <TextField
                 style={{display: 'none'}}
@@ -190,8 +192,6 @@ export const GestaoEditarProcesso = () => {
                 value={state.idProcesso}
                 {...register('idProcesso')}
               />
-
-
 
               <div className={styles.ContainerBotao}>
                 
