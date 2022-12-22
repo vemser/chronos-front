@@ -18,6 +18,7 @@ export const AdminColaboradores = () => {
     { descricao: 'Aluno', value: 'ROLE_ALUNO' },
     { descricao: 'Administrador', value: 'ROLE_ADMIN' },
     { descricao: 'Colaborador', value: 'ROLE_COLABORADOR' },
+    { descricao: 'Coordenador', value: 'ROLE_GESTOR' },
     { descricao: 'Gestão de pessoas', value: 'ROLE_GESTAO_DE_PESSOAS' },
     { descricao: 'Instrutor', value: 'ROLE_INSTRUTOR' }
   ]);
