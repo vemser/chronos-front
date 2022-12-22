@@ -14,6 +14,8 @@ import { BuscarContext } from '../../../context/buscaContext'
 
 export const AdminColaboradores = () => {
 
+  const [ isSearch, setIsSearch ] = useState(false)
+
   const [cargos] = useState<any>([
     { descricao: 'Aluno', value: 'ROLE_ALUNO' },
     { descricao: 'Administrador', value: 'ROLE_ADMIN' },
@@ -56,8 +58,8 @@ export const AdminColaboradores = () => {
 
   const { register, handleSubmit, reset } = useForm<any>({})
 
-  const buscar = (data: any) => {
-    buscarColaborador(data, buscarCargos);
+  const buscar = (login: any) => {
+    buscarColaborador(login, buscarCargos);
   }
 
   return (
@@ -139,7 +141,7 @@ export const AdminColaboradores = () => {
                   closeMenuOnSelect={true}
                   placeholder={'Cargo'}
                   defaultValue={defaultAreaValue}
-                  key={mudarKeySelect}
+                  key={mudarKeySelect}                  
                 />
               </Box>
               <Box
