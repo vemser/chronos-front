@@ -19,34 +19,7 @@ export const GestaoEditarProcesso = () => {
   const { edicao } = useParams();
 
   const idEdicao = Number(edicao)
-
-  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>([])
-  const [responsaveisState, setResponsaveisState] = useState<string[]>([])
-
-  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
-  const { register, handleSubmit } = useForm()
-
-  useEffect(() => {
-    getAreaEnvolvida()
-    getResponsavel()
-
-  }, [])
-
-
-  const handleChangeAreas = (value: any) => {
-    const list = value.map((item: any) => {
-      return { 'nome': item.value }
-    })
-    setAreasEnvolvidasState(list)
-  }
-
-  const handleChangeResponsaveis = (value: any) => {
-    const list = value.map((item: any) => {
-      return { 'nome': item.value }
-    })
-    setResponsaveisState(list)
-  }
-
+  
   const defaultAreaValue = state.areasEnvolvidas.map((area: any) => {
     return { label: area.nome, value: area.nome }
   })
@@ -54,6 +27,40 @@ export const GestaoEditarProcesso = () => {
   const defaultResponsavelValue = state.responsaveis.map((responsavel: any) => {
     return { label: responsavel.nome, value: responsavel.nome }
   })
+
+  const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>(defaultAreaValue.map((area: any) => {
+    return {nome: area.value}
+
+  }))
+  const [responsaveisState, setResponsaveisState] = useState<string[]>(defaultResponsavelValue.map((responsavel: any) => {
+    return {nome: responsavel.value}
+
+  }))
+
+  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
+  const { register, handleSubmit } = useForm()
+  
+  useEffect(() => {
+    getAreaEnvolvida()
+    getResponsavel()
+  }, [])
+  
+  const handleChangeAreas = (value: any) => {
+    const list = value.map((item: any) => {
+      return { 'nome': item.value }
+    })
+    setAreasEnvolvidasState(list)
+  }
+  
+  const handleChangeResponsaveis = (value: any) => {
+    const list = value.map((item: any) => {
+      return { 'nome': item.value }
+    })
+    setResponsaveisState(list)
+  }
+  
+  
+
 
 
 
@@ -83,7 +90,7 @@ export const GestaoEditarProcesso = () => {
   } else {
     var critico = false
   }
-
+  
   return (
     <>
       <Header />
