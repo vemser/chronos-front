@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoEditarProcesso.module.css'
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { Box, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
@@ -8,6 +7,7 @@ import { UserContext } from '../../../context/UserContex'
 import { useForm } from 'react-hook-form'
 import CreatableSelect from 'react-select'
 import makeAnimated from 'react-select/animated'
+import { Header } from '../../../components/Header/Header'
 
 
 export const GestaoEditarProcesso = () => {
@@ -80,7 +80,7 @@ export const GestaoEditarProcesso = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header />
 
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerProcesso}>

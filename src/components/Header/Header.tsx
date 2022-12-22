@@ -34,6 +34,8 @@ export const Header = () => {
     renderizarBotoes()
   }, [])
 
+  console.log(dadosUsuarioLogado);
+  
   const imagemBase = dadosUsuarioLogado.imagem
   const userEmail = localStorage.getItem('user')
   let homeLink = ''
@@ -251,7 +253,7 @@ export const Header = () => {
           </Box>
 
           <Box className={'usuario'}>
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}><h3>{dadosUsuarioLogado.nome}</h3></Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}><h3>{dadosUsuarioLogado.login}</h3></Box>
            
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

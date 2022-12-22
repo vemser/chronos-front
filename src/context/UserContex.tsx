@@ -291,7 +291,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         toast.success('Processo cadastrado com sucesso!', toastConfig)
         
-        // navigate(`/gestao/verificar-edicao/${idEdicao}`);
+        navigate(`/gestao/verificar-edicao/${idEdicao}`);
 
     } catch (error) {
         console.error(error);

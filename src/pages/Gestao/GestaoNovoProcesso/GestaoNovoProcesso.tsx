@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styles from './GestaoNovoProcesso.module.css'
 
-import { GestaoHeader } from '../../../components/Gestao/GestaoHeader/GestaoHeader'
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
@@ -11,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { ProcessoSchema } from '../../../utils/schemas'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
+import { Header } from '../../../components/Header/Header'
 
 const animatedComponents = makeAnimated()
 
@@ -72,7 +72,7 @@ export const GestaoNovoProcesso = () => {
 
   return (
     <>
-      <GestaoHeader />
+      <Header />
 
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerProcesso}>
