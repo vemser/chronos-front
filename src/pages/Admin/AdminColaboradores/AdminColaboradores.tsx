@@ -150,7 +150,7 @@ export const AdminColaboradores = () => {
                   gap: '20px'
                 }}
               >
-                <Button type={'submit'} variant={'contained'}>Buscar</Button>
+                <Button type={'submit'} variant={'contained'}>Filtrar</Button>
                 <Button
                   variant={'contained'}
                   onClick={() => {
