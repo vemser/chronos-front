@@ -16,14 +16,13 @@ export const BuscarProvider = ({ children }: IChildren) => {
     const token = localStorage.getItem('token');
 
     const buscarColaborador = async (pesquisa: any, buscarCargos: any) => {
-        buscarCargos.length == 0 ? pesquisa.cargo = '' : 
-        buscarCargos[0].value === undefined? pesquisa.cargo = '' : 
-        pesquisa.cargo = buscarCargos[0].value;   
+            
+        let cargosList = buscarCargos.map((el: any)=> el.value == undefined? `` : `&nomes=${el.value}`).join('')
 
         try {
             nProgress.start();
-            authApi.defaults.headers.common['Authorization'] = token
-            const { data } = await authApi.get(`/usuario/filtrarLoginCargo?pagina=${0}&tamanho=${10}&login=${pesquisa.login}&nomeCargo=${pesquisa.cargo}`)
+            authApi.defaults.headers.common['Authorization'] = token;
+            const { data } = await authApi.get(`/usuario/filtro-login-cargo?pagina=${0}&tamanho=${10}&login=${pesquisa.login}${cargosList}`)
             setTotalPages(data.quantidadePaginas)
             setDadosColaborador(data.elementos)
 
