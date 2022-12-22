@@ -62,8 +62,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
     try {
       nProgress.start()
-
-      dadosColaborador.login = data.login.replace(/[^a-zA-Z\wÀ-ú ]/g, '')
+      
       const retorno = await authApi.post('/usuario', dadosColaborador)
       
       console.log('deu certo')
@@ -239,6 +238,8 @@ export const AdminProvider = ({ children }: IChildren) => {
       await authApi.put(`/foto/upload-image-perfil`, data)
 
       loggedUser()
+
+      toast.success('Foto de perfil alterada com sucesso', toastConfig)
 
     } catch (error) {
       toast.error('Houve algum error, tente novamente!', toastConfig)

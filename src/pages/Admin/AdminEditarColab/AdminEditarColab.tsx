@@ -25,11 +25,7 @@ export const AdminEditarColab = () => {
 
   const [selectedImage, setSelectedImage] = useState<any>(null)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<IColaborador>({
+  const { register, handleSubmit, formState: { errors }} = useForm<IColaborador>({
     defaultValues: {
       login: state.login,
     }
