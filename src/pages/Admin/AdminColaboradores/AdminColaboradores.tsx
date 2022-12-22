@@ -83,10 +83,9 @@ export const AdminColaboradores = () => {
             onSubmit={handleSubmit(buscar)}
             sx={{
               display: 'flex',
-              alignItems: 'flex-start',
+              alignItems: 'center',
               gap: '20px',
-              justifyContent: 'space-between',
-              flexDirection: 'column',
+              justifyContent: 'flex-start',
             }}
           >
             <Box
@@ -95,7 +94,7 @@ export const AdminColaboradores = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '50px',
-                justifyContent: 'space-between'
+                justifyContent: 'flex-start'
               }}
             >
               <Box
@@ -142,24 +141,25 @@ export const AdminColaboradores = () => {
                   key={mudarKeySelect}
                 />
               </Box>
-            </Box>
-            <Box
-              sx={{
-                m: '15px 0',
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-              }}
-            >
-              <Button
-                variant={'contained'}
-                onClick={() => {
-                  buscarDadosColaborador('1');
-                  reset();
-                  setMudarKeySelect(mudarKeySelect + 1);
-                  setBuscarCargos([{}])
-                }}>Limpar</Button>
-              <Button type={'submit'} variant={'contained'}>Buscar</Button>
+              <Box
+                sx={{
+                  m: '15px 0',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  width: '50%',
+                  gap: '20px'
+                }}
+              >
+                <Button type={'submit'} variant={'contained'}>Buscar</Button>
+                <Button
+                  variant={'contained'}
+                  onClick={() => {
+                    buscarDadosColaborador('1');
+                    reset();
+                    setMudarKeySelect(mudarKeySelect + 1);
+                    setBuscarCargos([{}])
+                  }}>Limpar</Button>
+              </Box>
             </Box>
           </Box>
         </Box>
