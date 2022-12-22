@@ -64,7 +64,7 @@ export const CadastroDePessoasSchema = yup.object().shape({
     .string()
     .required('Por favor, digite o nome do colaborador')
     .min(3, 'O nome deve ter no mínimo 3 caracteres')
-    .matches(/^[aA-zZ\s]+$/, 'Por favor, digite somente caracteres '),
+    .matches(/^[a-z.]+$/, 'Por favor, digite um nome de usuário válido'),
 })
 
 export const EtapaSchema = yup.object().shape({
