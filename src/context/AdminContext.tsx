@@ -64,8 +64,6 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start()
       
       const retorno = await authApi.post('/usuario', dadosColaborador)
-      
-      console.log('deu certo')
 
       toast.success('Usuário criado com sucesso!', toastConfig)
       navigate("/admin/colaboradores")

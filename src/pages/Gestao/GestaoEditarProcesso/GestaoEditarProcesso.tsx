@@ -78,6 +78,12 @@ export const GestaoEditarProcesso = () => {
     })
   })
 
+  if (state.processoCritico === 'ATIVO') {
+    var critico = true
+  } else {
+    var critico = false
+  }
+
   return (
     <>
       <Header />
@@ -171,9 +177,9 @@ export const GestaoEditarProcesso = () => {
 
               <Box>
                 <FormControlLabel
-                  control={<Checkbox /> } 
+                  control={<Checkbox defaultChecked={critico} /> } 
                   label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
-                
+                  defaultChecked={critico}
                   {...register('processoCritico')} sx={{mt: 2}}
                 />
               </Box>

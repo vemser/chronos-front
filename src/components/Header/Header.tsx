@@ -34,8 +34,6 @@ export const Header = () => {
     renderizarBotoes()
   }, [])
 
-  console.log(dadosUsuarioLogado);
-  
   const imagemBase = dadosUsuarioLogado.imagem
   const userEmail = localStorage.getItem('user')
   let homeLink = ''
