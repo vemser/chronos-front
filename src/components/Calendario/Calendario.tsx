@@ -31,7 +31,7 @@ export const Calendario = () => {
         title: dia.processo,
         backgroundColor: dia.cor,
         display: 'background',
-        classNames: ['etapa']
+        classNames: ['etapa' , dia.critico]
       }
     })
 
@@ -40,7 +40,7 @@ export const Calendario = () => {
       return dia.processo !== null
     })
     const processoMap: ICalendarioProcesso[] = processoFilter?.map((dia: ICalendarioEdicao) => {
-      return { date: dia.dia, title: dia.processo }
+      return { date: dia.dia, title: dia.processo}
     })
 
     // AREAS

@@ -216,6 +216,17 @@ body::-webkit-scrollbar-thumb {
   font-weight: 600 !important;
 }
 
+.ATIVO{
+  border: 2px solid #ffffff !important;
+  outline: 2px solid #EF4444 !important;
+  box-shadow: 2px 4px 10px 2px #EF4444 !important;
+}
+.INATIVO{
+  border: 2px solid transparent !important;
+  outline: 2px solid transparent !important;
+}
+
+
 @media (max-width: 1230px) {
   .containerData {
     flex-direction: column;

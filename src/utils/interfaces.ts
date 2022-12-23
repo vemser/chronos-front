@@ -219,6 +219,7 @@ export interface ICalendarioEdicao {
   idEtapa: number
   cor: string
   areas: string | string[]
+  critico: string | boolean
 } 
 
 export interface ICalendarioGeral {
