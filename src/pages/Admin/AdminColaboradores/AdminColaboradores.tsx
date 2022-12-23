@@ -34,6 +34,7 @@ export const AdminColaboradores = () => {
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
     setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
@@ -50,6 +51,7 @@ export const AdminColaboradores = () => {
   }
 
   let mudarPaginacao = (value: any) => {
+    window.scrollTo(0,0)
     setCurrentPage(value);
     isSearch ? buscarColaborador(searchPayload.login, searchPayload.buscarCargos, value) : buscarDadosColaborador(value);
   }
