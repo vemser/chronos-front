@@ -17,7 +17,7 @@ export const BuscarProvider = ({ children }: IChildren) => {
 
     const buscarColaborador = async (pesquisa: any, buscarCargos: any) => {
             
-        let cargosList = buscarCargos.map((el: any)=> el.value == undefined? `` : `&nomes=${el.value}`).join('')
+        let cargosList = buscarCargos.map((el: any)=> el == ''? `` : `&nomes=${el}`).join('')
 
         try {
             nProgress.start();

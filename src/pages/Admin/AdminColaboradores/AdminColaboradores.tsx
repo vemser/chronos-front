@@ -6,48 +6,29 @@ import { AdminContext } from '../../../context/AdminContext'
 import { ButtonCadastrar } from '../../../components/Admin/ButtonCadastrar/ButtonCadastrar'
 import { Header } from '../../../components/Header/Header'
 import { AdminColaboradoresTable } from '../../../components/Admin/AdminColaboradoresTable/AdminColaboradoresTable'
-import { Button, TextField } from '@mui/material'
+import { Autocomplete, Button, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import CreatableSelect from 'react-select'
-import makeAnimated from 'react-select/animated'
 import { BuscarContext } from '../../../context/buscaContext'
 
 export const AdminColaboradores = () => {
 
-  const [ isSearch, setIsSearch ] = useState(false)
+  const [isSearch, setIsSearch] = useState(false)
 
   const [cargos] = useState<any>([
-    { descricao: 'Aluno', value: 'ROLE_ALUNO' },
-    { descricao: 'Administrador', value: 'ROLE_ADMIN' },
-    { descricao: 'Colaborador', value: 'ROLE_COLABORADOR' },
-    { descricao: 'Coordenador', value: 'ROLE_GESTOR' },
-    { descricao: 'Gestão de pessoas', value: 'ROLE_GESTAO_DE_PESSOAS' },
-    { descricao: 'Instrutor', value: 'ROLE_INSTRUTOR' }
+    'Aluno', 'Administrador', 'Colaborador', 'Coordenador', 'Gestão de pessoas', 'Instrutor'
   ]);
 
   const [mudarKeySelect, setMudarKeySelect] = useState(1)
-  const animatedComponents = makeAnimated()
-  const defaultAreaValue = ''
+  const [value, setValue] = useState<any>([])
 
-  let selectCargos: any = []
-
-  cargos.map((area: any) => {
-    selectCargos.push({
-      value: area.value,
-      label: area.descricao
-    })
-  })
-
-  const [buscarCargos, setBuscarCargos] = useState([{}])
-
-  const handleChangeCargos = (value: any) => {
-    const list = value.map((item: any) => {
-      return { 'value': item.value }
-    })
-    setBuscarCargos(list)
-  }
-
-  //
+  let buscarCargos = value.map((el: any) =>
+    el == 'Aluno' ? 'ROLE_ALUNO' :
+      el == 'Administrador' ? 'ROLE_ADMIN' :
+        el == 'Colaborador' ? 'ROLE_COLABORADOR' :
+          el == 'Coordenador' ? 'ROLE_GESTOR' :
+            el == 'Gestão de pessoas' ? 'ROLE_GESTAO_DE_PESSOAS' :
+              el == 'Instrutor' ? 'ROLE_INSTRUTOR' : ''
+  )
 
   const { buscarDadosColaborador } = useContext<any>(AdminContext)
   const { buscarColaborador } = useContext(BuscarContext)
@@ -126,22 +107,21 @@ export const AdminColaboradores = () => {
                   height: '40px'
                 }}
               >
-                <CreatableSelect
-                  id="cargo"
-                  components={animatedComponents}
-                  options={selectCargos}
-                  onChange={handleChangeCargos}
-                  className={styles.selectOption}
-                  isClearable={true}
-                  isSearchable={true}
-                  isDisabled={false}
-                  isLoading={false}
-                  isRtl={false}
-                  isMulti
-                  closeMenuOnSelect={true}
-                  placeholder={'Cargo'}
-                  defaultValue={defaultAreaValue}
-                  key={mudarKeySelect}                  
+                <Autocomplete
+                  multiple
+                  id="size-small-standard"
+                  size="small"
+                  key={mudarKeySelect}
+                  onChange={(_: any, newValue: any) => setValue(newValue)}
+                  options={cargos}
+                  getOptionLabel={(option) => option}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Cargos"
+                      placeholder="Cargos"
+                    />
+                  )}
                 />
               </Box>
               <Box
@@ -160,7 +140,7 @@ export const AdminColaboradores = () => {
                     buscarDadosColaborador('1');
                     reset();
                     setMudarKeySelect(mudarKeySelect + 1);
-                    setBuscarCargos([{}])
+                    setValue([])
                   }}>Limpar</Button>
               </Box>
             </Box>
