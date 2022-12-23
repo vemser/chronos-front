@@ -71,7 +71,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
       toast.success('Usuário criado com sucesso!', toastConfig)
       navigate("/admin/colaboradores")
-
+      setCurrentPage(1)
     } catch (error: any) {
       console.log(error)
       if(error.response.status === 400){
