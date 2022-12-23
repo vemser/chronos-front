@@ -62,10 +62,6 @@ export const AppRoutes = () => {
                     <Route path="/calendario/:edicao" element={<AccessRoute />}>
                       <Route index element={<Calendario />} />
                     </Route>
-                    <Route
-                        path="/instrutor/edicoes"
-                        element={<InstEdicoes />}
-                      />
 
                     {/* PRIVATE ROUTES */}
 

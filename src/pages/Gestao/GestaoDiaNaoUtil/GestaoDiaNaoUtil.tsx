@@ -1,13 +1,27 @@
-import React from 'react'
-import { Box, Button } from '@mui/material'
+import React, { useContext, useLayoutEffect } from 'react'
+import { Box, Button, Pagination } from '@mui/material'
 import { Link } from 'react-router-dom'
 import styles from './GestaoDiaNaoUtil.module.css'
 import { Header } from '../../../components/Header/Header';
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
 import { GestaoDiaNaoUtilTable } from '../../../components/Gestao/GestaoDiaNaoUtilTable/GestaoDiaNaoUtilTable';
+import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
 
 
 export const GestaoDiaNaoUtil = () => {
+
+  const { totalPages, getDiaNaoUtil, currentPage, setCurrentPage } = useContext(DiaNaoUtilContext)
+
+  useLayoutEffect(() => {    
+    setCurrentPage(1)
+    window.scrollTo(0,0)
+  }, [])
+
+  let mudarPaginacao = (value: any) => {
+    window.scrollTo(0,0)
+    setCurrentPage(value);
+    getDiaNaoUtil(value)
+  }
 
   return (
     <>
@@ -30,9 +44,10 @@ export const GestaoDiaNaoUtil = () => {
           <GestaoDiaNaoUtilTable />
 
         </div>
-        <div className={styles.paginacao}>
-          <PaginacaoNaoUtil />
-        </div>
+        <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>          
+          {/* <PaginacaoNaoUtil /> */}
+            <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
+        </Box>
   </section>
     </>
   )

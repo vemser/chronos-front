@@ -177,6 +177,8 @@ export interface IDiaNaoUtilContext {
   postDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
   deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>
   putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
+  currentPage: any,
+  setCurrentPage: any
 }
 
 export interface IDiaNaoUtil {
