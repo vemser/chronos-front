@@ -7,7 +7,8 @@ import {
   TableRow,
   Box,
   TableHead,
-  Checkbox
+  Checkbox,
+  Pagination
 } from '@mui/material'
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import styles from './InstNaoUteis.module.css'
@@ -15,11 +16,19 @@ import { Header } from '../../../components/Header/Header'
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil'
 
 export const InstNaoUteis = () => {
-  const { diasNaoUteis, getDiaNaoUtil } = useContext(DiaNaoUtilContext)
+  const { diasNaoUteis, getDiaNaoUtil, totalPages, currentPage, setCurrentPage } = useContext(DiaNaoUtilContext)
 
   useLayoutEffect(() => {
     getDiaNaoUtil('1')
+    setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
+
+  let mudarPaginacao = (value: any) => {
+    window.scrollTo(0,0)
+    setCurrentPage(value);
+    getDiaNaoUtil(value)
+  }
 
   return (
     <>
@@ -117,9 +126,10 @@ export const InstNaoUteis = () => {
             </Table>
           </TableContainer>
         </div>
-        <div className={styles.paginacao}>
-          <PaginacaoNaoUtil />
-        </div>
+        <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>          
+          {/* <PaginacaoNaoUtil /> */}
+            <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
+        </Box>
       </section>
     </>
   )
