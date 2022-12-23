@@ -1,20 +1,32 @@
 import React, { useContext, useLayoutEffect } from 'react'
-import { TableCell, TableContainer, Table, TableBody, TableRow, Box, TableHead, Switch} from '@mui/material'
+import { TableCell, TableContainer, Table, TableBody, TableRow, Box, TableHead, Switch, Pagination} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './InstEdicoes.module.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
 import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 import { Header } from '../../../components/Header/Header';
+import {  animateScroll as scroll } from 'react-scroll'
 
 export const InstEdicoes: React.FC = () => {
 
-  const { edicoes, getEdicoesList } = useContext(UserContext);
+  const { edicoes, getEdicoesList, totalPages, currentPage, setCurrentPage } = useContext(UserContext);
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
     getEdicoesList('1')
+    window.scrollTo(0,0)
   }, [])
+
+  let mudarPaginacao = (value: any) => {
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
+    setCurrentPage(value);
+    getEdicoesList(value.toString());
+  }
 
   return (
     <>
@@ -73,9 +85,10 @@ export const InstEdicoes: React.FC = () => {
             </Table>
           </TableContainer>
         </div>
-        <div>
-          <PaginacaoEdicoes/>
-        </div>
+        <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
+          {/* <PaginacaoEdicoes /> */}            
+          <Pagination color="primary"  page={currentPage} count={totalPages}  onChange={(_, value) => mudarPaginacao(value)}/>
+        </Box>
       </section>
     </>
   )

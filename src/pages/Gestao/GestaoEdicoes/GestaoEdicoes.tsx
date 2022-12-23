@@ -22,6 +22,7 @@ import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes
 import { Header } from '../../../components/Header/Header';
 import { TOptionsConfirmDialog } from '../../../utils/interfaces';
 import { ConfirmDialog } from '../../../components/ConfirmDialog';
+import {  animateScroll as scroll } from 'react-scroll'
 
 export const GestaoEdicoes: React.FC = () => {
 
@@ -31,6 +32,7 @@ export const GestaoEdicoes: React.FC = () => {
   useLayoutEffect(() => {
     getEdicoesList('1')
     setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
 
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
@@ -40,8 +42,13 @@ export const GestaoEdicoes: React.FC = () => {
   });
 
   let mudarPaginacao = (value: any) => {
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
-    getEdicoesList(value.toString())
+    getEdicoesList(value.toString());
   }
 
   return (

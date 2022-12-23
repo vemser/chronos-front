@@ -10,6 +10,8 @@ import { Autocomplete, Button, Pagination, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { BuscarContext } from '../../../context/buscaContext'
 import { IAdminContext } from '../../../utils/interfaces'
+import {  animateScroll as scroll } from 'react-scroll'
+
 
 export const AdminColaboradores = () => {
 
@@ -34,6 +36,7 @@ export const AdminColaboradores = () => {
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
     setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
@@ -50,6 +53,11 @@ export const AdminColaboradores = () => {
   }
 
   let mudarPaginacao = (value: any) => {
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
     isSearch ? buscarColaborador(searchPayload.login, searchPayload.buscarCargos, value) : buscarDadosColaborador(value);
   }

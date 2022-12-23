@@ -11,6 +11,8 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
 
     const [ diasNaoUteis, setDiasNaoUteis ] = useState<IDiaNaoUtil[]>([])
     const [totalPages, setTotalPages] = useState(0)
+    const [currentPage, setCurrentPage] = useState<any>(1)
+
     const token = localStorage.getItem('token');
 
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
         try {
             api.defaults.headers.common['Authorization'] = token;
             nProgress.start();
-            const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=10`)
+            const { data } = await api.get(`/dia-nao-util?pagina=${Number(page) - 1}&tamanho=8`)
             
             setTotalPages(data.quantidadePaginas)
             setDiasNaoUteis(data.elementos)
@@ -51,6 +53,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             toast.success('Dia Não Útil cadastrado com sucesso!', toastConfig)
 
             navigate('/gestao/dias-nao-uteis')
+            setCurrentPage(1)
 
         } catch (error: any) {
             console.log(error)
@@ -71,6 +74,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             await api.delete(`/dia-nao-util/${idDiaNaoUtil}`)
             toast.success('Dia Não Útil removido com sucesso!', toastConfig)
             getDiaNaoUtil('1')
+            setCurrentPage(1)
 
         } catch (error: any) {
             console.log(error)
@@ -101,6 +105,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             toast.success('Dia Não Útil atualizado com sucesso!', toastConfig)
 
             navigate('/gestao/dias-nao-uteis')
+            setCurrentPage(1)
 
         } catch (error: any) {
             console.log(error)
@@ -116,7 +121,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     }
 
     return(
-        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil }}>
+        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil, currentPage, setCurrentPage }}>
             { children }
         </DiaNaoUtilContext.Provider>
     )
