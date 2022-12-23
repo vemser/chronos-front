@@ -40,7 +40,7 @@ export const AdminColaboradores = () => {
   const { register, handleSubmit, reset } = useForm<any>({})
 
   const buscar = (login: any) => {
-    buscarColaborador(login, buscarCargos);
+    buscarColaborador(login, buscarCargos, 1);
   }
 
   return (

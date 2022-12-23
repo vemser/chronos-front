@@ -7,9 +7,11 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { AdminContext } from '../../../context/AdminContext'
 import style from './PaginacaoColaborador.module.css'
 import { Box } from '@mui/material'
+import { BuscarContext } from '../../../context/buscaContext'
 
 export const PaginacaoColaborador = () => {
   const { totalPages, buscarDadosColaborador } = useContext(AdminContext)
+  const {buscarColaborador} = useContext(BuscarContext)
   const [searchParam] = useSearchParams()
   const pageNumber = searchParam.get('page') || '1'
 
@@ -24,6 +26,7 @@ export const PaginacaoColaborador = () => {
 
   useEffect(() => {
     buscarDadosColaborador(pageNumber)
+    // buscarColaborador(pageNumber)
   }, [pageNumber])
 
   return (
