@@ -19,7 +19,6 @@ import {
   IAdminContext,
   TOptionsConfirmDialog
 } from '../../../utils/interfaces'
-import Switch from '@mui/material/Switch'
 import { ConfirmDialog } from '../../ConfirmDialog'
 
 
@@ -55,7 +54,7 @@ export const AdminColaboradoresTable = () => {
           }}>
             <TableRow>
               <TableCell >Colaborador(a)</TableCell>
-              <TableCell>Cargo</TableCell>
+              <TableCell>Cargo(s)</TableCell>
               <TableCell align="right">Editar</TableCell>
               <TableCell align="right">Excluir</TableCell>
             </TableRow>
@@ -72,14 +71,15 @@ export const AdminColaboradoresTable = () => {
                   <TableCell data-title='Colaborador(a)'>
                     {user.login}
                   </TableCell>     
-                  <TableCell data-title='Cargo'>
+                  <TableCell data-title='Cargo(s)'>
                     {user?.cargos?.map((cargo: IColaborador) => {
                       return <p key={cargo.idCargo}>{cargo.descricao}</p>
                     })}
                   </TableCell>
-                  <TableCell data-title='Editar' align="right">
+
+                  <TableCell data-title='Editar' sx={{ textAlign: {sm: 'initial', md: 'right'}}}>
                     <ModeEditSharpIcon
-                      sx={{ mr: 1, cursor: 'pointer' }}
+                      sx={{ mr: 1, cursor: 'pointer'}}
                       className={styles.ButtonContainer}
                       onClick={() => {
                         navigate('/admin/editar-colaborador/:colaborador', {
@@ -88,7 +88,7 @@ export const AdminColaboradoresTable = () => {
                       }}
                     />
                   </TableCell>
-                  <TableCell data-title='Excluir' sx={{ pr: 3 }} align="right">
+                  <TableCell data-title='Excluir' sx={{ textAlign: {sm: 'initial', md: 'right'}}}>
                     <HighlightOffIcon
                       onClick={(event) => {
                         setConfirmDialog({

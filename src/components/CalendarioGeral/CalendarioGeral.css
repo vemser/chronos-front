@@ -11,7 +11,7 @@
 .fc-daygrid-day-events{
     display: flex !important;
     flex-direction: column !important;
-    gap: 4px !important;
+    gap: 8px !important;
 }
 
 .fc-daygrid-event-harness:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:before{
