@@ -13,8 +13,8 @@ import { IAdminContext } from '../../../utils/interfaces'
 
 export const AdminColaboradores = () => {
   
-  const { buscarDadosColaborador, totalPages } = useContext<IAdminContext>(AdminContext)
-  const { buscarColaborador, isSearch, setIsSearch, searchPayload, setSearchPayload, } = useContext(BuscarContext)  
+  const { buscarDadosColaborador, totalPages, currentPage, setCurrentPage } = useContext<IAdminContext>(AdminContext)
+  const { buscarColaborador, isSearch, setIsSearch, searchPayload, setSearchPayload } = useContext(BuscarContext)  
 
   const [mudarKeySelect, setMudarKeySelect] = useState(1)
   const [value, setValue] = useState<any>([])
@@ -22,7 +22,7 @@ export const AdminColaboradores = () => {
     'Aluno', 'Administrador', 'Colaborador', 'Coordenador', 'Gestão de pessoas', 'Instrutor'
   ]);
 
-  const [currentPage, setCurrentPage] = useState<any>(1)
+  // const [currentPage, setCurrentPage] = useState<any>(1)
 
   let buscarCargos = value.map((el: any) =>
     el == 'Aluno' ? 'ROLE_ALUNO' :

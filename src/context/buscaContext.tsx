@@ -10,9 +10,10 @@ export const BuscarContext = createContext({} as IBuscaContext)
 
 export const BuscarProvider = ({ children }: IChildren) => {
 
-    const { setTotalPages } = useContext<IAdminContext>(AdminContext)
-    const { setDadosColaborador } = useContext<IAdminContext>(AdminContext)
+    const [] = useState<any>(1)
 
+    const { setTotalPages, setDadosColaborador } = useContext<IAdminContext>(AdminContext)
+    
     const [isSearch, setIsSearch] = useState<boolean>(false)
     const [searchPayload, setSearchPayload] = useState<any>({})
 

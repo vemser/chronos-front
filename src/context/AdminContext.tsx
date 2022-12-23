@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
 import { AuthContext } from './AuthContext'
+import { BuscarContext } from './buscaContext'
 
 export const AdminContext = createContext({} as IAdminContext)
 
@@ -24,6 +25,9 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const { dadosUsuarioLogado, loggedUser } = useContext(AuthContext)
 
+  const [currentPage, setCurrentPage] = useState<any>(1)
+ 
+  
   const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
       login: data.login,
@@ -109,6 +113,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       await authApi.delete(`/usuario/${idUsuario}`)
       toast.success(`Usuário ${idUsuario} deletado com sucesso!`, toastConfig)
       buscarDadosColaborador('1')
+      setCurrentPage(1)
       
     } catch (error) {
       toast.error(`Erro ao deletar o usuario ${idUsuario} , tente novamente!`, toastConfig)
@@ -116,7 +121,6 @@ export const AdminProvider = ({ children }: IChildren) => {
       
     } finally {
       nProgress.done()
-
     }
   }
 
@@ -165,6 +169,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin/colaboradores')
+      setCurrentPage(1)
     } catch (error: any) {
       console.log(error)
       if(error.response.status === 400){
@@ -262,7 +267,9 @@ export const AdminProvider = ({ children }: IChildren) => {
         alterarStatusColab,
         atualizarSenhaUsuario,
         inserirFotoUsuario,
-        setTotalPages
+        setTotalPages,
+        currentPage,
+        setCurrentPage
       }}
     >
       {children}
