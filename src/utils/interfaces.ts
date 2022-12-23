@@ -76,6 +76,8 @@ export interface IAdminContext {
   atualizarSenhaUsuario: (data: IColaborador) => Promise<void>
   inserirFotoUsuario: (data: any) => Promise<void>
   setTotalPages: React.Dispatch<React.SetStateAction<number>>
+  currentPage: any,
+  setCurrentPage: any
 }
 
 export interface ICargos {
@@ -256,5 +258,5 @@ export interface IBuscaContext {
   isSearch: boolean, 
   setIsSearch: any, 
   searchPayload: any, 
-  setSearchPayload: any
+  setSearchPayload: any,
 }
