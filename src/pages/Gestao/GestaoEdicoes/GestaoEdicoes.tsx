@@ -31,6 +31,7 @@ export const GestaoEdicoes: React.FC = () => {
   useLayoutEffect(() => {
     getEdicoesList('1')
     setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
 
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
@@ -41,7 +42,8 @@ export const GestaoEdicoes: React.FC = () => {
 
   let mudarPaginacao = (value: any) => {
     setCurrentPage(value);
-    getEdicoesList(value.toString())
+    getEdicoesList(value.toString());
+    window.scrollTo(0,0)
   }
 
   return (
