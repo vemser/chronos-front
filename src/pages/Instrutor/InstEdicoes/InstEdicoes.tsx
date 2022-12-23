@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
 import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 import { Header } from '../../../components/Header/Header';
+import {  animateScroll as scroll } from 'react-scroll'
 
 export const InstEdicoes: React.FC = () => {
 
@@ -18,9 +19,13 @@ export const InstEdicoes: React.FC = () => {
   }, [])
 
   let mudarPaginacao = (value: any) => {
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
     getEdicoesList(value.toString());
-    window.scrollTo(0,0)
   }
 
   return (

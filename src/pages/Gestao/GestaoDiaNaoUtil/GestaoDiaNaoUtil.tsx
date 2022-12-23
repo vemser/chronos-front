@@ -6,6 +6,7 @@ import { Header } from '../../../components/Header/Header';
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
 import { GestaoDiaNaoUtilTable } from '../../../components/Gestao/GestaoDiaNaoUtilTable/GestaoDiaNaoUtilTable';
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
+import {  animateScroll as scroll } from 'react-scroll'
 
 
 export const GestaoDiaNaoUtil = () => {
@@ -18,7 +19,11 @@ export const GestaoDiaNaoUtil = () => {
   }, [])
 
   let mudarPaginacao = (value: any) => {
-    window.scrollTo(0,0)
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
     getDiaNaoUtil(value)
   }

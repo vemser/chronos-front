@@ -14,6 +14,7 @@ import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import styles from './InstNaoUteis.module.css'
 import { Header } from '../../../components/Header/Header'
 import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil'
+import {  animateScroll as scroll } from 'react-scroll'
 
 export const InstNaoUteis = () => {
   const { diasNaoUteis, getDiaNaoUtil, totalPages, currentPage, setCurrentPage } = useContext(DiaNaoUtilContext)
@@ -25,7 +26,11 @@ export const InstNaoUteis = () => {
   }, [])
 
   let mudarPaginacao = (value: any) => {
-    window.scrollTo(0,0)
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
     getDiaNaoUtil(value)
   }
