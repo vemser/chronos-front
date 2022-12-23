@@ -18,6 +18,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const [ areasEnvolvidas, setAreasEnvolvidas ] = useState<IAreasEnvolvidas[]>([]);
     const [ responsaveis, setResponsaveis ] = useState<IResponsaveis[]>([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState<any>(1)
 
     const getEdicoesList = async (page: string) => {
         try {
@@ -46,7 +47,7 @@ export const UserProvider = ({ children }: IChildren) => {
             await api.delete(`/edicao/${idEdicao}`);
             toast.success(`Edição ${nomeEdicao} foi removida com sucesso`);
             getEdicoesList('1');
-
+            setCurrentPage(1)
         } catch (error) {
             console.error(error);
             toast.error(`Houve um erro ao remover Edicao ${nomeEdicao}!`);
@@ -67,7 +68,7 @@ export const UserProvider = ({ children }: IChildren) => {
             toast.success('Edição criada com sucesso!');
 
             navigate('/gestao/edicoes');
-            
+            setCurrentPage(1)
         } catch (error) {
             console.error(error);
             toast.error('Houve um erro ao criar uma nova edição, por favor, tente novamente');
@@ -86,7 +87,7 @@ export const UserProvider = ({ children }: IChildren) => {
             toast.success('Edicao editada com sucesso!', toastConfig);
 
             navigate('/gestao/edicoes');
-            
+            setCurrentPage(1)
         } catch (error) {
             console.error(error);
             toast.error('Houve um erro ao editar a edição.', toastConfig);
@@ -106,6 +107,7 @@ export const UserProvider = ({ children }: IChildren) => {
             toast.success(`Clone da edicao ${edicao.nome} criado com sucesso!`, toastConfig);
 
             getEdicoesList('1');
+            setCurrentPage(1)
             
         } catch (error) {
             console.error(error);
@@ -413,7 +415,9 @@ export const UserProvider = ({ children }: IChildren) => {
         editProcesso,
 
         getAreaEnvolvida,
-        getResponsavel
+        getResponsavel,
+        currentPage,
+        setCurrentPage
       }}
     >
       {children}

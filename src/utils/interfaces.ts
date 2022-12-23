@@ -126,6 +126,8 @@ export interface IUserContext {
 
   getAreaEnvolvida: () => Promise<void>
   getResponsavel: () => Promise<void>
+  currentPage: any
+  setCurrentPage: any
 }
 
 export interface IEdicao {

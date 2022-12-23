@@ -9,6 +9,7 @@ import {
   Button,
   TableHead,
   Switch,
+  Pagination,
 } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -24,11 +25,12 @@ import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export const GestaoEdicoes: React.FC = () => {
 
-  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao, cloneEdicao } = useContext(UserContext);
+  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao, cloneEdicao, totalPages, currentPage, setCurrentPage } = useContext(UserContext);
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
     getEdicoesList('1')
+    setCurrentPage(1)
   }, [])
 
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
@@ -36,6 +38,11 @@ export const GestaoEdicoes: React.FC = () => {
     title: "",
     onConfirm: () => { }
   });
+
+  let mudarPaginacao = (value: any) => {
+    setCurrentPage(value);
+    getEdicoesList(value.toString())
+  }
 
   return (
     <>
@@ -137,10 +144,11 @@ export const GestaoEdicoes: React.FC = () => {
               setConfirmDialog={setConfirmDialog}
             />
           </TableContainer>
-        </div>
-        <div>
-          <PaginacaoEdicoes />
-        </div>
+        </div> 
+        <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
+          {/* <PaginacaoEdicoes /> */}            
+          <Pagination color="primary"  page={currentPage} count={totalPages}  onChange={(_, value) => mudarPaginacao(value)}/>
+        </Box>
       </section>
     </>
   )
