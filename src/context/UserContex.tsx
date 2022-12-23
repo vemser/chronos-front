@@ -309,21 +309,32 @@ export const UserProvider = ({ children }: IChildren) => {
         nProgress.start();
 
         api.defaults.headers.common['Authorization'] = token;
+        
+        if(area.length < 1 && responsaveis.length < 1) {
+            toast.error('Por favor informe pelo menos um responsável e uma área envolvida')
+        } else if(responsaveis.length < 1){
+            toast.error('Por favor informe pelo menos um responsável')
+        } else if(area.length < 1){
+            toast.error('Por favor informe pelo menos uma área envolvida')
+        } else{
 
-        if(processo.processoCritico === true) {
-            processo.processoCritico = 'ATIVO'
-        } else {
-            processo.processoCritico = 'INATIVO'
+            if(processo.processoCritico === true) {
+                processo.processoCritico = 'ATIVO'
+            } else {
+                processo.processoCritico = 'INATIVO'
+            }
+    
+            processo.areasEnvolvidas = area
+            processo.responsaveis = responsaveis
+            processo.diasUteis = Number(processo.diasUteis)
+            processo.ordemExecucao = Number(processo.ordemExecucao)
+    
+            await api.put(`/processo/${processo.idProcesso}`, processo);
+            toast.success('Processo editado com sucesso!', toastConfig)
+            navigate(`/gestao/verificar-edicao/${idEdicao}`);
         }
 
-        processo.areasEnvolvidas = area
-        processo.responsaveis = responsaveis
-        processo.diasUteis = Number(processo.diasUteis)
-        processo.ordemExecucao = Number(processo.ordemExecucao)
-
-        await api.put(`/processo/${processo.idProcesso}`, processo);
-        toast.success('Processo editado com sucesso!', toastConfig)
-        navigate(`/gestao/verificar-edicao/${idEdicao}`);
+        
 
     }  catch (error) {
         console.log(error);

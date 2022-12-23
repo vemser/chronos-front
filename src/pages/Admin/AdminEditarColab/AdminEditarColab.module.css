@@ -4,10 +4,24 @@
   justify-content: center;
 }
 
+.nomeFoto{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nomeFoto span{
+  color: var(--color-blue);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
 .ContainerEnviar {
   width: 100% !important;
   display: flex;
-  justify-content: center;
+  justify-content: center;  
 }
 
 .BotaoEnviar {

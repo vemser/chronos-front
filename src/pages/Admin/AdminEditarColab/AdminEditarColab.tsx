@@ -113,12 +113,14 @@ export const AdminEditarColab = () => {
               alignItems={'center'}
               className={styles.ContainerPerfil}
             >
-              <Box
+              <Box className={styles.nomeFoto}
                 width={'50%'}
                 display={'flex'}
                 alignItems={'center'}
                 justifyContent={'center'}
+                flexDirection={'column'}
               >
+                <span>{state.login}</span>
                 <Box
                   width={'300px'}
                   height={'300px'}

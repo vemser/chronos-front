@@ -28,6 +28,7 @@ export const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
+  
 
   useEffect(() => {
     loggedUser()
@@ -251,7 +252,10 @@ export const Header = () => {
           </Box>
 
           <Box className={'usuario'}>
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}><h3>{dadosUsuarioLogado.login}</h3></Box>
+            <Box className='nome-usuario' sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column'}}>
+              <h3 style={{textTransform: 'capitalize'}}>{dadosUsuarioLogado.login?.replace('.', ' ')}</h3>
+              <span>{dadosUsuarioLogado?.login}</span>
+            </Box>
            
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

@@ -81,8 +81,8 @@ export const AdminCadastrar = () => {
               >
                 <Box display="flex" flexDirection="column" gap="20px">
                   <TextField
-                    id="nome"
-                    label="Nome"
+                    id="login"
+                    label="Login"
                     variant="standard"
                     sx={{ width: '450px' }}
                     className={styles.FormPerfil}
