@@ -11,7 +11,7 @@ import { BuscarContext } from '../../../context/buscaContext'
 
 export const PaginacaoColaborador = () => {
   const { totalPages, buscarDadosColaborador } = useContext(AdminContext)
-  const {buscarColaborador} = useContext(BuscarContext)
+  const { buscarColaborador, searchPayload, isSearch } = useContext(BuscarContext)
   const [searchParam] = useSearchParams()
   const pageNumber = searchParam.get('page') || '1'
 
@@ -25,8 +25,7 @@ export const PaginacaoColaborador = () => {
   }, [totalPages])
 
   useEffect(() => {
-    buscarDadosColaborador(pageNumber)
-    // buscarColaborador(pageNumber)
+    isSearch ? buscarColaborador(searchPayload.login, searchPayload.buscarCargos, pageNumber) : buscarDadosColaborador(pageNumber)
   }, [pageNumber])
 
   return (

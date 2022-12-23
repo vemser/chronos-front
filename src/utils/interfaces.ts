@@ -252,5 +252,9 @@ export interface ICalendarioProcesso {
 // Busca colaboradores
 
 export interface IBuscaContext {
-  buscarColaborador: (pesquisa: any, buscarCargos: any, page: number) => Promise<void>
+  buscarColaborador: (pesquisa: any, buscarCargos: any, page: any) => Promise<void>
+  isSearch: boolean, 
+  setIsSearch: any, 
+  searchPayload: any, 
+  setSearchPayload: any
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import styles from './AdminColab.module.css'
 import { Box } from '@mui/system'
 import { PaginacaoColaborador } from '../../../components/Paginacao/PaginacaoColaborador/PaginacaoColaborador'
@@ -6,20 +6,23 @@ import { AdminContext } from '../../../context/AdminContext'
 import { ButtonCadastrar } from '../../../components/Admin/ButtonCadastrar/ButtonCadastrar'
 import { Header } from '../../../components/Header/Header'
 import { AdminColaboradoresTable } from '../../../components/Admin/AdminColaboradoresTable/AdminColaboradoresTable'
-import { Autocomplete, Button, TextField } from '@mui/material'
+import { Autocomplete, Button, Pagination, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { BuscarContext } from '../../../context/buscaContext'
+import { IAdminContext } from '../../../utils/interfaces'
 
 export const AdminColaboradores = () => {
+  
+  const { buscarDadosColaborador, totalPages } = useContext<IAdminContext>(AdminContext)
+  const { buscarColaborador, isSearch, setIsSearch, searchPayload, setSearchPayload, } = useContext(BuscarContext)  
 
-  const [isSearch, setIsSearch] = useState(false)
-
+  const [mudarKeySelect, setMudarKeySelect] = useState(1)
+  const [value, setValue] = useState<any>([])
   const [cargos] = useState<any>([
     'Aluno', 'Administrador', 'Colaborador', 'Coordenador', 'Gestão de pessoas', 'Instrutor'
   ]);
 
-  const [mudarKeySelect, setMudarKeySelect] = useState(1)
-  const [value, setValue] = useState<any>([])
+  const [currentPage, setCurrentPage] = useState<any>(1)
 
   let buscarCargos = value.map((el: any) =>
     el == 'Aluno' ? 'ROLE_ALUNO' :
@@ -30,9 +33,6 @@ export const AdminColaboradores = () => {
               el == 'Instrutor' ? 'ROLE_INSTRUTOR' : ''
   )
 
-  const { buscarDadosColaborador } = useContext<any>(AdminContext)
-  const { buscarColaborador } = useContext(BuscarContext)
-
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
   }, [])
@@ -40,13 +40,25 @@ export const AdminColaboradores = () => {
   const { register, handleSubmit, reset } = useForm<any>({})
 
   const buscar = (login: any) => {
+    let carga = {
+      login: login,
+      buscarCargos : buscarCargos
+    }
+    setSearchPayload(carga)
+    setIsSearch(true)
     buscarColaborador(login, buscarCargos, 1);
+    setCurrentPage(1);
+  }
+
+  let mudarPaginacao = (value: any) =>{
+    setCurrentPage(value);
+    isSearch ? buscarColaborador(searchPayload.login, searchPayload.buscarCargos, value) : buscarDadosColaborador(value);
   }
 
   return (
     <>
       <Header />
-      <Box width={'100%'} display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'} mt={'50px'}>
+      <Box width={'100%'} display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'} mt={'50px'} mb={"50px"}>
         <Box sx={{
           width: '80%',
           mb: '30px',
@@ -148,6 +160,8 @@ export const AdminColaboradores = () => {
                     reset();
                     setMudarKeySelect(mudarKeySelect + 1);
                     setValue([])
+                    setIsSearch(false)
+                    setCurrentPage(1);
                   }}>Limpar</Button>
               </Box>
             </Box>
@@ -156,9 +170,10 @@ export const AdminColaboradores = () => {
         <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }} className={styles.ContainerButton}><ButtonCadastrar /></Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
-          <div>
-            <PaginacaoColaborador />
-          </div>
+          <Box sx={{display: 'flex', width: '100%', justifyContent: 'center', mt: '10px'}}>
+            {/* <PaginacaoColaborador /> */}
+            <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value)=>  mudarPaginacao(value)}/>
+          </Box>
         </Box>
       </Box>
     </>

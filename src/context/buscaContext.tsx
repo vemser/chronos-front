@@ -13,9 +13,12 @@ export const BuscarProvider = ({ children }: IChildren) => {
     const { setTotalPages } = useContext<IAdminContext>(AdminContext)
     const { setDadosColaborador } = useContext<IAdminContext>(AdminContext)
 
+    const [isSearch, setIsSearch] = useState<boolean>(false)
+    const [searchPayload, setSearchPayload] = useState<any>({})
+
     const token = localStorage.getItem('token');
 
-    const buscarColaborador = async (pesquisa: any, buscarCargos: any, page: number) => {       
+    const buscarColaborador = async (pesquisa: any, buscarCargos: any, page: any) => {       
             
         let cargosList = buscarCargos.map((el: any)=> el == ''? `` : `&nomes=${el}`).join('')
 
@@ -45,7 +48,7 @@ export const BuscarProvider = ({ children }: IChildren) => {
     }
 
     return (
-        <BuscarContext.Provider value={{ buscarColaborador }}>
+        <BuscarContext.Provider value={{ buscarColaborador, isSearch, setIsSearch, searchPayload, setSearchPayload }}>
             {children}
         </BuscarContext.Provider>
     )
