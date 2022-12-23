@@ -12,17 +12,15 @@ import { BuscarContext } from '../../../context/buscaContext'
 import { IAdminContext } from '../../../utils/interfaces'
 
 export const AdminColaboradores = () => {
-  
+
   const { buscarDadosColaborador, totalPages, currentPage, setCurrentPage } = useContext<IAdminContext>(AdminContext)
-  const { buscarColaborador, isSearch, setIsSearch, searchPayload, setSearchPayload } = useContext(BuscarContext)  
+  const { buscarColaborador, isSearch, setIsSearch, searchPayload, setSearchPayload } = useContext(BuscarContext)
 
   const [mudarKeySelect, setMudarKeySelect] = useState(1)
   const [value, setValue] = useState<any>([])
   const [cargos] = useState<any>([
     'Aluno', 'Administrador', 'Colaborador', 'Coordenador', 'Gestão de pessoas', 'Instrutor'
   ]);
-
-  // const [currentPage, setCurrentPage] = useState<any>(1)
 
   let buscarCargos = value.map((el: any) =>
     el == 'Aluno' ? 'ROLE_ALUNO' :
@@ -35,6 +33,7 @@ export const AdminColaboradores = () => {
 
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
+    setCurrentPage(1)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
@@ -42,7 +41,7 @@ export const AdminColaboradores = () => {
   const buscar = (login: any) => {
     let carga = {
       login: login,
-      buscarCargos : buscarCargos
+      buscarCargos: buscarCargos
     }
     setSearchPayload(carga)
     setIsSearch(true)
@@ -50,7 +49,7 @@ export const AdminColaboradores = () => {
     setCurrentPage(1);
   }
 
-  let mudarPaginacao = (value: any) =>{
+  let mudarPaginacao = (value: any) => {
     setCurrentPage(value);
     isSearch ? buscarColaborador(searchPayload.login, searchPayload.buscarCargos, value) : buscarDadosColaborador(value);
   }
@@ -139,10 +138,10 @@ export const AdminColaboradores = () => {
               </Box>
             </Box>
             <Box
-            sx={{
-              width: '100%'
-            }}
-            >              
+              sx={{
+                width: '100%'
+              }}
+            >
               <Box
                 sx={{
                   m: '10px 0',
@@ -170,9 +169,9 @@ export const AdminColaboradores = () => {
         <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }} className={styles.ContainerButton}><ButtonCadastrar /></Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
-          <Box sx={{display: 'flex', width: '100%', justifyContent: 'center', mt: '10px'}}>
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
             {/* <PaginacaoColaborador /> */}
-            <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value)=>  mudarPaginacao(value)}/>
+            <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
           </Box>
         </Box>
       </Box>
