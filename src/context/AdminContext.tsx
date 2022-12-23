@@ -12,124 +12,26 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import nProgress from 'nprogress'
 import { AuthContext } from './AuthContext'
-import { BuscarContext } from './buscaContext'
 
 export const AdminContext = createContext({} as IAdminContext)
 
 export const AdminProvider = ({ children }: IChildren) => {
   const [totalPages, setTotalPages] = useState(0)
   const navigate = useNavigate()
-  const [dadosColaborador, setDadosColaborador] = useState<IColaborador[] | undefined >(undefined)
+  const [dadosColaborador, setDadosColaborador] = useState<IColaborador[] | undefined>(undefined)
 
-  const token  = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
   const { dadosUsuarioLogado, loggedUser } = useContext(AuthContext)
 
   const [currentPage, setCurrentPage] = useState<any>(1)
- 
-  
+
+
   const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
       login: data.login,
       cargos: []
     }
-    data.Administrador &&
-    dadosColaborador.cargos.push({
-      nome: 'ROLE_ADMIN',
-      descricao: 'Administrador'
-    })
-  data.GestaoDePessoas &&
-    dadosColaborador.cargos.push({
-      nome: 'ROLE_GESTAO_DE_PESSOAS',
-      descricao: 'GestaoDePessoas'
-    })
-  data.Instrutor &&
-    dadosColaborador.cargos.push({
-      nome: 'ROLE_INSTRUTOR',
-      descricao: 'Instrutor'
-    })
-  data.Gestor &&
-    dadosColaborador.cargos.push({
-      nome: 'ROLE_GESTOR',
-      descricao: 'Gestor'
-    })
-  data.Aluno &&
-    dadosColaborador.cargos.push({
-      nome: 'ROLE_ALUNO',
-      descricao: 'Aluno'
-    })
-  data.Colaborador &&
-    dadosColaborador.cargos.push({
-      nome: 'ROLE_COLABORADOR',
-      descricao: 'Colaborador'
-    })
-
-    try {
-      nProgress.start()
-      
-      const retorno = await authApi.post('/usuario', dadosColaborador)
-
-      toast.success('Usuário criado com sucesso!', toastConfig)
-      navigate("/admin/colaboradores")
-      setCurrentPage(1)
-    } catch (error: any) {
-      console.log(error)
-      if(error.response.status === 400){
-        toast.error(error.response.data.errors[0], toastConfig)
-
-      } else {
-        toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
-      }
-    } finally {
-      nProgress.done()
-    }
-  }
-
-  const buscarDadosColaborador = async (page: string) => {
-    try {
-      nProgress.start();
-
-      authApi.defaults.headers.common['Authorization'] = token
-      const { data } = await authApi.get(`/usuario?pagina=${Number(page) - 1 }&tamanho=8`)
-
-        
-      setTotalPages(data.quantidadePaginas)
-      setDadosColaborador(data.elementos)
-
-    } catch (error) {
-      console.log(error)
-      toast.error('Houve um erro ao exibir as informações, por favor tente novamente.')
-
-    } finally {
-      nProgress.done()
-    }
-  }
-
-  const deletarColaborador = async (idUsuario: number) => {
-    try {
-      nProgress.start()
-
-      authApi.defaults.headers.common['Authorization'] = token
-      await authApi.delete(`/usuario/${idUsuario}`)
-      toast.success(`Usuário ${idUsuario} deletado com sucesso!`, toastConfig)
-      buscarDadosColaborador('1')
-      setCurrentPage(1)
-      
-    } catch (error) {
-      toast.error(`Erro ao deletar o usuario ${idUsuario} , tente novamente!`, toastConfig)
-      console.log(error)
-      
-    } finally {
-      nProgress.done()
-    }
-  }
-
-  // Atualizar cadastro e cargo do usuário
-  const editarColaborador = async (data: IColaborador, idUsuario: number) => {
-    let dadosColaborador: IEditarColaborador = {
-      cargos: []
-    }
-    
     data.Administrador &&
       dadosColaborador.cargos.push({
         nome: 'ROLE_ADMIN',
@@ -160,7 +62,104 @@ export const AdminProvider = ({ children }: IChildren) => {
         nome: 'ROLE_COLABORADOR',
         descricao: 'Colaborador'
       })
-    
+
+    try {
+      nProgress.start()
+
+      const retorno = await authApi.post('/usuario', dadosColaborador)
+
+      toast.success('Usuário criado com sucesso!', toastConfig)
+      navigate("/admin/colaboradores")
+      setCurrentPage(1)
+    } catch (error: any) {
+      console.log(error)
+      if (error.response.status === 400) {
+        toast.error(error.response.data.errors[0], toastConfig)
+
+      } else {
+        toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
+      }
+    } finally {
+      nProgress.done()
+    }
+  }
+
+  const buscarDadosColaborador = async (page: string) => {
+    try {
+      nProgress.start();
+
+      authApi.defaults.headers.common['Authorization'] = token
+      const { data } = await authApi.get(`/usuario?pagina=${Number(page) - 1}&tamanho=8`)
+
+
+      setTotalPages(data.quantidadePaginas)
+      setDadosColaborador(data.elementos)
+
+    } catch (error) {
+      console.log(error)
+      toast.error('Houve um erro ao exibir as informações, por favor tente novamente.')
+
+    } finally {
+      nProgress.done()
+    }
+  }
+
+  const deletarColaborador = async (idUsuario: number) => {
+    try {
+      nProgress.start()
+
+      authApi.defaults.headers.common['Authorization'] = token
+      await authApi.delete(`/usuario/${idUsuario}`)
+      toast.success(`Usuário ${idUsuario} deletado com sucesso!`, toastConfig)
+      buscarDadosColaborador('1')
+      setCurrentPage(1)
+
+    } catch (error) {
+      toast.error(`Erro ao deletar o usuario ${idUsuario} , tente novamente!`, toastConfig)
+      console.log(error)
+
+    } finally {
+      nProgress.done()
+    }
+  }
+
+  // Atualizar cadastro e cargo do usuário
+  const editarColaborador = async (data: IColaborador, idUsuario: number) => {
+    let dadosColaborador: IEditarColaborador = {
+      cargos: []
+    }
+
+    data.Administrador &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_ADMIN',
+        descricao: 'Administrador'
+      })
+    data.GestaoDePessoas &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_GESTAO_DE_PESSOAS',
+        descricao: 'GestaoDePessoas'
+      })
+    data.Instrutor &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_INSTRUTOR',
+        descricao: 'Instrutor'
+      })
+    data.Gestor &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_GESTOR',
+        descricao: 'Gestor'
+      })
+    data.Aluno &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_ALUNO',
+        descricao: 'Aluno'
+      })
+    data.Colaborador &&
+      dadosColaborador.cargos.push({
+        nome: 'ROLE_COLABORADOR',
+        descricao: 'Colaborador'
+      })
+
     try {
       nProgress.start()
       authApi.defaults.headers.common['Authorization'] = token
@@ -172,7 +171,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       setCurrentPage(1)
     } catch (error: any) {
       console.log(error)
-      if(error.response.status === 400){
+      if (error.response.status === 400) {
         toast.error(error.response.data.errors[0], toastConfig)
       } else {
         toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
@@ -219,7 +218,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
     } catch (error: any) {
       console.log(error)
-      if(error.response.status === 400){
+      if (error.response.status === 400) {
         toast.error(error.response.data.errors[0], toastConfig)
       } else {
         toast.error('Erro ao criar dado do colaborador, tente novamente', toastConfig)
