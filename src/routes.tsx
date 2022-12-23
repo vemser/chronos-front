@@ -63,11 +63,6 @@ export const AppRoutes = () => {
                       <Route index element={<Calendario />} />
                     </Route>
 
-                    <Route
-                        path="/instrutor/dias-nao-uteis"
-                        element={<InstNaoUteis />}
-                      />
-
                     {/* PRIVATE ROUTES */}
 
                     <Route
