@@ -70,6 +70,7 @@ export const AdminColaboradores = () => {
               alignItems: 'center',
               gap: '20px',
               justifyContent: 'flex-start',
+              flexDirection: 'column'
             }}
           >
             <Box
@@ -78,7 +79,7 @@ export const AdminColaboradores = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '50px',
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
               }}
             >
               <Box
@@ -124,9 +125,15 @@ export const AdminColaboradores = () => {
                   )}
                 />
               </Box>
+            </Box>
+            <Box
+            sx={{
+              width: '100%'
+            }}
+            >              
               <Box
                 sx={{
-                  m: '15px 0',
+                  m: '10px 0',
                   display: 'flex',
                   justifyContent: 'flex-start',
                   width: '50%',
