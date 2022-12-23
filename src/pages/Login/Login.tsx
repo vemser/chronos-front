@@ -45,7 +45,7 @@ export const Login = () => {
   useEffect(() => {
     if (token) {
       let decodedJWT = JSON.parse(atob(token.split('.')[1]))
-      let roleArray = decodedJWT.CARGOS
+      let roleArray = decodedJWT.cargos
 
       setRoles(roleArray)
     }
