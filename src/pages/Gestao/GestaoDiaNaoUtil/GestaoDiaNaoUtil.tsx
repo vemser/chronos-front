@@ -3,7 +3,6 @@ import { Box, Button, Pagination } from '@mui/material'
 import { Link } from 'react-router-dom'
 import styles from './GestaoDiaNaoUtil.module.css'
 import { Header } from '../../../components/Header/Header';
-import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil';
 import { GestaoDiaNaoUtilTable } from '../../../components/Gestao/GestaoDiaNaoUtilTable/GestaoDiaNaoUtilTable';
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext';
 import {  animateScroll as scroll } from 'react-scroll'
@@ -66,7 +65,6 @@ export const GestaoDiaNaoUtil = () => {
 
         </div>
         <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>          
-          {/* <PaginacaoNaoUtil /> */}
             <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
         </Box>
   </section>

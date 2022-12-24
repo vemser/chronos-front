@@ -4,7 +4,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import styles from './InstEdicoes.module.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
-import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 import { Header } from '../../../components/Header/Header';
 import {  animateScroll as scroll } from 'react-scroll'
 
@@ -86,7 +85,6 @@ export const InstEdicoes: React.FC = () => {
           </TableContainer>
         </div>
         <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
-          {/* <PaginacaoEdicoes /> */}            
           <Pagination color="primary"  page={currentPage} count={totalPages}  onChange={(_, value) => mudarPaginacao(value)}/>
         </Box>
       </section>

@@ -13,7 +13,6 @@ import {
 import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import styles from './InstNaoUteis.module.css'
 import { Header } from '../../../components/Header/Header'
-import { PaginacaoNaoUtil } from '../../../components/Paginacao/PaginacaoNaoUtil/PaginacaoNaoUtil'
 import {  animateScroll as scroll } from 'react-scroll'
 
 export const InstNaoUteis = () => {
@@ -132,7 +131,6 @@ export const InstNaoUteis = () => {
           </TableContainer>
         </div>
         <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>          
-          {/* <PaginacaoNaoUtil /> */}
             <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
         </Box>
       </section>

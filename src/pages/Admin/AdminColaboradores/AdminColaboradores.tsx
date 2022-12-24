@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import styles from './AdminColab.module.css'
 import { Box } from '@mui/system'
-import { PaginacaoColaborador } from '../../../components/Paginacao/PaginacaoColaborador/PaginacaoColaborador'
 import { AdminContext } from '../../../context/AdminContext'
 import { ButtonCadastrar } from '../../../components/Admin/ButtonCadastrar/ButtonCadastrar'
 import { Header } from '../../../components/Header/Header'
@@ -11,7 +10,6 @@ import { useForm } from 'react-hook-form'
 import { BuscarContext } from '../../../context/buscaContext'
 import { IAdminContext } from '../../../utils/interfaces'
 import {  animateScroll as scroll } from 'react-scroll'
-
 
 export const AdminColaboradores = () => {
 
@@ -207,8 +205,7 @@ export const AdminColaboradores = () => {
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
-          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
-            {/* <PaginacaoColaborador /> */}
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>           
             <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
           </Box>
         </Box>
