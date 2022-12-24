@@ -18,6 +18,7 @@ import imgLogo from '../../assets/login-logo.png'
 import { AuthContext } from '../../context/AuthContext'
 import { HeaderButton } from '../HeaderButton/HeaderButton'
 import './Header.css'
+import { NavLink } from 'react-router-dom'
 
 export const Header = () => {
   const { dadosUsuarioLogado, handleLogout, loggedUser, roles } =
@@ -28,7 +29,7 @@ export const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
-  
+
 
   useEffect(() => {
     loggedUser()
@@ -54,34 +55,34 @@ export const Header = () => {
     roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
     roles.includes('ROLE_ADMIN') && document.getElementById('colaboradoresResp')?.classList.remove('hide')
 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide') 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoesResp')?.classList.remove('hide') 
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide')
+    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoesResp')?.classList.remove('hide')
 
     roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
     roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtilResp')?.classList.remove('hide')
-    
+
     roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
     roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoesResp')?.classList.remove('hide')
 
     // roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
     // roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtilResp')?.classList.remove('hide')
 
-  } 
+  }
 
   roles.includes('ROLE_ADMIN') && document.getElementById('colaboradores')?.classList.remove('hide')
-    roles.includes('ROLE_ADMIN') && document.getElementById('colaboradoresResp')?.classList.remove('hide')
+  roles.includes('ROLE_ADMIN') && document.getElementById('colaboradoresResp')?.classList.remove('hide')
 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide') 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoesResp')?.classList.remove('hide') 
+  roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoes')?.classList.remove('hide')
+  roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoEdicoesResp')?.classList.remove('hide')
 
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
-    roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtilResp')?.classList.remove('hide')
-    
-    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
-    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoesResp')?.classList.remove('hide')
+  roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtil')?.classList.remove('hide')
+  roles.includes('ROLE_GESTAO_DE_PESSOAS') === true && document.getElementById('gestaoNaoUtilResp')?.classList.remove('hide')
 
-    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
-    roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtilResp')?.classList.remove('hide')
+  roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoes')?.classList.remove('hide')
+  roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorEdicoesResp')?.classList.remove('hide')
+
+  roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtil')?.classList.remove('hide')
+  roles.includes('ROLE_INSTRUTOR') && !roles.includes('ROLE_GESTAO_DE_PESSOAS') && document.getElementById('instrutorNaoUtilResp')?.classList.remove('hide')
 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -97,6 +98,12 @@ export const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  let activeStyle = {
+    color: '#1e62fe',
+    borderBottom: '2px solid #1e62fe',
+    marginBottom: '5px'
   }
 
   return (
@@ -151,37 +158,37 @@ export const Header = () => {
               <Box className={'menuBurgerOptions'}>
                 <ul>
 
-                <MenuItem id="colaboradoresResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                  <Link to='/admin/colaboradores'>
+                  <MenuItem id="colaboradoresResp" className='hide' sx={{ '&:hover': { backgroundColor: 'inherit' } }}>
+                    <Link to='/admin/colaboradores'>
                       <p>COLABORADORES</p>
-                  </Link> 
-                </MenuItem>
+                    </Link>
+                  </MenuItem>
 
-                <MenuItem id="gestaoEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                  <Link to='/gestao/edicoes'>
+                  <MenuItem id="gestaoEdicoesResp" className='hide' sx={{ '&:hover': { backgroundColor: 'inherit' } }}>
+                    <Link to='/gestao/edicoes'>
                       <p>EDIÇÕES</p>
-                  </Link> 
-                </MenuItem>
+                    </Link>
+                  </MenuItem>
 
-                <MenuItem  id="gestaoNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                  <Link to='/gestao/dias-nao-uteis'>
+                  <MenuItem id="gestaoNaoUtilResp" className='hide' sx={{ '&:hover': { backgroundColor: 'inherit' } }}>
+                    <Link to='/gestao/dias-nao-uteis'>
                       <p>PERÍODO NÃO ÚTIL</p>
-                  </Link> 
-                </MenuItem>
+                    </Link>
+                  </MenuItem>
 
-                <MenuItem  id="instrutorEdicoesResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                  <Link to='/instrutor/edicoes'>
+                  <MenuItem id="instrutorEdicoesResp" className='hide' sx={{ '&:hover': { backgroundColor: 'inherit' } }}>
+                    <Link to='/instrutor/edicoes'>
                       <p>EDIÇÕES</p>
-                  </Link> 
-                </MenuItem>
-                      
-                <MenuItem id="instrutorNaoUtilResp" className='hide' sx={{  '&:hover': { backgroundColor: 'inherit' }}}>
-                  <Link to='/instrutor/dias-nao-uteis'>
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem id="instrutorNaoUtilResp" className='hide' sx={{ '&:hover': { backgroundColor: 'inherit' } }}>
+                    <Link to='/instrutor/dias-nao-uteis'>
                       <p>PERÍODO NÃO ÚTIL</p>
-                  </Link> 
-                </MenuItem>
-                
-            </ul>
+                    </Link>
+                  </MenuItem>
+
+                </ul>
               </Box>
             </Menu>
           </Box>
@@ -205,58 +212,80 @@ export const Header = () => {
                 className="hide"
                 sx={{ '&:hover': { backgroundColor: 'inherit' } }}
               >
-                <HeaderButton
-                  texto={'COLABORADORES'}
-                  url={'/admin/colaboradores'}
-                />
+                <NavLink to='/admin/colaboradores'
+                  style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                  className={'links'}
+                >
+                  <p>COLABORADORES</p>
+                </NavLink>
               </MenuItem>
-
               <MenuItem
                 id="gestaoEdicoes"
                 className="hide"
                 sx={{ '&:hover': { backgroundColor: 'inherit' } }}
-              >
-                <HeaderButton texto={'EDIÇÕES'} url={'/gestao/edicoes'} />
+              >                
+                <NavLink to='/gestao/edicoes'
+                  style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                  className={'links'}
+                >
+                  <p>EDIÇÕES</p>
+                </NavLink>
               </MenuItem>
-
               <MenuItem
                 id="gestaoNaoUtil"
                 className="hide"
                 sx={{ '&:hover': { backgroundColor: 'inherit' } }}
               >
-                <HeaderButton
-                  texto={'PERÍODO NÃO ÚTIL'}
-                  url={'/gestao/dias-nao-uteis'}
-                />
+                <NavLink to='/gestao/dias-nao-uteis'
+                  style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                  className={'links'}
+                >
+                  <p>PERÍODO NÃO ÚTIL</p>
+                </NavLink>
               </MenuItem>
-
               <MenuItem
                 id="instrutorEdicoes"
                 className="hide"
                 sx={{ '&:hover': { backgroundColor: 'inherit' } }}
-              >
-                <HeaderButton texto={'EDIÇÕES'} url={'/instrutor/edicoes'} />
+              >                
+                <NavLink to='/instrutor/edicoes'
+                  style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                  className={'links'}
+                >
+                  <p>EDIÇÕES</p>
+                </NavLink>
               </MenuItem>
-
               <MenuItem
                 id="instrutorNaoUtil"
                 className="hide"
                 sx={{ '&:hover': { backgroundColor: 'inherit' } }}
               >
-                <HeaderButton
-                  texto={'PERÍODO NÃO ÚTIL'}
-                  url={'/instrutor/dias-nao-uteis'}
-                />
+                <NavLink to='/instrutor/dias-nao-uteis'
+                  style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                  }
+                  className={'links'}
+                >
+                  <p>PERÍODO NÃO ÚTIL</p>
+                </NavLink>                
               </MenuItem>
             </ul>
           </Box>
 
           <Box className={'usuario'}>
-            <Box className='nome-usuario' sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column'}}>
-              <h3 style={{textTransform: 'capitalize'}}>{dadosUsuarioLogado.login?.replace('.', ' ')}</h3>
+            <Box className='nome-usuario' sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+              <h3 style={{ textTransform: 'capitalize' }}>{dadosUsuarioLogado.login?.replace('.', ' ')}</h3>
               <span>{dadosUsuarioLogado?.login}</span>
             </Box>
-           
+
             <Tooltip title="Exibir detalhes">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {dadosUsuarioLogado.imagem === null ? (

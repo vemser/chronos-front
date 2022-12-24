@@ -40,12 +40,22 @@
     height: 50px;
     width: 50px;
   }
-  
+
   .navbar {
     flex-grow: 1;
   }
   .navbar ul {
     display: flex;
+  }
+
+  .links {
+    font-weight: 700;
+    color: #1e62fe;
+    font-size: 0.875rem;
+  }
+
+  .links:hover {
+    margin-bottom: 5px;
   }
   
   .usuario {
