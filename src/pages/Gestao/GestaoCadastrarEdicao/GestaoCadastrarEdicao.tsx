@@ -62,7 +62,25 @@ export const GestaoCadastrarEdicao = () => {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-              <Button className={styles.submitButton} type="submit" variant="contained" id="button-cadastrar-edicao" sx={{ mt: 3, mb: 2, backgroundColor: '#1e62fe'}}>
+              <Button 
+              className={styles.submitButton} 
+              type="submit" 
+              variant="contained" 
+              id="button-cadastrar-edicao" 
+              sx={{
+                mt: 3, 
+                mb: 2, 
+                backgroundColor: '#1e62fe',
+                boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                transition: '0.5s',
+                "&:hover":{
+                  transform: 'scale(1.02)'
+                },
+                "&:active":{
+                  transform: 'scale(0.98)'
+                }
+              }}
+              >
                 Enviar
               </Button>
             </Box>
