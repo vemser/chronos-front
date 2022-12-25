@@ -19,6 +19,9 @@ import { AuthContext } from '../../context/AuthContext'
 import { HeaderButton } from '../HeaderButton/HeaderButton'
 import './Header.css'
 import { NavLink } from 'react-router-dom'
+import { Divider } from '@mui/material'
+import { ListItemIcon } from '@mui/material'
+import { Logout, PersonAdd, Settings } from '@mui/icons-material'
 
 export const Header = () => {
   const { dadosUsuarioLogado, handleLogout, loggedUser, roles } =
@@ -305,7 +308,7 @@ export const Header = () => {
               </IconButton>
             </Tooltip>
 
-            <Menu
+            {/* <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -338,7 +341,85 @@ export const Header = () => {
                   </Box>
                 </Box>
               </ul>
-            </Menu>
+            </Menu> */}
+
+      <Menu
+        anchorEl={anchorElUser}
+        id="account-menu"
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+        onClick={handleCloseUserMenu}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem onClick={() => {navigate('/perfil')}}>
+        {dadosUsuarioLogado.imagem === null ? (
+                  <Avatar
+                    alt={`${dadosUsuarioLogado.imagem}`}
+                    src={dadosUsuarioLogado.imagem}
+                  />
+                ) : (
+                  <img
+                    data-testid="imagem-usuario"
+                    alt=""
+                    width={'20px'}
+                    className={'minImg'}
+                    src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}
+                  />
+                )}
+           Editar Perfil
+        </MenuItem>
+        {/* <MenuItem>
+          <Avatar /> My account
+        </MenuItem> */}
+        <Divider />
+        {/* <MenuItem>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem> */}
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <Logout fontSize="small" fill={'red'} />
+          </ListItemIcon>
+          Sair
+        </MenuItem>
+      </Menu>        
+
+
           </Box>
         </Toolbar>
       </Container>
