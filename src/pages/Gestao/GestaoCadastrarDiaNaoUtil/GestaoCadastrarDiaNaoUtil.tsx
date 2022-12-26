@@ -19,6 +19,10 @@ export const GestaoCadastrarDiaNaoUtil = () => {
     resolver: yupResolver(cadastrarDiaNaoUtilFormSchema)
   }))
 
+  const handleRepeticaoAnual = () =>{
+    document.getElementById('dataFinalContainer')?.classList.toggle('hide');
+  } 
+
   return (
     <>
     <Header/>
@@ -48,11 +52,12 @@ export const GestaoCadastrarDiaNaoUtil = () => {
               </span>
               )}
 
-              <FormControlLabel control={<Checkbox /> } 
+              <FormControlLabel control={<Checkbox onClick={() => handleRepeticaoAnual()} /> } 
               label="Repetir todos os anos"  id='repeticaoAnual' className={styles.dataPicker}
               
                 {...register('repeticaoAnual')} sx={{mt: 2}}/>
           </div>
+
 
         
               <Box className={styles.ContainerMenorCalendario}>
@@ -69,7 +74,7 @@ export const GestaoCadastrarDiaNaoUtil = () => {
                   )}
                 </Box>
 
-                <Box className={styles.dateContainer}>
+                <Box className={styles.dateContainer} id='dataFinalContainer'>
                   <p>Data Final</p>
                   <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataFinal')} error={!!errors.dataFinal}/>
 

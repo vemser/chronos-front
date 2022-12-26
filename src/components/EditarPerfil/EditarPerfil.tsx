@@ -43,8 +43,6 @@ export const EditarPerfil = () => {
 
   const atualizarDadosPerfil = () => {
 
-    console.log('chamou')
-
     const formData = new FormData()
 
     if (selectedImage) {
