@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import styles from './AdminColab.module.css'
 import { Box } from '@mui/system'
-import { PaginacaoColaborador } from '../../../components/Paginacao/PaginacaoColaborador/PaginacaoColaborador'
 import { AdminContext } from '../../../context/AdminContext'
 import { ButtonCadastrar } from '../../../components/Admin/ButtonCadastrar/ButtonCadastrar'
 import { Header } from '../../../components/Header/Header'
@@ -10,6 +9,7 @@ import { Autocomplete, Button, Pagination, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { BuscarContext } from '../../../context/buscaContext'
 import { IAdminContext } from '../../../utils/interfaces'
+import {  animateScroll as scroll } from 'react-scroll'
 
 export const AdminColaboradores = () => {
 
@@ -34,6 +34,7 @@ export const AdminColaboradores = () => {
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
     setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
@@ -50,6 +51,11 @@ export const AdminColaboradores = () => {
   }
 
   let mudarPaginacao = (value: any) => {
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
     isSearch ? buscarColaborador(searchPayload.login, searchPayload.buscarCargos, value) : buscarDadosColaborador(value);
   }
@@ -151,7 +157,22 @@ export const AdminColaboradores = () => {
                   gap: '20px'
                 }}
               >
-                <Button type={'submit'} variant={'contained'}>Filtrar</Button>
+                <Button 
+                type={'submit'} 
+                variant={'contained'}
+                sx={{
+                  boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                  transition: '0.5s',
+                  "&:hover":{
+                    transform: 'scale(1.02)'
+                  },
+                  "&:active":{
+                    transform: 'scale(0.98)'
+                  }
+                }}
+                >
+                  Filtrar
+                </Button>
                 <Button
                   variant={'contained'}
                   onClick={() => {
@@ -161,16 +182,30 @@ export const AdminColaboradores = () => {
                     setValue([])
                     setIsSearch(false)
                     setCurrentPage(1);
-                  }}>Limpar</Button>
+                  }}
+                  sx={{
+                    boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                    transition: '0.5s',
+                    "&:hover":{
+                      transform: 'scale(1.02)'
+                    },
+                    "&:active":{
+                      transform: 'scale(0.98)'
+                    }
+                  }}
+                  >
+                    Limpar
+                  </Button>
               </Box>
             </Box>
           </Box>
         </Box>
-        <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }} className={styles.ContainerButton}><ButtonCadastrar /></Box>
+        <Box sx={{ justifyContent: { xs: 'center', md: 'flex-end' } }} className={styles.ContainerButton}>
+          <ButtonCadastrar />
+        </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
-          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
-            {/* <PaginacaoColaborador /> */}
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>           
             <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
           </Box>
         </Box>

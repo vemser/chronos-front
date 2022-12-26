@@ -18,10 +18,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import styles from './GestaoEdicoes.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContex'
-import { PaginacaoEdicoes } from '../../../components/Paginacao/PaginacaoEdicoes/PaginacaoEdicoes';
 import { Header } from '../../../components/Header/Header';
 import { TOptionsConfirmDialog } from '../../../utils/interfaces';
 import { ConfirmDialog } from '../../../components/ConfirmDialog';
+import {  animateScroll as scroll } from 'react-scroll'
 
 export const GestaoEdicoes: React.FC = () => {
 
@@ -31,6 +31,7 @@ export const GestaoEdicoes: React.FC = () => {
   useLayoutEffect(() => {
     getEdicoesList('1')
     setCurrentPage(1)
+    window.scrollTo(0,0)
   }, [])
 
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
@@ -40,8 +41,13 @@ export const GestaoEdicoes: React.FC = () => {
   });
 
   let mudarPaginacao = (value: any) => {
+    const options = {
+      duration: 800,
+      smooth: true
+    }
+    scroll.scrollToTop(options)
     setCurrentPage(value);
-    getEdicoesList(value.toString())
+    getEdicoesList(value.toString());
   }
 
   return (
@@ -57,7 +63,22 @@ export const GestaoEdicoes: React.FC = () => {
             </div>
 
             <Link to={'/gestao/cadastrar-edicao'}>
-              <Button variant="contained" id='addButton'> ADICIONAR EDIÇÃO</Button>
+              <Button 
+              variant="contained" 
+              id='addButton'
+              sx={{
+                boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                transition: '0.5s',
+                "&:hover":{
+                  transform: 'scale(1.02)'
+                },
+                "&:active":{
+                  transform: 'scale(0.98)'
+                }
+              }}
+              > 
+                ADICIONAR EDIÇÃO
+              </Button>
             </Link>
           </Box>
 
@@ -128,7 +149,7 @@ export const GestaoEdicoes: React.FC = () => {
                             width: '25px',
                             height: '25px',
                             "&:hover": { color: 'red', transform: 'scale(1.05)' },
-                            "& :active": {
+                            "&:active": {
                               transform: 'scale(.99)',
                             }
                           }} />
@@ -146,7 +167,6 @@ export const GestaoEdicoes: React.FC = () => {
           </TableContainer>
         </div> 
         <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
-          {/* <PaginacaoEdicoes /> */}            
           <Pagination color="primary"  page={currentPage} count={totalPages}  onChange={(_, value) => mudarPaginacao(value)}/>
         </Box>
       </section>

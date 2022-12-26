@@ -45,7 +45,11 @@
 }
 
 .BotaoEnviar:hover {
-  scale: 1.01;
+  transform: scale(1.02);
+}
+
+.BotaoEnviar:active {
+  transform: scale(0.98);
 }
 
 .FormPerfil {

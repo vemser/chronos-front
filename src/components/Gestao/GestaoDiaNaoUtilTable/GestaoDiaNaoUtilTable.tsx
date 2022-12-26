@@ -100,7 +100,7 @@ export const GestaoDiaNaoUtilTable = () => {
                           width: '25px',
                           height: '25px',
                           "&:hover": { color: 'red', transform: 'scale(1.05)' },
-                          "& :active": {
+                          "&:active": {
                             transform: 'scale(.99)',
                           }
                         }} />

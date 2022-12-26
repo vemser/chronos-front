@@ -6,6 +6,7 @@ import './CalendarioGeral.css'
 import { CalendarioContext } from '../../context/CalendarioContext'
 import { ICalendarioEdicao } from '../../utils/interfaces'
 import { Link } from 'react-router-dom'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 
 export const CalendarioGeral: React.FC = () => {
 
@@ -196,7 +197,20 @@ export const CalendarioGeral: React.FC = () => {
       <div onBlur={() => {document.getElementById('modal-id')?.classList.add('hide')}} 
           style={{border:`2px solid ${modalInfos?.extendedProps.cor}`}} id='modal-id' className='event-modal hide'>
 
-          <div onClick={handleModal} className='close-modal'>X</div>
+          <div onClick={handleModal} className='close-modal'>
+            <HighlightOffIcon 
+            sx={{
+              cursor: 'pointer',
+              width: '30px',
+              height: '30px',
+              color: 'red',
+              "&:hover": { transform: 'scale(1.05)' },
+              "&:active": {
+                transform: 'scale(.99)',
+              }
+            }}
+            />
+          </div>
 
           <div className='modal-date'>
             <h3>{modalInfos?.extendedProps.dia}</h3>
