@@ -83,9 +83,15 @@ export const CalendarioGeral: React.FC = () => {
   const arrayFeriados = feriadosFilter.map((day: any) => {
     return{
       date: day.dia,
-      title: day.feriado,
       display: 'background',
       backgroundColor: '#e5e7eb',
+      extendedProps:{
+        feriado: day.feriado,
+        cor: '#cccccc',
+        dia: day.dia.split('-')
+        .reverse()
+        .join('/'),
+      }
     }
   })
 
@@ -93,7 +99,14 @@ export const CalendarioGeral: React.FC = () => {
     return{
       date: day.dia,
       display: 'background',
-      backgroundColor: '#e5e7eb'
+      backgroundColor: '#e5e7eb',
+      extendedProps:{
+        feriado: day.feriado,
+        cor: '#cccccc',
+        dia: day.dia.split('-')
+        .reverse()
+        .join('/'),
+      }
     }
   })
   
@@ -102,6 +115,7 @@ export const CalendarioGeral: React.FC = () => {
   function renderEventContent(eventInfo: any) {
     return (
       <div className='evento'>
+        <strong>{eventInfo.event.extendedProps.feriado}</strong>
         <strong>{eventInfo.event.title}</strong>
         <strong>{eventInfo.event.extendedProps.processo}</strong>
       </div>
@@ -218,16 +232,19 @@ export const CalendarioGeral: React.FC = () => {
 
           <div className='modal-header'>
             <Link to={`/gestao/verificar-edicao/${modalInfos?.extendedProps.idEdicao}`} title={'Verificar Edição'}>
+              
               <h3>{modalInfos?.title}</h3>
             </Link>
           </div>
 
           <div className='modal-etapa'>
+            {modalInfos?.extendedProps.feriado && <h3>{modalInfos?.extendedProps.feriado}</h3>} 
             <h3>{modalInfos?.extendedProps.etapa}</h3>
             <div style={{backgroundColor: modalInfos?.extendedProps.cor }} className='color-tag'></div>
           </div>
 
-          <div className='modal-processo-container'>
+          {modalInfos?.extendedProps.processo && 
+            <div className='modal-processo-container'>
             <div className='modal-divisor' style={{backgroundColor: modalInfos?.extendedProps.cor }}></div>
             <span>Detalhes do Processo:</span>
             <div className='modal-processo'>
@@ -235,6 +252,9 @@ export const CalendarioGeral: React.FC = () => {
               {modalInfos?.extendedProps.critico == 'ATIVO' ? <div className='modal-critico'><p>!</p></div> : ''}
             </div>
           </div>
+          }
+
+          
 
           <div>
           </div>
