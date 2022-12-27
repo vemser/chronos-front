@@ -45,7 +45,8 @@
 
 .ContainerMenorCalendario{
   display: flex;
-  gap: 40px;
+  justify-content: center;
+  gap: 20px;
 }
 
 .dateContainer{

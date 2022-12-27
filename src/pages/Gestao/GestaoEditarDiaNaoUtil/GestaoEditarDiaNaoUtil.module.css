@@ -68,6 +68,10 @@
   width: 200px;
 }
 
+.hide{
+  display: none;
+}
+
 @media (max-width: 1200px) {
   .ContainerSection {
     height: 100%;

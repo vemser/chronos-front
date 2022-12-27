@@ -77,7 +77,6 @@ export const GestaoCadastrarDiaNaoUtil = () => {
                 <Box className={styles.dateContainer} id='dataFinalContainer'>
                   <p>Data Final</p>
                   <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataFinal')} error={!!errors.dataFinal}/>
-
                 </Box>
               </Box>
        
