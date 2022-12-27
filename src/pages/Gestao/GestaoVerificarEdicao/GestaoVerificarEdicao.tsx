@@ -203,11 +203,11 @@ export const GestaoVerificarEdicao = () => {
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="justify">Nome</TableCell>
-                        <TableCell align="justify">Dias Úteis</TableCell>
-                        <TableCell align="justify">Ordem</TableCell>
-                        <TableCell align="right">Editar</TableCell>
-                        <TableCell align="right">Excluir</TableCell>
+                        <TableCell align="justify"><strong>Nome</strong></TableCell>
+                        <TableCell align="justify"><strong>Dias Úteis</strong></TableCell>
+                        <TableCell align="justify"><strong>Ordem</strong></TableCell>
+                        <TableCell align="right"><strong>Editar</strong></TableCell>
+                        <TableCell align="right"><strong>Excluir</strong></TableCell>
                       </TableRow>
                     </TableHead>
 

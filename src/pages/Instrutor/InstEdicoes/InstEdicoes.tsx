@@ -44,9 +44,9 @@ export const InstEdicoes: React.FC = () => {
             <Table sx={{ minWidth: 650,  }} aria-label="simple table">
               <TableHead>
                 <TableRow >
-                  <TableCell align="justify">Edições</TableCell>
-                  <TableCell align="center">Detalhes</TableCell>
-                  <TableCell align="right">Ativo</TableCell>
+                <TableCell align="justify"><strong>Edições</strong></TableCell>
+                  <TableCell align="center"><strong>Detalhes</strong></TableCell>
+                  <TableCell align="right"><strong>Ativo</strong></TableCell>
                 </TableRow>
               </TableHead>
 
