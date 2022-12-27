@@ -103,9 +103,9 @@ export const InstVerificarEdicao = () => {
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="justify">Nome</TableCell>
-                        <TableCell align="justify">Dias Úteis</TableCell>
-                        <TableCell align="justify">Ordem</TableCell>
+                        <TableCell align="justify"><strong>Nome</strong></TableCell>
+                        <TableCell align="justify"><strong>Dias Úteis</strong></TableCell>
+                        <TableCell align="justify"><strong>Ordem</strong></TableCell>
                       </TableRow>
                     </TableHead>
 

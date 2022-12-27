@@ -226,6 +226,11 @@ body::-webkit-scrollbar-thumb {
   outline: 2px solid transparent !important;
 }
 
+.fc-button-active {
+  font-weight: bold !important;
+  border: 1px solid #1e62fe !important;
+  border-radius: 5px !important;
+}
 
 @media (max-width: 1230px) {
   .containerData {
