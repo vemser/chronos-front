@@ -27,13 +27,13 @@ export const GestaoDiaNaoUtilTable = () => {
             <Table sx={{ minWidth: 650, maxWidth: 1366}} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="justify" width={'20px'}>Código</TableCell>
-                  <TableCell align="justify">Descrição</TableCell>
-                  <TableCell align="justify">Período Inicial</TableCell>
-                  <TableCell align="justify">Período Final</TableCell>
-                  <TableCell align="justify">Repetir</TableCell>
-                  <TableCell align="right">Editar</TableCell>
-                  <TableCell align="right">Excluir</TableCell>
+                  <TableCell align="justify" width={'20px'}><strong>Código</strong></TableCell>
+                  <TableCell align="justify"><strong>Descrição</strong></TableCell>
+                  <TableCell align="justify"><strong>Período Inicial</strong></TableCell>
+                  <TableCell align="justify"><strong>Período Final</strong></TableCell>
+                  <TableCell align="justify"><strong>Repetir</strong></TableCell>
+                  <TableCell align="right"><strong>Editar</strong></TableCell>
+                  <TableCell align="right"><strong>Excluir</strong></TableCell>
                 </TableRow>
               </TableHead>
 

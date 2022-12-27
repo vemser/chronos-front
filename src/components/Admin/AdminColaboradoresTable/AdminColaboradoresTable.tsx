@@ -53,10 +53,10 @@ export const AdminColaboradoresTable = () => {
             borderRadius: '8px'                 
           }}>
             <TableRow>
-              <TableCell >Colaborador(a)</TableCell>
-              <TableCell>Cargo(s)</TableCell>
-              <TableCell align="right">Editar</TableCell>
-              <TableCell align="right">Excluir</TableCell>
+              <TableCell ><strong>Colaborador(a)</strong></TableCell>
+              <TableCell><strong>Cargo(s)</strong></TableCell>
+              <TableCell align="right"><strong>Editar</strong></TableCell>
+              <TableCell align="right"><strong>Excluir</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
