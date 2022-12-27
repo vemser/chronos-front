@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: IChildren) => {
   const loggedUser = async () => {
     try {
       authApi.defaults.headers.common['Authorization'] = accesstoken;
+      
       const { data } = await authApi.get('/usuario/logged-user');
       setDadosUsuarioLogado(data); 
     } catch (error:any) {

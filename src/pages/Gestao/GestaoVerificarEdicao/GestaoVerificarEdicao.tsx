@@ -25,7 +25,7 @@ export const GestaoVerificarEdicao = () => {
   const idEdicao = Number(edicao)
 
   const navigate = useNavigate()
-  const { deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } =
+  const { getEdicoesList, deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } =
     useContext(UserContext)
 
   const { getCalendarioPorEdicao } = useContext(CalendarioContext)
@@ -33,6 +33,7 @@ export const GestaoVerificarEdicao = () => {
   const EdicaoAtual = edicoes?.find(data => data.idEdicao == idEdicao)
 
   useLayoutEffect(() => {
+    getEdicoesList('1')
     getEtapas(idEdicao)
   }, [])
 
