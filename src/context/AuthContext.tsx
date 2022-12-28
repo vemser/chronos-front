@@ -94,6 +94,15 @@ export const AuthProvider = ({ children }: IChildren) => {
     localStorage.removeItem('user');
   }
 
+
+  const refreshAuth = (token: string) => {
+
+    let decodedJWT = JSON.parse(atob(token.split('.')[1]));
+      let roleArray = decodedJWT.cargos;
+
+    setRoles(roleArray)
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -102,7 +111,8 @@ export const AuthProvider = ({ children }: IChildren) => {
         handleLogin,
         handleLogout,
         dadosUsuarioLogado,
-        loggedUser
+        loggedUser,
+        refreshAuth
       }}
     >
       {children}

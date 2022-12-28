@@ -27,6 +27,7 @@ export interface IAuthContext {
   handleLogout: () => Promise<void>
   dadosUsuarioLogado: any
   loggedUser: () => Promise<void>
+  refreshAuth: (token: string) => void
 }
 
 // INTERFACES ADMIN
@@ -215,6 +216,7 @@ export interface ICalendarioContext {
   calendarioGeral: ICalendarioGeral[]
   getCalendarioPorEdicao: (idEdicao: IEdicao | undefined) => Promise<void>
   getCalendarioGeral: () => Promise<void>
+  getExcelCalendario: (idEdicao: number) => Promise<void>
 }
 
 export interface ICalendarioEdicao {

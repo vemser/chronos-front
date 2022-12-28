@@ -17,7 +17,7 @@ import { GestaoVerificarEdicao } from './pages/Gestao/GestaoVerificarEdicao/Gest
 import { Login } from './pages/Login/Login'
 import { NotFind } from './pages/NotFind/NotFind'
 
-import { AccessRoute, PrivateRoute } from './pages/PrivateRoute/PrivateRoute'
+import { AccessRoute, NewPrivateRoute, PrivateRoute } from './pages/PrivateRoute/PrivateRoute'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'nprogress/nprogress.css'
@@ -67,7 +67,7 @@ export const AppRoutes = () => {
 
                     <Route
                       path="/admin"
-                      element={<PrivateRoute roleRequired="ROLE_ADMIN" />}
+                      element={<NewPrivateRoute roleRequired="ROLE_ADMIN" />}
                     >
                       <Route index element={<AdminHome />} />
 
@@ -88,7 +88,7 @@ export const AppRoutes = () => {
                     <Route
                       path="/gestao"
                       element={
-                        <PrivateRoute roleRequired="ROLE_GESTAO_DE_PESSOAS" />
+                        <NewPrivateRoute roleRequired="ROLE_GESTAO_DE_PESSOAS" />
                       }
                     >
                       <Route index element={<GestaoHome />} />
@@ -140,7 +140,7 @@ export const AppRoutes = () => {
 
                     <Route
                       path="/instrutor"
-                      element={<PrivateRoute roleRequired="ROLE_INSTRUTOR" />}
+                      element={<NewPrivateRoute roleRequired="ROLE_INSTRUTOR" />}
                     >
                       <Route index element={<InstHome />} />
                       <Route

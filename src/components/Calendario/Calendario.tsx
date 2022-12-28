@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { ICalendarioEdicao, ICalendarioProcesso } from '../../utils/interfaces'
 
 export const Calendario = () => {
-  const { calendarioEdicao } = useContext(CalendarioContext)
+  const { calendarioEdicao, getExcelCalendario } = useContext(CalendarioContext)
 
   const { state } = useLocation()
 
@@ -129,6 +129,10 @@ export const Calendario = () => {
 
         <Box>
           <h4>Previsão de encerramento: {encerramento} </h4>
+        </Box>
+
+        <Box onClick={() => {getExcelCalendario(state.idEdicao)}}>
+          sydney
         </Box>
       </Box>
 

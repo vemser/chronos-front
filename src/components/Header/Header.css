@@ -84,6 +84,7 @@
   
 .hide{
     display: none !important;
+    cursor: default;
 }
 
 .minImg {

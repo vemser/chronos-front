@@ -33,6 +33,7 @@ export const Header = () => {
     null
   )
 
+  console.log(roles)
 
   useEffect(() => {
     loggedUser()
@@ -213,7 +214,7 @@ export const Header = () => {
               <MenuItem
                 id="colaboradores"
                 className="hide"
-                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
               >
                 <NavLink to='/admin/colaboradores'
                   style={({ isActive }) =>
@@ -227,7 +228,7 @@ export const Header = () => {
               <MenuItem
                 id="gestaoEdicoes"
                 className="hide"
-                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
               >                
                 <NavLink to='/gestao/edicoes'
                   style={({ isActive }) =>
@@ -241,7 +242,7 @@ export const Header = () => {
               <MenuItem
                 id="gestaoNaoUtil"
                 className="hide"
-                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
               >
                 <NavLink to='/gestao/dias-nao-uteis'
                   style={({ isActive }) =>
@@ -255,7 +256,7 @@ export const Header = () => {
               <MenuItem
                 id="instrutorEdicoes"
                 className="hide"
-                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
               >                
                 <NavLink to='/instrutor/edicoes'
                   style={({ isActive }) =>
@@ -269,7 +270,7 @@ export const Header = () => {
               <MenuItem
                 id="instrutorNaoUtil"
                 className="hide"
-                sx={{ '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
               >
                 <NavLink to='/instrutor/dias-nao-uteis'
                   style={({ isActive }) =>
