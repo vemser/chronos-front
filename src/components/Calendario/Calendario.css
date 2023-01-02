@@ -202,7 +202,7 @@ body::-webkit-scrollbar-thumb {
   border: none !important;
 }
 
-.fc-dayGridWeek-button {
+.fc-dayGridWeek-button, .fc-completo-button {
   background-color: transparent !important;
   color: #1e62fe !important;
   border-radius: 5px 0px 0px 5px !important;

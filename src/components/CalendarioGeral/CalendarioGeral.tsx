@@ -7,6 +7,8 @@ import { CalendarioContext } from '../../context/CalendarioContext'
 import { ICalendarioEdicao } from '../../utils/interfaces'
 import { Link } from 'react-router-dom'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import listPlugin from '@fullcalendar/list'; 
+
 
 export const CalendarioGeral: React.FC = () => {
 
@@ -159,9 +161,9 @@ export const CalendarioGeral: React.FC = () => {
         margin: '50px 0'
       }}>
         <FullCalendar
-          plugins={[dayGridPlugin]}
+          plugins={[ dayGridPlugin, listPlugin ]}
           locale={'pt-br'}
-          initialView="dayGridWeek"
+          initialView="dayGridMonth"
           weekends={true}
           events={concatArray}
           selectable={true}
@@ -169,9 +171,16 @@ export const CalendarioGeral: React.FC = () => {
           eventContent={renderEventContent}
           navLinks={true}
           headerToolbar={{
-            left: 'dayGridMonth,dayGridWeek,dayGridDay',
+            left: 'completo,dayGridMonth,dayGridWeek,dayGridDay',
             center: 'title',
             right: 'prev,next today',
+          }}
+          views={{
+            completo: {
+              type: 'list',
+              duration: { days: 120 },
+              buttonText: 'Completo'
+            }
           }}
           buttonText={{
             today: 'Hoje',

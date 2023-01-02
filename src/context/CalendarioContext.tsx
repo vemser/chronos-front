@@ -67,10 +67,17 @@ export const CalendarioProvider = ({ children }: IChildren) => {
         try {
             nProgress.start();
 
-            api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/calendario/export/excel/${idEdicao}`);    
-
-            console.log(data)
+            api.get(`/edicao/calendario/export/excel/${idEdicao}`, {
+                method: 'GET',
+                responseType: 'blob', // important
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `${Date.now()}.xlsx`);
+                document.body.appendChild(link);
+                link.click();
+            });
 
         } catch (error) {
             if (axios.isAxiosError(error) && error.response && error.response.data) {

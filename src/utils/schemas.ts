@@ -38,8 +38,6 @@ export const cadastrarEdicaoFormSchema = yup.object().shape({
   nome: yup.string().required('Por favor, digite o nome da edição'),
 
   dataInicial: yup.string().required('Por favor informe a data inicial'),
-
-  dataFinal: yup.string().required('Por favor informe a data final')
 })
 
 export const cadastrarDiaNaoUtilFormSchema = yup.object().shape({

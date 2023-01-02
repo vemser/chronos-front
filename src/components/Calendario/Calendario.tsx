@@ -8,6 +8,8 @@ import { CalendarioContext } from '../../context/CalendarioContext'
 import { Header } from '../Header/Header'
 import { useLocation } from 'react-router-dom'
 import { ICalendarioEdicao, ICalendarioProcesso } from '../../utils/interfaces'
+import listPlugin from '@fullcalendar/list'; 
+import {Button} from '@mui/material'
 
 export const Calendario = () => {
   const { calendarioEdicao, getExcelCalendario } = useContext(CalendarioContext)
@@ -131,25 +133,32 @@ export const Calendario = () => {
           <h4>Previsão de encerramento: {encerramento} </h4>
         </Box>
 
-        <Box onClick={() => {getExcelCalendario(state.idEdicao)}}>
-          sydney
-        </Box>
+        <Button variant='contained' onClick={() => {getExcelCalendario(state.idEdicao)}}>
+          Baixar Excel
+        </Button>
       </Box>
 
       <Box className="CalendarContainer" mt={'50px'}>
 
 
         <FullCalendar
-          plugins={[dayGridPlugin]}
+          plugins={[dayGridPlugin, listPlugin]}
           locale={'pt-br'}
-          initialView="dayGridWeek"
+          initialView="dayGridMonth"
           weekends={true}
           events={gerarCalendario()}
           navLinks={true}
           headerToolbar={{
-            left: 'dayGridMonth,dayGridWeek,dayGridDay',
+            left: 'completo,dayGridMonth,dayGridWeek,dayGridDay',
             center: 'title',
             right: 'prev,next today',
+          }}
+          views={{
+            completo: {
+              type: 'list',
+              duration: { days: 120 },
+              buttonText: 'Completo'
+            }
           }}
           buttonText={{
             today: 'Hoje',

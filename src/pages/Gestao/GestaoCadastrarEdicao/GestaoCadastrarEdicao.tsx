@@ -41,7 +41,7 @@ export const GestaoCadastrarEdicao = () => {
 
             <Box className={styles.ContainerMenorCalendario}>
               <Box className={styles.dateContainer} >
-                <p>Data Inicial</p>
+                <p>Início da edição</p>
 
                 <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial}/>
                 
@@ -50,15 +50,6 @@ export const GestaoCadastrarEdicao = () => {
                 </span>)}
               </Box>
 
-              <Box className={styles.dateContainer}>
-                <p>Data Final</p>
-                
-                <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"  {...register('dataFinal')} error={!!errors.dataFinal}/>
-
-                {errors.dataFinal && (<span className={styles.ContainerError} id="erro-data-final">
-                  {errors.dataFinal.message}  
-                </span>)}
-              </Box>
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
