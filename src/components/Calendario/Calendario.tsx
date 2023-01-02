@@ -14,10 +14,7 @@ import {Button} from '@mui/material'
 export const Calendario = () => {
   const { calendarioEdicao, getExcelCalendario } = useContext(CalendarioContext)
 
-  const { state } = useLocation()
-
-  console.log(calendarioEdicao);
-  
+  const { state } = useLocation()  
 
   const gerarCalendario = () => {
 
