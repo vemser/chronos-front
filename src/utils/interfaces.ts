@@ -180,7 +180,9 @@ export interface IDiaNaoUtilContext {
   deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>
   putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
   currentPage: any,
-  setCurrentPage: any
+  setCurrentPage: any,
+  setDiasNaoUteis: any,
+  setTotalPages: any
 }
 
 export interface IDiaNaoUtil {
@@ -262,6 +264,14 @@ export interface ICalendarioProcesso {
 
 export interface IBuscaContext {
   buscarColaborador: (pesquisa: any, buscarCargos: any, page: any) => Promise<void>
+  isSearch: boolean, 
+  setIsSearch: any, 
+  searchPayload: any, 
+  setSearchPayload: any,
+}
+
+export interface IBuscaDiasContext {
+  buscarDiasNaoUteis: (pesquisa: any, page: any) => Promise<void>
   isSearch: boolean, 
   setIsSearch: any, 
   searchPayload: any, 

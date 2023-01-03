@@ -121,7 +121,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     }
 
     return(
-        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil, currentPage, setCurrentPage }}>
+        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil, currentPage, setCurrentPage, setDiasNaoUteis, setTotalPages }}>
             { children }
         </DiaNaoUtilContext.Provider>
     )

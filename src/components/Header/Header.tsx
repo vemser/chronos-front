@@ -31,9 +31,7 @@ export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
-  )
-
-  console.log(roles)
+  ) 
 
   useEffect(() => {
     loggedUser()

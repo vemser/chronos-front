@@ -1,44 +1,15 @@
-.ContainerNova {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-   
-  }
-
-  .ContainerNova a button{
-    width: 280px;
-  }
-  
-  .ButtonContainer {
-    transition: 0.2s;
-  
+ .ButtonContainer {
+    transition: 0.2s;  
     margin-right: 7px;
   }
   .ButtonContainer:hover {
-    scale: 1.05;
-  
+    scale: 1.05;  
     cursor: pointer;
   }
   
   .ContainerButton {
     width: 25%;
-  }
-  .ContainerGestaoEdicoes {
-    width: 80%;
-  }
-  
-
-  
-  .ContainerGeral {
-    max-width: 1600px;
-    height: 100%;
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
+  }  
   
   .ContainerTitle {
     width: 100%;
@@ -63,23 +34,23 @@
     justify-content: center;
   }
 
-  @media (max-width: 620px) { 
-    .ContainerNova {
+  .ContainerButton {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    }
+    justify-content: flex-end;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 620px) { 
 
     .ContainerTitle {
       width: 400px;
      padding-right: 20%;
      padding-bottom: 20px;
-
       }
+
     .ContainerTitle h2 {
       width: 100%;
       text-align: center;
-
       }
-
   }
