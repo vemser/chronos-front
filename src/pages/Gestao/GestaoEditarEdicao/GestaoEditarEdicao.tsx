@@ -88,7 +88,7 @@ export const GestaoEditarEdicao = () => {
                   }
                 }}
                 >
-                  Enviar
+                  Salvar
               </Button>
             </Box>
           </form>

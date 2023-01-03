@@ -94,7 +94,7 @@ export const GestaoEditarEtapa = () => {
               }
             }}
             >
-              Enviar
+              Salvar
             </Button>
           </form>
         </div>

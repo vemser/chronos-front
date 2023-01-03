@@ -248,7 +248,7 @@ export const AdminEditarColab = () => {
                       <input
                         type="submit"
                         className={styles.BotaoEnviar}
-                        value="Enviar"
+                        value="Salvar"
                       />
                     </label>
                   </div>

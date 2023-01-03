@@ -215,7 +215,7 @@ export const GestaoEditarProcesso = () => {
                     }
                   }}
                 >
-                  Enviar
+                  Salvar
                 </Button>
               </div>
             </form>

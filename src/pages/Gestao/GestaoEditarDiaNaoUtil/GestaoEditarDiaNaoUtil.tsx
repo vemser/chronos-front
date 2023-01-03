@@ -139,7 +139,7 @@ export const GestaoEditarDiaNaoUtil = () => {
                   }
                 }}
               >
-                Enviar
+                Salvar
               </Button>
             </Box>
           </form>
