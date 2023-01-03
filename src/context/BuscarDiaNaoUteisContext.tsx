@@ -31,7 +31,7 @@ export const BuscarDiaNaoUteisProvider = ({ children }: IChildren) => {
             const { data } = await api.get(`/dia-nao-util/filtro-dia-nao-util?pagina=${Number(page) - 1}&tamanho=${10}&descricao=${pesquisa.descricao}`)
             setTotalPages(data.quantidadePaginas)
             setDiasNaoUteis(data.elementos)
-            console.log(data)
+            // console.log(data)
 
         } catch (error) {
             console.log(error)

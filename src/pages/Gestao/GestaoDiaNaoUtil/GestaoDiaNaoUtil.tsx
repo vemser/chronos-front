@@ -12,15 +12,14 @@ import { BuscarDiaNaoUteisContext } from '../../../context/BuscarDiaNaoUteisCont
 export const GestaoDiaNaoUtil = () => {
 
   const { totalPages, getDiaNaoUtil, currentPage, setCurrentPage } = useContext(DiaNaoUtilContext)
-  const { isSearch, setIsSearch, searchPayload, setSearchPayload, buscarDiasNaoUteis  } = useContext(BuscarDiaNaoUteisContext)
+  const { isSearch, setIsSearch, searchPayload, setSearchPayload, buscarDiasNaoUteis } = useContext(BuscarDiaNaoUteisContext)
 
   useLayoutEffect(() => {
     setCurrentPage(1)
     window.scrollTo(0, 0)
   }, [])
 
-
-  let {register, handleSubmit, reset} = useForm()
+  let { register, handleSubmit, reset } = useForm()
 
   const buscar = (carga: any) => {
     // console.log(carga)
@@ -29,21 +28,20 @@ export const GestaoDiaNaoUtil = () => {
     //   datainicial: dataInicial,
     //   dataFinal: dataFinal
     // }
-    setSearchPayload(carga)
-    setIsSearch(true)
+    setSearchPayload(carga);
+    setIsSearch(true);
     buscarDiasNaoUteis(carga, 1);
     setCurrentPage(1);
   }
-
 
   let mudarPaginacao = (value: any) => {
     const options = {
       duration: 800,
       smooth: true
     }
-    scroll.scrollToTop(options)
+    scroll.scrollToTop(options);
     setCurrentPage(value);
-    getDiaNaoUtil(value)
+    isSearch ? buscarDiasNaoUteis(searchPayload, value) : getDiaNaoUtil(value);
   }
 
   return (
@@ -75,7 +73,7 @@ export const GestaoDiaNaoUtil = () => {
               justifyContent: 'flex-start',
               flexDirection: 'column'
             }}
-          >            
+          >
             <Box
               sx={{
                 width: '100%',
@@ -92,7 +90,7 @@ export const GestaoDiaNaoUtil = () => {
                 }}
               >
                 <TextField
-                  label='Dia não útil'
+                  label='Descrição'
                   id='descricao'
                   type='text'
                   {...register('descricao')}
@@ -144,7 +142,7 @@ export const GestaoDiaNaoUtil = () => {
                 <Box className={styles.dateContainer} >
                   <p>Data Inicial</p>
                   <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard"
-                  {...register('dataInicial')} 
+                    {...register('dataInicial')}
                   // error={!!errors.dataInicial}
                   />
                   {/* {errors.dataInicial && (<span
@@ -165,7 +163,7 @@ export const GestaoDiaNaoUtil = () => {
                 <Box className={styles.dateContainer} id='dataFinalContainer'>
                   <p>Data Final</p>
                   <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"
-                  {...register('dataFinal')} 
+                    {...register('dataFinal')}
                   // error={!!errors.dataFinal}
                   />
                 </Box>
