@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useLayoutEffect, useState } from 'react'
 import styles from './AdminColab.module.css'
 import { Box } from '@mui/system'
 import { AdminContext } from '../../../context/AdminContext'
@@ -9,7 +9,7 @@ import { Autocomplete, Button, Pagination, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { BuscarContext } from '../../../context/buscaContext'
 import { IAdminContext } from '../../../utils/interfaces'
-import {  animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 
 export const AdminColaboradores = () => {
 
@@ -34,7 +34,7 @@ export const AdminColaboradores = () => {
   useLayoutEffect(() => {
     buscarDadosColaborador('1')
     setCurrentPage(1)
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
@@ -157,19 +157,19 @@ export const AdminColaboradores = () => {
                   gap: '20px'
                 }}
               >
-                <Button 
-                type={'submit'} 
-                variant={'contained'}
-                sx={{
-                  boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
-                  transition: '0.5s',
-                  "&:hover":{
-                    transform: 'scale(1.02)'
-                  },
-                  "&:active":{
-                    transform: 'scale(0.98)'
-                  }
-                }}
+                <Button
+                  type={'submit'}
+                  variant={'contained'}
+                  sx={{
+                    boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                    transition: '0.5s',
+                    "&:hover": {
+                      transform: 'scale(1.02)'
+                    },
+                    "&:active": {
+                      transform: 'scale(0.98)'
+                    }
+                  }}
                 >
                   Filtrar
                 </Button>
@@ -186,16 +186,16 @@ export const AdminColaboradores = () => {
                   sx={{
                     boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
                     transition: '0.5s',
-                    "&:hover":{
+                    "&:hover": {
                       transform: 'scale(1.02)'
                     },
-                    "&:active":{
+                    "&:active": {
                       transform: 'scale(0.98)'
                     }
                   }}
-                  >
-                    Limpar
-                  </Button>
+                >
+                  Limpar
+                </Button>
               </Box>
             </Box>
           </Box>
@@ -205,7 +205,7 @@ export const AdminColaboradores = () => {
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
-          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>           
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
             <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
           </Box>
         </Box>

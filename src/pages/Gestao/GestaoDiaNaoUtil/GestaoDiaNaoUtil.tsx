@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react'
+import { useContext, useLayoutEffect } from 'react'
 import { Box, Button, Pagination, TextField } from '@mui/material'
 import { Link } from 'react-router-dom'
 import styles from './GestaoDiaNaoUtil.module.css'
@@ -22,12 +22,6 @@ export const GestaoDiaNaoUtil = () => {
   let { register, handleSubmit, reset } = useForm()
 
   const buscar = (carga: any) => {
-    // console.log(carga)
-    // let carga = {
-    //   descricao: diaNaoUtil,
-    //   datainicial: dataInicial,
-    //   dataFinal: dataFinal
-    // }
     setSearchPayload(carga);
     setIsSearch(true);
     buscarDiasNaoUteis(carga, 1);
@@ -204,7 +198,6 @@ export const GestaoDiaNaoUtil = () => {
                   onClick={() => {
                     getDiaNaoUtil('1');
                     reset();
-                    // setValue([])
                     setIsSearch(false)
                     setCurrentPage(1);
                   }}
