@@ -22,6 +22,7 @@ import { Header } from '../../../components/Header/Header';
 import { TOptionsConfirmDialog } from '../../../utils/interfaces';
 import { ConfirmDialog } from '../../../components/ConfirmDialog';
 import {  animateScroll as scroll } from 'react-scroll'
+import { Loader } from '../../../components/Loader/Loader';
 
 export const GestaoEdicoes: React.FC = () => {
 
@@ -81,7 +82,7 @@ export const GestaoEdicoes: React.FC = () => {
               </Button>
             </Link>
           </Box>
-
+          {edicoes && edicoes.length == 0 ? <Loader /> : 
           <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
             <Table sx={{ minWidth: 650, }} aria-label="simple table">
               <TableHead>
@@ -105,57 +106,60 @@ export const GestaoEdicoes: React.FC = () => {
                   }
 
                   return (
-                    <TableRow
-                      key={edicao.idEdicao}
-                      className={`linha-edicao-${index}`}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row" align="justify">
-                        {edicao.nome}
-                      </TableCell>
+                   
+                      <TableRow
+                        key={edicao.idEdicao}
+                        className={`linha-edicao-${index}`}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      >
+                        <TableCell component="th" scope="row" align="justify">
+                          {edicao.nome}
+                        </TableCell>
 
-                      <TableCell component="th" scope="row" align="center" width={'120px'}>
-                        <SearchIcon id={'button-exibir-detalhes'} className={`edicao-verificar-${index}`} onClick={() => { navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
-                      </TableCell>
+                        <TableCell component="th" scope="row" align="center" width={'120px'}>
+                          <SearchIcon id={'button-exibir-detalhes'} className={`edicao-verificar-${index}`} onClick={() => { navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
+                        </TableCell>
 
-                      <TableCell align="right" width={'40px'}>
-                        <Switch className={`edicao-status-${index}`} onClick={() => ativoInativo(edicao)} checked={status} />
-                      </TableCell>
+                        <TableCell align="right" width={'40px'}>
+                          <Switch className={`edicao-status-${index}`} onClick={() => ativoInativo(edicao)} checked={status} />
+                        </TableCell>
 
-                      <TableCell align="right" width={'40px'}>
-                        <EditIcon className={`edicao-editar-${index}`} onClick={() => { navigate(`/gestao/editar-edicao/${edicao.idEdicao}`, { state: edicao }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
-                      </TableCell>
+                        <TableCell align="right" width={'40px'}>
+                          <EditIcon className={`edicao-editar-${index}`} onClick={() => { navigate(`/gestao/editar-edicao/${edicao.idEdicao}`, { state: edicao }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
+                        </TableCell>
 
-                      <TableCell align="right" width={'40px'}>
-                        <ContentCopyIcon className={`edicao-clonar-${index}`} onClick={() => cloneEdicao(edicao)} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
-                      </TableCell>
+                        <TableCell align="right" width={'40px'}>
+                          <ContentCopyIcon className={`edicao-clonar-${index}`} onClick={() => cloneEdicao(edicao)} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
+                        </TableCell>
 
-                      <TableCell align="right" width={'40px'}>
-                        <HighlightOffIcon
-                          onClick={(event) => {
-                            setConfirmDialog({
-                              isOpen: true,
-                              title: `Confirma a exclusão da edição ${edicao.nome}?`,
-                              onConfirm: () => {
-                                setConfirmDialog({
-                                  ...confirmDialog,
-                                  isOpen: false
-                                })
-                                deleteEdicao(edicao.idEdicao, edicao.nome)
+                        <TableCell align="right" width={'40px'}>
+                          <HighlightOffIcon
+                            onClick={(event) => {
+                              setConfirmDialog({
+                                isOpen: true,
+                                title: `Confirma a exclusão da edição ${edicao.nome}?`,
+                                onConfirm: () => {
+                                  setConfirmDialog({
+                                    ...confirmDialog,
+                                    isOpen: false
+                                  })
+                                  deleteEdicao(edicao.idEdicao, edicao.nome)
+                                }
+                              });
+                            }} sx={{
+                              cursor: 'pointer',
+                              width: '25px',
+                              height: '25px',
+                              "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                              "&:active": {
+                                transform: 'scale(.99)',
                               }
-                            });
-                          }} sx={{
-                            cursor: 'pointer',
-                            width: '25px',
-                            height: '25px',
-                            "&:hover": { color: 'red', transform: 'scale(1.05)' },
-                            "&:active": {
-                              transform: 'scale(.99)',
-                            }
-                          }} />
-                      </TableCell>
+                            }} />
+                        </TableCell>
 
-                    </TableRow>
+                      </TableRow>
+                    
+                  
                   )
                 })}
               </TableBody>
@@ -165,6 +169,7 @@ export const GestaoEdicoes: React.FC = () => {
               setConfirmDialog={setConfirmDialog}
             />
           </TableContainer>
+          }
         </div> 
         <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
           <Pagination color="primary"  page={currentPage} count={totalPages}  onChange={(_, value) => mudarPaginacao(value)}/>

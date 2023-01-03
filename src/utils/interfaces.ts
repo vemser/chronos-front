@@ -79,6 +79,7 @@ export interface IAdminContext {
   setTotalPages: React.Dispatch<React.SetStateAction<number>>
   currentPage: any,
   setCurrentPage: any
+  loading: boolean
 }
 
 export interface ICargos {

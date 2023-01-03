@@ -8,6 +8,7 @@ import { ICalendarioEdicao } from '../../utils/interfaces'
 import { Link } from 'react-router-dom'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import listPlugin from '@fullcalendar/list'; 
+import { Loader } from '../Loader/Loader'
 
 
 export const CalendarioGeral: React.FC = () => {
@@ -157,117 +158,124 @@ export const CalendarioGeral: React.FC = () => {
 
   return (
     <>
-      <Box id='CalendarContainer' className="CalendarContainer" sx={{
-        margin: '50px 0'
-      }}>
-        <FullCalendar
-          plugins={[ dayGridPlugin, listPlugin ]}
-          locale={'pt-br'}
-          initialView="dayGridMonth"
-          weekends={true}
-          events={concatArray}
-          selectable={true}
-          editable={true}
-          eventContent={renderEventContent}
-          navLinks={true}
-          headerToolbar={{
-            left: 'completo,dayGridMonth,dayGridWeek,dayGridDay',
-            center: 'title',
-            right: 'prev,next today',
-          }}
-          views={{
-            completo: {
-              type: 'list',
-              duration: { days: 120 },
-              buttonText: 'Completo'
-            }
-          }}
-          buttonText={{
-            today: 'Hoje',
-            month: "Mês",
-            week: "Semana",
-            day: 'Dia'
-          }}
-          eventClick={
-            function(info) {
-              handleModal(info)
-            }
-          }
-      
-        />
-      </Box>
-      <Box id='legenda' className="legendaSection">
-        <div className="containerTitulo">
-          <h2>Legenda de etapas:</h2>
-        </div>
-        <div className="legenda">
-          {unique &&
-            unique.map((etapa: ICalendarioEdicao) => {
-              return (
-                <div key={etapa.etapa}>
-                  <div className="legendaLinha">
-                    <div
-                      style={{ backgroundColor: `${etapa.cor} ` }}
-                      className="cardCor"
-                    ></div>
-                    <p>{etapa.etapa}</p>
-                  </div>
-                </div>
-              )
-            })}
-        </div>
-      </Box>
-      <div onBlur={() => {document.getElementById('modal-id')?.classList.add('hide')}} 
-          style={{border:`2px solid ${modalInfos?.extendedProps.cor}`}} id='modal-id' className='event-modal hide'>
+      {calendarioGeral && calendarioGeral.length == 0 ? <Loader /> : 
 
-          <div onClick={handleModal} className='close-modal'>
-            <HighlightOffIcon 
-            sx={{
-              cursor: 'pointer',
-              width: '30px',
-              height: '30px',
-              color: 'red',
-              "&:hover": { transform: 'scale(1.05)' },
-              "&:active": {
-                transform: 'scale(.99)',
+      <Box>
+        <Box id='CalendarContainer' className="CalendarContainer" sx={{
+          margin: '50px 0'
+        }}>
+          <FullCalendar
+            plugins={[ dayGridPlugin, listPlugin ]}
+            locale={'pt-br'}
+            initialView="dayGridMonth"
+            weekends={true}
+            events={concatArray}
+            selectable={true}
+            editable={true}
+            eventContent={renderEventContent}
+            navLinks={true}
+            headerToolbar={{
+              left: 'completo,dayGridMonth,dayGridWeek,dayGridDay',
+              center: 'title',
+              right: 'prev,next today',
+            }}
+            views={{
+              completo: {
+                type: 'list',
+                duration: { days: 120 },
+                buttonText: 'Completo'
               }
             }}
-            />
-          </div>
+            buttonText={{
+              today: 'Hoje',
+              month: "Mês",
+              week: "Semana",
+              day: 'Dia'
+            }}
+            eventClick={
+              function(info) {
+                handleModal(info)
+              }
+            }
+        
+          />
+        </Box>
 
-          <div className='modal-date'>
-            <h3>{modalInfos?.extendedProps.dia}</h3>
+        <Box id='legenda' className="legendaSection">
+          <div className="containerTitulo">
+            <h2>Legenda de etapas:</h2>
           </div>
-
-          <div className='modal-header'>
-            <Link to={`/gestao/verificar-edicao/${modalInfos?.extendedProps.idEdicao}`} title={'Verificar Edição'}>
-              
-              <h3>{modalInfos?.title}</h3>
-            </Link>
+          <div className="legenda">
+            {unique &&
+              unique.map((etapa: ICalendarioEdicao) => {
+                return (
+                  <div key={etapa.etapa}>
+                    <div className="legendaLinha">
+                      <div
+                        style={{ backgroundColor: `${etapa.cor} ` }}
+                        className="cardCor"
+                      ></div>
+                      <p>{etapa.etapa}</p>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
+        </Box>
 
-          <div className='modal-etapa'>
-            {modalInfos?.extendedProps.feriado && <h3>{modalInfos?.extendedProps.feriado}</h3>} 
-            <h3>{modalInfos?.extendedProps.etapa}</h3>
-            <div style={{backgroundColor: modalInfos?.extendedProps.cor }} className='color-tag'></div>
-          </div>
+        <div onBlur={() => {document.getElementById('modal-id')?.classList.add('hide')}} 
+            style={{border:`2px solid ${modalInfos?.extendedProps.cor}`}} id='modal-id' className='event-modal hide'>
 
-          {modalInfos?.extendedProps.processo && 
-            <div className='modal-processo-container'>
-            <div className='modal-divisor' style={{backgroundColor: modalInfos?.extendedProps.cor }}></div>
-            <span>Detalhes do Processo:</span>
-            <div className='modal-processo'>
-              <h3>{modalInfos?.extendedProps.processo}</h3> 
-              {modalInfos?.extendedProps.critico == 'ATIVO' ? <div className='modal-critico'><p>!</p></div> : ''}
+            <div onClick={handleModal} className='close-modal'>
+              <HighlightOffIcon 
+              sx={{
+                cursor: 'pointer',
+                width: '30px',
+                height: '30px',
+                color: 'red',
+                "&:hover": { transform: 'scale(1.05)' },
+                "&:active": {
+                  transform: 'scale(.99)',
+                }
+              }}
+              />
             </div>
-          </div>
-          }
 
-          
+            <div className='modal-date'>
+              <h3>{modalInfos?.extendedProps.dia}</h3>
+            </div>
 
-          <div>
-          </div>
+            <div className='modal-header'>
+              <Link to={`/gestao/verificar-edicao/${modalInfos?.extendedProps.idEdicao}`} title={'Verificar Edição'}>
+                
+                <h3>{modalInfos?.title}</h3>
+              </Link>
+            </div>
+
+            <div className='modal-etapa'>
+              {modalInfos?.extendedProps.feriado && <h3>{modalInfos?.extendedProps.feriado}</h3>} 
+              <h3>{modalInfos?.extendedProps.etapa}</h3>
+              <div style={{backgroundColor: modalInfos?.extendedProps.cor }} className='color-tag'></div>
+            </div>
+
+            {modalInfos?.extendedProps.processo && 
+              <div className='modal-processo-container'>
+              <div className='modal-divisor' style={{backgroundColor: modalInfos?.extendedProps.cor }}></div>
+              <span>Detalhes do Processo:</span>
+              <div className='modal-processo'>
+                <h3>{modalInfos?.extendedProps.processo}</h3> 
+                {modalInfos?.extendedProps.critico == 'ATIVO' ? <div className='modal-critico'><p>!</p></div> : ''}
+              </div>
+            </div>
+            }
+
+            
+
+            <div>
+            </div>
         </div>
+      </Box>
+      }
     </>
   )
 }

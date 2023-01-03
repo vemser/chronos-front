@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
 import { ICargos, IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
+import {MoonLoader} from 'react-spinners'
 
 import { useLocation } from 'react-router-dom'
 
@@ -30,6 +31,8 @@ export const AdminEditarColab = () => {
       login: state.login,
     }
   })
+
+
 
   // CARGOS
   var administrador = false
@@ -66,9 +69,12 @@ export const AdminEditarColab = () => {
       } 
     }
   
+
   return (
     <>
+   
       <Header />
+
       <Grid container width={'100%'} display="flex" justifyContent="center">
         <form
           className={styles.FormAdmin}

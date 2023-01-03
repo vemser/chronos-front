@@ -1,6 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {
   TableCell,
   TableContainer,
@@ -20,6 +18,8 @@ import {
   TOptionsConfirmDialog
 } from '../../../utils/interfaces'
 import { ConfirmDialog } from '../../ConfirmDialog'
+import { MoonLoader } from 'react-spinners'
+import { Loader } from '../../Loader/Loader'
 
 
 export const AdminColaboradoresTable = () => {
@@ -32,9 +32,15 @@ export const AdminColaboradoresTable = () => {
     alterarStatusColab
   } = useContext<IAdminContext>(AdminContext)
 
+  
+  useEffect(() => {
+  }, [dadosColaborador])
+
   useEffect(() => {
     buscarDadosColaborador('1')
   }, [])
+
+ 
 
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
     isOpen: false,
@@ -42,8 +48,15 @@ export const AdminColaboradoresTable = () => {
     onConfirm: () => { }
   });
 
+
+
+
+
   return (
     <>
+    
+
+    {dadosColaborador == undefined ? <Loader /> : 
       <TableContainer className={styles.tableContainer}
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >
@@ -66,6 +79,8 @@ export const AdminColaboradoresTable = () => {
               } else {
                 var status = false
               }
+
+           
               return (
                 <TableRow key={user.idUsuario}>
                   <TableCell data-title='Colaborador(a)'>
@@ -123,6 +138,7 @@ export const AdminColaboradoresTable = () => {
           setConfirmDialog={setConfirmDialog}
         />
       </TableContainer>
+      } 
     </>
   )
 }

@@ -6,6 +6,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import { TOptionsConfirmDialog } from '../../../utils/interfaces';
 import { ConfirmDialog } from '../../../components/ConfirmDialog';
+import { Loader } from '../../Loader/Loader';
 
 export const GestaoDiaNaoUtilTable = () => {
 
@@ -23,6 +24,8 @@ export const GestaoDiaNaoUtilTable = () => {
     });
 
   return (
+    <>
+    {diasNaoUteis && diasNaoUteis.length == 0 ? <Loader /> : 
     <TableContainer sx={{ boxShadow: 1, width: 'auto', borderRadius: '5px', maxWidth: 1366, margin: '50px auto' }}>
             <Table sx={{ minWidth: 650, maxWidth: 1366}} aria-label="simple table">
               <TableHead>
@@ -115,6 +118,8 @@ export const GestaoDiaNaoUtilTable = () => {
               setConfirmDialog={setConfirmDialog}
               />
             </Table>
-          </TableContainer>
+    </TableContainer>
+  } 
+  </>
   )
 }

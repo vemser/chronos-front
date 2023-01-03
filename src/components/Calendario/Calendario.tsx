@@ -10,13 +10,12 @@ import { useLocation } from 'react-router-dom'
 import { ICalendarioEdicao, ICalendarioProcesso } from '../../utils/interfaces'
 import listPlugin from '@fullcalendar/list'; 
 import {Button} from '@mui/material'
+import { Loader } from '../Loader/Loader'
 
 export const Calendario = () => {
   const { calendarioEdicao, getExcelCalendario } = useContext(CalendarioContext)
 
   const { state } = useLocation()
-
-  console.log(calendarioEdicao);
   
 
   const gerarCalendario = () => {
@@ -117,80 +116,83 @@ export const Calendario = () => {
   return (
     <>
       <Header />
+      {calendarioEdicao && calendarioEdicao.length == 0 ? <Loader /> : 
+      <Box>
+        <Box
+          className="containerData"
+          sx={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <Box>
+            <h4>
+              {' '}
+              {state.nome} - de {inicio} até {encerramento}{' '}
+            </h4>
+          </Box>
 
-      <Box
-        className="containerData"
-        sx={{ display: 'flex', justifyContent: 'space-between' }}
-      >
-        <Box>
-          <h4>
-            {' '}
-            {state.nome} - de {inicio} até {encerramento}{' '}
-          </h4>
+          <Box>
+            <h4>Previsão de encerramento: {encerramento} </h4>
+          </Box>
+
+          <Button variant='contained' onClick={() => {getExcelCalendario(state.idEdicao)}}>
+            Baixar Excel
+          </Button>
         </Box>
 
-        <Box>
-          <h4>Previsão de encerramento: {encerramento} </h4>
+        <Box className="CalendarContainer" mt={'50px'}>
+
+
+          <FullCalendar
+            plugins={[dayGridPlugin, listPlugin]}
+            locale={'pt-br'}
+            initialView="dayGridMonth"
+            weekends={true}
+            events={gerarCalendario()}
+            navLinks={true}
+            headerToolbar={{
+              left: 'completo,dayGridMonth,dayGridWeek,dayGridDay',
+              center: 'title',
+              right: 'prev,next today',
+            }}
+            views={{
+              completo: {
+                type: 'list',
+                duration: { days: 120 },
+                buttonText: 'Completo'
+              }
+            }}
+            buttonText={{
+              today: 'Hoje',
+              month: "Mês",
+              week: "Semana",
+              day: 'Dia'
+            }}
+          />
+
+          
         </Box>
-
-        <Button variant='contained' onClick={() => {getExcelCalendario(state.idEdicao)}}>
-          Baixar Excel
-        </Button>
-      </Box>
-
-      <Box className="CalendarContainer" mt={'50px'}>
-
-
-        <FullCalendar
-          plugins={[dayGridPlugin, listPlugin]}
-          locale={'pt-br'}
-          initialView="dayGridMonth"
-          weekends={true}
-          events={gerarCalendario()}
-          navLinks={true}
-          headerToolbar={{
-            left: 'completo,dayGridMonth,dayGridWeek,dayGridDay',
-            center: 'title',
-            right: 'prev,next today',
-          }}
-          views={{
-            completo: {
-              type: 'list',
-              duration: { days: 120 },
-              buttonText: 'Completo'
-            }
-          }}
-          buttonText={{
-            today: 'Hoje',
-            month: "Mês",
-            week: "Semana",
-            day: 'Dia'
-          }}
-        />
-
-        
-      </Box>
-      <Box className="legendaSection">
-        <div className="containerTitulo">
-          <h2>Legenda de etapas:</h2>
-        </div>
-        <div className="legenda">
-          {unique &&
-            unique.map((etapa: ICalendarioEdicao) => {
-              return (
-                <div>
-                  <div className="legendaLinha">
-                    <div
-                      style={{ backgroundColor: `${etapa.cor} ` }}
-                      className="cardCor"
-                    ></div>
-                    <p>{etapa.etapa}</p>
+        <Box className="legendaSection">
+          <div className="containerTitulo">
+            <h2>Legenda de etapas:</h2>
+          </div>
+          <div className="legenda">
+            {unique &&
+              unique.map((etapa: ICalendarioEdicao) => {
+                return (
+                  <div>
+                    <div className="legendaLinha">
+                      <div
+                        style={{ backgroundColor: `${etapa.cor} ` }}
+                        className="cardCor"
+                      ></div>
+                      <p>{etapa.etapa}</p>
+                    </div>
                   </div>
-                </div>
-              )
-            })}
-        </div>
-      </Box>
+                )
+              })}
+          </div>
+        </Box>
+        </Box>
+      }
     </>
   )
 }

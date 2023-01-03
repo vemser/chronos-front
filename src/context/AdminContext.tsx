@@ -26,6 +26,8 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const [currentPage, setCurrentPage] = useState<any>(1)
 
+  const [loading, setLoading] = useState<boolean>(true)
+
 
   const criarDadosColaborador = async (data: IColaborador) => {
     let dadosColaborador: IColaborador2 = {
@@ -65,6 +67,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
     try {
       nProgress.start()
+      setLoading(true)
 
       const retorno = await authApi.post('/usuario', dadosColaborador)
 
@@ -81,6 +84,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       }
     } finally {
       nProgress.done()
+      setLoading(false)
     }
   }
 
@@ -268,7 +272,8 @@ export const AdminProvider = ({ children }: IChildren) => {
         inserirFotoUsuario,
         setTotalPages,
         currentPage,
-        setCurrentPage
+        setCurrentPage,
+        loading
       }}
     >
       {children}
