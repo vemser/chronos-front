@@ -15,8 +15,7 @@ import { Loader } from '../Loader/Loader'
 export const Calendario = () => {
   const { calendarioEdicao, getExcelCalendario } = useContext(CalendarioContext)
 
-  const { state } = useLocation()
-  
+  const { state } = useLocation()  
 
   const gerarCalendario = () => {
 
