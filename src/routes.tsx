@@ -47,10 +47,10 @@ export const AppRoutes = () => {
       <AuthProvider>
         <AdminProvider>
           <BuscarProvider>
-            <BuscarDiaNaoUteisProvider>
-              <UserProvider>
-                <CalendarioProvider>
-                  <DiaNaoUtilProvider>
+            <UserProvider>
+              <CalendarioProvider>
+                <DiaNaoUtilProvider>
+                  <BuscarDiaNaoUteisProvider>
                     <Routes>
                       {/* PUBLIC ROUTES */}
 
@@ -159,10 +159,10 @@ export const AppRoutes = () => {
                         />
                       </Route>
                     </Routes>
-                  </DiaNaoUtilProvider>
-                </CalendarioProvider>
-              </UserProvider>
-            </BuscarDiaNaoUteisProvider>
+                  </BuscarDiaNaoUteisProvider>
+                </DiaNaoUtilProvider>
+              </CalendarioProvider>
+            </UserProvider>
           </BuscarProvider>
         </AdminProvider>
       </AuthProvider>

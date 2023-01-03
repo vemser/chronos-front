@@ -270,7 +270,7 @@ export interface IBuscaContext {
 }
 
 export interface IBuscaDiasContext {
-  buscarDiasNaoUteis: (pesquisa: any, buscarCargos: any, page: any) => Promise<void>
+  buscarDiasNaoUteis: (pesquisa: any, page: any) => Promise<void>
   isSearch: boolean, 
   setIsSearch: any, 
   searchPayload: any, 
