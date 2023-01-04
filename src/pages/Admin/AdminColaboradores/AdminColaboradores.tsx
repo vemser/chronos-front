@@ -22,24 +22,30 @@ export const AdminColaboradores = () => {
     'Aluno', 'Administrador', 'Colaborador', 'Coordenador', 'Gestão de pessoas', 'Instrutor'
   ]);
 
-  let buscarCargos = value.map((el: any) =>
-    el == 'Aluno' ? 'ROLE_ALUNO' :
-      el == 'Administrador' ? 'ROLE_ADMIN' :
-        el == 'Colaborador' ? 'ROLE_COLABORADOR' :
-          el == 'Coordenador' ? 'ROLE_GESTOR' :
-            el == 'Gestão de pessoas' ? 'ROLE_GESTAO_DE_PESSOAS' :
-              el == 'Instrutor' ? 'ROLE_INSTRUTOR' : '',
+  let buscarCargos = value.map((el: any) => {
+      let test: any = {
+        'Aluno': 'ROLE_ALUNO',
+        'Administrador': 'ROLE_ADMIN',
+        'Colaborador': 'ROLE_COLABORADOR',
+        'Coordenador': 'ROLE_GESTOR',
+        'Gestão de pessoas': 'ROLE_GESTAO_DE_PESSOAS',
+        'Instrutor': 'ROLE_INSTRUTOR',
+      }
+      return test[el]
+    }
   )
 
   useLayoutEffect(() => {
+    window.scrollTo(0, 0)
     buscarDadosColaborador('1')
     setCurrentPage(1)
-    window.scrollTo(0, 0)
+    setIsSearch(false)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
 
   const buscar = (login: any) => {
+    console.log(buscarCargos)
     let carga = {
       login: login,
       buscarCargos: buscarCargos

@@ -17,6 +17,7 @@ export const GestaoDiaNaoUtil = () => {
   useLayoutEffect(() => {
     setCurrentPage(1)
     window.scrollTo(0, 0)
+    setIsSearch(false)
   }, [])
 
   let { register, handleSubmit, reset } = useForm()

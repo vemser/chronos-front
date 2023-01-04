@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react'
+import { useContext, useLayoutEffect } from 'react'
 import {
   TableCell,
   TableContainer,
@@ -27,6 +27,7 @@ export const InstNaoUteis = () => {
     getDiaNaoUtil('1')
     setCurrentPage(1)
     window.scrollTo(0, 0)
+    setIsSearch(false)
   }, [])
 
   let { register, handleSubmit, reset } = useForm()
@@ -109,26 +110,6 @@ export const InstNaoUteis = () => {
                       }}
                     />
                   </Box>
-                  {/* <Box
-                sx={{
-                  width: '100%',
-                  height: '40px'
-                }}
-              >
-                <TextField
-                  label='Login'
-                  id='login'
-                  type='text'
-                  // {...register('login')}
-                  size={'small'}
-                  sx={{
-                    "& .MuiInputBase-input": {
-                      height: '20px',
-                    },
-                    width: '100%',
-                  }}
-                />
-              </Box> */}
                 </Box>
                 <Box
                   sx={{
