@@ -14,6 +14,7 @@ export const InstEdicoes: React.FC = () => {
 
   useLayoutEffect(() => {
     getEdicoesList('1')
+    setCurrentPage(1)
     window.scrollTo(0,0)
   }, [])
 
