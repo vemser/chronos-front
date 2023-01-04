@@ -28,7 +28,7 @@ export const AdminColaboradores = () => {
         el == 'Colaborador' ? 'ROLE_COLABORADOR' :
           el == 'Coordenador' ? 'ROLE_GESTOR' :
             el == 'Gestão de pessoas' ? 'ROLE_GESTAO_DE_PESSOAS' :
-              el == 'Instrutor' ? 'ROLE_INSTRUTOR' : ''
+              el == 'Instrutor' ? 'ROLE_INSTRUTOR' : '',
   )
 
   useLayoutEffect(() => {
