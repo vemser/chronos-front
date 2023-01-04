@@ -51,7 +51,6 @@ export const InstNaoUteis = () => {
   return (
     <>
       <Header />
-
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>
           <Box className={styles.ContainerNova}>
@@ -256,7 +255,6 @@ export const InstNaoUteis = () => {
                   <TableCell align="justify"><strong>Repetir</strong></TableCell>
                 </TableRow>
               </TableHead>
-
               <TableBody>
                 {diasNaoUteis?.map((dia, index) => {
                   if (dia.repeticaoAnual === 'ATIVO') {
@@ -264,7 +262,6 @@ export const InstNaoUteis = () => {
                   } else {
                     var status = false
                   }
-
                   const dataIniciaFormatada = dia.dataInicial
                     .split('-')
                     .reverse()
@@ -288,7 +285,6 @@ export const InstNaoUteis = () => {
                       >
                         {dia.idDiaNaoUtil}
                       </TableCell>
-
                       <TableCell
                         component="th"
                         scope="row"
@@ -297,15 +293,12 @@ export const InstNaoUteis = () => {
                       >
                         {dia.descricao}
                       </TableCell>
-
                       <TableCell align="justify" width={'300px'}>
                         {dataIniciaFormatada}
                       </TableCell>
-
                       <TableCell align="justify" width={'300px'}>
                         {dataFinalFormatada}
                       </TableCell>
-
                       <TableCell align="justify" width={'300px'}>
                         <Checkbox checked={status} />
                       </TableCell>
