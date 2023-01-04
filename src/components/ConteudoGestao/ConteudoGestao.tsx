@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from './ConteudoGestao.module.css'
 import imgHome from '../../assets/gestaoLogo.svg'
 import { IAuthContext } from '../../utils/interfaces'

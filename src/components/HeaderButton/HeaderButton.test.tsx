@@ -1,4 +1,3 @@
-import * as axios from 'axios'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
@@ -10,6 +9,5 @@ test('deve achar o botão no header', () => {
       <HeaderButton />
     </BrowserRouter>
   )
-
   expect(screen.getByTestId('botao-header')).toBeInTheDocument()
 })

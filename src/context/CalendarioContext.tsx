@@ -1,72 +1,60 @@
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import nProgress from 'nprogress'
-import React, { createContext, useState } from 'react'
+import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { api } from '../utils/api'
 import { ICalendarioContext, ICalendarioEdicao, ICalendarioGeral, IChildren, IEdicao, toastConfig } from '../utils/interfaces'
 
-
-export const CalendarioContext = createContext ({} as ICalendarioContext)
+export const CalendarioContext = createContext({} as ICalendarioContext)
 
 export const CalendarioProvider = ({ children }: IChildren) => {
-    
+
     const navigate = useNavigate()
     const token = localStorage.getItem('token');
-
-    const [ calendarioEdicao, setCalendarioEdicao ] = useState<ICalendarioEdicao[]>([]);
-    const [ calendarioGeral, setcalendarioGeral ] = useState<ICalendarioGeral[]>([]);
+    const [calendarioEdicao, setCalendarioEdicao] = useState<ICalendarioEdicao[]>([]);
+    const [calendarioGeral, setcalendarioGeral] = useState<ICalendarioGeral[]>([]);
 
     const getCalendarioPorEdicao = async (edicao: IEdicao | undefined) => {
-        try{
+        try {
             nProgress.start();
-
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/calendario-edicao/${edicao?.idEdicao}`);    
-
+            const { data } = await api.get(`/edicao/calendario-edicao/${edicao?.idEdicao}`);
             setCalendarioEdicao(data)
+            navigate(`/calendario/${edicao?.idEdicao}`, { state: edicao })
 
-            navigate(`/calendario/${edicao?.idEdicao}`, {state: edicao})
-
-        } catch(error) {
+        } catch (error) {
             console.error(error);
-
         } finally {
             nProgress.done();
-
         }
     }
-
     const getCalendarioGeral = async () => {
-        try{
+        try {
             nProgress.start();
-
             api.defaults.headers.common['Authorization'] = token;
-            const { data } = await api.get(`/edicao/calendario-geral`);    
-
+            const { data } = await api.get(`/edicao/calendario-geral`);
             setcalendarioGeral(data)
 
         } catch (error) {
             if (axios.isAxiosError(error) && error.response && error.response.data) {
-              if (error.response.data.message) {
-                  toast.error(error.response.data.message);
-              } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
-                  toast.error(error.response.data.errors.join("\n"));
-              }
-              } else {
-                  toast.error('Houve um erro no servidor, por favor tente novamente mais tarde.');
-              }
+                if (error.response.data.message) {
+                    toast.error(error.response.data.message);
+                } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
+                    toast.error(error.response.data.errors.join("\n"));
+                }
+            } else {
+                toast.error('Houve um erro no servidor, por favor tente novamente mais tarde.');
+            }
 
         } finally {
             nProgress.done();
-
         }
     }
 
     const getExcelCalendario = async (idEdicao: number) => {
         try {
             nProgress.start();
-
             api.get(`/edicao/calendario/export/excel/${idEdicao}`, {
                 method: 'GET',
                 responseType: 'blob', // important
@@ -81,26 +69,23 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
         } catch (error) {
             if (axios.isAxiosError(error) && error.response && error.response.data) {
-              if (error.response.data.message) {
-                  toast.error(error.response.data.message);
-              } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
-                  toast.error(error.response.data.errors.join("\n"));
-              }
-              } else {
-                  toast.error('Houve um erro no servidor, por favor tente novamente mais tarde.');
-              }
+                if (error.response.data.message) {
+                    toast.error(error.response.data.message);
+                } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
+                    toast.error(error.response.data.errors.join("\n"));
+                }
+            } else {
+                toast.error('Houve um erro no servidor, por favor tente novamente mais tarde.');
+            }
 
         } finally {
             nProgress.done();
-
         }
-        
     }
 
-
-  return (
-    <CalendarioContext.Provider value={{ calendarioEdicao, getCalendarioPorEdicao, getCalendarioGeral, calendarioGeral, getExcelCalendario }}>
-        {children}
-    </CalendarioContext.Provider>
-  )
+    return (
+        <CalendarioContext.Provider value={{ calendarioEdicao, getCalendarioPorEdicao, getCalendarioGeral, calendarioGeral, getExcelCalendario }}>
+            {children}
+        </CalendarioContext.Provider>
+    )
 }

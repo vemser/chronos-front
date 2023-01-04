@@ -24,16 +24,12 @@ export const GestaoHeader = () => {
     loggedUser()
   }, [])
   const navigate = useNavigate()
-  const userEmail = localStorage.getItem('user')
   const { dadosUsuarioLogado, loggedUser, handleLogout } = useContext(AuthContext)
-  const imagemBase = dadosUsuarioLogado.imagem
 
   // ==== MATERIAL UI FUNCTIONS ====
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  )
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -66,7 +62,6 @@ export const GestaoHeader = () => {
               <img src={imgLogo} alt="Logo DBC" title="Logo" />
             </Link>
           </Box>
-
           <Box
             className={styles.menuBurgerContainer}
             sx={{ display: { xs: 'flex', md: 'none' } }}
@@ -102,14 +97,12 @@ export const GestaoHeader = () => {
                 <Link to={'/gestao/edicoes'}>
                   <MenuItem>EDIÇÕES</MenuItem>
                 </Link>
-
                 <Link to={'/gestao/dias-nao-uteis'}>
                   <MenuItem>PERÍODO NÃO ÚTIL</MenuItem>
                 </Link>
               </Box>
             </Menu>
           </Box>
-
           <Box
             className={styles.logoImg}
             sx={{ display: { xs: 'flex', md: 'none' } }}
@@ -118,20 +111,17 @@ export const GestaoHeader = () => {
               <img src={imgLogo} alt="Logo DBC" />
             </Link>
           </Box>
-
           <Box
             className={styles.navbar}
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
             <ul>
-              <HeaderButton id={'botaoEdicao'} texto={'EDIÇÕES'} url={'/gestao/edicoes'}/>
-              <HeaderButton id={'botaoNaoUtil'} texto={'PERÍODO NÃO ÚTIL'} url={'/gestao/dias-nao-uteis'}/>
+              <HeaderButton id={'botaoEdicao'} texto={'EDIÇÕES'} url={'/gestao/edicoes'} />
+              <HeaderButton id={'botaoNaoUtil'} texto={'PERÍODO NÃO ÚTIL'} url={'/gestao/dias-nao-uteis'} />
             </ul>
           </Box>
-
           <Box className={styles.usuario}>
             <h3>{dadosUsuarioLogado.nome}</h3>
-
             <Tooltip title="Exibir detalhes" id='exibirDetalhes'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {dadosUsuarioLogado.imagem === null ? (
@@ -149,7 +139,6 @@ export const GestaoHeader = () => {
                 )}
               </IconButton>
             </Tooltip>
-
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -172,12 +161,10 @@ export const GestaoHeader = () => {
                     className={styles.HoverButton}
                     onClick={() => {
                       navigate('/gestao/perfil')
-                      // , {state }
                     }} id='editarPerfil'
                   >
                     EDITAR PERFIL
                   </MenuItem>
-
                   <Box onClick={handleLogout} id='logout'>
                     <MenuItem>SAIR</MenuItem>
                   </Box>

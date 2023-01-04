@@ -38,7 +38,6 @@ describe('<Header/>', () => {
         </AuthProvider>
       </BrowserRouter>
     )
-
     const botao = screen.getByTestId('imagem-usuario')
     expect(botao).toBeInTheDocument()
   })

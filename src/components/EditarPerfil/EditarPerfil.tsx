@@ -1,12 +1,3 @@
-import axios from 'axios'
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-  IconButton,
-} from '@mui/material'
 import React, { useContext, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
@@ -16,18 +7,8 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import styles from './EditarPerfil.module.css'
 import { AdminContext } from '../../context/AdminContext'
 import { useForm } from 'react-hook-form'
-import { IColaborador } from '../../utils/interfaces'
 
-import { useLocation } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-import { editarPerfilFormSchema } from '../../utils/schemas'
-
-interface State {
-  password: string
-  showPassword: boolean
-}
 
 export const EditarPerfil = () => {
   const [selectedImage, setSelectedImage] = useState<any>(null)
@@ -35,11 +16,10 @@ export const EditarPerfil = () => {
   const { dadosUsuarioLogado } = React.useContext<any>(AuthContext)
 
   const imagemBase: any = dadosUsuarioLogado.imagem
-  const { state } = useLocation()
-  const{ handleSubmit } = useForm()
+
+  const { handleSubmit } = useForm()
 
   const { inserirFotoUsuario } = useContext(AdminContext)
-
 
   const atualizarDadosPerfil = () => {
 
@@ -86,7 +66,7 @@ export const EditarPerfil = () => {
             </Box>
           </Grid>
           <form
-            onSubmit={handleSubmit(() => {atualizarDadosPerfil()})}
+            onSubmit={handleSubmit(() => { atualizarDadosPerfil() })}
             className={styles.FormEditar}
           >
             <Box
@@ -173,25 +153,25 @@ export const EditarPerfil = () => {
                         <input type="file" hidden name="[name]" />
                       </Button>
                     </label>
-                      {selectedImage === null ? 
-                        <Button variant="contained" disabled type='submit' sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '200px',
-                          mt: 2,
-                        }}>
-                          Confirmar
-                        </Button> 
-                      : 
-                        <Button variant="contained" type='submit' sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '200px',
-                          mt: 2,
-                        }}>
-                          Confirmar
-                        </Button>
-                      }
+                    {selectedImage === null ?
+                      <Button variant="contained" disabled type='submit' sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: '200px',
+                        mt: 2,
+                      }}>
+                        Confirmar
+                      </Button>
+                      :
+                      <Button variant="contained" type='submit' sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: '200px',
+                        mt: 2,
+                      }}>
+                        Confirmar
+                      </Button>
+                    }
                   </Box>
                 </Box>
               </Box>

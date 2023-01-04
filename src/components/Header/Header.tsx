@@ -31,7 +31,7 @@ export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
-  ) 
+  )
 
   useEffect(() => {
     loggedUser()
@@ -212,7 +212,7 @@ export const Header = () => {
               <MenuItem
                 id="colaboradores"
                 className="hide"
-                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor: 'default', '&:hover': { backgroundColor: 'inherit' } }}
               >
                 <NavLink to='/admin/colaboradores'
                   style={({ isActive }) =>
@@ -226,8 +226,8 @@ export const Header = () => {
               <MenuItem
                 id="gestaoEdicoes"
                 className="hide"
-                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
-              >                
+                sx={{ cursor: 'default', '&:hover': { backgroundColor: 'inherit' } }}
+              >
                 <NavLink to='/gestao/edicoes'
                   style={({ isActive }) =>
                     isActive ? activeStyle : undefined
@@ -240,7 +240,7 @@ export const Header = () => {
               <MenuItem
                 id="gestaoNaoUtil"
                 className="hide"
-                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor: 'default', '&:hover': { backgroundColor: 'inherit' } }}
               >
                 <NavLink to='/gestao/dias-nao-uteis'
                   style={({ isActive }) =>
@@ -254,8 +254,8 @@ export const Header = () => {
               <MenuItem
                 id="instrutorEdicoes"
                 className="hide"
-                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
-              >                
+                sx={{ cursor: 'default', '&:hover': { backgroundColor: 'inherit' } }}
+              >
                 <NavLink to='/instrutor/edicoes'
                   style={({ isActive }) =>
                     isActive ? activeStyle : undefined
@@ -268,7 +268,7 @@ export const Header = () => {
               <MenuItem
                 id="instrutorNaoUtil"
                 className="hide"
-                sx={{ cursor:'default', '&:hover': { backgroundColor: 'inherit' } }}
+                sx={{ cursor: 'default', '&:hover': { backgroundColor: 'inherit' } }}
               >
                 <NavLink to='/instrutor/dias-nao-uteis'
                   style={({ isActive }) =>
@@ -277,7 +277,7 @@ export const Header = () => {
                   className={'links'}
                 >
                   <p>PERÍODO NÃO ÚTIL</p>
-                </NavLink>                
+                </NavLink>
               </MenuItem>
             </ul>
           </Box>
@@ -306,79 +306,43 @@ export const Header = () => {
                 )}
               </IconButton>
             </Tooltip>
-
-            {/* <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
+            <Menu
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
+              id="account-menu"
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              onClick={handleCloseUserMenu}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: 'visible',
+                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                  mt: 1.5,
+                  '& .MuiAvatar-root': {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  '&:before': {
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: 'background.paper',
+                    transform: 'translateY(-50%) rotate(45deg)',
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-              <ul>
-                <Box className={'menuBurgerOptions'}>
-                  <MenuItem
-                    className={'HoverButton'}
-                    id={'button-editar-perfil'}
-                    onClick={() => {
-                      navigate('/perfil')
-                    }}
-                  >
-                    EDITAR PERFIL
-                  </MenuItem>
-
-                  <Box onClick={handleLogout}>
-                    <MenuItem>SAIR</MenuItem>
-                  </Box>
-                </Box>
-              </ul>
-            </Menu> */}
-
-      <Menu
-        anchorEl={anchorElUser}
-        id="account-menu"
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-        onClick={handleCloseUserMenu}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <MenuItem onClick={() => {navigate('/perfil')}}>
-        {dadosUsuarioLogado.imagem === null ? (
+              <MenuItem onClick={() => { navigate('/perfil') }}>
+                {dadosUsuarioLogado.imagem === null ? (
                   <Avatar
                     alt={`${dadosUsuarioLogado.imagem}`}
                     src={dadosUsuarioLogado.imagem}
@@ -392,33 +356,15 @@ export const Header = () => {
                     src={`data:image/png;base64, ${dadosUsuarioLogado.imagem}`}
                   />
                 )}
-           Editar Perfil
-        </MenuItem>
-        {/* <MenuItem>
-          <Avatar /> My account
-        </MenuItem> */}
-        <Divider />
-        {/* <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem> */}
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <Logout fontSize="small" fill={'red'} />
-          </ListItemIcon>
-          Sair
-        </MenuItem>
-      </Menu>        
-
-
+                Editar Perfil
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>
+                <ListItemIcon>
+                  <Logout fontSize="small" fill={'red'} />
+                </ListItemIcon>
+                Sair
+              </MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>

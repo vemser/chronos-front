@@ -10,10 +10,8 @@ export const BuscarDiaNaoUteisContext = createContext({} as IBuscaDiasContext)
 export const BuscarDiaNaoUteisProvider = ({ children }: IChildren) => {
 
     const { setTotalPages, setDiasNaoUteis } = useContext<IDiaNaoUtilContext>(DiaNaoUtilContext)
-
     const [isSearch, setIsSearch] = useState<boolean>(false)
     const [searchPayload, setSearchPayload] = useState<any>({})
-
     const token = localStorage.getItem('token');
 
     const buscarDiasNaoUteis = async (pesquisa: any, page: any) => {
@@ -39,18 +37,7 @@ export const BuscarDiaNaoUteisProvider = ({ children }: IChildren) => {
             setTotalPages(data.quantidadePaginas)
             setDiasNaoUteis(data.elementos)
         } catch (error) {
-            console.log(error)
-            // if (axios.isAxiosError(error) && error.response && error.response.data) {
-            //     if (error.response.data.message) {
-            //         toast.error(error.response.data.message);
-            //     } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
-            //         toast.error(error.response.data.errors.join("\n"));
-            //     }
-            // } else {
-            //     toast.error('Houve um erro ao exibir as informações, tente novamente mais tarde.');
-            // }
             toast.error('Houve um erro ao exibir as informações, por favor tente novamente.')
-
         } finally {
             nProgress.done()
         }

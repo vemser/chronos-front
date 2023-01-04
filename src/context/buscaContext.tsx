@@ -1,4 +1,3 @@
-import axios from "axios";
 import nProgress from "nprogress";
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
@@ -10,11 +9,9 @@ export const BuscarContext = createContext({} as IBuscaContext)
 
 export const BuscarProvider = ({ children }: IChildren) => {
 
-    const { setTotalPages, setDadosColaborador } = useContext<IAdminContext>(AdminContext)
-    
+    const { setTotalPages, setDadosColaborador } = useContext<IAdminContext>(AdminContext)    
     const [isSearch, setIsSearch] = useState<boolean>(false)
     const [searchPayload, setSearchPayload] = useState<any>({})
-
     const token = localStorage.getItem('token');
 
     const buscarColaborador = async (pesquisa: any, buscarCargos: any, page: any) => {       
@@ -29,16 +26,6 @@ export const BuscarProvider = ({ children }: IChildren) => {
             setDadosColaborador(data.elementos)
 
         } catch (error) {
-            console.log(error)
-            // if (axios.isAxiosError(error) && error.response && error.response.data) {
-            //     if (error.response.data.message) {
-            //         toast.error(error.response.data.message);
-            //     } else if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
-            //         toast.error(error.response.data.errors.join("\n"));
-            //     }
-            // } else {
-            //     toast.error('Houve um erro ao exibir as informações, tente novamente mais tarde.');
-            // }
             toast.error('Houve um erro ao exibir as informações, por favor tente novamente.')
 
         } finally {
