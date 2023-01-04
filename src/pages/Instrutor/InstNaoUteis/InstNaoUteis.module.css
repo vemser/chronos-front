@@ -1,8 +1,9 @@
 .ContainerNova {
   margin-top: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
+  width: 100%;
 }
 
 .ContainerNova a button {
