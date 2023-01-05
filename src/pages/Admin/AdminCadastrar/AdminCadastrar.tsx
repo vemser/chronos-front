@@ -1,8 +1,6 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from './AdminCadastrar.module.css'
-
 import TextField from '@mui/material/TextField'
-
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import { useForm } from 'react-hook-form'
@@ -10,7 +8,6 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
-
 import { IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -24,9 +21,7 @@ export const AdminCadastrar = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<IColaborador>({ resolver: yupResolver(CadastroDePessoasSchema) })
-
-  const cargos = []
-
+ 
   const { criarDadosColaborador, loading } = useContext(AdminContext)
 
   return (
@@ -102,8 +97,7 @@ export const AdminCadastrar = () => {
                     
                     <FormControl
                       required
-                      // error={error}
-                      component="fieldset"
+                        component="fieldset"
                       sx={{ m: 3 }}
                       variant="standard"
                     >
@@ -117,7 +111,6 @@ export const AdminCadastrar = () => {
                           }
                           label="Administrador"
                         />
-
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -127,7 +120,6 @@ export const AdminCadastrar = () => {
                           }
                           label="Gestão De Pessoas"
                         />
-
                         <FormControlLabel
                           control={
                             <Checkbox id="Instrutor" 
@@ -136,28 +128,24 @@ export const AdminCadastrar = () => {
                           }
                           label="Instrutor"
                         />
-
                         <FormControlLabel
                           control={
                             <Checkbox id="Gestor" {...register('Gestor')} />
                           }
                           label="Gestor"
                         />
-
                         <FormControlLabel
                           control={
                             <Checkbox id="Aluno" {...register('Aluno')} />
                           }
                           label="Aluno"
                         />
-
                         <FormControlLabel
                           control={
                             <Checkbox id="Colaborador" {...register('Colaborador')} />
                           }
                           label="Colaborador"
                         />
-
                       </FormGroup>
                     </FormControl>
                     <div className={styles.ContainerEnviar}>

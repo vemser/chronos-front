@@ -1,59 +1,58 @@
 .ContainerNova {
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  
-  .ContainerNova a button {
-    width: 180px;
-  }
-  
-  .ButtonContainer {
-    transition: 0.2s;
-  
-    margin-right: 7px;
-  }
-  .ButtonContainer:hover {
-    scale: 1.05;
-  
-    cursor: pointer;
-  }
-  
-  .ContainerButton {
-    width: 25%;
-  }
-  .ContainerGestaoEdicoes {
-    width: 80%;
-    margin-bottom: 15px;
-  }
-  
-  .ButtonSearch {
-    margin-right: 15%;
-  }
-  
-  .ContainerGeral {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .ContainerTitle {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-  
-  .ContainerHead {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto;
-  }
-  
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.ContainerNova a button {
+  width: 180px;
+}
+
+.ButtonContainer {
+  transition: 0.2s;
+  margin-right: 7px;
+}
+
+.ButtonContainer:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+.ContainerButton {
+  width: 25%;
+}
+
+.ContainerGestaoEdicoes {
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.ButtonSearch {
+  margin-right: 15%;
+}
+
+.ContainerGeral {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ContainerTitle {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.ContainerHead {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+}

@@ -13,15 +13,15 @@ export const GestaoDiaNaoUtilTable = () => {
     const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil, loading } = useContext(DiaNaoUtilContext)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        getDiaNaoUtil('1')
-    }, [])
+  useEffect(() => {
+    getDiaNaoUtil('1')
+  }, [])
 
-    const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
-      isOpen: false,
-      title: "",
-      onConfirm: () => { }
-    });
+  const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
+    isOpen: false,
+    title: "",
+    onConfirm: () => { }
+  });
 
   return (
     <>
@@ -64,62 +64,55 @@ export const GestaoDiaNaoUtilTable = () => {
                     <TableCell component="th" scope="row" align="justify" width={'300px'}>
                       {dia.idDiaNaoUtil}
                     </TableCell>
-
                     <TableCell component="th" scope="row" align="justify" width={'300px'}>
                       {dia.descricao}
                     </TableCell>
-
                     <TableCell align="justify" width={'300px'}>
                       {dataIniciaFormatada}
                     </TableCell>
-
                     <TableCell align="justify" width={'300px'}>
                       {dataFinalFormatada}
                     </TableCell>
-
                     <TableCell align="justify" width={'600px'}>
                       <Checkbox checked={status} />
                     </TableCell>
-
                     <TableCell align="right" >
-                      <EditIcon id={`linha-nao-util-editar-${index}`} onClick={() => {navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia })}} sx={{cursor: 'pointer', transition:'100ms all ease-in-out', '&:hover':{color: '#1e62fe'}}}/>
+                      <EditIcon id={`linha-nao-util-editar-${index}`} onClick={() => { navigate(`/gestao/editar-dias-nao-uteis/${dia.idDiaNaoUtil}`, { state: dia }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
                     </TableCell>
-
                     <TableCell align="right" >
-                    <HighlightOffIcon onClick={(event) => {
-                          setConfirmDialog({
-                            isOpen: true,
-                            title: `Confirma a exclusão de ${dia.descricao}?`,
-                            onConfirm: () => {
-                              setConfirmDialog({
-                                ...confirmDialog,
-                                isOpen: false
-                              })
-                              deleteDiaNaoUtil(dia.idDiaNaoUtil)
-                            }
-                          });
-                        }} sx={{
-                          cursor: 'pointer',
-                          width: '25px',
-                          height: '25px',
-                          "&:hover": { color: 'red', transform: 'scale(1.05)' },
-                          "&:active": {
-                            transform: 'scale(.99)',
+                      <HighlightOffIcon onClick={(event) => {
+                        setConfirmDialog({
+                          isOpen: true,
+                          title: `Confirma a exclusão de ${dia.descricao}?`,
+                          onConfirm: () => {
+                            setConfirmDialog({
+                              ...confirmDialog,
+                              isOpen: false
+                            })
+                            deleteDiaNaoUtil(dia.idDiaNaoUtil)
                           }
-                        }} />
+                        });
+                      }} sx={{
+                        cursor: 'pointer',
+                        width: '25px',
+                        height: '25px',
+                        "&:hover": { color: 'red', transform: 'scale(1.05)' },
+                        "&:active": {
+                          transform: 'scale(.99)',
+                        }
+                      }} />
                     </TableCell>
-
                   </TableRow>
-                  )
-                })}
-              </TableBody>
-              <ConfirmDialog
+                )
+              })}
+            </TableBody>
+            <ConfirmDialog
               confirmDialog={confirmDialog}
               setConfirmDialog={setConfirmDialog}
-              />
-            </Table>
-    </TableContainer>
-  } 
-  </>
+            />
+          </Table>
+        </TableContainer>
+      }
+    </>
   )
 }

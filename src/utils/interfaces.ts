@@ -36,7 +36,7 @@ export interface IColaborador2 {
   login: string
   cargos: Object[]
 }
-export interface IEditarColaborador{
+export interface IEditarColaborador {
   cargos: Object[]
 }
 
@@ -182,6 +182,8 @@ export interface IDiaNaoUtilContext {
   putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
   currentPage: any,
   setCurrentPage: any,
+  setDiasNaoUteis: any,
+  setTotalPages: any,
   loading: boolean
 }
 
@@ -232,7 +234,7 @@ export interface ICalendarioEdicao {
   cor: string
   areas: string | string[]
   critico: string | boolean
-} 
+}
 
 export interface ICalendarioGeral {
   dia: string,
@@ -241,7 +243,7 @@ export interface ICalendarioGeral {
   feriado: string | undefined | null
   idEtapa: number
   idEdicao: number
-} 
+}
 
 // Confirmar Exclusão
 
@@ -253,7 +255,7 @@ export interface TOptionsConfirmDialog {
 
 export interface Props {
   confirmDialog: TOptionsConfirmDialog,
-  setConfirmDialog(options:TOptionsConfirmDialog): void
+  setConfirmDialog(options: TOptionsConfirmDialog): void
 }
 
 export interface ICalendarioProcesso {
@@ -265,8 +267,16 @@ export interface ICalendarioProcesso {
 
 export interface IBuscaContext {
   buscarColaborador: (pesquisa: any, buscarCargos: any, page: any) => Promise<void>
-  isSearch: boolean, 
-  setIsSearch: any, 
-  searchPayload: any, 
+  isSearch: boolean,
+  setIsSearch: any,
+  searchPayload: any,
+  setSearchPayload: any,
+}
+
+export interface IBuscaDiasContext {
+  buscarDiasNaoUteis: (pesquisa: any, page: any) => Promise<void>
+  isSearch: boolean,
+  setIsSearch: any,
+  searchPayload: any,
   setSearchPayload: any,
 }

@@ -1,90 +1,100 @@
 .header {
-    background-color: #ffffff;
-    width: 100vw;
-  }
-  .headerContainer {
-    max-width: 80%;
-  }
-  
-  .toolbar {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    height: 80px;
-    justify-content: space-between;
-  }
-  
-  .logoImg {
-    justify-content: center;
-  }
-  .logoImg img {
-    width: 100px;
-  }
-  
-  .menuBurgerContainer {
-    align-items: center;
-  }
-  .menuBurgerContainer .burgerIcon {
-    fill: var(--color-blue);
-  }
-  .menuBurgerOptions {
-    display: flex;
-    flex-direction: column;
-  }
-  .menuBurgerOptions a li {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  .BorderRadius {
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-  }
+  background-color: #ffffff;
+  width: 100vw;
+}
 
-  .navbar {
-    flex-grow: 1;
-  }
-  .navbar ul {
-    display: flex;
-  }
+.headerContainer {
+  max-width: 80%;
+}
 
-  .links {
-    font-weight: 700;
-    color: #1e62fe;
-    font-size: 0.875rem;
-    padding: 5px;
-  }
+.toolbar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  height: 80px;
+  justify-content: space-between;
+}
 
-  .links:hover {
-    margin-bottom: 5px;
-  }
-  
-  .usuario {
-    flex-grow: 0;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .usuario h3 {
-    color: var(--color-blue);
-  }
-  .nome-usuario h3{
-    text-transform: capitalize;
-  }
+.logoImg {
+  justify-content: center;
+}
 
-  .nome-usuario span{
-    opacity: 0.6;
-    color: var(--color-blue);
-    font-size: 1rem;
-    font-weight: 600;
-  }
-  .HoverButton:hover {
-    color: blue !important;
-  }
-  
-.hide{
-    display: none !important;
-    cursor: default;
+.logoImg img {
+  width: 100px;
+}
+
+.menuBurgerContainer {
+  align-items: center;
+}
+
+.menuBurgerContainer .burgerIcon {
+  fill: var(--color-blue);
+}
+
+.menuBurgerOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuBurgerOptions a li {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.BorderRadius {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.navbar {
+  flex-grow: 1;
+}
+
+.navbar ul {
+  display: flex;
+}
+
+.links {
+  font-weight: 700;
+  color: #1e62fe;
+  font-size: 0.875rem;
+  padding: 5px;
+}
+
+.links:hover {
+  margin-bottom: 5px;
+}
+
+.usuario {
+  flex-grow: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.usuario h3 {
+  color: var(--color-blue);
+}
+
+.nome-usuario h3 {
+  text-transform: capitalize;
+}
+
+.nome-usuario span {
+  opacity: 0.6;
+  color: var(--color-blue);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.HoverButton:hover {
+  color: blue !important;
+}
+
+.hide {
+  display: none !important;
+  cursor: default;
 }
 
 .minImg {

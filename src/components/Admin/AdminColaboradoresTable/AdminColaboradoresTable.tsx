@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import {
   TableCell,
   TableContainer,
@@ -18,9 +18,7 @@ import {
   TOptionsConfirmDialog
 } from '../../../utils/interfaces'
 import { ConfirmDialog } from '../../ConfirmDialog'
-import { MoonLoader } from 'react-spinners'
 import { Loader } from '../../Loader/Loader'
-
 
 export const AdminColaboradoresTable = () => {
 
@@ -32,7 +30,6 @@ export const AdminColaboradoresTable = () => {
     loading
   } = useContext<IAdminContext>(AdminContext)
 
-  
   useEffect(() => {
   }, [dadosColaborador])
 
@@ -40,18 +37,11 @@ export const AdminColaboradoresTable = () => {
     buscarDadosColaborador('1')
   }, [])
 
- 
-
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
     isOpen: false,
     title: "",
     onConfirm: () => { }
   });
-
-
-
-
-
   return (
     <>
     

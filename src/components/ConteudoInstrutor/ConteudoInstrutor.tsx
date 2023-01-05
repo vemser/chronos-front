@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from './ConteudoInstrutor.module.css'
 import imgHome from '../../assets/instrutorLogo.svg'
 import { IAuthContext } from '../../utils/interfaces'

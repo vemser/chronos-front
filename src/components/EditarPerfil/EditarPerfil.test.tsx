@@ -1,4 +1,3 @@
-import * as axios from 'axios'
 import '@testing-library/jest-dom'
 import { EditarPerfil } from './EditarPerfil'
 import { render, screen } from '@testing-library/react'

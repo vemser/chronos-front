@@ -1,8 +1,9 @@
 .ContainerNova {
   margin-top: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
+  width: 100%;
 }
 
 .ContainerNova a button {
@@ -11,18 +12,18 @@
 
 .ButtonContainer {
   transition: 0.2s;
-
   margin-right: 7px;
 }
+
 .ButtonContainer:hover {
   scale: 1.05;
-
   cursor: pointer;
 }
 
 .ContainerButton {
   width: 25%;
 }
+
 .ContainerGestaoEdicoes {
   width: 80%;
 }

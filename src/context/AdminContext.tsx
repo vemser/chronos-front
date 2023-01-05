@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react'
+import { createContext, useState, useContext } from 'react'
 import {
   IChildren,
   IAdminContext,
@@ -19,11 +19,8 @@ export const AdminProvider = ({ children }: IChildren) => {
   const [totalPages, setTotalPages] = useState(0)
   const navigate = useNavigate()
   const [dadosColaborador, setDadosColaborador] = useState<IColaborador[] | undefined>(undefined)
-
   const token = localStorage.getItem('token');
-
   const { dadosUsuarioLogado, loggedUser } = useContext(AuthContext)
-
   const [currentPage, setCurrentPage] = useState<any>(1)
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -68,9 +65,6 @@ export const AdminProvider = ({ children }: IChildren) => {
     try {
       nProgress.start()
       setLoading(true)
-
-      const retorno = await authApi.post('/usuario', dadosColaborador)
-
       toast.success('Usuário criado com sucesso!', toastConfig)
       navigate("/admin/colaboradores")
       setCurrentPage(1)
@@ -91,11 +85,8 @@ export const AdminProvider = ({ children }: IChildren) => {
   const buscarDadosColaborador = async (page: string) => {
     try {
       nProgress.start();
-
       authApi.defaults.headers.common['Authorization'] = token
       const { data } = await authApi.get(`/usuario?pagina=${Number(page) - 1}&tamanho=8`)
-
-
       setTotalPages(data.quantidadePaginas)
       setDadosColaborador(data.elementos)
 
@@ -170,9 +161,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       nProgress.start()
       setLoading(true)
       authApi.defaults.headers.common['Authorization'] = token
-
       await authApi.put(`usuario/update-cargos/${idUsuario}`, dadosColaborador)
-
       toast.success('Usuário editado com sucesso!', toastConfig)
       navigate('/admin/colaboradores')
       setCurrentPage(1)
@@ -221,7 +210,6 @@ export const AdminProvider = ({ children }: IChildren) => {
       api.defaults.headers.common['Authorization'] = token
       await api.put(`usuario/update-perfil`, data)
       toast.success('Usuário editado com sucesso!', toastConfig)
-
       navigate('/')
 
     } catch (error: any) {
@@ -242,13 +230,11 @@ export const AdminProvider = ({ children }: IChildren) => {
   // Atualizar foto do PRÓPRIO usuário
   const inserirFotoUsuario = async (data: any) => {
     try {
+
       nProgress.start()
       authApi.defaults.headers.common['Authorization'] = token
-
       await authApi.put(`/foto/upload-image-perfil`, data)
-
       loggedUser()
-
       toast.success('Foto de perfil alterada com sucesso', toastConfig)
 
     } catch (error) {

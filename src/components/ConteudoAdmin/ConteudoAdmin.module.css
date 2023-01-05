@@ -16,17 +16,21 @@
   max-width: 600px;
   font-size: 52px;
 }
+
 .Logo {
   transform: translatey(0px);
   animation: float 5s ease-in-out infinite;
 }
+
 @keyframes float {
   0% {
     transform: translatey(0px);
   }
+
   50% {
     transform: translatey(-20px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -38,10 +42,12 @@
     flex-direction: column;
     gap: 2px;
   }
+
   .containerBemVindo h1 {
     font-size: 36px;
     padding: 0px 10px;
   }
+
   .Logo {
     width: 450px;
   }

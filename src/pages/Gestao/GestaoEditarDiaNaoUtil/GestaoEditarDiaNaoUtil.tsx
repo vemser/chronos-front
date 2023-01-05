@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import styles from './GestaoEditarDiaNaoUtil.module.css'
 import TextField from '@mui/material/TextField'
 import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
@@ -32,13 +32,13 @@ export const GestaoEditarDiaNaoUtil = () => {
   }
 
   useEffect(() => {
-    state.repeticaoAnual === 'ATIVO' && document.getElementById('dataFinalContainer')?.classList.add('hide') 
+    state.repeticaoAnual === 'ATIVO' && document.getElementById('dataFinalContainer')?.classList.add('hide')
   })
-  
 
-  const handleRepeticaoAnual = () =>{
+
+  const handleRepeticaoAnual = () => {
     document.getElementById('dataFinalContainer')?.classList.toggle('hide');
-  } 
+  }
 
   return (
     <>
@@ -69,15 +69,13 @@ export const GestaoEditarDiaNaoUtil = () => {
                   {errors.descricao.message}
                 </span>
               )}
-
               <FormControlLabel
-                control={<Checkbox defaultChecked={status} onClick={() => handleRepeticaoAnual()}/>}
+                control={<Checkbox defaultChecked={status} onClick={() => handleRepeticaoAnual()} />}
                 label="Repetir todos os anos"
                 id="repeticaoAnual"
                 {...register('repeticaoAnual')}
               />
             </div>
-
             <Box className={styles.ContainerMenorCalendario}>
               <Box className={styles.dateContainer}>
                 <p>Data Inicial</p>
@@ -98,21 +96,17 @@ export const GestaoEditarDiaNaoUtil = () => {
                   </span>
                 )}
               </Box>
-
-            
-                  <Box className={`${styles.dateContainer}`} id='dataFinalContainer'>
-                    <p>Data Final</p>
-                    <TextField
-                      id="dataFinal"
-                      className={styles.dataPicker}
-                      type={'date'}
-                      variant="standard"
-                      defaultValue={state?.dataFinal}
-                      {...register('dataFinal')}
-                    />
-                  </Box> 
-                
-             
+              <Box className={`${styles.dateContainer}`} id='dataFinalContainer'>
+                <p>Data Final</p>
+                <TextField
+                  id="dataFinal"
+                  className={styles.dataPicker}
+                  type={'date'}
+                  variant="standard"
+                  defaultValue={state?.dataFinal}
+                  {...register('dataFinal')}
+                />
+              </Box>
               <Box className={styles.dateContainer}>
                 <TextField
                   id="idDiaNaoUtil"
@@ -123,7 +117,6 @@ export const GestaoEditarDiaNaoUtil = () => {
                 />
               </Box>
             </Box>
-
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: '50px' }}>
               <Button
                 className={styles.submitButton}
@@ -133,15 +126,15 @@ export const GestaoEditarDiaNaoUtil = () => {
                 sx={{
                   boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
                   transition: '0.5s',
-                  "&:hover":{
+                  "&:hover": {
                     transform: 'scale(1.02)'
                   },
-                  "&:active":{
+                  "&:active": {
                     transform: 'scale(0.98)'
                   }
                 }}
               >
-                Enviar
+                Salvar
               </Button>
             </Box>
           </form>

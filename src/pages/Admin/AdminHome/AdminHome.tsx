@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from 'react'
-import { IAdminContext } from '../../../utils/interfaces'
-import { AdminContext } from '../../../context/AdminContext'
+import React, { useContext, useEffect } from 'react'
 import { Header } from '../../../components/Header/Header'
 import { ConteudoAdmin } from '../../../components/ConteudoAdmin/ConteudoAdmin'
 import { AuthContext } from '../../../context/AuthContext'

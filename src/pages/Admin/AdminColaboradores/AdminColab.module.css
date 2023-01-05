@@ -1,5 +1,5 @@
 .ContainerHeader {
-  width: 80%;  
+  width: 80%;
   align-items: flex-end;
 }
 
@@ -23,9 +23,9 @@
     margin-top: 10px;
     margin-bottom: 0px;
   }
+
   .ContainerTitulo {
-  
+
     margin-bottom: 0px;
   }
-  
 }

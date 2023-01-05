@@ -10,10 +10,12 @@
 .dataPicker {
   width: 210px;
 }
+
 .ContainerTitle h2 {
   color: #1e62fe;
   margin-bottom: 20px;
 }
+
 .ContainerConteudo {
   width: 80%;
 }
@@ -21,7 +23,6 @@
 .ContainerCalendario {
   display: flex;
   flex-direction: column;
-
   align-items: center;
   padding: 40px;
   width: 600px;
@@ -30,6 +31,7 @@
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
     0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
+
 .ContainerCalendario form {
   display: flex;
   flex-direction: column;
@@ -43,6 +45,7 @@
   gap: 20px;
   width: 440px;
 }
+
 .ContainerMenorCalendario {
   display: flex;
   justify-content: center;
@@ -68,7 +71,7 @@
   width: 200px;
 }
 
-.hide{
+.hide {
   display: none;
 }
 
@@ -76,6 +79,7 @@
   .ContainerSection {
     height: 100%;
   }
+
   .ContainerCalendario {
     justify-content: center;
   }
@@ -89,12 +93,14 @@
   .ContainerCalendario {
     width: 80%;
   }
+
   .ContainerNomeEdicao {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 300px !important;
   }
+
   .ContainerMenorCalendario {
     flex-direction: column;
     align-items: center;

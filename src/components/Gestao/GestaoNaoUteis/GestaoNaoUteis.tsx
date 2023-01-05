@@ -1,4 +1,3 @@
-import * as React from 'react'
 import {
   TableCell,
   TableContainer,
@@ -37,7 +36,6 @@ export const GestaoNaoUteis = () => {
             boxShadow={2}
           >
             <h1 className={styles.titulo}>Períodos Não Úteis</h1>
-
             <Link to={'/gestao/cadastrar-dias-nao-uteis'}>
               <Button
                 variant="contained"
@@ -58,10 +56,7 @@ export const GestaoNaoUteis = () => {
                 <TableCell sx={{ color: '#1e62fe' }}>Ações</TableCell>
               </TableRow>
             </TableHead>
-
             <TableBody>
-              {/* {rows.map(row => ( */}
-
               <TableRow>
                 <TableCell>1</TableCell>
                 <TableCell>Natal</TableCell>
@@ -75,7 +70,6 @@ export const GestaoNaoUteis = () => {
                   <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
                 </TableCell>
               </TableRow>
-
               <TableRow>
                 <TableCell>1</TableCell>
                 <TableCell>Natal</TableCell>
@@ -89,7 +83,6 @@ export const GestaoNaoUteis = () => {
                   <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
                 </TableCell>
               </TableRow>
-
               <TableRow>
                 <TableCell>1</TableCell>
                 <TableCell>Natal</TableCell>
@@ -103,7 +96,6 @@ export const GestaoNaoUteis = () => {
                   <DeleteSharpIcon sx={{ cursor: 'pointer' }} />
                 </TableCell>
               </TableRow>
-
               <TableRow>
                 <TableCell>1</TableCell>
                 <TableCell>Natal</TableCell>

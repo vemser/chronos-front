@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useLayoutEffect, useState } from 'react'
 import styles from './AdminColab.module.css'
 import { Box } from '@mui/system'
 import { AdminContext } from '../../../context/AdminContext'
@@ -9,7 +9,7 @@ import { Autocomplete, Button, Pagination, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { BuscarContext } from '../../../context/buscaContext'
 import { IAdminContext } from '../../../utils/interfaces'
-import {  animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 
 export const AdminColaboradores = () => {
 
@@ -22,24 +22,30 @@ export const AdminColaboradores = () => {
     'Aluno', 'Administrador', 'Colaborador', 'Coordenador', 'Gestão de pessoas', 'Instrutor'
   ]);
 
-  let buscarCargos = value.map((el: any) =>
-    el == 'Aluno' ? 'ROLE_ALUNO' :
-      el == 'Administrador' ? 'ROLE_ADMIN' :
-        el == 'Colaborador' ? 'ROLE_COLABORADOR' :
-          el == 'Coordenador' ? 'ROLE_GESTOR' :
-            el == 'Gestão de pessoas' ? 'ROLE_GESTAO_DE_PESSOAS' :
-              el == 'Instrutor' ? 'ROLE_INSTRUTOR' : ''
+  let buscarCargos = value.map((el: any) => {
+      let test: any = {
+        'Aluno': 'ROLE_ALUNO',
+        'Administrador': 'ROLE_ADMIN',
+        'Colaborador': 'ROLE_COLABORADOR',
+        'Coordenador': 'ROLE_GESTOR',
+        'Gestão de pessoas': 'ROLE_GESTAO_DE_PESSOAS',
+        'Instrutor': 'ROLE_INSTRUTOR',
+      }
+      return test[el]
+    }
   )
 
   useLayoutEffect(() => {
+    window.scrollTo(0, 0)
     buscarDadosColaborador('1')
     setCurrentPage(1)
-    window.scrollTo(0,0)
+    setIsSearch(false)
   }, [])
 
   const { register, handleSubmit, reset } = useForm<any>({})
 
   const buscar = (login: any) => {
+    console.log(buscarCargos)
     let carga = {
       login: login,
       buscarCargos: buscarCargos
@@ -157,19 +163,19 @@ export const AdminColaboradores = () => {
                   gap: '20px'
                 }}
               >
-                <Button 
-                type={'submit'} 
-                variant={'contained'}
-                sx={{
-                  boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
-                  transition: '0.5s',
-                  "&:hover":{
-                    transform: 'scale(1.02)'
-                  },
-                  "&:active":{
-                    transform: 'scale(0.98)'
-                  }
-                }}
+                <Button
+                  type={'submit'}
+                  variant={'contained'}
+                  sx={{
+                    boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                    transition: '0.5s',
+                    "&:hover": {
+                      transform: 'scale(1.02)'
+                    },
+                    "&:active": {
+                      transform: 'scale(0.98)'
+                    }
+                  }}
                 >
                   Filtrar
                 </Button>
@@ -186,16 +192,16 @@ export const AdminColaboradores = () => {
                   sx={{
                     boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
                     transition: '0.5s',
-                    "&:hover":{
+                    "&:hover": {
                       transform: 'scale(1.02)'
                     },
-                    "&:active":{
+                    "&:active": {
                       transform: 'scale(0.98)'
                     }
                   }}
-                  >
-                    Limpar
-                  </Button>
+                >
+                  Limpar
+                </Button>
               </Box>
             </Box>
           </Box>
@@ -205,7 +211,7 @@ export const AdminColaboradores = () => {
         </Box>
         <Box width={'80%'}>
           <AdminColaboradoresTable />
-          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>           
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
             <Pagination page={currentPage} count={totalPages} color="primary" onChange={(_, value) => mudarPaginacao(value)} />
           </Box>
         </Box>

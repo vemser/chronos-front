@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './AdminEditarColab.module.css'
 
 import Grid from '@mui/material/Grid'
@@ -14,7 +14,6 @@ import { ICargos, IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
 
 import { useLocation } from 'react-router-dom'
-
 import { Header } from '../../../components/Header/Header'
 import { Loader } from '../../../components/Loader/Loader'
 
@@ -31,8 +30,6 @@ export const AdminEditarColab = () => {
       login: state.login,
     }
   })
-
-
 
   // CARGOS
   var administrador = false
@@ -249,7 +246,7 @@ export const AdminEditarColab = () => {
                       <input
                         type="submit"
                         className={styles.BotaoEnviar}
-                        value="Enviar"
+                        value="Salvar"
                       />
                     </label>
                   </div>
