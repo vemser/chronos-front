@@ -22,9 +22,7 @@ import { Navigate } from 'react-router-dom'
 export const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
@@ -46,7 +44,6 @@ export const Login = () => {
     if (token) {
       let decodedJWT = JSON.parse(atob(token.split('.')[1]))
       let roleArray = decodedJWT.cargos
-
       setRoles(roleArray)
     }
   }, [])
@@ -73,7 +70,6 @@ export const Login = () => {
       >
         <img src={loginLogo} alt="" style={{ width: '80%' }} />
       </Box>
-
       <Box
         display={'flex'}
         alignItems={'center'}
@@ -117,7 +113,6 @@ export const Login = () => {
                   </span>
                 )}
               </Box>
-
               <FormControl variant="outlined" sx={{ mb: 2 }}>
                 <InputLabel htmlFor="outlined-adornment-password">
                   Senha

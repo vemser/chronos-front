@@ -6,21 +6,16 @@ import { IPrivateRoute } from '../../utils/interfaces'
 const useAuth = () => {
 
     const { roles, setRoles } = useContext(AuthContext);
-
     let userToken = localStorage.getItem('token')
-
     const user = localStorage.getItem('user')
-
     let userRoles = parseJwt(userToken);
 
-    
-
-    if(user) {
+    if (user) {
         return {
             auth: true,
             authRoles: roles
         }
-    }   else {
+    } else {
         return {
             auth: false,
             authRoles: null
@@ -30,33 +25,29 @@ const useAuth = () => {
 
 const parseJwt = async (token: any) => {
     try {
-      let decodedJWT = JSON.parse(atob(token.split('.')[1]));
-      let roleArray = decodedJWT.cargos;
+        let decodedJWT = JSON.parse(atob(token.split('.')[1]));
+        let roleArray = decodedJWT.cargos;
 
-      return roleArray;
+        return roleArray;
 
     } catch (e) {
-      return null;
+        return null;
 
     };
 };
 
-
-
 export const PrivateRoute = (props: IPrivateRoute) => {
 
-    const {auth, authRoles} = useAuth()
+    const { auth, authRoles } = useAuth()
 
-
-    if(props.roleRequired) {
-
+    if (props.roleRequired) {
         return auth ? (
             authRoles?.includes(props.roleRequired) ? (
                 <Outlet />
             ) : (
                 <Navigate to={'/'} />
             )
-        )   :   (
+        ) : (
             <Navigate to={'/'} />
         )
     } else {
@@ -68,24 +59,23 @@ export const PrivateRoute = (props: IPrivateRoute) => {
 export const NewPrivateRoute = (props: IPrivateRoute) => {
 
     const { refreshAuth } = useContext(AuthContext);
-
     let userToken = localStorage.getItem('token')
 
-    useEffect(() =>{
+    useEffect(() => {
         userToken && refreshAuth(userToken)
     }, [])
 
 
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
 
         let userToken = localStorage.getItem('token')
-        
-        if(userToken) {
+
+        if (userToken) {
             let decodedJWT = JSON.parse(atob(userToken.split('.')[1]))
             let userRoles = decodedJWT.cargos;
 
 
-            if(userRoles?.includes(props.roleRequired)){
+            if (userRoles?.includes(props.roleRequired)) {
                 return <Outlet />
             } else {
                 return <Navigate to={'/'} />
@@ -93,11 +83,11 @@ export const NewPrivateRoute = (props: IPrivateRoute) => {
         } else {
             return <Navigate to={'/'} />
         }
-    } else{
+    } else {
         return <Navigate to={'/'} />
     }
 
-    
+
 }
 
 export const AccessRoute = () => {
@@ -107,8 +97,7 @@ export const AccessRoute = () => {
     authRoles?.includes('ROLE_ADMIN') ? access = true : access = false
     authRoles?.includes('ROLE_GESTAO_DE_PESSOAS') ? access = true : access = false
     authRoles?.includes('ROLE_INSTRUTOR') ? access = true : access = false
-     
-    
+
     if (access = true) {
         return <Outlet />
     } else {

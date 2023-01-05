@@ -12,18 +12,18 @@
 
 .ButtonContainer {
   transition: 0.2s;
-
   margin-right: 7px;
 }
+
 .ButtonContainer:hover {
   scale: 1.05;
-
   cursor: pointer;
 }
 
 .ContainerButton {
   width: 25%;
 }
+
 .ContainerGestaoEdicoes {
   width: 80%;
 }

@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import styles from './GestaoNovoProcesso.module.css'
-
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useLocation, useParams } from 'react-router-dom'
@@ -15,46 +14,42 @@ import { Header } from '../../../components/Header/Header'
 const animatedComponents = makeAnimated()
 
 export const GestaoNovoProcesso = () => {
-  
+
   const { state } = useLocation()
   const { edicao } = useParams();
-
   const idEdicao = Number(edicao)
-
   const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>([])
   const [responsaveisState, setResponsaveisState] = useState<string[]>([])
-
   const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
 
-  const { register, handleSubmit, formState: {errors} } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(ProcessoSchema)
-     })
+  })
 
-  
   useEffect(() => {
     getAreaEnvolvida()
     getResponsavel()
-    
+
   }, [])
 
-  const handleChangeAreas = (value: any) => { 
+  const handleChangeAreas = (value: any) => {
     const list = value.map((item: any) => {
-      return {'nome': item.value}
+      return { 'nome': item.value }
     })
     setAreasEnvolvidasState(list)
   }
 
-  const handleChangeResponsaveis = (value: any) => { 
+  const handleChangeResponsaveis = (value: any) => {
     const list = value.map((item: any) => {
-      return {'nome': item.value}
+      return { 'nome': item.value }
     })
     setResponsaveisState(list)
   }
 
   // SELECT 
-  
-  const selectAreaEnvolvida:object[] = []
-  const selectResponsavel:object[] = []
+
+  const selectAreaEnvolvida: object[] = []
+  const selectResponsavel: object[] = []
 
   areasEnvolvidas.map((area) => {
     selectAreaEnvolvida.push({
@@ -73,7 +68,6 @@ export const GestaoNovoProcesso = () => {
   return (
     <>
       <Header />
-
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerProcesso}>
           <div>
@@ -85,7 +79,6 @@ export const GestaoNovoProcesso = () => {
               onSubmit={handleSubmit((data: any) => createProcesso(data, areasEnvolvidasState, responsaveisState, state.idEtapa, idEdicao)
               )}
             >
-
               <TextField
                 className={styles.FormRow}
                 id="nome"
@@ -94,17 +87,16 @@ export const GestaoNovoProcesso = () => {
                 {...register('nome')}
                 error={!!errors.nome}
               />
-       {errors.duracaoProcesso && (
-                    <span
-                      className={styles.ContainerError}
-                      id="duracaoProcesso-error"
-                    >
-                      <p className={styles.ContainerError}>Por favor, digite os nomes</p>
-                    </span>
-                  )}
+              {errors.duracaoProcesso && (
+                <span
+                  className={styles.ContainerError}
+                  id="duracaoProcesso-error"
+                >
+                  <p className={styles.ContainerError}>Por favor, digite os nomes</p>
+                </span>
+              )}
               <label htmlFor="selectGroup" id='area-envolvida'>
                 Área Envolvida
-
                 <CreatableSelect
                   components={animatedComponents}
                   options={selectAreaEnvolvida}
@@ -118,13 +110,11 @@ export const GestaoNovoProcesso = () => {
                   isMulti
                   closeMenuOnSelect={false}
                   placeholder={'Área Envolvida'}
-        
+
                 />
               </label>
-
               <label htmlFor="selectGroup" id='responsavel'>
                 Responsável
-
                 <CreatableSelect
                   components={animatedComponents}
                   options={selectResponsavel}
@@ -138,10 +128,9 @@ export const GestaoNovoProcesso = () => {
                   isMulti
                   closeMenuOnSelect={false}
                   placeholder={'Responsável'}
-          
+
                 />
               </label>
-
               <TextField
                 className={styles.FormRow}
                 id="duracaoProcesso"
@@ -151,14 +140,14 @@ export const GestaoNovoProcesso = () => {
                 error={!!errors.duracaoProcesso}
               />
               {errors.duracaoProcesso && (
-                    <span
-                      className={styles.ContainerError}
-                      id="duracaoProcesso-error"
-                    >
-                      <p className={styles.ContainerError}>Por favor, digite a duração do processo</p>
-                    </span>
-                    
-                  )}
+                <span
+                  className={styles.ContainerError}
+                  id="duracaoProcesso-error"
+                >
+                  <p className={styles.ContainerError}>Por favor, digite a duração do processo</p>
+                </span>
+
+              )}
               <TextField
                 className={styles.FormRow}
                 id="diasUteis"
@@ -168,14 +157,13 @@ export const GestaoNovoProcesso = () => {
                 error={!!errors.diasUteis}
               />
               {errors.duracaoProcesso && (
-                    <span
-                      className={styles.ContainerError}
-                      id="duracaoProcesso-error"
-                    >
-                      <p className={styles.ContainerError}>Por favor, digite os dias úteis</p>
-                    </span>
-                    
-                  )}
+                <span
+                  className={styles.ContainerError}
+                  id="duracaoProcesso-error"
+                >
+                  <p className={styles.ContainerError}>Por favor, digite os dias úteis</p>
+                </span>
+              )}
               <TextField
                 className={styles.FormRow}
                 id="ordemExecucao"
@@ -185,18 +173,18 @@ export const GestaoNovoProcesso = () => {
                 error={!!errors.ordemExecucao}
               />
               {errors.duracaoProcesso && (
-                    <span
-                      className={styles.ContainerError}
-                      id="duracaoProcesso-error"
-                    >
-                      <p className={styles.ContainerError}>Por favor, digite a ordem de execução</p>
-                    </span>
-                  )}
+                <span
+                  className={styles.ContainerError}
+                  id="duracaoProcesso-error"
+                >
+                  <p className={styles.ContainerError}>Por favor, digite a ordem de execução</p>
+                </span>
+              )}
 
-                <FormControlLabel control={<Checkbox /> } 
-                label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
-              
-                {...register('processoCritico')} sx={{mt: 2}}/>
+              <FormControlLabel control={<Checkbox />}
+                label="Processo Crítico" id='processoCritico' className={styles.dataPicker}
+
+                {...register('processoCritico')} sx={{ mt: 2 }} />
 
               <div className={styles.ContainerBotao}>
                 <Button
@@ -206,10 +194,10 @@ export const GestaoNovoProcesso = () => {
                   sx={{
                     boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
                     transition: '0.5s',
-                    "&:hover":{
+                    "&:hover": {
                       transform: 'scale(1.02)'
                     },
-                    "&:active":{
+                    "&:active": {
                       transform: 'scale(0.98)'
                     }
                   }}

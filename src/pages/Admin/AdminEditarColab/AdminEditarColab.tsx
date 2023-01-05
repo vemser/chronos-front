@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './AdminEditarColab.module.css'
 
 import Grid from '@mui/material/Grid'
@@ -15,7 +15,6 @@ import { AdminContext } from '../../../context/AdminContext'
 import {MoonLoader} from 'react-spinners'
 
 import { useLocation } from 'react-router-dom'
-
 import { Header } from '../../../components/Header/Header'
 
 export const AdminEditarColab = () => {
@@ -31,8 +30,6 @@ export const AdminEditarColab = () => {
       login: state.login,
     }
   })
-
-
 
   // CARGOS
   var administrador = false

@@ -1,56 +1,58 @@
  .ButtonContainer {
-    transition: 0.2s;  
-    margin-right: 7px;
-  }
-  .ButtonContainer:hover {
-    scale: 1.05;  
-    cursor: pointer;
-  }
-  
-  .ContainerButton {
-    width: 25%;
-  }  
-  
-  .ContainerTitle {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-  .ContainerTitle h2{
+   transition: 0.2s;
+   margin-right: 7px;
+ }
+
+ .ButtonContainer:hover {
+   scale: 1.05;
+   cursor: pointer;
+ }
+
+ .ContainerButton {
+   width: 25%;
+ }
+
+ .ContainerTitle {
+   width: 100%;
+   height: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: flex-end;
+ }
+
+ .ContainerTitle h2 {
    margin-left: 25%;
-  }
-  
-  .ContainerHead {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: auto;
-  }
-  
-  .paginacao{
-    display: flex;
-    justify-content: center;
-  }
+ }
 
-  .ContainerButton {
-    display: flex;
-    justify-content: flex-end;
-    width: 80%;
-    margin-bottom: 10px;
-  }
+ .ContainerHead {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   margin: auto;
+ }
 
-  @media (max-width: 620px) { 
+ .paginacao {
+   display: flex;
+   justify-content: center;
+ }
 
-    .ContainerTitle {
-      width: 400px;
+ .ContainerButton {
+   display: flex;
+   justify-content: flex-end;
+   width: 80%;
+   margin-bottom: 10px;
+ }
+
+ @media (max-width: 620px) {
+
+   .ContainerTitle {
+     width: 400px;
      padding-right: 20%;
      padding-bottom: 20px;
-      }
+   }
 
-    .ContainerTitle h2 {
-      width: 100%;
-      text-align: center;
-      }
-  }
+   .ContainerTitle h2 {
+     width: 100%;
+     text-align: center;
+   }
+ }

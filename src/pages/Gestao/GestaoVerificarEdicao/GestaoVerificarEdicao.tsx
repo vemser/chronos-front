@@ -22,15 +22,10 @@ import { Loader } from '../../../components/Loader/Loader'
 
 export const GestaoVerificarEdicao = () => {
   const { edicao } = useParams()
-
   const idEdicao = Number(edicao)
-
   const navigate = useNavigate()
-  const { getEdicoesList, deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } =
-    useContext(UserContext)
-
+  const { getEdicoesList, deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } = useContext(UserContext)
   const { getCalendarioPorEdicao } = useContext(CalendarioContext)
-
   const EdicaoAtual = edicoes?.find(data => data.idEdicao == idEdicao)
 
   useLayoutEffect(() => {
@@ -47,7 +42,7 @@ export const GestaoVerificarEdicao = () => {
   return (
     <>
       <Header />
-      {etapas && etapas.length == 0 ? <Loader /> : 
+      {etapas && etapas.length == 0 ? <Loader /> :
         <Box
           sx={{
             margin: '50px auto',
@@ -67,23 +62,22 @@ export const GestaoVerificarEdicao = () => {
             <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <h2>{EdicaoAtual?.nome}</h2>
               <Button variant="outlined"
-              sx={{
-                boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
-                transition: '0.5s',
-                "&:hover":{
-                  transform: 'scale(1.02)'
-                },
-                "&:active":{
-                  transform: 'scale(0.98)'
-                }
-              }}
+                sx={{
+                  boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                  transition: '0.5s',
+                  "&:hover": {
+                    transform: 'scale(1.02)'
+                  },
+                  "&:active": {
+                    transform: 'scale(0.98)'
+                  }
+                }}
               >
                 <p onClick={() => getCalendarioPorEdicao(EdicaoAtual)}>
                   Gerar Calendario
                 </p>
               </Button>
             </Box>
-
             <Button
               variant="contained"
               id="addButton"
@@ -95,11 +89,11 @@ export const GestaoVerificarEdicao = () => {
               sx={{
                 boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
                 transition: '0.3s',
-                "&:hover":{
+                "&:hover": {
                   boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
                   transform: 'scale(1.02)'
                 },
-                "&:active":{
+                "&:active": {
                   transform: 'scale(0.98)'
                 }
               }}
@@ -108,7 +102,6 @@ export const GestaoVerificarEdicao = () => {
               + Adicionar nova etapa
             </Button>
           </Box>
-
           {etapas?.map((etapa: IEtapa, index) => {
             return (
               <Box key={etapa.idEtapa} sx={{ padding: '20px' }}>
@@ -162,11 +155,10 @@ export const GestaoVerificarEdicao = () => {
                           "& :active": {
                             transform: 'scale(.99)',
                           }
-                        }} 
+                        }}
                       />
                     </Box>
                   </Box>
-
                   <Button
                     variant="contained"
                     id={`novo-processo-${index}`}
@@ -179,11 +171,11 @@ export const GestaoVerificarEdicao = () => {
                     sx={{
                       boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
                       transition: '0.3s',
-                      "&:hover":{
+                      "&:hover": {
                         boxShadow: '-2px 7px 15px -4px rgba(0,0,0,0.75)',
                         transform: 'scale(1.02)'
                       },
-                      "&:active":{
+                      "&:active": {
                         transform: 'scale(0.98)'
                       }
                     }}
@@ -192,7 +184,6 @@ export const GestaoVerificarEdicao = () => {
                     + NOVO PROCESSO
                   </Button>
                 </Box>
-
                 <Box>
                   <TableContainer
                     sx={{
@@ -212,7 +203,6 @@ export const GestaoVerificarEdicao = () => {
                           <TableCell align="right"><strong>Excluir</strong></TableCell>
                         </TableRow>
                       </TableHead>
-
                       <TableBody>
                         {etapa.processos?.map(
                           (processo: IProcesso, procIndex: number) => {
@@ -232,7 +222,6 @@ export const GestaoVerificarEdicao = () => {
                                 >
                                   {processo.nome}
                                 </TableCell>
-
                                 <TableCell
                                   component="th"
                                   scope="row"
@@ -240,7 +229,6 @@ export const GestaoVerificarEdicao = () => {
                                 >
                                   {processo.diasUteis}
                                 </TableCell>
-
                                 <TableCell
                                   component="th"
                                   scope="row"
@@ -248,7 +236,6 @@ export const GestaoVerificarEdicao = () => {
                                 >
                                   {processo.ordemExecucao}
                                 </TableCell>
-
                                 <TableCell
                                   component="th"
                                   scope="row"
@@ -270,7 +257,7 @@ export const GestaoVerificarEdicao = () => {
                                     }}
                                   />
                                 </TableCell>
-                                <TableCell align="right" width={'40px'}>   
+                                <TableCell align="right" width={'40px'}>
                                   <HighlightOffIcon
                                     onClick={(event) => {
                                       setConfirmDialog({
@@ -292,7 +279,7 @@ export const GestaoVerificarEdicao = () => {
                                       "& :active": {
                                         transform: 'scale(.99)',
                                       }
-                                    }} 
+                                    }}
                                   />
                                 </TableCell>
                               </TableRow>

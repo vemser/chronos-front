@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styles from './GestaoEditarEdicao.module.css'
 import { Box, TextField, Button } from '@mui/material'
 import 'dayjs/locale/pt-br'
-
 import { IEdicao } from '../../../utils/interfaces'
 import { useForm } from 'react-hook-form'
 import { cadastrarEdicaoFormSchema } from '../../../utils/schemas'
@@ -14,8 +13,7 @@ import { Header } from '../../../components/Header/Header'
 export const GestaoEditarEdicao = () => {
 
   const { editEdicao } = useContext(UserContext);
-
-  const { register, handleSubmit,  formState: { errors }} = useForm<IEdicao>(({
+  const { register, handleSubmit, formState: { errors } } = useForm<IEdicao>(({
     resolver: yupResolver(cadastrarEdicaoFormSchema)
   }))
 
@@ -23,14 +21,12 @@ export const GestaoEditarEdicao = () => {
 
   return (
     <>
-    <Header/>
+      <Header />
       <section className={styles.ContainerSection}>
-
         <div className={styles.ContainerCalendario}>
           <div className={styles.ContainerTitle}>
             <h2>Editar</h2>
           </div>
-
           <form onSubmit={handleSubmit((data: IEdicao) => editEdicao(data))}>
             <div className={styles.ContainerNomeEdicao}>
               <TextField
@@ -45,50 +41,46 @@ export const GestaoEditarEdicao = () => {
               {errors.nome && (<span
                 className={styles.ContainerError}
                 id="erro-nome"
-                >
-                  {errors.nome.message}
-                </span>
+              >
+                {errors.nome.message}
+              </span>
               )}
             </div>
-
             <Box className={styles.ContainerMenorCalendario}>
               <Box className={styles.dateContainer} >
                 <p>Início da edição</p>
-                <TextField id="dataInicial" className={styles.dataPicker} defaultValue={state.dataInicial} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial}/>
+                <TextField id="dataInicial" className={styles.dataPicker} defaultValue={state.dataInicial} type={'date'} variant="standard" {...register('dataInicial')} error={!!errors.dataInicial} />
                 {errors.dataInicial && (<span
                   className={styles.ContainerError}
-                    id="erro-data-inicial"
-                  >
+                  id="erro-data-inicial"
+                >
                   {errors.dataInicial.message}
-                  </span>
+                </span>
                 )}
-                </Box>
-
-                <TextField id="idEdicao" sx={{ display: 'none'}} value={state.idEdicao} {...register('idEdicao')}/>
-
               </Box>
-
-              <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+              <TextField id="idEdicao" sx={{ display: 'none' }} value={state.idEdicao} {...register('idEdicao')} />
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button
                 className={styles.submitButton}
                 type="submit"
                 variant="contained"
-                id="button-login" 
+                id="button-login"
                 sx={{
-                  mt: 3, 
-                  mb: 2, 
-                  backgroundColor: '#1e62fe', 
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: '#1e62fe',
                   boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
                   transition: '0.5s',
-                  "&:hover":{
+                  "&:hover": {
                     transform: 'scale(1.02)'
                   },
-                  "&:active":{
+                  "&:active": {
                     transform: 'scale(0.98)'
                   }
                 }}
-                >
-                  Salvar
+              >
+                Salvar
               </Button>
             </Box>
           </form>

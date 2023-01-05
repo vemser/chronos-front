@@ -20,11 +20,9 @@ import {
   TOptionsConfirmDialog
 } from '../../../utils/interfaces'
 import Switch from '@mui/material/Switch'
-import { AuthContext } from '../../../context/AuthContext'
 import { ConfirmDialog } from '../../../components/ConfirmDialog'
 
 export const AdminListar: React.FC = () => {
-  const { dadosUsuarioLogado } = useContext(AuthContext)
 
   const navigate = useNavigate()
   const {

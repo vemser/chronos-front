@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import styles from './GestaoEditarProcesso.module.css'
 import { Box, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
@@ -8,19 +8,15 @@ import { useForm } from 'react-hook-form'
 import CreatableSelect from 'react-select'
 import makeAnimated from 'react-select/animated'
 import { Header } from '../../../components/Header/Header'
-import { toast } from 'react-toastify'
-
 
 export const GestaoEditarProcesso = () => {
 
   //HOOKS
   const animatedComponents = makeAnimated()
-
   const { state } = useLocation()
   const { edicao } = useParams();
-
   const idEdicao = Number(edicao)
-  
+
   const defaultAreaValue = state.areasEnvolvidas.map((area: any) => {
     return { label: area.nome, value: area.nome }
   })
@@ -30,47 +26,40 @@ export const GestaoEditarProcesso = () => {
   })
 
   const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>(defaultAreaValue.map((area: any) => {
-    return {nome: area.value}
+    return { nome: area.value }
 
   }))
   const [responsaveisState, setResponsaveisState] = useState<string[]>(defaultResponsavelValue.map((responsavel: any) => {
-    return {nome: responsavel.value}
+    return { nome: responsavel.value }
 
   }))
 
   const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
   const { register, handleSubmit } = useForm()
-  
+
   useEffect(() => {
     getAreaEnvolvida()
     getResponsavel()
   }, [])
-  
+
   const handleChangeAreas = (value: any) => {
     const list = value.map((item: any) => {
       return { 'nome': item.value }
     })
     setAreasEnvolvidasState(list)
   }
-  
+
   const handleChangeResponsaveis = (value: any) => {
     const list = value.map((item: any) => {
       return { 'nome': item.value }
     })
     setResponsaveisState(list)
   }
-  
-  
-
-
-
 
   // SELECT 
 
-
   const selectAreaEnvolvida: object[] = []
   const selectResponsavel: object[] = []
-
 
   areasEnvolvidas.map((area) => {
     selectAreaEnvolvida.push({
@@ -95,7 +84,6 @@ export const GestaoEditarProcesso = () => {
   return (
     <>
       <Header />
-
       <div className={styles.ContainerGeral}>
         <div className={styles.ContainerProcesso}>
           <div>
@@ -107,7 +95,6 @@ export const GestaoEditarProcesso = () => {
               onSubmit={handleSubmit((data: any) => editProcesso(data, areasEnvolvidasState, responsaveisState, idEdicao)
               )}
             >
-
               <TextField
                 className={styles.FormRow}
                 id="nome"
@@ -136,7 +123,6 @@ export const GestaoEditarProcesso = () => {
                   defaultValue={defaultAreaValue}
                 />
               </label>
-
               <label htmlFor="selectGroup">
                 Responsável
 
@@ -157,7 +143,6 @@ export const GestaoEditarProcesso = () => {
                   defaultValue={defaultResponsavelValue}
                 />
               </label>
-
               <TextField
                 className={styles.FormRow}
                 id="duracaoProcesso"
@@ -182,23 +167,20 @@ export const GestaoEditarProcesso = () => {
                 variant="standard"
                 {...register('ordemExecucao')}
               />
-
               <Box>
                 <FormControlLabel
-                  control={<Checkbox defaultChecked={critico} /> } 
-                  label="Processo Crítico"  id='processoCritico' className={styles.dataPicker}
+                  control={<Checkbox defaultChecked={critico} />}
+                  label="Processo Crítico" id='processoCritico' className={styles.dataPicker}
                   defaultChecked={critico}
-                  {...register('processoCritico')} sx={{mt: 2}}
+                  {...register('processoCritico')} sx={{ mt: 2 }}
                 />
               </Box>
-
               <TextField
                 style={{ display: 'none' }}
                 id="idProcesso"
                 value={state.idProcesso}
                 {...register('idProcesso')}
               />
-
               <div className={styles.ContainerBotao}>
                 <Button
                   className={styles.BotaoGestao}
@@ -207,10 +189,10 @@ export const GestaoEditarProcesso = () => {
                   sx={{
                     boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
                     transition: '0.5s',
-                    "&:hover":{
+                    "&:hover": {
                       transform: 'scale(1.02)'
                     },
-                    "&:active":{
+                    "&:active": {
                       transform: 'scale(0.98)'
                     }
                   }}

@@ -8,7 +8,6 @@
 
 .ContainerProcesso {
   margin-top: 2%;
-
   max-width: 800px;
   height: 700px;
   padding: 5%;
@@ -38,13 +37,14 @@
 .ContainerBotao {
   display: flex;
   justify-content: center;
-
   width: 500px;
 }
+
 .selectOption {
   width: 500px;
 }
-.ContainerError{
+
+.ContainerError {
   text-align: left;
   color: rgb(171, 33, 33);
   width: 100%;
@@ -54,9 +54,11 @@
   .ContainerProcesso {
     width: 420px;
   }
+
   .FormRow {
     width: 380px;
   }
+
   .selectOption {
     width: 380px;
   }

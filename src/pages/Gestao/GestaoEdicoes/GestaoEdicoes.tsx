@@ -21,7 +21,7 @@ import { UserContext } from '../../../context/UserContex'
 import { Header } from '../../../components/Header/Header';
 import { TOptionsConfirmDialog } from '../../../utils/interfaces';
 import { ConfirmDialog } from '../../../components/ConfirmDialog';
-import {  animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 import { Loader } from '../../../components/Loader/Loader';
 
 export const GestaoEdicoes: React.FC = () => {
@@ -32,7 +32,7 @@ export const GestaoEdicoes: React.FC = () => {
   useLayoutEffect(() => {
     getEdicoesList('1')
     setCurrentPage(1)
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }, [])
 
   const [confirmDialog, setConfirmDialog] = React.useState<TOptionsConfirmDialog>({
@@ -57,56 +57,53 @@ export const GestaoEdicoes: React.FC = () => {
 
       <section className={styles.ContainerGeral}>
         <div className={styles.ContainerGestaoEdicoes}>
-
           <Box className={styles.ContainerNova}>
             <div className={styles.ContainerTitle}>
               <h2>Edições do Vem Ser</h2>
             </div>
-
             <Link to={'/gestao/cadastrar-edicao'}>
-              <Button 
-              variant="contained" 
-              id='addButton'
-              sx={{
-                boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
-                transition: '0.5s',
-                "&:hover":{
-                  transform: 'scale(1.02)'
-                },
-                "&:active":{
-                  transform: 'scale(0.98)'
-                }
-              }}
-              > 
+              <Button
+                variant="contained"
+                id='addButton'
+                sx={{
+                  boxShadow: '-2px 4px 10px -4px rgba(0,0,0,0.75)',
+                  transition: '0.5s',
+                  "&:hover": {
+                    transform: 'scale(1.02)'
+                  },
+                  "&:active": {
+                    transform: 'scale(0.98)'
+                  }
+                }}
+              >
                 ADICIONAR EDIÇÃO
               </Button>
             </Link>
           </Box>
-          {edicoes && edicoes.length == 0 ? <Loader /> : 
-          <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
-            <Table sx={{ minWidth: 650, }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="justify"><strong>Edições</strong></TableCell>
-                  <TableCell align="center"><strong>Detalhes</strong></TableCell>
-                  <TableCell align="right"><strong>Ativo</strong></TableCell>
-                  <TableCell align="right"><strong>Editar</strong></TableCell>
-                  <TableCell align="right"><strong>Clonar</strong></TableCell>
-                  <TableCell align="right"><strong>Excluir</strong></TableCell>
-                </TableRow>
-              </TableHead>
+          {edicoes && edicoes.length == 0 ? <Loader /> :
+            <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
+              <Table sx={{ minWidth: 650, }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="justify"><strong>Edições</strong></TableCell>
+                    <TableCell align="center"><strong>Detalhes</strong></TableCell>
+                    <TableCell align="right"><strong>Ativo</strong></TableCell>
+                    <TableCell align="right"><strong>Editar</strong></TableCell>
+                    <TableCell align="right"><strong>Clonar</strong></TableCell>
+                    <TableCell align="right"><strong>Excluir</strong></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {edicoes?.map((edicao, index) => {
 
-              <TableBody>
-                {edicoes?.map((edicao, index) => {
+                    if (edicao.status === 'ATIVO') {
+                      var status = true
+                    } else {
+                      var status = false
+                    }
 
-                  if (edicao.status === 'ATIVO') {
-                    var status = true
-                  } else {
-                    var status = false
-                  }
+                    return (
 
-                  return (
-                   
                       <TableRow
                         key={edicao.idEdicao}
                         className={`linha-edicao-${index}`}
@@ -115,23 +112,18 @@ export const GestaoEdicoes: React.FC = () => {
                         <TableCell component="th" scope="row" align="justify">
                           {edicao.nome}
                         </TableCell>
-
                         <TableCell component="th" scope="row" align="center" width={'120px'}>
                           <SearchIcon id={'button-exibir-detalhes'} className={`edicao-verificar-${index}`} onClick={() => { navigate(`/gestao/verificar-edicao/${edicao.idEdicao}`, { state: edicao }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
                         </TableCell>
-
                         <TableCell align="right" width={'40px'}>
                           <Switch className={`edicao-status-${index}`} onClick={() => ativoInativo(edicao)} checked={status} />
                         </TableCell>
-
                         <TableCell align="right" width={'40px'}>
                           <EditIcon className={`edicao-editar-${index}`} onClick={() => { navigate(`/gestao/editar-edicao/${edicao.idEdicao}`, { state: edicao }) }} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
                         </TableCell>
-
                         <TableCell align="right" width={'40px'}>
                           <ContentCopyIcon className={`edicao-clonar-${index}`} onClick={() => cloneEdicao(edicao)} sx={{ cursor: 'pointer', transition: '100ms all ease-in-out', '&:hover': { color: '#1e62fe' } }} />
                         </TableCell>
-
                         <TableCell align="right" width={'40px'}>
                           <HighlightOffIcon
                             onClick={(event) => {
@@ -156,23 +148,21 @@ export const GestaoEdicoes: React.FC = () => {
                               }
                             }} />
                         </TableCell>
-
                       </TableRow>
-                    
-                  
-                  )
-                })}
-              </TableBody>
-            </Table>
-            <ConfirmDialog
-              confirmDialog={confirmDialog}
-              setConfirmDialog={setConfirmDialog}
-            />
-          </TableContainer>
+
+                    )
+                  })}
+                </TableBody>
+              </Table>
+              <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+              />
+            </TableContainer>
           }
-        </div> 
+        </div>
         <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center', mt: '10px' }}>
-          <Pagination color="primary"  page={currentPage} count={totalPages}  onChange={(_, value) => mudarPaginacao(value)}/>
+          <Pagination color="primary" page={currentPage} count={totalPages} onChange={(_, value) => mudarPaginacao(value)} />
         </Box>
       </section>
     </>

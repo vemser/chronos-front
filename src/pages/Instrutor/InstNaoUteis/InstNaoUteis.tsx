@@ -130,15 +130,7 @@ export const InstNaoUteis = () => {
                       <p>Data Inicial</p>
                       <TextField id="dataInicial" className={styles.dataPicker} type={'date'} variant="standard"
                         {...register('dataInicial')}
-                      // error={!!errors.dataInicial}
                       />
-                      {/* {errors.dataInicial && (<span
-                      className={styles.ContainerError}
-                      id="data-inicial-error"
-                    >
-                      {errors.dataInicial.message}
-                    </span>
-                  )} */}
                     </Box>
                   </Box>
                   <Box
@@ -151,7 +143,6 @@ export const InstNaoUteis = () => {
                       <p>Data Final</p>
                       <TextField id="dataFinal" className={styles.dataPicker} type={'date'} variant="standard"
                         {...register('dataFinal')}
-                      // error={!!errors.dataFinal}
                       />
                     </Box>
                   </Box>
