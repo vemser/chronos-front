@@ -25,6 +25,7 @@ export const UserProvider = ({ children }: IChildren) => {
         try {
             nProgress.start();
             setLoading(true);
+
             api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/listar?pagina=${Number(page) - 1}&tamanho=8 `);
             setTotalPages(data.quantidadePaginas);
@@ -253,9 +254,7 @@ export const UserProvider = ({ children }: IChildren) => {
         };
     };
 
-
-  const createProcesso = async (processo: IProcesso, area: string[], responsaveis:string[], idEtapa: number, idEdicao: number) => {
-
+    const createProcesso = async (processo: IProcesso, area: string[], responsaveis: string[], idEtapa: number, idEdicao: number) => {
     try {
         nProgress.start();
         setLoading(true);
@@ -289,47 +288,6 @@ export const UserProvider = ({ children }: IChildren) => {
 
     };
   };
-    
-
-  const editProcesso = async (processo: IProcesso, area: string[], responsaveis:string[], idEdicao: number) => {
-    try {
-        nProgress.start();
-        setLoading(true);
-
-        api.defaults.headers.common['Authorization'] = token;
-        
-        if(area.length < 1 && responsaveis.length < 1) {
-            toast.error('Por favor informe pelo menos um responsável e uma área envolvida')
-        } else if(responsaveis.length < 1){
-            toast.error('Por favor informe pelo menos um responsável')
-        } else if(area.length < 1){
-            toast.error('Por favor informe pelo menos uma área envolvida')
-        } else{
-
-            if(processo.processoCritico === true) {
-                processo.processoCritico = 'ATIVO'
-            } else {
-                processo.processoCritico = 'INATIVO'
-            }
-
-            processo.areasEnvolvidas = area
-            processo.responsaveis = responsaveis
-            processo.diasUteis = Number(processo.diasUteis)
-            processo.ordemExecucao = Number(processo.ordemExecucao)
-
-            await api.post(`/processo/${idEtapa}`, processo);
-            toast.success('Processo cadastrado com sucesso!', toastConfig)
-            navigate(`/gestao/verificar-edicao/${idEdicao}`);
-
-        } catch (error) {
-            console.error(error);
-            toast.error('Houve um erro ao cadastrar um novo processo, por favor tente novamente.');
-
-        } finally {
-            nProgress.done();
-        };
-    };
-
 
     const editProcesso = async (processo: IProcesso, area: string[], responsaveis: string[], idEdicao: number) => {
         try {
@@ -360,14 +318,13 @@ export const UserProvider = ({ children }: IChildren) => {
                 navigate(`/gestao/verificar-edicao/${idEdicao}`);
             }
 
-    }  catch (error) {
-        console.log(error);
-        toast.error(`Houve um erro ao editar o processo ${processo.nome}`);
-        
-    } finally {
-        nProgress.done();
-        setLoading(false);
+        } catch (error) {
+            console.log(error);
+            toast.error(`Houve um erro ao editar o processo ${processo.nome}`);
 
+        } finally {
+            nProgress.done();
+        };
     };
 
 
@@ -376,14 +333,15 @@ export const UserProvider = ({ children }: IChildren) => {
     const getAreaEnvolvida = async () => {
         try {
             nProgress.start();
+
             const { data } = await api.get('/area-envolvida');
             setAreasEnvolvidas(data)
 
         } catch (error) {
             console.error(error);
             toast.error('Houve um erro em receber as areas envolvidas cadastradas', toastConfig)
-
-        } finally {
+            
+        } finally { 
             nProgress.done()
         }
     }
