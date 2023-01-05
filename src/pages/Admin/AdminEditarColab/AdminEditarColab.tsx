@@ -12,15 +12,15 @@ import FormControl from '@mui/material/FormControl'
 import Checkbox from '@mui/material/Checkbox'
 import { ICargos, IColaborador } from '../../../utils/interfaces'
 import { AdminContext } from '../../../context/AdminContext'
-import {MoonLoader} from 'react-spinners'
 
 import { useLocation } from 'react-router-dom'
 
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 export const AdminEditarColab = () => {
   const { state } = useLocation()
-  const { editarColaborador } = useContext(AdminContext)
+  const { editarColaborador, loading } = useContext(AdminContext)
 
   const [ userCargos, setUserCargos ] = useState<ICargos>()
 
@@ -76,6 +76,7 @@ export const AdminEditarColab = () => {
       <Header />
 
       <Grid container width={'100%'} display="flex" justifyContent="center">
+      {loading == true ? <Loader /> :
         <form
           className={styles.FormAdmin}
           onSubmit={handleSubmit((data: IColaborador) => editarColaborador(data, state.idUsuario)
@@ -257,6 +258,7 @@ export const AdminEditarColab = () => {
             </Box>
           </Grid>
         </form>
+         }
       </Grid>
     </>
   )

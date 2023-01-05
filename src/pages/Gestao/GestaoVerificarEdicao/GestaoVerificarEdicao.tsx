@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react'
+import React, { useContext, useEffect, useLayoutEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   TableCell,
@@ -26,7 +26,7 @@ export const GestaoVerificarEdicao = () => {
   const idEdicao = Number(edicao)
 
   const navigate = useNavigate()
-  const { getEdicoesList, deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes } =
+  const { getEdicoesList, deleteEtapa, getEtapas, deleteProcesso, etapas, edicoes, loading, currentPage } =
     useContext(UserContext)
 
   const { getCalendarioPorEdicao } = useContext(CalendarioContext)
@@ -34,7 +34,7 @@ export const GestaoVerificarEdicao = () => {
   const EdicaoAtual = edicoes?.find(data => data.idEdicao == idEdicao)
 
   useLayoutEffect(() => {
-    getEdicoesList('1')
+    getEdicoesList(currentPage)
     getEtapas(idEdicao)
   }, [])
 
@@ -47,7 +47,7 @@ export const GestaoVerificarEdicao = () => {
   return (
     <>
       <Header />
-      {etapas && etapas.length == 0 ? <Loader /> : 
+      {loading == true ? <Loader /> : 
         <Box
           sx={{
             margin: '50px auto',

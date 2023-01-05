@@ -23,11 +23,12 @@ export const InstVerificarEdicao = () => {
 
   const idEdicao = Number(edicao)
 
-  const { getEtapas, etapas, edicoes } = useContext(UserContext)
+  const { getEtapas, etapas, edicoes, currentPage, getEdicoesList } = useContext(UserContext)
 
   const EdicaoAtual = edicoes?.find(data => data.idEdicao == idEdicao)
 
   useLayoutEffect(() => {
+    getEdicoesList(currentPage) 
     getEtapas(idEdicao)
   }, [])
   const { getCalendarioPorEdicao } = useContext(CalendarioContext)

@@ -26,7 +26,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
   const [currentPage, setCurrentPage] = useState<any>(1)
 
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
 
 
   const criarDadosColaborador = async (data: IColaborador) => {
@@ -111,6 +111,7 @@ export const AdminProvider = ({ children }: IChildren) => {
   const deletarColaborador = async (idUsuario: number) => {
     try {
       nProgress.start()
+      setLoading(true)
 
       authApi.defaults.headers.common['Authorization'] = token
       await authApi.delete(`/usuario/${idUsuario}`)
@@ -124,6 +125,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
     } finally {
       nProgress.done()
+      setLoading(false)
     }
   }
 
@@ -166,6 +168,7 @@ export const AdminProvider = ({ children }: IChildren) => {
 
     try {
       nProgress.start()
+      setLoading(true)
       authApi.defaults.headers.common['Authorization'] = token
 
       await authApi.put(`usuario/update-cargos/${idUsuario}`, dadosColaborador)
@@ -182,6 +185,7 @@ export const AdminProvider = ({ children }: IChildren) => {
       }
     } finally {
       nProgress.done()
+      setLoading(false)
     }
   }
 

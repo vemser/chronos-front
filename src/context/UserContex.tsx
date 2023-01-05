@@ -19,10 +19,12 @@ export const UserProvider = ({ children }: IChildren) => {
     const [ responsaveis, setResponsaveis ] = useState<IResponsaveis[]>([]);
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState<any>(1)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const getEdicoesList = async (page: string) => {
         try {
             nProgress.start();
+            setLoading(true);
 
             api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/listar?pagina=${Number(page) - 1}&tamanho=8 `);
@@ -35,14 +37,18 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+            setLoading(false);
 
         };
     };
+    
 
 
     const deleteEdicao = async (idEdicao: number, nomeEdicao: string) => {
         try {
             nProgress.start();
+            setLoading(true)
+
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/edicao/${idEdicao}`);
             toast.success(`Edição ${nomeEdicao} foi removida com sucesso`);
@@ -54,7 +60,7 @@ export const UserProvider = ({ children }: IChildren) => {
             
         } finally {
             nProgress.done();
-
+            setLoading(false)
         };
     };
 
@@ -62,6 +68,8 @@ export const UserProvider = ({ children }: IChildren) => {
     const createEdicao = async (edicao: IEdicao) => {
         try {
             nProgress.start();
+            setLoading(true)
+
             api.defaults.headers.common['Authorization'] = token;
 
             await api.post('/edicao', edicao);
@@ -75,6 +83,8 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+            setLoading(false)
+
         };
     };
 
@@ -82,6 +92,8 @@ export const UserProvider = ({ children }: IChildren) => {
     const editEdicao = async (edicao: IEdicao) => {
         try {
             nProgress.start();
+            setLoading(true)
+
             api.defaults.headers.common['Authorization'] = token;
             await api.put(`/edicao/${edicao.idEdicao}`, edicao);
             toast.success('Edicao editada com sucesso!', toastConfig);
@@ -94,6 +106,7 @@ export const UserProvider = ({ children }: IChildren) => {
             
         } finally {
             nProgress.done();
+            setLoading(false)
 
         };
     };
@@ -102,6 +115,8 @@ export const UserProvider = ({ children }: IChildren) => {
     const cloneEdicao = async (edicao: IEdicao) => {
         try {
             nProgress.start();
+            setLoading(true)
+
             api.defaults.headers.common['Authorization'] = token;
             await api.post(`/edicao/clone/${edicao.idEdicao}`);
             toast.success(`Clone da edicao ${edicao.nome} criado com sucesso!`, toastConfig);
@@ -115,6 +130,7 @@ export const UserProvider = ({ children }: IChildren) => {
             
         } finally {
             nProgress.done();
+            setLoading(false)
 
         };
     };
@@ -124,6 +140,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const ativoInativo = async (data: IEdicao) => {
          try {
             nProgress.start();
+
             api.defaults.headers.common['Authorization'] = token;
             await api.put(`edicao/enable-disable/${data.idEdicao}`);
 
@@ -171,6 +188,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const deleteEtapa = async (idEtapa: number, idEdicao: number) => {
         try {
             nProgress.start();
+            setLoading(true)
             
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/etapa/${idEtapa}`);
@@ -184,6 +202,8 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+            setLoading(false)
+            
         };
     };
 
@@ -191,6 +211,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const createEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
             nProgress.start();
+            setLoading(true)
 
             etapa.ordemExecucao = Number(etapa.ordemExecucao);
             api.defaults.headers.common['Authorization'] = token;
@@ -205,6 +226,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+            setLoading(false)
 
         };
     };
@@ -213,6 +235,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const editEtapa = async (etapa: IEtapa, idEdicao: number) => {
         try {
             nProgress.start();
+            setLoading(true)
 
             api.defaults.headers.common['Authorization'] = token;
             await api.put(`/etapa/${etapa.idEtapa}`, etapa);
@@ -226,7 +249,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
-
+            setLoading(false)
         };
     };
 
@@ -253,6 +276,7 @@ export const UserProvider = ({ children }: IChildren) => {
     const deleteProcesso = async (idProcesso: number, idEdicao: number) => {
         try {
             nProgress.start();
+            setLoading(true)
 
             api.defaults.headers.common['Authorization'] = token;
             await api.delete(`/processo/${idProcesso}`);
@@ -266,6 +290,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+            setLoading(false)
 
         };
     };
@@ -275,6 +300,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
     try {
         nProgress.start();
+        setLoading(true);
 
         api.defaults.headers.common[`Authorization`] = token;
 
@@ -301,6 +327,7 @@ export const UserProvider = ({ children }: IChildren) => {
 
     } finally {
         nProgress.done();
+        setLoading(false);
 
     };
   };
@@ -309,6 +336,7 @@ export const UserProvider = ({ children }: IChildren) => {
   const editProcesso = async (processo: IProcesso, area: string[], responsaveis:string[], idEdicao: number) => {
     try {
         nProgress.start();
+        setLoading(true);
 
         api.defaults.headers.common['Authorization'] = token;
         
@@ -344,6 +372,7 @@ export const UserProvider = ({ children }: IChildren) => {
         
     } finally {
         nProgress.done();
+        setLoading(false);
 
     };
   };
@@ -417,7 +446,8 @@ export const UserProvider = ({ children }: IChildren) => {
         getAreaEnvolvida,
         getResponsavel,
         currentPage,
-        setCurrentPage
+        setCurrentPage,
+        loading
       }}
     >
       {children}

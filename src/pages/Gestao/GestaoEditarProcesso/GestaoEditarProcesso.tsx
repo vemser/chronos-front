@@ -9,6 +9,7 @@ import CreatableSelect from 'react-select'
 import makeAnimated from 'react-select/animated'
 import { Header } from '../../../components/Header/Header'
 import { toast } from 'react-toastify'
+import { Loader } from '../../../components/Loader/Loader'
 
 
 export const GestaoEditarProcesso = () => {
@@ -38,7 +39,7 @@ export const GestaoEditarProcesso = () => {
 
   }))
 
-  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso } = useContext(UserContext)
+  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, editProcesso, loading } = useContext(UserContext)
   const { register, handleSubmit } = useForm()
   
   useEffect(() => {
@@ -102,6 +103,7 @@ export const GestaoEditarProcesso = () => {
             <h2>Editar processo</h2>
           </div>
           <div>
+          {loading == true ? <Loader /> :
             <form
               className={styles.ContainerForm}
               onSubmit={handleSubmit((data: any) => editProcesso(data, areasEnvolvidasState, responsaveisState, idEdicao)
@@ -219,6 +221,7 @@ export const GestaoEditarProcesso = () => {
                 </Button>
               </div>
             </form>
+          }
           </div>
         </div>
       </div>

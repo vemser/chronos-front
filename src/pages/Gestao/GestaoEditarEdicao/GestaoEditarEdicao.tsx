@@ -10,10 +10,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { UserContext } from '../../../context/UserContex'
 import { useLocation } from 'react-router-dom'
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 export const GestaoEditarEdicao = () => {
 
-  const { editEdicao } = useContext(UserContext);
+  const { editEdicao, loading } = useContext(UserContext);
 
   const { register, handleSubmit,  formState: { errors }} = useForm<IEdicao>(({
     resolver: yupResolver(cadastrarEdicaoFormSchema)
@@ -30,7 +31,7 @@ export const GestaoEditarEdicao = () => {
           <div className={styles.ContainerTitle}>
             <h2>Editar</h2>
           </div>
-
+          {loading == true ? <Loader /> :
           <form onSubmit={handleSubmit((data: IEdicao) => editEdicao(data))}>
             <div className={styles.ContainerNomeEdicao}>
               <TextField
@@ -92,6 +93,7 @@ export const GestaoEditarEdicao = () => {
               </Button>
             </Box>
           </form>
+          }
         </div>
       </section>
     </>

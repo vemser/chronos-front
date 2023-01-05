@@ -10,9 +10,10 @@ import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { cadastrarDiaNaoUtilFormSchema } from '../../../utils/schemas'
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 export const GestaoEditarDiaNaoUtil = () => {
-  const { putDiaNaoUtil } = useContext(DiaNaoUtilContext)
+  const { putDiaNaoUtil, loading } = useContext(DiaNaoUtilContext)
 
   const { state } = useLocation()
 
@@ -47,6 +48,7 @@ export const GestaoEditarDiaNaoUtil = () => {
           <div className={styles.ContainerTitle}>
             <h2>Editar {state?.descricao}</h2>
           </div>
+          {loading == true ? <Loader /> :
           <form
             onSubmit={handleSubmit((data: IDiaNaoUtil) => putDiaNaoUtil(data))}
           >
@@ -143,6 +145,7 @@ export const GestaoEditarDiaNaoUtil = () => {
               </Button>
             </Box>
           </form>
+          }
         </div>
       </section>
     </>

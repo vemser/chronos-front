@@ -11,6 +11,7 @@ import { ProcessoSchema } from '../../../utils/schemas'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 const animatedComponents = makeAnimated()
 
@@ -24,7 +25,7 @@ export const GestaoNovoProcesso = () => {
   const [areasEnvolvidasState, setAreasEnvolvidasState] = useState<string[]>([])
   const [responsaveisState, setResponsaveisState] = useState<string[]>([])
 
-  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso } = useContext(UserContext)
+  const { getAreaEnvolvida, getResponsavel, areasEnvolvidas, responsaveis, createProcesso, loading } = useContext(UserContext)
 
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: yupResolver(ProcessoSchema)
@@ -80,6 +81,7 @@ export const GestaoNovoProcesso = () => {
             <h2>Cadastrar processo</h2>
           </div>
           <div>
+          {loading == true ? <Loader /> :
             <form
               className={styles.ContainerForm}
               onSubmit={handleSubmit((data: any) => createProcesso(data, areasEnvolvidasState, responsaveisState, state.idEtapa, idEdicao)
@@ -218,6 +220,7 @@ export const GestaoNovoProcesso = () => {
                 </Button>
               </div>
             </form>
+          }
           </div>
         </div>
       </div>

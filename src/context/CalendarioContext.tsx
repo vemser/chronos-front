@@ -16,10 +16,12 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
     const [ calendarioEdicao, setCalendarioEdicao ] = useState<ICalendarioEdicao[]>([]);
     const [ calendarioGeral, setcalendarioGeral ] = useState<ICalendarioGeral[]>([]);
+    const [loading, setLoading] = useState<boolean>(false)
 
     const getCalendarioPorEdicao = async (edicao: IEdicao | undefined) => {
         try{
             nProgress.start();
+            setLoading(true)
 
             api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/calendario-edicao/${edicao?.idEdicao}`);    
@@ -33,13 +35,14 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
-
+            setLoading(false)
         }
     }
 
     const getCalendarioGeral = async () => {
         try{
             nProgress.start();
+            setLoading(true);
 
             api.defaults.headers.common['Authorization'] = token;
             const { data } = await api.get(`/edicao/calendario-geral`);    
@@ -59,6 +62,7 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
+            setLoading(false);
 
         }
     }
@@ -66,6 +70,7 @@ export const CalendarioProvider = ({ children }: IChildren) => {
     const getExcelCalendario = async (idEdicao: number) => {
         try {
             nProgress.start();
+            setLoading(true);
 
             api.get(`/edicao/calendario/export/excel/${idEdicao}`, {
                 method: 'GET',
@@ -92,14 +97,14 @@ export const CalendarioProvider = ({ children }: IChildren) => {
 
         } finally {
             nProgress.done();
-
+            setLoading(false);
         }
         
     }
 
 
   return (
-    <CalendarioContext.Provider value={{ calendarioEdicao, getCalendarioPorEdicao, getCalendarioGeral, calendarioGeral, getExcelCalendario }}>
+    <CalendarioContext.Provider value={{ calendarioEdicao, getCalendarioPorEdicao, getCalendarioGeral, calendarioGeral, getExcelCalendario, loading }}>
         {children}
     </CalendarioContext.Provider>
   )

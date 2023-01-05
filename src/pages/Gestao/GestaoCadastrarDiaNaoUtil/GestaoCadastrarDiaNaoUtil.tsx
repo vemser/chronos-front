@@ -10,11 +10,12 @@ import { DiaNaoUtilContext } from '../../../context/DiaNaoUtilContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { cadastrarDiaNaoUtilFormSchema } from '../../../utils/schemas'
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 
 export const GestaoCadastrarDiaNaoUtil = () => {
 
-  const { postDiaNaoUtil } = useContext(DiaNaoUtilContext)
+  const { postDiaNaoUtil, loading } = useContext(DiaNaoUtilContext)
   const { register, handleSubmit,  formState: { errors }} = useForm<IDiaNaoUtil>(({
     resolver: yupResolver(cadastrarDiaNaoUtilFormSchema)
   }))
@@ -31,7 +32,7 @@ export const GestaoCadastrarDiaNaoUtil = () => {
           <div className={styles.ContainerTitle}>
             <h2>Cadastrar Período Não Útil</h2>
           </div>
-
+          {loading == true ? <Loader /> :
           <form onSubmit={handleSubmit((data: IDiaNaoUtil) => postDiaNaoUtil(data))}>
           <div className={styles.ContainerNomeEdicao}>
             <TextField
@@ -102,6 +103,7 @@ export const GestaoCadastrarDiaNaoUtil = () => {
               </Button>
             </Box>
           </form>
+          } 
         </div>
       </section>
     </>

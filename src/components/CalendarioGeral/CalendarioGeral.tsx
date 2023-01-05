@@ -9,11 +9,12 @@ import { Link } from 'react-router-dom'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import listPlugin from '@fullcalendar/list'; 
 import { Loader } from '../Loader/Loader'
+import { SemCalendario } from '../SemCalendario/SemCalendario'
 
 
 export const CalendarioGeral: React.FC = () => {
 
-  const { calendarioGeral, getCalendarioGeral } = useContext(CalendarioContext)
+  const { calendarioGeral, getCalendarioGeral, loading } = useContext(CalendarioContext)
   const [etapaLegendas, setEtapaLegendas] = useState<any>([])
   const [ modalInfos, setModalInfos ] = useState<any>()
 
@@ -158,7 +159,7 @@ export const CalendarioGeral: React.FC = () => {
 
   return (
     <>
-      {calendarioGeral && calendarioGeral.length == 0 ? <Loader /> : 
+      {loading == true ? <Loader /> : calendarioGeral && calendarioGeral.length == 0 ? <SemCalendario /> :  
 
       <Box>
         <Box id='CalendarContainer' className="CalendarContainer" sx={{

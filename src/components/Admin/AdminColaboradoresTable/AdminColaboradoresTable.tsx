@@ -29,7 +29,7 @@ export const AdminColaboradoresTable = () => {
     dadosColaborador,
     buscarDadosColaborador,
     deletarColaborador,
-    alterarStatusColab
+    loading
   } = useContext<IAdminContext>(AdminContext)
 
   
@@ -56,7 +56,7 @@ export const AdminColaboradoresTable = () => {
     <>
     
 
-    {dadosColaborador == undefined ? <Loader /> : 
+    {dadosColaborador == undefined ? <Loader /> : loading == true ? <Loader /> :
       <TableContainer className={styles.tableContainer}
         sx={{ boxShadow: 2, width: 'auto', mt: 2, borderRadius: '5px' }}
       >

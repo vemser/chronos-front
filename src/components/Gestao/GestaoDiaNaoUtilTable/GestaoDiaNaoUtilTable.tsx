@@ -10,7 +10,7 @@ import { Loader } from '../../Loader/Loader';
 
 export const GestaoDiaNaoUtilTable = () => {
 
-    const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil } = useContext(DiaNaoUtilContext)
+    const { diasNaoUteis, getDiaNaoUtil, deleteDiaNaoUtil, loading } = useContext(DiaNaoUtilContext)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export const GestaoDiaNaoUtilTable = () => {
 
   return (
     <>
-    {diasNaoUteis && diasNaoUteis.length == 0 ? <Loader /> : 
+    {diasNaoUteis && diasNaoUteis.length == 0 ? <Loader /> : loading == true ? <Loader /> : 
     <TableContainer sx={{ boxShadow: 1, width: 'auto', borderRadius: '5px', maxWidth: 1366, margin: '50px auto' }}>
             <Table sx={{ minWidth: 650, maxWidth: 1366}} aria-label="simple table">
               <TableHead>

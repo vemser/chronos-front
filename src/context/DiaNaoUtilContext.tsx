@@ -12,6 +12,8 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     const [ diasNaoUteis, setDiasNaoUteis ] = useState<IDiaNaoUtil[]>([])
     const [totalPages, setTotalPages] = useState(0)
     const [currentPage, setCurrentPage] = useState<any>(1)
+    const [loading, setLoading] = useState<boolean>(false)
+
 
     const token = localStorage.getItem('token');
 
@@ -42,6 +44,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     const postDiaNaoUtil = async (data: IDiaNaoUtil) => {
         try {
             nProgress.start()
+            setLoading(true)
 
             if(data.repeticaoAnual === true) {
                 data.repeticaoAnual = 'ATIVO'
@@ -64,6 +67,7 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             }
         } finally{  
             nProgress.done()
+            setLoading(false)
 
         }
     }
@@ -71,6 +75,8 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
     const deleteDiaNaoUtil = async (idDiaNaoUtil: number) => {
         try {
             nProgress.start()
+            setLoading(true)
+
             await api.delete(`/dia-nao-util/${idDiaNaoUtil}`)
             toast.success('Dia Não Útil removido com sucesso!', toastConfig)
             getDiaNaoUtil('1')
@@ -85,14 +91,16 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             }
         } finally {
             nProgress.done()
+            setLoading(false)
 
         }
     }
 
     const putDiaNaoUtil = async (data: IDiaNaoUtil) => {
         try {
+            nProgress.start()
+            setLoading(true)
 
-            
             if(data.repeticaoAnual === true) {
                 data.repeticaoAnual = 'ATIVO'
             } else {
@@ -100,7 +108,6 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             }
 
 
-            nProgress.start()
             await api.put(`/dia-nao-util/${data.idDiaNaoUtil}`, data)
             toast.success('Dia Não Útil atualizado com sucesso!', toastConfig)
 
@@ -116,12 +123,12 @@ export const DiaNaoUtilProvider = ({ children }: IChildren ) => {
             }
         } finally {
             nProgress.done();
-
+            setLoading(false)
         }
     }
 
     return(
-        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil, currentPage, setCurrentPage }}>
+        <DiaNaoUtilContext.Provider value={{ totalPages, diasNaoUteis, getDiaNaoUtil, postDiaNaoUtil, deleteDiaNaoUtil, putDiaNaoUtil, currentPage, setCurrentPage, loading }}>
             { children }
         </DiaNaoUtilContext.Provider>
     )

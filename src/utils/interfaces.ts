@@ -129,7 +129,8 @@ export interface IUserContext {
   getAreaEnvolvida: () => Promise<void>
   getResponsavel: () => Promise<void>
   currentPage: any
-  setCurrentPage: any
+  setCurrentPage: any,
+  loading: boolean
 }
 
 export interface IEdicao {
@@ -180,7 +181,8 @@ export interface IDiaNaoUtilContext {
   deleteDiaNaoUtil: (idDiaNaoUtil: number) => Promise<void>
   putDiaNaoUtil: (data: IDiaNaoUtil) => Promise<void>
   currentPage: any,
-  setCurrentPage: any
+  setCurrentPage: any,
+  loading: boolean
 }
 
 export interface IDiaNaoUtil {
@@ -217,7 +219,8 @@ export interface ICalendarioContext {
   calendarioGeral: ICalendarioGeral[]
   getCalendarioPorEdicao: (idEdicao: IEdicao | undefined) => Promise<void>
   getCalendarioGeral: () => Promise<void>
-  getExcelCalendario: (idEdicao: number) => Promise<void>
+  getExcelCalendario: (idEdicao: number) => Promise<void>,
+  loading: boolean
 }
 
 export interface ICalendarioEdicao {

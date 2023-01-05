@@ -9,10 +9,11 @@ import { cadastrarEdicaoFormSchema } from '../../../utils/schemas'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { UserContext } from '../../../context/UserContex'
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 export const GestaoCadastrarEdicao = () => {
 
-  const { createEdicao } = useContext(UserContext);
+  const { createEdicao, loading } = useContext(UserContext);
 
   const { register, handleSubmit,  formState: { errors }} = useForm<IEdicao>(({
     resolver: yupResolver(cadastrarEdicaoFormSchema)
@@ -28,7 +29,7 @@ export const GestaoCadastrarEdicao = () => {
           <div className={styles.ContainerTitle}>
             <h2>Cadastrar Edição</h2>
           </div>
-
+          {loading == true ? <Loader /> :
           <form onSubmit={handleSubmit((data: IEdicao) => createEdicao(data))}>
             <div className={styles.ContainerNomeEdicao}>
               <TextField id="nome" label="Nome da edição" variant="standard" className={styles.NomeEdicao} {...register('nome')} error={!!errors.nome} />
@@ -76,6 +77,7 @@ export const GestaoCadastrarEdicao = () => {
               </Button>
             </Box>
           </form>
+          }
         </div>
       </section>
     </>

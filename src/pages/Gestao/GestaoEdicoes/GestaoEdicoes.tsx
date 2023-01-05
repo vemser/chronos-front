@@ -26,7 +26,7 @@ import { Loader } from '../../../components/Loader/Loader';
 
 export const GestaoEdicoes: React.FC = () => {
 
-  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao, cloneEdicao, totalPages, currentPage, setCurrentPage } = useContext(UserContext);
+  const { edicoes, getEdicoesList, ativoInativo, deleteEdicao, cloneEdicao, totalPages, currentPage, setCurrentPage, loading } = useContext(UserContext);
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
@@ -82,7 +82,7 @@ export const GestaoEdicoes: React.FC = () => {
               </Button>
             </Link>
           </Box>
-          {edicoes && edicoes.length == 0 ? <Loader /> : 
+          {edicoes && edicoes.length == 0 ? <Loader /> : loading == true ? <Loader /> :
           <TableContainer sx={{ boxShadow: 1, width: 'auto', mt: 2, borderRadius: '5px' }}>
             <Table sx={{ minWidth: 650, }} aria-label="simple table">
               <TableHead>

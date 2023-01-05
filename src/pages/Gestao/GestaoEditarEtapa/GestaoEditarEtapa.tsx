@@ -9,12 +9,13 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { EtapaSchema } from '../../../utils/schemas'
 import { Header } from '../../../components/Header/Header'
+import { Loader } from '../../../components/Loader/Loader'
 
 export const GestaoEditarEtapa = () => {
 
 
   const { state } = useLocation();
-  const { editEtapa } = useContext(UserContext);
+  const { editEtapa, loading } = useContext(UserContext);
 
   const { register, handleSubmit,  formState: { errors }} = useForm<IEtapa>(({
     resolver: yupResolver(EtapaSchema)
@@ -31,7 +32,7 @@ export const GestaoEditarEtapa = () => {
           <h2>Editar etapa</h2>
         </div>
         <div className={styles.ContainerCadastrarEtapa}>
-
+        {loading == true ? <Loader /> :
           <form onSubmit={handleSubmit((data:IEtapa) =>  editEtapa(data, idEdicao))}>
             <TextField
               id="nome"
@@ -97,6 +98,7 @@ export const GestaoEditarEtapa = () => {
               Enviar
             </Button>
           </form>
+        }
         </div>
       </div>
     </>
